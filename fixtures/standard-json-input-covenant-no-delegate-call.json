@@ -1,0 +1,74 @@
+{
+    "language": "Solidity",
+    "sources": {
+        "src/libraries/NoDelegateCall.sol": {
+            "content": "// SPDX-License-Identifier: AGPL-3.0\npragma solidity ^0.8.30;\n\ncontract NoDelegateCall {\n    address private immutable originalAddress;\n    error E_DelegateCallNotAllowed();\n\n    constructor() {\n        originalAddress = address(this);\n    }\n\n    modifier noDelegateCall() {\n        if (address(this) != originalAddress) revert E_DelegateCallNotAllowed();\n        _;\n    }\n}\n"
+        }
+    },
+    "settings": {
+        "remappings": [
+            "@std/=lib/forge-std/src/",
+            "@clones/=lib/clones-with-immutable-args/src/",
+            "@chainlink/=lib/chainlink-brownie-contracts/",
+            "@openzeppelin/=lib/openzeppelin-contracts/contracts/",
+            "@solady/=lib/solady/src/",
+            "@aave/=lib/aave-v3-core/contracts/protocol/",
+            "@euler-price-oracle/=lib/euler-price-oracle/src/",
+            "aave-v3-core/=lib/aave-v3-core/",
+            "forge-std/=lib/forge-std/src/",
+            "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+            "chainlink-brownie-contracts/=lib/chainlink-brownie-contracts/contracts/src/v0.6/vendor/@arbitrum/nitro-contracts/src/",
+            "clones-with-immutable-args/=lib/clones-with-immutable-args/src/",
+            "ds-test/=lib/clones-with-immutable-args/lib/ds-test/src/",
+            "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+            "halmos-cheatcodes/=lib/openzeppelin-contracts/lib/halmos-cheatcodes/src/",
+            "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+            "solady/=lib/solady/src/",
+            "@pendle/core-v2/=lib/euler-price-oracle/lib/pendle-core-v2-public/contracts/",
+            "@pyth/=lib/euler-price-oracle/lib/pyth-sdk-solidity/",
+            "@redstone/evm-connector/=lib/euler-price-oracle/lib/redstone-oracles-monorepo/packages/evm-connector/contracts/",
+            "@uniswap/v3-core/=lib/euler-price-oracle/lib/v3-core/",
+            "@uniswap/v3-periphery/=lib/euler-price-oracle/lib/v3-periphery/",
+            "ethereum-vault-connector/=lib/euler-price-oracle/lib/ethereum-vault-connector/",
+            "euler-price-oracle/=lib/euler-price-oracle/src/",
+            "openzeppelin/=lib/euler-price-oracle/lib/openzeppelin-contracts/contracts/",
+            "pendle-core-v2-public/=lib/euler-price-oracle/lib/pendle-core-v2-public/contracts/",
+            "pyth-sdk-solidity/=lib/pyth-sdk-solidity/",
+            "redstone-oracles-monorepo/=lib/euler-price-oracle/lib/",
+            "v3-core/=lib/euler-price-oracle/lib/v3-core/contracts/",
+            "v3-periphery/=lib/euler-price-oracle/lib/v3-periphery/contracts/"
+        ],
+        "optimizer": {
+            "enabled": true,
+            "runs": 3750
+        },
+        "metadata": {
+            "useLiteralContent": false,
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+        },
+        "outputSelection": {
+            "*": {
+                "": ["ast"],
+                "*": [
+                    "abi",
+                    "evm.bytecode.object",
+                    "evm.bytecode.sourceMap",
+                    "evm.bytecode.linkReferences",
+                    "evm.deployedBytecode.object",
+                    "evm.deployedBytecode.sourceMap",
+                    "evm.deployedBytecode.linkReferences",
+                    "evm.deployedBytecode.immutableReferences",
+                    "evm.methodIdentifiers",
+                    "ir",
+                    "irOptimized",
+                    "metadata",
+                    "irOptimizedAst"
+                ]
+            }
+        },
+        "evmVersion": "cancun",
+        "viaIR": false,
+        "libraries": {}
+    }
+}

@@ -1,7 +1,7 @@
 //! Types and builders for creating the Solidity compiler's Standard JSON
-//! `Input` object, the payload consumed by `solc --standard-json`.
+//! `StandardJsonInput` object, the payload consumed by `solc --standard-json`.
 //!
-//! This module exposes the top-level `Input` type and the related types used to
+//! This module exposes the top-level `StandardJsonInput` type and the related types used to
 //! configure compilation:
 //!
 //! * `Source` / `SourceContent`: Source inclusion.
@@ -15,11 +15,11 @@
 //!
 //! ## Single Solidity file
 //!
-//! Build a minimal `Input` that contains a single file embedded as literal
+//! Build a minimal `StandardJsonInput` that contains a single file embedded as literal
 //! content and request only the bytecode output for all contracts:
 //!
 //! ```rust
-//! use solc::input::{Input};
+//! use solc::input::StandardJsonInput;
 //! use std::collections::BTreeMap;
 //!
 //! let mut output_sel = BTreeMap::new();
@@ -27,7 +27,7 @@
 //! file_sel.insert("*".to_string(), vec!["evm.bytecode".to_string()]);
 //! output_sel.insert("*".to_string(), file_sel);
 //!
-//! let mut input = Input::new().add_source("Counter.sol", "contract Counter { uint x; }");
+//! let mut input = StandardJsonInput::new().add_source("Counter.sol", "contract Counter { uint x; }");
 //! input.settings.output_selection = Some(output_sel);
 //!
 //! // Inspect the JSON you would send to solc
@@ -41,9 +41,9 @@
 //! import paths are resolved on the filesystem.
 //!
 //! ```rust
-//! use solc::input::Input;
+//! use solc::input::StandardJsonInput;
 //!
-//! let input = Input::new()
+//! let input = StandardJsonInput::new()
 //!     .add_source("lib/Math.sol", "library Math { function add(uint a, uint b) internal pure returns (uint) { return a + b; } }")
 //!     .add_source("src/Contract.sol", "import \"lib/Math.sol\"; contract C { } ");
 //!
@@ -59,9 +59,9 @@
 //! the downloaded content.
 //!
 //! ```rust
-//! use solc::input::Input;
+//! use solc::input::StandardJsonInput;
 //!
-//! let input = Input::new().add_source_urls(
+//! let input = StandardJsonInput::new().add_source_urls(
 //!     "Remote.sol",
 //!     vec!["ipfs://Qm...".to_string()],
 //!     Some("0x123abc...".to_string()),
@@ -75,9 +75,9 @@
 //! when left as `None`.
 //!
 //! ```rust
-//! use solc::input::{Input, Optimizer, EvmVersion};
+//! use solc::input::{StandardJsonInput, Optimizer, EvmVersion};
 //!
-//! let mut input = Input::new().add_source("A.sol", "contract A {} ");
+//! let mut input = StandardJsonInput::new().add_source("A.sol", "contract A {} ");
 //! input.settings.optimizer = Some(Optimizer { enabled: true, runs: 200, details: None });
 //! input.settings.evm_version = Some(EvmVersion::Osaka);
 //! ```
@@ -90,7 +90,7 @@
 //! produce mismatched metadata.
 //!
 //! ```rust
-//! use solc::input::Input;
+//! use solc::input::StandardJsonInput;
 //! use std::collections::BTreeMap;
 //!
 //! let mut libs = BTreeMap::new();
@@ -98,7 +98,7 @@
 //! file_map.insert("MyLib".to_string(), "0x1234567890abcdef1234567890abcdef12345678".to_string());
 //! libs.insert("".to_string(), file_map);
 //!
-//! let mut input = Input::new().add_source("Main.sol", "import \"MyLib.sol\"; contract Main {} ");
+//! let mut input = StandardJsonInput::new().add_source("Main.sol", "import \"MyLib.sol\"; contract Main {} ");
 //! input.settings.libraries = Some(libs);
 //! ```
 //!
@@ -110,10 +110,11 @@
 //! * Avoid manual bytecode linking after compilation; prefer `settings.libraries`.
 //! * For full schema details and available `settings`/`outputSelection`
 //!   values consult the Solidity Standard JSON documentation.
-use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
-/// Represents the Solidity compiler's Standard JSON `Input` object consumed by
+use serde::{Deserialize, Serialize};
+
+/// Represents the Solidity compiler's Standard JSON `StandardJsonInput` object consumed by
 /// `solc --standard-json`.
 ///
 /// This struct mirrors the compiler's JSON schema:
@@ -124,15 +125,15 @@ use std::collections::BTreeMap;
 ///   checker, metadata, etc.).
 ///
 /// The struct is serialized using camelCase fields to match the compiler's
-/// expected keys. Use the builder-style helpers (`Input::new`, `add_source`,
+/// expected keys. Use the builder-style helpers (`StandardJsonInput::new`, `add_source`,
 /// `add_source_urls`, `model_checker`) for common workflows; for advanced
 /// configuration modify `input.settings` directly.
 ///
 /// Example:
 ///
 /// ```rust
-/// use solc::input::Input;
-/// let input = Input::new()
+/// use solc::input::StandardJsonInput;
+/// let input = StandardJsonInput::new()
 ///     .add_source("Counter.sol", "contract Counter { uint x; }");
 /// let json = serde_json::to_string(&input).unwrap();
 /// ```
@@ -142,12 +143,12 @@ use std::collections::BTreeMap;
 /// Input/Output interface.
 #[derive(Clone, Default, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Input {
+pub struct StandardJsonInput {
     /// The source language for the provided `sources` map.
     ///
     /// This is serialized to the compiler-expected string (for example
     /// `"Solidity"` or `"Yul"`). It defaults to `Language::Solidity` via
-    /// `Input::new()` and controls how the compiler interprets the provided
+    /// `StandardJsonInput::new()` and controls how the compiler interprets the provided
     /// source files (regular Solidity source files, pre-parsed ASTs, or EVM
     /// assembly).
     pub language: Language,
@@ -158,7 +159,7 @@ pub struct Input {
     /// `outputSelection` (for example `"src/Contract.sol"`). Each value is a
     /// `Source` that either embeds literal `content` or specifies `urls` to
     /// fetch the source (optionally validated with a `keccak256` hash).
-    /// Use `Input::add_source` or `Input::add_source_urls` to populate this
+    /// Use `StandardJsonInput::add_source` or `StandardJsonInput::add_source_urls` to populate this
     /// map in a safe, builder-style manner.
     pub sources: BTreeMap<String, Source>,
 
@@ -172,7 +173,7 @@ pub struct Input {
     pub settings: Settings,
 }
 
-/// Source language for the `Input` object. Serialized to the compiler
+/// Source language for the `StandardJsonInput` object. Serialized to the compiler
 /// representation.
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq, Default)]
 pub enum Language {
@@ -185,7 +186,7 @@ pub enum Language {
     EvmAssembly,
 }
 
-/// A `Source` entry for the `sources` map in `Input`.
+/// A `Source` entry for the `sources` map in `StandardJsonInput`.
 ///
 /// Each source can optionally include a `keccak256` hash used to verify the
 /// contents when the compiler fetches a URL-based source. The actual source
@@ -506,13 +507,13 @@ pub enum EvmVersion {
     Osaka,
 }
 
-impl Input {
-    /// Create a new, empty `Input` with sensible defaults:
+impl StandardJsonInput {
+    /// Create a new, empty `StandardJsonInput` with sensible defaults:
     /// * `language` defaults to `Language::Solidity`.
     /// * `sources` is empty.
     /// * `settings` uses `Settings::default()`.
     ///
-    /// The methods on `Input` return `Self` to enable builder-style chaining.
+    /// The methods on `StandardJsonInput` return `Self` to enable builder-style chaining.
     pub fn new() -> Self {
         Self {
             language: Language::Solidity,
@@ -572,33 +573,30 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_source_content_exclusivity() {
-        let input = Input::new().add_source("A.sol", "contract A {}");
+    fn source_content_exclusivity() {
+        let input = StandardJsonInput::new().add_source("A.sol", "contract A {}");
         let json = serde_json::to_value(&input).unwrap();
-        // Check structure is flat: {"content": "..."}
         assert_eq!(json["sources"]["A.sol"]["content"], "contract A {}");
         assert!(json["sources"]["A.sol"].get("urls").is_none());
     }
 
     #[test]
-    fn test_source_url_exclusivity() {
-        let input = Input::new().add_source_urls(
+    fn source_url_exclusivity() {
+        let input = StandardJsonInput::new().add_source_urls(
             "B.sol",
             vec!["ipfs://Qm...".to_string()],
             Some("0x123".to_string()),
         );
         let json = serde_json::to_value(&input).unwrap();
 
-        // Check structure is flat: {"urls": [...], "keccak256": "..."}
         assert!(json["sources"]["B.sol"]["urls"].is_array());
         assert_eq!(json["sources"]["B.sol"]["urls"][0], "ipfs://Qm...");
         assert_eq!(json["sources"]["B.sol"]["keccak256"], "0x123");
-        // Ensure content field is NOT present
         assert!(json["sources"]["B.sol"].get("content").is_none());
     }
 
     #[test]
-    fn test_model_checker_serialization() {
+    fn model_checker_serialization() {
         let settings = ModelCheckerSettings {
             engine: Some(ModelCheckerEngine::Chc),
             targets: Some(vec![
@@ -609,11 +607,94 @@ mod tests {
             ..Default::default()
         };
 
-        let input = Input::new().model_checker(settings);
+        let input = StandardJsonInput::new().model_checker(settings);
         let json = serde_json::to_string(&input).unwrap();
 
         assert!(json.contains(r#""engine":"chc""#));
         assert!(json.contains(r#""targets":["underflow","overflow"]"#));
         assert!(json.contains(r#""solvers":["z3"]"#));
+    }
+    #[test]
+    fn parse_covenant_fixture() {
+        let json_str = include_str!("../fixtures/standard-json-input-covenant.json");
+        let input: StandardJsonInput =
+            serde_json::from_str(json_str).expect("Failed to parse covenant fixture");
+        assert_eq!(input.language, Language::Solidity);
+        assert!(!input.sources.is_empty());
+    }
+
+    #[test]
+    fn parse_covenant_chainlink_oracle_fixture() {
+        let json_str =
+            include_str!("../fixtures/standard-json-input-covenant-chainlink-oracle.json");
+        let input: StandardJsonInput =
+            serde_json::from_str(json_str).expect("Failed to parse chainlink oracle fixture");
+        assert_eq!(input.language, Language::Solidity);
+        assert!(!input.sources.is_empty());
+    }
+
+    #[test]
+    fn parse_covenant_cross_adapter_fixture() {
+        let json_str = include_str!("../fixtures/standard-json-input-covenant-cross-adapter.json");
+        let input: StandardJsonInput =
+            serde_json::from_str(json_str).expect("Failed to parse cross adapter fixture");
+        assert_eq!(input.language, Language::Solidity);
+        assert!(!input.sources.is_empty());
+    }
+
+    #[test]
+    fn parse_covenant_curator_fixture() {
+        let json_str = include_str!("../fixtures/standard-json-input-covenant-curator.json");
+        let input: StandardJsonInput =
+            serde_json::from_str(json_str).expect("Failed to parse curator fixture");
+        assert_eq!(input.language, Language::Solidity);
+        assert!(!input.sources.is_empty());
+    }
+
+    #[test]
+    fn parse_covenant_data_provider_fixture() {
+        let json_str = include_str!("../fixtures/standard-json-input-covenant-data-provider.json");
+        let input: StandardJsonInput =
+            serde_json::from_str(json_str).expect("Failed to parse data provider fixture");
+        assert_eq!(input.language, Language::Solidity);
+        assert!(!input.sources.is_empty());
+    }
+
+    #[test]
+    fn parse_covenant_latent_swap_lex_fixture() {
+        let json_str =
+            include_str!("../fixtures/standard-json-input-covenant-latent-swap-lex.json");
+        let input: StandardJsonInput =
+            serde_json::from_str(json_str).expect("Failed to parse latent swap lex fixture");
+        assert_eq!(input.language, Language::Solidity);
+        assert!(!input.sources.is_empty());
+    }
+
+    #[test]
+    fn parse_covenant_no_delegate_call_fixture() {
+        let json_str =
+            include_str!("../fixtures/standard-json-input-covenant-no-delegate-call.json");
+        let input: StandardJsonInput =
+            serde_json::from_str(json_str).expect("Failed to parse no delegate call fixture");
+        assert_eq!(input.language, Language::Solidity);
+        assert!(!input.sources.is_empty());
+    }
+
+    #[test]
+    fn parse_covenant_pyth_oracle_fixture() {
+        let json_str = include_str!("../fixtures/standard-json-input-covenant-pyth-oracle.json");
+        let input: StandardJsonInput =
+            serde_json::from_str(json_str).expect("Failed to parse pyth oracle fixture");
+        assert_eq!(input.language, Language::Solidity);
+        assert!(!input.sources.is_empty());
+    }
+
+    #[test]
+    fn parse_covenant_synth_token_fixture() {
+        let json_str = include_str!("../fixtures/standard-json-input-covenant-synth-token.json");
+        let input: StandardJsonInput =
+            serde_json::from_str(json_str).expect("Failed to parse synth token fixture");
+        assert_eq!(input.language, Language::Solidity);
+        assert!(!input.sources.is_empty());
     }
 }
