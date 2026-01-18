@@ -28,51 +28,61 @@ cargo txt show serde::Deserialize
 
 # Guidelines
 
-**CRITICAL**: You must follow the guidelines strictly.
+- [README Writing Guidelines](.zed/agent/guidelines/readme.md)
+- [Rust Coding Guidelines: Documentation](.zed/agent/guidelines/rust.md)
 
-1. Read `.zed/agent/guidelines/readme.md` to understand README guidelines.
-2. Read `.zed/agent/guidelines/rust.md` to understand the Rust guidelines.
+# Instructions
 
-# Planning Mode
+- [Create Plan Intruction](.zed/agent/instructions/create-plan.md)
+- [Review Changes Instruction](.zed/agent/instructions/review-changes.md)
+- [Create Git Commit Message Instruction](.zed/agent/instructions/create-git-commit-message.md)
+
+# Agent Modes
+
+## Planning Mode
 
 When creating or updating a plan:
 
 1. Read README.md to understand the project.
-2. Use the thinking tool.
-3. Use `cargo-txt` if needed.
-4. Include README.md updates in the plan.
-5. **IMPORTANT**: Every plan's Success Criteria section MUST include these base
+2. Use the guidelines.
+3. Use the thinking tool.
+4. Use `cargo-txt` if needed.
+5. Include README.md updates in the plan.
+6. **IMPORTANT**: Every plan's Success Criteria section MUST include these base
    criteria:
     - `rust-lint` passes
     - `cargo clippy -- -D warnings` passes
     - `cargo build` succeeds
     - `cargo test` passes
-6. Read & follow instructions in `.zed/agent/instructions/create-plan.md`.
+7. Read & follow **Create Plan Instruction**.
 
-# Building Mode
+## Building Mode
 
 When implementing a plan:
 
 1. Update the plan status as in progress.
 2. Read README.md to understand the project.
-3. Use the thinking tool.
-4. **IMPORTANT**: Do not use git restore commands (can cause data loss).
-5. **IMPORTANT**: Review and update the plan checklist after implementation.
+3. Use the guidelines.
+4. Use the `cargo-txt` tool.
+5. Use the thinking tool.
+6. **IMPORTANT**: Do not use git restore commands (can cause data loss).
+7. **IMPORTANT**: Review and update the plan checklist after implementation.
 
-# Reviewing Mode
+## Review Mode
 
 When reviewing staged changes:
 
 1. Read README.md to understand the project.
-2. Use the thinking tool.
-3. Follow the instructions in `.zed/agent/instructions/review-changes.md`.
-4. Use `cargo test` to run tests and `rust-lint` to verify changes.
+2. Use the guidelines.
+3. Use the thinking tool.
+4. Read & follow **Review Changes Instruction**.
+5. Use `cargo test` to run tests and `rust-lint` to verify changes.
 
-# Git Commit Mode
+## Git Commit Mode
 
 When writing Git Commit message:
 
 1. Read README.md to understand the project.
-2. Use the thinking tool.
-3. Follow instructions in
-   `.zed/agent/instructions/create-git-commit-message.md`.
+2. Use the guidelines.
+3. Use the thinking tool.
+4. Read & follow **Create Git Commit Message Instruction**.
