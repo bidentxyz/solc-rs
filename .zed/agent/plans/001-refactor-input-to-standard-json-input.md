@@ -36,7 +36,7 @@ Standard JSON Input files.
 2. Re-export `StandardJsonInput` at the crate root level
 3. Update all documentation and examples to use the new name
 4. Add unit tests that deserialize fixture files from
-   `fixtures/standard-json-input-*.json`
+   `fixtures/standard-json-input/covenant-*.json`
 5. Verify all existing functionality works with the renamed type
 
 ## Analysis Required
@@ -52,7 +52,7 @@ Standard JSON Input files.
 
 - `src/input.rs` - Contains the `Input` struct and all related types
 - `src/lib.rs` - Module declarations and exports
-- `fixtures/standard-json-input-*.json` - Test fixture files
+- `fixtures/standard-json-input/covenant-*.json` - Test fixture files
 
 ## Implementation Checklist
 
@@ -65,6 +65,14 @@ Standard JSON Input files.
 - [x] Update module-level documentation in `src/input.rs` to reference
       `StandardJsonInput`
 - [x] Update all doc comment examples that reference `Input`
+
+### File Structure Changes
+
+- [x] Create `fixtures/standard-json-input/` directory
+- [x] Move all fixture files from `fixtures/standard-json-input-*.json` to
+      `fixtures/standard-json-input/covenant-*.json` (preserving covenant
+      prefix)
+- [x] Update test file paths in `src/input.rs` to use new directory structure
 
 ### Documentation Updates
 
@@ -117,7 +125,7 @@ solc-rs/
 │   ├── input.rs       # Input struct renamed to StandardJsonInput
 │   └── lib.rs         # Re-exports StandardJsonInput at crate root
 └── fixtures/
-    └── standard-json-input-*.json  # Used for unit tests
+    └── standard-json-input/  # Directory containing covenant-*.json fixture files
 ```
 
 ### Module Exports
@@ -195,9 +203,19 @@ compile time:
 ```rust
 #[test]
 fn test_parse_covenant_fixture() {
-    let json_str = include_str!("../../fixtures/standard-json-input-covenant.json");
+    let json_str = include_str!("../../fixtures/standard-json-input/covenant.json");
     let input: StandardJsonInput = serde_json::from_str(json_str).expect("Failed to parse covenant fixture");
     assert_eq!(input.language, Language::Solidity);
     // ... additional assertions
 }
+
+// Other fixture tests follow same pattern:
+// fixtures/standard-json-input/covenant-chainlink-oracle.json
+// fixtures/standard-json-input/covenant-cross-adapter.json
+// fixtures/standard-json-input/covenant-curator.json
+// fixtures/standard-json-input/covenant-data-provider.json
+// fixtures/standard-json-input/covenant-latent-swap-lex.json
+// fixtures/standard-json-input/covenant-no-delegate-call.json
+// fixtures/standard-json-input/covenant-pyth-oracle.json
+// fixtures/standard-json-input/covenant-synth-token.json
 ```

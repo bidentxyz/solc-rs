@@ -616,7 +616,7 @@ mod tests {
     }
     #[test]
     fn parse_covenant_fixture() {
-        let json_str = include_str!("../fixtures/standard-json-input-covenant.json");
+        let json_str = include_str!("../fixtures/standard-json-input/covenant.json");
         let input: StandardJsonInput =
             serde_json::from_str(json_str).expect("Failed to parse covenant fixture");
         assert_eq!(input.language, Language::Solidity);
@@ -626,7 +626,7 @@ mod tests {
     #[test]
     fn parse_covenant_chainlink_oracle_fixture() {
         let json_str =
-            include_str!("../fixtures/standard-json-input-covenant-chainlink-oracle.json");
+            include_str!("../fixtures/standard-json-input/covenant-chainlink-oracle.json");
         let input: StandardJsonInput =
             serde_json::from_str(json_str).expect("Failed to parse chainlink oracle fixture");
         assert_eq!(input.language, Language::Solidity);
@@ -635,7 +635,7 @@ mod tests {
 
     #[test]
     fn parse_covenant_cross_adapter_fixture() {
-        let json_str = include_str!("../fixtures/standard-json-input-covenant-cross-adapter.json");
+        let json_str = include_str!("../fixtures/standard-json-input/covenant-cross-adapter.json");
         let input: StandardJsonInput =
             serde_json::from_str(json_str).expect("Failed to parse cross adapter fixture");
         assert_eq!(input.language, Language::Solidity);
@@ -644,7 +644,7 @@ mod tests {
 
     #[test]
     fn parse_covenant_curator_fixture() {
-        let json_str = include_str!("../fixtures/standard-json-input-covenant-curator.json");
+        let json_str = include_str!("../fixtures/standard-json-input/covenant-curator.json");
         let input: StandardJsonInput =
             serde_json::from_str(json_str).expect("Failed to parse curator fixture");
         assert_eq!(input.language, Language::Solidity);
@@ -653,7 +653,7 @@ mod tests {
 
     #[test]
     fn parse_covenant_data_provider_fixture() {
-        let json_str = include_str!("../fixtures/standard-json-input-covenant-data-provider.json");
+        let json_str = include_str!("../fixtures/standard-json-input/covenant-data-provider.json");
         let input: StandardJsonInput =
             serde_json::from_str(json_str).expect("Failed to parse data provider fixture");
         assert_eq!(input.language, Language::Solidity);
@@ -663,7 +663,7 @@ mod tests {
     #[test]
     fn parse_covenant_latent_swap_lex_fixture() {
         let json_str =
-            include_str!("../fixtures/standard-json-input-covenant-latent-swap-lex.json");
+            include_str!("../fixtures/standard-json-input/covenant-latent-swap-lex.json");
         let input: StandardJsonInput =
             serde_json::from_str(json_str).expect("Failed to parse latent swap lex fixture");
         assert_eq!(input.language, Language::Solidity);
@@ -673,7 +673,7 @@ mod tests {
     #[test]
     fn parse_covenant_no_delegate_call_fixture() {
         let json_str =
-            include_str!("../fixtures/standard-json-input-covenant-no-delegate-call.json");
+            include_str!("../fixtures/standard-json-input/covenant-no-delegate-call.json");
         let input: StandardJsonInput =
             serde_json::from_str(json_str).expect("Failed to parse no delegate call fixture");
         assert_eq!(input.language, Language::Solidity);
@@ -682,7 +682,7 @@ mod tests {
 
     #[test]
     fn parse_covenant_pyth_oracle_fixture() {
-        let json_str = include_str!("../fixtures/standard-json-input-covenant-pyth-oracle.json");
+        let json_str = include_str!("../fixtures/standard-json-input/covenant-pyth-oracle.json");
         let input: StandardJsonInput =
             serde_json::from_str(json_str).expect("Failed to parse pyth oracle fixture");
         assert_eq!(input.language, Language::Solidity);
@@ -691,7 +691,7 @@ mod tests {
 
     #[test]
     fn parse_covenant_synth_token_fixture() {
-        let json_str = include_str!("../fixtures/standard-json-input-covenant-synth-token.json");
+        let json_str = include_str!("../fixtures/standard-json-input/covenant-synth-token.json");
         let input: StandardJsonInput =
             serde_json::from_str(json_str).expect("Failed to parse synth token fixture");
         assert_eq!(input.language, Language::Solidity);
