@@ -1,13 +1,10 @@
 //! Types and builders for creating the Solidity compiler's Standard JSON
-//! `StandardJsonInput` object, the payload consumed by `solc --standard-json`.
+//! `StandardJsonInput` object, the payload used by `solc --standard-json`.
 //!
 //! This module exposes the top-level `StandardJsonInput` type and the related types used to
-//! configure compilation:
-//!
-//! * `Source` / `SourceContent`: Source inclusion.
-//! * `Settings`: optimizer, metadata, output selection, model checker, etc.
-//!
-//! and various enums used to serialize compiler-friendly values.
+//! configure compilation, including `Source` and `SourceContent` for source inclusion,
+//! `Settings` for optimizer, metadata, output selection, model checker, and other options,
+//! as well as various enums used to serialize compiler-friendly values.
 //!
 //! The documentation below is organized by common use-cases and contains small
 //! runnable examples that demonstrate how to construct the JSON payload you
@@ -19,7 +16,7 @@
 //! content and request only the bytecode output for all contracts:
 //!
 //! ```rust
-//! use solc::input::StandardJsonInput;
+//! use solc::StandardJsonInput;
 //! use std::collections::BTreeMap;
 //!
 //! let mut output_sel = BTreeMap::new();
@@ -41,7 +38,7 @@
 //! import paths are resolved on the filesystem.
 //!
 //! ```rust
-//! use solc::input::StandardJsonInput;
+//! use solc::StandardJsonInput;
 //!
 //! let input = StandardJsonInput::new()
 //!     .add_source("lib/Math.sol", "library Math { function add(uint a, uint b) internal pure returns (uint) { return a + b; } }")
@@ -59,7 +56,7 @@
 //! the downloaded content.
 //!
 //! ```rust
-//! use solc::input::StandardJsonInput;
+//! use solc::StandardJsonInput;
 //!
 //! let input = StandardJsonInput::new().add_source_urls(
 //!     "Remote.sol",
@@ -90,7 +87,7 @@
 //! produce mismatched metadata.
 //!
 //! ```rust
-//! use solc::input::StandardJsonInput;
+//! use solc::StandardJsonInput;
 //! use std::collections::BTreeMap;
 //!
 //! let mut libs = BTreeMap::new();
@@ -114,7 +111,7 @@ use std::collections::BTreeMap;
 
 use serde::{Deserialize, Serialize};
 
-/// Represents the Solidity compiler's Standard JSON `StandardJsonInput` object consumed by
+/// Represents the Solidity compiler's Standard JSON `StandardJsonInput` object used by
 /// `solc --standard-json`.
 ///
 /// This struct mirrors the compiler's JSON schema:
@@ -126,13 +123,13 @@ use serde::{Deserialize, Serialize};
 ///
 /// The struct is serialized using camelCase fields to match the compiler's
 /// expected keys. Use the builder-style helpers (`StandardJsonInput::new`, `add_source`,
-/// `add_source_urls`, `model_checker`) for common workflows; for advanced
+/// `add_source_urls`, `model_checker`) for common workflows. For advanced
 /// configuration modify `input.settings` directly.
 ///
 /// Example:
 ///
 /// ```rust
-/// use solc::input::StandardJsonInput;
+/// use solc::StandardJsonInput;
 /// let input = StandardJsonInput::new()
 ///     .add_source("Counter.sol", "contract Counter { uint x; }");
 /// let json = serde_json::to_string(&input).unwrap();
@@ -167,8 +164,8 @@ pub struct StandardJsonInput {
     /// EVM target, metadata, libraries, model checking and debugging behavior.
     ///
     /// Most fields are optional and will be omitted from serialized JSON if
-    /// left as `None`. Set only the options you need—e.g., enable the
-    /// optimizer, set `evmVersion`, populate `outputSelection`, or provide
+    /// left as `None`. Set only the options you need such as enabling the
+    /// optimizer, setting `evmVersion`, populating `outputSelection`, or providing
     /// library addresses in `libraries` to request linked artifacts.
     pub settings: Settings,
 }
@@ -393,28 +390,26 @@ pub enum ModelCheckerTarget {
 /// Debugging-related settings exposed in the `settings.debug` section of the
 /// Standard JSON input.
 ///
-/// These options control two separate concerns:
-/// 1. How `revert` and `require` reason strings are treated (`revert_strings`).
-/// 2. What additional debug annotations are injected as comments into the
-///    generated EVM assembly/Yul output (`debug_info`).
+/// These options control two separate concerns: how `revert` and `require` reason
+/// strings are treated (`revert_strings`), and what additional debug annotations
+/// are injected as comments into the generated EVM assembly/Yul output (`debug_info`).
 ///
-/// Notes:
-/// * These settings are useful when building contracts for development or when
-///   producing rich assembly artifacts for debugging and analysis.
-/// * Some options (for example `VerboseDebug`) may be experimental or not fully
-///   implemented in all compiler versions; consult the Solidity docs for details.
+/// These settings are useful when building contracts for development or when
+/// producing rich assembly artifacts for debugging and analysis.
+/// Some options (for example `VerboseDebug`) may be experimental or not fully
+/// implemented in all compiler versions; consult the Solidity docs for details.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DebugSettings {
     /// Controls treatment of `revert` and `require` reason strings.
     ///
-    /// * `Default` (compiler default): preserves user-supplied reason strings
-    ///   and does not inject additional compiler-generated strings.
-    /// * `Strip`: removes revert strings where possible to reduce bytecode size.
-    /// * `Debug`: injects compiler-generated strings for internal reverts and
-    ///   other diagnostics (helpful while debugging but increases size).
-    /// * `VerboseDebug`: injects even more detailed debug information when
-    ///   available (may append additional runtime context to messages).
+    /// The `Default` setting preserves user-supplied reason strings
+    /// and does not inject additional compiler-generated strings.
+    /// The `Strip` setting removes revert strings where possible to reduce bytecode size.
+    /// The `Debug` setting injects compiler-generated strings for internal reverts and
+    /// other diagnostics (helpful while debugging but increases size).
+    /// The `VerboseDebug` setting injects even more detailed debug information when
+    /// available (may append additional runtime context to messages).
     ///
     /// Choose the most appropriate setting depending on whether you prefer
     /// compact bytecode (`Strip`) or richer runtime diagnostics (`Debug`).
@@ -423,12 +418,11 @@ pub struct DebugSettings {
     /// A list of debug components to include inline as comments in generated
     /// assembly and Yul output.
     ///
-    /// Valid component names include (but are not limited to):
-    /// * `"location"`: include `@src <index>:<start>:<end>` annotations that
-    ///   map generated code back to source file byte ranges.
-    /// * `"snippet"`: include a short, single-line quoted snippet of source at
-    ///   each annotated location to aid quick inspection.
-    /// * `"*"`: wildcard to request all available debug annotations.
+    /// Valid component names include `"location"` to include `@src <index>:<start>:<end>`
+    /// annotations that map generated code back to source file byte ranges,
+    /// `"snippet"` to include a short, single-line quoted snippet of source at
+    /// each annotated location to aid quick inspection, and `"*"` as a wildcard
+    /// to request all available debug annotations.
     ///
     /// Example:
     ///
@@ -437,7 +431,7 @@ pub struct DebugSettings {
     /// let debug = DebugSettings { revert_strings: Default::default(), debug_info: vec!["location".into(), "snippet".into()] };
     /// ```
     ///
-    /// Tip: limit `debug_info` to only the components you need to avoid
+    /// Limit `debug_info` to only the components you need to avoid
     /// producing excessively large assembly comments.
     pub debug_info: Vec<String>,
 }
