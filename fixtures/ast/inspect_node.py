@@ -16,65 +16,6 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-# Common fields that contain AST nodes in Solidity compiler output
-AST_NODE_FIELDS = {
-    "nodes",
-    "foreign",
-    "body",
-    "arguments",
-    "declarations",
-    "nodes",
-    "foreign",
-    "body",
-    "arguments",
-    "declarations",
-    "baseContracts",
-    "functions",
-    "events",
-    "modifiers",
-    "variables",
-    "parameters",
-    "returnParameters",
-    "condition",
-    "trueBody",
-    "falseBody",
-    "initialization",
-    "value",
-    "assignment",
-    "leftHandSide",
-    "rightHandSide",
-    "expression",
-    "vReturnValue",
-    "vFunctionCall",
-    "vTryCall",
-    "statements",
-    "documentation",
-    "typeName",
-    "type",
-    "element",
-    "memberName",
-    "members",
-    "attributes",
-    "arguments",
-    "components",
-    "arrayExpression",
-    "indexExpression",
-    "base",
-    "expressionName",
-    "memberExpression",
-    "newExpression",
-    "expressionType",
-    "superFunction",
-    "constructor",
-    "fallbackReceive",
-    "receiveEther",
-    "fallback",
-    "symbolAliases",
-    "originalName",
-    "nameLocation",
-    "functionSelector",
-}
-
 
 def is_ast_node(value):
     """Check if a value is an AST node (dict with nodeType field)"""
@@ -94,17 +35,12 @@ def extract_ast_nodes(value):
         nodes.append(value)
 
     if isinstance(value, dict):
-        for key, val in value.items():
-            # Check if this key is likely to contain AST nodes
-            if key in AST_NODE_FIELDS or is_ast_node(val):
-                nodes.extend(extract_ast_nodes(val))
-            elif isinstance(val, (dict, list)):
+        for val in value.values():
+            if isinstance(val, (dict, list)):
                 nodes.extend(extract_ast_nodes(val))
     elif isinstance(value, list):
         for item in value:
-            if is_ast_node(item):
-                nodes.extend(extract_ast_nodes(item))
-            elif isinstance(item, (dict, list)):
+            if isinstance(item, (dict, list)):
                 nodes.extend(extract_ast_nodes(item))
 
     return nodes
@@ -143,27 +79,18 @@ def analyze_directory(directory):
                 node_type = node.get("nodeType", "Unknown")
                 all_node_types.add(node_type)
 
-                # Find child nodes in common fields
-                for field in AST_NODE_FIELDS:
-                    if field in node:
-                        value = node[field]
-
-                        if is_ast_node(value):
-                            # Single child node
-                            child_nodes = extract_ast_nodes(value)
-                            for child_node in child_nodes:
-                                child_type = child_node.get("nodeType", "Unknown")
+                # Find child nodes by checking all fields
+                for value in node.values():
+                    if is_ast_node(value):
+                        # Direct child node
+                        child_type = value.get("nodeType", "Unknown")
+                        node_types[node_type].add(child_type)
+                    elif isinstance(value, list):
+                        # Array of child nodes
+                        for item in value:
+                            if is_ast_node(item):
+                                child_type = item.get("nodeType", "Unknown")
                                 node_types[node_type].add(child_type)
-                        elif isinstance(value, list):
-                            # Array of child nodes
-                            for item in value:
-                                if is_ast_node(item):
-                                    child_nodes = extract_ast_nodes(item)
-                                    for child_node in child_nodes:
-                                        child_type = child_node.get(
-                                            "nodeType", "Unknown"
-                                        )
-                                        node_types[node_type].add(child_type)
 
         except Exception as e:
             print(f"⚠️  Error processing {json_file}: {e}", file=sys.stderr)
