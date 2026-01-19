@@ -15,8 +15,8 @@
 //! # Module Structure
 //!
 //! - [`common`]: Shared structures used across multiple AST node types
-//! - [`error`]: Error types for AST deserialization operations
 //! - [`types`]: Type definitions and type-related nodes
+//! - [`identifier`]: Identifier nodes representing named entity references
 //!
 //! # Example
 //!
@@ -41,10 +41,10 @@
 //! assert_eq!(type_name.node_type, "ElementaryTypeName");
 //! ```
 
-pub use common::TypeDescriptions;
-pub use error::Error;
+pub use common::{SourceLocation, TypeDescriptions};
+pub use identifier::Identifier;
 pub use types::{ElementaryType, ElementaryTypeName};
 
 pub mod common;
-pub mod error;
+pub mod identifier;
 pub mod types;

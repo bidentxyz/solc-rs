@@ -5,9 +5,9 @@
 
 use std::fmt;
 
-use crate::ast;
-use crate::ast::common;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
+
+use crate::ast::{SourceLocation, TypeDescriptions};
 
 /// Elementary type names in Solidity.
 ///
@@ -44,6 +44,85 @@ pub enum ElementaryType {
     Ufixed(u8, u8),
     /// Fixed-point signed type with total and fractional bits.
     Fixed(u8, u8),
+}
+
+/// An elementary type name in Solidity source code.
+///
+/// Represents primitive types like `uint256`, `address`, `bool`, `string`,
+/// and `bytes`. This is a leaf node in the Solidity AST.
+///
+/// # Example
+///
+/// ```rust
+/// use solc::ast::ElementaryTypeName;
+/// use serde_json;
+///
+/// let json = r#"{
+///   "id": 50907,
+///   "name": "uint32",
+///   "nodeType": "ElementaryTypeName",
+///   "src": "1729:6:66",
+///   "stateMutability": null,
+///   "typeDescriptions": {
+///     "typeIdentifier": "t_uint32",
+///     "typeString": "uint32"
+///   }
+/// }"#;
+///
+/// let type_name: ElementaryTypeName = serde_json::from_str(json).unwrap();
+/// assert_eq!(type_name.id, 50907);
+/// assert_eq!(type_name.node_type, "ElementaryTypeName");
+/// ```
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ElementaryTypeName {
+    /// Unique identifier assigned by the compiler.
+    pub id: i64,
+
+    /// The name of the type as an enum for type safety.
+    pub name: ElementaryType,
+
+    /// The node type identifier (always "ElementaryTypeName").
+    #[serde(rename = "nodeType")]
+    pub node_type: String,
+
+    /// Source location information.
+    pub src: SourceLocation,
+
+    /// State mutability for address types (only present for address).
+    #[serde(rename = "stateMutability", skip_serializing_if = "Option::is_none")]
+    pub state_mutability: Option<String>,
+
+    /// Type descriptions provided by the compiler.
+    #[serde(rename = "typeDescriptions")]
+    pub type_descriptions: TypeDescriptions,
+}
+
+impl<'de> Deserialize<'de> for ElementaryType {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let s = String::deserialize(deserializer)?;
+
+        match s.as_str() {
+            "address" => Ok(ElementaryType::Address),
+            "payable" => Ok(ElementaryType::Payable),
+            "bool" => Ok(ElementaryType::Bool),
+            "string" => Ok(ElementaryType::String),
+            "bytes" => Ok(ElementaryType::Bytes),
+            s if s.starts_with("uint") => deserialize_uint(s).map_err(serde::de::Error::custom),
+            s if s.starts_with("int") => deserialize_int(s).map_err(serde::de::Error::custom),
+            s if s.starts_with("bytes") => {
+                deserialize_fixed_bytes(s).map_err(serde::de::Error::custom)
+            }
+            s if s.starts_with("ufixed") => deserialize_ufixed(s).map_err(serde::de::Error::custom),
+            s if s.starts_with("fixed") => deserialize_fixed(s).map_err(serde::de::Error::custom),
+            _ => Err(serde::de::Error::custom(format!(
+                "unknown elementary type: {}",
+                s
+            ))),
+        }
+    }
 }
 
 impl fmt::Display for ElementaryType {
@@ -87,206 +166,94 @@ impl Serialize for ElementaryType {
 }
 
 /// Deserializes a uint type string (e.g., "uint256", "uint8") into an ElementaryType.
-fn deserialize_uint(s: &str) -> Result<ElementaryType, ast::Error> {
+fn deserialize_uint(s: &str) -> Result<ElementaryType, String> {
     let rest = s
         .strip_prefix("uint")
-        .ok_or_else(|| ast::Error::NotAUintType(s.to_string()))?;
+        .ok_or_else(|| format!("not a uint type: {}", s))?;
 
     let bits = if rest.is_empty() {
         256
     } else {
         rest.parse::<u16>()
-            .map_err(|e: std::num::ParseIntError| ast::Error::InvalidSize(e.to_string()))?
+            .map_err(|e: std::num::ParseIntError| format!("invalid integer size: {}", e))?
     };
 
     Ok(ElementaryType::Uint(bits))
 }
 
 /// Deserializes an int type string (e.g., "int256", "int8") into an ElementaryType.
-fn deserialize_int(s: &str) -> Result<ElementaryType, ast::Error> {
+fn deserialize_int(s: &str) -> Result<ElementaryType, String> {
     let rest = s
         .strip_prefix("int")
-        .ok_or_else(|| ast::Error::NotAIntType(s.to_string()))?;
+        .ok_or_else(|| format!("not an int type: {}", s))?;
 
     let bits = if rest.is_empty() {
         256
     } else {
         rest.parse::<u16>()
-            .map_err(|e: std::num::ParseIntError| ast::Error::InvalidSize(e.to_string()))?
+            .map_err(|e: std::num::ParseIntError| format!("invalid integer size: {}", e))?
     };
 
     Ok(ElementaryType::Int(bits))
 }
 
 /// Deserializes a fixed bytes type string (e.g., "bytes32", "bytes8") into an ElementaryType.
-fn deserialize_fixed_bytes(s: &str) -> Result<ElementaryType, ast::Error> {
+fn deserialize_fixed_bytes(s: &str) -> Result<ElementaryType, String> {
     let rest = s
         .strip_prefix("bytes")
-        .ok_or_else(|| ast::Error::NotABytesType(s.to_string()))?;
+        .ok_or_else(|| format!("not a bytes type: {}", s))?;
 
     let size = rest
         .parse::<u16>()
-        .map_err(|e: std::num::ParseIntError| ast::Error::InvalidBytesSize(e.to_string()))?;
+        .map_err(|e: std::num::ParseIntError| format!("invalid bytes size: {}", e))?;
 
     Ok(ElementaryType::FixedBytes(size))
 }
 
 /// Deserializes a ufixed type string (e.g., "ufixed128x18") into an ElementaryType.
-fn deserialize_ufixed(s: &str) -> Result<ElementaryType, ast::Error> {
+fn deserialize_ufixed(s: &str) -> Result<ElementaryType, String> {
     let rest = s
         .strip_prefix("ufixed")
-        .ok_or_else(|| ast::Error::NotAUfixedType(s.to_string()))?;
+        .ok_or_else(|| format!("not a ufixed type: {}", s))?;
 
-    let (total_str, fractional_str) = rest
-        .split_once('x')
-        .ok_or_else(|| ast::Error::InvalidUfixedFormat(s.to_string()))?;
+    let (total_str, fractional_str) = rest.split_once('x').ok_or_else(|| {
+        format!(
+            "invalid ufixed format: expected 'ufixed<total>x<fractional>', got: {}",
+            s
+        )
+    })?;
 
     let total: u8 = total_str
         .parse()
-        .map_err(|e: std::num::ParseIntError| ast::Error::InvalidTotalBits(e.to_string()))?;
+        .map_err(|e: std::num::ParseIntError| format!("invalid total bits: {}", e))?;
     let fractional: u8 = fractional_str
         .parse()
-        .map_err(|e: std::num::ParseIntError| ast::Error::InvalidFractionalBits(e.to_string()))?;
+        .map_err(|e: std::num::ParseIntError| format!("invalid fractional bits: {}", e))?;
 
     Ok(ElementaryType::Ufixed(total, fractional))
 }
 
 /// Deserializes a fixed type string (e.g., "fixed128x18") into an ElementaryType.
-fn deserialize_fixed(s: &str) -> Result<ElementaryType, ast::Error> {
+fn deserialize_fixed(s: &str) -> Result<ElementaryType, String> {
     let rest = s
         .strip_prefix("fixed")
-        .ok_or_else(|| ast::Error::NotAFixedType(s.to_string()))?;
+        .ok_or_else(|| format!("not a fixed type: {}", s))?;
 
-    let (total_str, fractional_str) = rest
-        .split_once('x')
-        .ok_or_else(|| ast::Error::InvalidFixedFormat(s.to_string()))?;
+    let (total_str, fractional_str) = rest.split_once('x').ok_or_else(|| {
+        format!(
+            "invalid fixed format: expected 'fixed<total>x<fractional>', got: {}",
+            s
+        )
+    })?;
 
     let total: u8 = total_str
         .parse()
-        .map_err(|e: std::num::ParseIntError| ast::Error::InvalidTotalBits(e.to_string()))?;
+        .map_err(|e: std::num::ParseIntError| format!("invalid total bits: {}", e))?;
     let fractional: u8 = fractional_str
         .parse()
-        .map_err(|e: std::num::ParseIntError| ast::Error::InvalidFractionalBits(e.to_string()))?;
+        .map_err(|e: std::num::ParseIntError| format!("invalid fractional bits: {}", e))?;
 
     Ok(ElementaryType::Fixed(total, fractional))
-}
-
-impl<'de> Deserialize<'de> for ElementaryType {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
-        let s = String::deserialize(deserializer)?;
-
-        match s.as_str() {
-            "address" => Ok(ElementaryType::Address),
-            "payable" => Ok(ElementaryType::Payable),
-            "bool" => Ok(ElementaryType::Bool),
-            "string" => Ok(ElementaryType::String),
-            "bytes" => Ok(ElementaryType::Bytes),
-            s if s.starts_with("uint") => deserialize_uint(s).map_err(serde::de::Error::custom),
-            s if s.starts_with("int") => deserialize_int(s).map_err(serde::de::Error::custom),
-            s if s.starts_with("bytes") => {
-                deserialize_fixed_bytes(s).map_err(serde::de::Error::custom)
-            }
-            s if s.starts_with("ufixed") => deserialize_ufixed(s).map_err(serde::de::Error::custom),
-            s if s.starts_with("fixed") => deserialize_fixed(s).map_err(serde::de::Error::custom),
-            _ => Err(serde::de::Error::custom(format!(
-                "unknown elementary type: {}",
-                s
-            ))),
-        }
-    }
-}
-
-/// An elementary type name in Solidity source code.
-///
-/// Represents primitive types like `uint256`, `address`, `bool`, `string`,
-/// and `bytes`. This is a leaf node in the Solidity AST.
-///
-/// # Example
-///
-/// ```rust
-/// use solc::ast::ElementaryTypeName;
-/// use serde_json;
-///
-/// let json = r#"{
-///   "id": 50907,
-///   "name": "uint32",
-///   "nodeType": "ElementaryTypeName",
-///   "src": "1729:6:66",
-///   "stateMutability": null,
-///   "typeDescriptions": {
-///     "typeIdentifier": "t_uint32",
-///     "typeString": "uint32"
-///   }
-/// }"#;
-///
-/// let type_name: ElementaryTypeName = serde_json::from_str(json).unwrap();
-/// assert_eq!(type_name.id, 50907);
-/// assert_eq!(type_name.node_type, "ElementaryTypeName");
-/// ```
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct ElementaryTypeName {
-    /// Unique identifier assigned by the compiler.
-    pub id: i64,
-
-    /// The name of the type as an enum for type safety.
-    pub name: ElementaryType,
-
-    /// The node type identifier (always "ElementaryTypeName").
-    #[serde(rename = "nodeType")]
-    pub node_type: String,
-
-    /// Source location information.
-    pub src: String,
-
-    /// State mutability for address types (only present for address).
-    #[serde(rename = "stateMutability", skip_serializing_if = "Option::is_none")]
-    pub state_mutability: Option<String>,
-
-    /// Type descriptions provided by the compiler.
-    #[serde(rename = "typeDescriptions")]
-    pub type_descriptions: common::TypeDescriptions,
-}
-
-impl ElementaryTypeName {
-    /// Creates a new ElementaryTypeName.
-    ///
-    /// # Example
-    ///
-    /// ```
-    /// use solc::ast::{ElementaryTypeName, ElementaryType, TypeDescriptions};
-    ///
-    /// let type_name = ElementaryTypeName {
-    ///     id: 1,
-    ///     name: ElementaryType::Uint(256),
-    ///     node_type: "ElementaryTypeName".to_string(),
-    ///     src: "0:7:0".to_string(),
-    ///     state_mutability: None,
-    ///     type_descriptions: TypeDescriptions::new(
-    ///         Some("t_uint256".to_string()),
-    ///         Some("uint256".to_string())
-    ///     ),
-    /// };
-    /// ```
-    pub fn new(
-        id: i64,
-        name: ElementaryType,
-        node_type: &str,
-        src: &str,
-        state_mutability: Option<String>,
-        type_descriptions: common::TypeDescriptions,
-    ) -> Self {
-        Self {
-            id,
-            name,
-            node_type: node_type.to_string(),
-            src: src.to_string(),
-            state_mutability,
-            type_descriptions,
-        }
-    }
 }
 
 #[cfg(test)]
@@ -294,7 +261,6 @@ mod tests {
     use std::fs;
 
     use super::*;
-    use crate::ast::common;
     use serde_json::Value;
     use walkdir::WalkDir;
 
@@ -356,17 +322,21 @@ mod tests {
 
     #[test]
     fn elementary_type_name_roundtrip() {
-        let original = ElementaryTypeName::new(
-            50909,
-            ElementaryType::Address,
-            "ElementaryTypeName",
-            "1821:7:66",
-            Some("nonpayable".to_string()),
-            common::TypeDescriptions::new(
-                Some("t_address".to_string()),
-                Some("address".to_string()),
-            ),
-        );
+        let original = ElementaryTypeName {
+            id: 50909,
+            name: ElementaryType::Address,
+            node_type: "ElementaryTypeName".to_string(),
+            src: SourceLocation {
+                offset: 1821,
+                length: 7,
+                source_index: 66,
+            },
+            state_mutability: Some("nonpayable".to_string()),
+            type_descriptions: TypeDescriptions {
+                type_identifier: Some("t_address".to_string()),
+                type_string: Some("address".to_string()),
+            },
+        };
 
         let json = serde_json::to_string(&original).unwrap();
         let deserialized: ElementaryTypeName = serde_json::from_str(&json).unwrap();
@@ -439,31 +409,42 @@ mod tests {
 
     #[test]
     fn state_mutability_field_handling() {
-        let with_mutability = ElementaryTypeName::new(
-            50909,
-            ElementaryType::Address,
-            "ElementaryTypeName",
-            "1821:7:66",
-            Some("nonpayable".to_string()),
-            common::TypeDescriptions::new(
-                Some("t_address".to_string()),
-                Some("address".to_string()),
-            ),
-        );
+        let with_mutability = ElementaryTypeName {
+            id: 50909,
+            name: ElementaryType::Address,
+            node_type: "ElementaryTypeName".to_string(),
+            src: SourceLocation {
+                offset: 1821,
+                length: 7,
+                source_index: 66,
+            },
+            state_mutability: Some("nonpayable".to_string()),
+            type_descriptions: TypeDescriptions {
+                type_identifier: Some("t_address".to_string()),
+                type_string: Some("address".to_string()),
+            },
+        };
 
         let json = serde_json::to_string(&with_mutability).unwrap();
         let parsed: Value = serde_json::from_str(&json).unwrap();
         assert!(parsed["stateMutability"].is_string());
         assert_eq!(parsed["stateMutability"], "nonpayable");
 
-        let without_mutability = ElementaryTypeName::new(
-            50907,
-            ElementaryType::Uint(32),
-            "ElementaryTypeName",
-            "1729:6:66",
-            None,
-            common::TypeDescriptions::new(Some("t_uint32".to_string()), Some("uint32".to_string())),
-        );
+        let without_mutability = ElementaryTypeName {
+            id: 50907,
+            name: ElementaryType::Uint(32),
+            node_type: "ElementaryTypeName".to_string(),
+            src: SourceLocation {
+                offset: 1729,
+                length: 6,
+                source_index: 66,
+            },
+            state_mutability: None,
+            type_descriptions: TypeDescriptions {
+                type_identifier: Some("t_uint32".to_string()),
+                type_string: Some("uint32".to_string()),
+            },
+        };
 
         let json = serde_json::to_string(&without_mutability).unwrap();
         let parsed: Value = serde_json::from_str(&json).unwrap();
