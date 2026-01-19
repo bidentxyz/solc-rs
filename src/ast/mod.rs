@@ -42,7 +42,7 @@
 //! ```
 
 pub use common::{SourceLocation, TypeDescriptions};
-pub use identifier::Identifier;
+pub use identifier::{Identifier, IdentifierPath};
 pub use types::{ElementaryType, ElementaryTypeName};
 
 pub mod common;

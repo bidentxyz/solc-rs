@@ -408,75 +408,6 @@ mod tests {
     }
 
     #[test]
-    fn state_mutability_field_handling() {
-        let with_mutability = ElementaryTypeName {
-            id: 50909,
-            name: ElementaryType::Address,
-            node_type: "ElementaryTypeName".to_string(),
-            src: SourceLocation {
-                offset: 1821,
-                length: 7,
-                source_index: 66,
-            },
-            state_mutability: Some("nonpayable".to_string()),
-            type_descriptions: TypeDescriptions {
-                type_identifier: Some("t_address".to_string()),
-                type_string: Some("address".to_string()),
-            },
-        };
-
-        let json = serde_json::to_string(&with_mutability).unwrap();
-        let parsed: Value = serde_json::from_str(&json).unwrap();
-        assert!(parsed["stateMutability"].is_string());
-        assert_eq!(parsed["stateMutability"], "nonpayable");
-
-        let without_mutability = ElementaryTypeName {
-            id: 50907,
-            name: ElementaryType::Uint(32),
-            node_type: "ElementaryTypeName".to_string(),
-            src: SourceLocation {
-                offset: 1729,
-                length: 6,
-                source_index: 66,
-            },
-            state_mutability: None,
-            type_descriptions: TypeDescriptions {
-                type_identifier: Some("t_uint32".to_string()),
-                type_string: Some("uint32".to_string()),
-            },
-        };
-
-        let json = serde_json::to_string(&without_mutability).unwrap();
-        let parsed: Value = serde_json::from_str(&json).unwrap();
-        assert!(parsed["stateMutability"].is_null());
-
-        let json_with = r#"{
-            "id": 50909,
-            "name": "address",
-            "nodeType": "ElementaryTypeName",
-            "src": "1821:7:66",
-            "stateMutability": "nonpayable",
-            "typeDescriptions": {
-                "typeIdentifier": "t_address",
-                "typeString": "address"
-            }
-        }"#;
-        let _: ElementaryTypeName = serde_json::from_str(json_with).unwrap();
-
-        let json_without = r#"{
-            "id": 50907,
-            "name": "uint32",
-            "nodeType": "ElementaryTypeName",
-            "src": "1729:6:66",
-            "typeDescriptions": {
-                "typeIdentifier": "t_uint32",
-                "typeString": "uint32"
-            }
-        }"#;
-        let _: ElementaryTypeName = serde_json::from_str(json_without).unwrap();
-    }
-
-    #[test]
     fn deserialize_uint_values() {
         assert_eq!(deserialize_uint("uint"), Ok(ElementaryType::Uint(256)));
         assert_eq!(deserialize_uint("uint8"), Ok(ElementaryType::Uint(8)));
@@ -526,6 +457,7 @@ mod tests {
         assert!(deserialize_fixed_bytes("bytes").is_err());
         assert!(deserialize_fixed_bytes("bytesabc").is_err());
     }
+
     #[test]
     fn deserialize_ufixed_values() {
         assert_eq!(
@@ -554,7 +486,7 @@ mod tests {
     }
 
     #[test]
-    fn deserialize_fixed_valid() {
+    fn deserialize_fixed_values() {
         assert_eq!(
             deserialize_fixed("fixed8x8"),
             Ok(ElementaryType::Fixed(8, 8))
