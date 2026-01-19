@@ -13,28 +13,72 @@ Default directory: fixtures/ast
 
 import json
 import sys
-from pathlib import Path
 from collections import defaultdict
-
+from pathlib import Path
 
 # Common fields that contain AST nodes in Solidity compiler output
 AST_NODE_FIELDS = {
-    'nodes', 'foreign', 'body', 'arguments', 'declarations',
-    'baseContracts', 'functions', 'events', 'modifiers', 'variables',
-    'parameters', 'returnParameters', 'condition', 'trueBody', 'falseBody',
-    'initialization', 'value', 'assignment', 'leftHandSide', 'rightHandSide',
-    'expression', 'vReturnValue', 'vFunctionCall', 'vTryCall', 'statements',
-    'documentation', 'typeName', 'type', 'element', 'memberName', 'members',
-    'attributes', 'arguments', 'components', 'arrayExpression', 'indexExpression',
-    'base', 'expressionName', 'memberExpression', 'newExpression', 'expressionType',
-    'superFunction', 'constructor', 'fallbackReceive', 'receiveEther', 'fallback',
-    'symbolAliases', 'originalName', 'nameLocation', 'functionSelector',
+    "nodes",
+    "foreign",
+    "body",
+    "arguments",
+    "declarations",
+    "nodes",
+    "foreign",
+    "body",
+    "arguments",
+    "declarations",
+    "baseContracts",
+    "functions",
+    "events",
+    "modifiers",
+    "variables",
+    "parameters",
+    "returnParameters",
+    "condition",
+    "trueBody",
+    "falseBody",
+    "initialization",
+    "value",
+    "assignment",
+    "leftHandSide",
+    "rightHandSide",
+    "expression",
+    "vReturnValue",
+    "vFunctionCall",
+    "vTryCall",
+    "statements",
+    "documentation",
+    "typeName",
+    "type",
+    "element",
+    "memberName",
+    "members",
+    "attributes",
+    "arguments",
+    "components",
+    "arrayExpression",
+    "indexExpression",
+    "base",
+    "expressionName",
+    "memberExpression",
+    "newExpression",
+    "expressionType",
+    "superFunction",
+    "constructor",
+    "fallbackReceive",
+    "receiveEther",
+    "fallback",
+    "symbolAliases",
+    "originalName",
+    "nameLocation",
+    "functionSelector",
 }
 
 
 def is_ast_node(value):
     """Check if a value is an AST node (dict with nodeType field)"""
-    return isinstance(value, dict) and 'nodeType' in value
+    return isinstance(value, dict) and "nodeType" in value
 
 
 def extract_ast_nodes(value):
@@ -88,7 +132,7 @@ def analyze_directory(directory):
 
     for json_file in json_files:
         try:
-            with open(json_file, 'r') as f:
+            with open(json_file, "r") as f:
                 data = json.load(f)
 
             # Extract all AST nodes from the file
@@ -96,7 +140,7 @@ def analyze_directory(directory):
 
             # For each node, find its children
             for node in all_nodes:
-                node_type = node.get('nodeType', 'Unknown')
+                node_type = node.get("nodeType", "Unknown")
                 all_node_types.add(node_type)
 
                 # Find child nodes in common fields
@@ -108,7 +152,7 @@ def analyze_directory(directory):
                             # Single child node
                             child_nodes = extract_ast_nodes(value)
                             for child_node in child_nodes:
-                                child_type = child_node.get('nodeType', 'Unknown')
+                                child_type = child_node.get("nodeType", "Unknown")
                                 node_types[node_type].add(child_type)
                         elif isinstance(value, list):
                             # Array of child nodes
@@ -116,7 +160,9 @@ def analyze_directory(directory):
                                 if is_ast_node(item):
                                     child_nodes = extract_ast_nodes(item)
                                     for child_node in child_nodes:
-                                        child_type = child_node.get('nodeType', 'Unknown')
+                                        child_type = child_node.get(
+                                            "nodeType", "Unknown"
+                                        )
                                         node_types[node_type].add(child_type)
 
         except Exception as e:
@@ -171,9 +217,12 @@ def print_results(node_types, all_node_types):
     print("\n" + "=" * 70)
     print(f"\n✅ Total: {len(sorted_types)} node types")
     print(f"   • {sum(1 for _, c in sorted_types if len(c) == 0)} with no children")
-    print(f"   • {sum(1 for _, c in sorted_types if 0 < len(c) <= 5)} with 1-5 children")
-    print(f"   • {sum(1 for _, c in sorted_types if 5 < len(c) <= 20)} with 6-20 children")
-    print(f"   • {sum(1 for _, c in sorted_types if len(c) > 20)} with 20+ children")
+    print(
+        f"   • {sum(1 for _, c in sorted_types if 0 < len(c) <= 5)} with 1-5 children"
+    )
+    print(
+        f"   • {sum(1 for _, c in sorted_types if 5 < len(c) <= 20)} with 6-20 children"
+    )
 
 
 def main():
