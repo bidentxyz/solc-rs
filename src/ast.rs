@@ -322,33 +322,25 @@ pub struct ErrorDefinition {
 #[serde(tag = "nodeType")]
 pub enum ErrorDefinitionNode {}
 
-// ============================================================================
-// Struct
-// ============================================================================
-
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct StructDefinition {
     pub id: i64,
     pub name: String,
     pub members: Vec<VariableDeclaration>,
     pub src: SourceLocation,
-    pub scope: Option<i64>,
+    pub scope: i64,
     pub documentation: Option<Documentation>,
     #[serde(rename = "canonicalName")]
-    pub canonical_name: Option<String>,
-    #[serde(rename = "usedInEvents")]
-    pub used_in_events: Option<bool>,
-    #[serde(default)]
+    pub canonical_name: String,
+    visibility: Visibility,
     pub nodes: Vec<StructDefinitionNode>,
+    #[serde(rename = "nameLocation")]
+    pub name_location: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "nodeType")]
 pub enum StructDefinitionNode {}
-
-// ============================================================================
-// Enum
-// ============================================================================
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct EnumDefinition {
