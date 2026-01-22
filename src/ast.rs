@@ -304,19 +304,17 @@ pub struct EventDefinition {
 #[serde(tag = "nodeType")]
 pub enum EventDefinitionNode {}
 
-// ============================================================================
-// Error
-// ============================================================================
-
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ErrorDefinition {
     pub id: i64,
     pub name: String,
+    #[serde(rename = "errorSelector")]
+    pub error_selector: String,
     pub parameters: ParameterList,
     pub src: SourceLocation,
-    pub scope: Option<i64>,
+    #[serde(rename = "nameLocation")]
+    pub name_location: String,
     pub documentation: Option<Documentation>,
-    #[serde(default)]
     pub nodes: Vec<ErrorDefinitionNode>,
 }
 
