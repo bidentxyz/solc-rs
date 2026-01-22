@@ -185,6 +185,7 @@ pub struct FunctionDefinition {
     pub visibility: Visibility,
     #[serde(rename = "stateMutability")]
     pub state_mutability: StateMutability,
+    /// Present only when implemented=true
     pub body: Option<Block>,
     pub parameters: ParameterList,
     #[serde(rename = "returnParameters")]
@@ -194,14 +195,16 @@ pub struct FunctionDefinition {
     pub scope: i64,
     pub implemented: bool,
     pub documentation: Option<Documentation>,
+    /// Present only when overrides base
     pub overrides: Option<OverrideSpecifier>,
+    /// Present only when overrides/implements base
     #[serde(rename = "baseFunctions")]
     pub base_functions: Option<Vec<i64>>,
+    /// Present only on external/public functions
     #[serde(rename = "functionSelector")]
     pub function_selector: Option<String>,
     #[serde(rename = "nameLocation")]
-    pub name_location: Option<String>,
-    #[serde(default)]
+    pub name_location: String,
     pub nodes: Vec<VariableDeclarationNode>,
 }
 
