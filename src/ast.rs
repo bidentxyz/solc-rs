@@ -10,11 +10,10 @@ use std::path::PathBuf;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct SourceUnit {
     pub id: i64,
-    #[serde(rename = "absolutePath")]
     pub absolute_path: String,
-    #[serde(rename = "exportedSymbols")]
     pub exported_symbols: HashMap<String, Vec<i64>>,
     pub src: SourceLocation,
     pub nodes: Vec<SourceUnitNode>,
@@ -45,57 +44,45 @@ pub struct PragmaDirective {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ImportDirective {
     pub id: i64,
-    #[serde(rename = "absolutePath")]
     pub absolute_path: PathBuf,
     pub file: PathBuf,
-    #[serde(rename = "unitAlias")]
     pub unit_alias: String,
-    #[serde(rename = "symbolAliases")]
     pub symbol_aliases: Vec<SymbolAlias>,
     pub scope: i64,
-    #[serde(rename = "sourceUnit")]
     pub source_unit: i64,
     pub src: SourceLocation,
-    #[serde(rename = "nameLocation")]
     pub name_location: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct SymbolAlias {
     pub foreign: Identifier,
     pub local: Option<String>,
-    #[serde(rename = "nameLocation")]
     pub name_location: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ContractDefinition {
     pub id: i64,
     pub name: String,
     pub r#abstract: bool,
-    #[serde(rename = "baseContracts")]
     pub base_contracts: Vec<InheritanceSpecifier>,
-    #[serde(rename = "canonicalName")]
     pub canonical_name: String,
-    #[serde(rename = "contractKind")]
     pub contract_kind: ContractKind,
-    #[serde(rename = "fullyImplemented")]
     pub fully_implemented: bool,
-    #[serde(rename = "linearizedBaseContracts")]
     pub linearized_base_contracts: Vec<i64>,
     pub nodes: Vec<ContractDefinitionNode>,
     pub scope: i64,
     pub src: SourceLocation,
     pub documentation: Option<Documentation>,
-    #[serde(rename = "contractDependencies")]
     pub contract_dependencies: Vec<i64>,
-    #[serde(rename = "nameLocation")]
     pub name_location: String,
-    #[serde(rename = "usedErrors")]
     pub used_errors: Vec<i64>,
-    #[serde(rename = "usedEvents")]
     pub used_events: Vec<i64>,
 }
 
@@ -122,34 +109,30 @@ pub enum ContractDefinitionNode {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct InheritanceSpecifier {
     pub id: i64,
-    #[serde(rename = "baseName")]
     pub base_name: IdentifierPath,
     pub arguments: Option<Vec<Box<Expression>>>,
     pub src: SourceLocation,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct VariableDeclaration {
     pub id: i64,
     pub name: String,
-    #[serde(rename = "typeName")]
     pub type_name: TypeName,
     pub src: SourceLocation,
-    #[serde(rename = "nameLocation")]
     pub name_location: String,
     pub visibility: Visibility,
     pub mutability: Mutability,
-    #[serde(rename = "stateVariable")]
     pub state_variable: bool,
-    #[serde(rename = "storageLocation")]
     pub storage_location: StorageLocation,
     pub constant: bool,
     pub indexed: Option<bool>,
     pub value: Option<Box<Expression>>,
     pub documentation: Option<Documentation>,
-    #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
     pub overrides: Option<OverrideSpecifier>,
     pub scope: i64,
@@ -163,18 +146,17 @@ pub struct OverrideSpecifier {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct FunctionDefinition {
     pub id: i64,
     pub name: String,
     pub r#virtual: bool,
     pub kind: FunctionKind,
     pub visibility: Visibility,
-    #[serde(rename = "stateMutability")]
     pub state_mutability: StateMutability,
     /// Present only when implemented=true
     pub body: Option<Block>,
     pub parameters: ParameterList,
-    #[serde(rename = "returnParameters")]
     pub return_parameters: ParameterList,
     pub modifiers: Vec<ModifierInvocation>,
     pub src: SourceLocation,
@@ -184,12 +166,9 @@ pub struct FunctionDefinition {
     /// Present only when overrides base
     pub overrides: Option<OverrideSpecifier>,
     /// Present only when overrides/implements base
-    #[serde(rename = "baseFunctions")]
     pub base_functions: Option<Vec<i64>>,
     /// Present only on external/public functions
-    #[serde(rename = "functionSelector")]
     pub function_selector: Option<String>,
-    #[serde(rename = "nameLocation")]
     pub name_location: String,
 }
 
@@ -223,10 +202,10 @@ pub enum StateMutability {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ModifierInvocation {
     pub id: i64,
     pub kind: ModifierInvocationKind,
-    #[serde(rename = "modifierName")]
     pub modifier_name: IdentifierPath,
     pub arguments: Option<Vec<Box<Expression>>>,
     pub src: SourceLocation,
@@ -260,33 +239,32 @@ pub struct ModifierDefinition {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct EventDefinition {
     pub id: i64,
     pub name: String,
     pub anonymous: bool,
-    #[serde(rename = "eventSelector")]
     pub event_selector: String,
     pub parameters: ParameterList,
     pub src: SourceLocation,
-    #[serde(rename = "nameLocation")]
     pub name_location: String,
     pub documentation: Option<Documentation>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ErrorDefinition {
     pub id: i64,
     pub name: String,
-    #[serde(rename = "errorSelector")]
     pub error_selector: String,
     pub parameters: ParameterList,
     pub src: SourceLocation,
-    #[serde(rename = "nameLocation")]
     pub name_location: String,
     pub documentation: Option<Documentation>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct StructDefinition {
     pub id: i64,
     pub name: String,
@@ -294,54 +272,48 @@ pub struct StructDefinition {
     pub src: SourceLocation,
     pub scope: i64,
     pub documentation: Option<Documentation>,
-    #[serde(rename = "canonicalName")]
     pub canonical_name: String,
     visibility: Visibility,
-    #[serde(rename = "nameLocation")]
     pub name_location: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct EnumDefinition {
     pub id: i64,
     pub name: String,
     pub members: Vec<EnumValue>,
     pub src: SourceLocation,
     pub documentation: Option<Documentation>,
-    #[serde(rename = "canonicalName")]
     pub canonical_name: String,
-    #[serde(rename = "nameLocation")]
     pub name_location: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct EnumValue {
     pub id: i64,
     pub name: String,
-    #[serde(rename = "nameLocation")]
     pub name_location: String,
     pub src: SourceLocation,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct UserDefinedValueTypeDefinition {
     pub id: i64,
     pub name: String,
     pub src: SourceLocation,
-    #[serde(rename = "canonicalName")]
     pub canonical_name: String,
-    #[serde(rename = "nameLocation")]
     pub name_location: String,
-    #[serde(rename = "underlyingType")]
     pub underlying_type: TypeName,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct UsingForDirective {
     pub id: i64,
-    #[serde(rename = "libraryName")]
     pub library_name: IdentifierPath,
-    #[serde(rename = "typeName")]
     pub type_name: Option<TypeName>,
     pub operations: Option<Vec<String>>,
     pub src: SourceLocation,
@@ -388,27 +360,24 @@ pub struct UncheckedBlock {
 pub enum UncheckedBlockNode {}
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct IfStatement {
     pub id: i64,
     pub condition: Box<Expression>,
-    #[serde(rename = "trueBody")]
     pub true_body: Box<Statement>,
-    #[serde(rename = "falseBody")]
     pub false_body: Option<Box<Statement>>,
     pub src: SourceLocation,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ForStatement {
     pub id: i64,
-    #[serde(rename = "initializationExpression")]
     pub initialization_expression: Box<Expression>,
     pub condition: Box<Expression>,
-    #[serde(rename = "loopExpression")]
     pub loop_expression: Option<Box<Expression>>,
     pub body: Box<Statement>,
     pub src: SourceLocation,
-    #[serde(rename = "isSimpleCounterLoop")]
     is_simple_counter_loop: bool,
 }
 
@@ -441,43 +410,43 @@ pub struct Break {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Return {
     pub id: i64,
-    #[serde(rename = "functionReturnParameters")]
     pub function_return_parameters: i64,
     pub expression: Option<Box<Expression>>,
     pub src: SourceLocation,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct EmitStatement {
     pub id: i64,
-    #[serde(rename = "eventCall")]
     pub event_call: FunctionCall,
     pub src: SourceLocation,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct RevertStatement {
     pub id: i64,
-    #[serde(rename = "errorCall")]
     pub error_call: FunctionCall,
     pub src: SourceLocation,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct TryStatement {
     pub id: i64,
-    #[serde(rename = "externalCall")]
     pub external_call: Box<Expression>,
     pub clauses: Vec<TryCatchClause>,
     pub src: SourceLocation,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct TryCatchClause {
     pub id: i64,
-    #[serde(rename = "errorName")]
     pub error_name: Option<String>,
     pub parameters: Option<ParameterList>,
     pub block: Block,
@@ -492,27 +461,26 @@ pub struct ExpressionStatement {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct VariableDeclarationStatement {
     pub id: i64,
     pub assignments: Vec<Option<i64>>,
     pub declarations: Vec<Option<VariableDeclaration>>,
-    #[serde(rename = "initialValue")]
     pub initial_value: Option<Box<Expression>>,
     pub src: SourceLocation,
     pub documentation: Option<Documentation>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct InlineAssembly {
     pub id: i64,
     #[serde(rename = "AST")]
     pub ast: YulBlock,
-    #[serde(rename = "externalReferences")]
     pub external_references: Vec<ExternalReference>,
     pub src: SourceLocation,
     pub documentation: Option<Documentation>,
     pub flags: Option<Vec<String>>,
-    #[serde(rename = "evmVersion")]
     pub evm_version: String,
 }
 
@@ -533,62 +501,61 @@ pub enum YulStatement {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulBlock {
     pub src: String,
-    #[serde(rename = "nativeSrc")]
     pub native_src: String,
     pub statements: Vec<YulStatement>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulAssignment {
     pub src: String,
-    #[serde(rename = "nativeSrc")]
     pub native_src: String,
-    #[serde(rename = "variableNames")]
     pub variable_names: Vec<YulIdentifier>,
     pub value: YulExpression,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulVariableDeclaration {
     pub src: String,
-    #[serde(rename = "nativeSrc")]
     pub native_src: String,
     pub variables: Vec<YulTypedName>,
     pub value: YulExpression,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulTypedName {
     pub name: String,
     pub src: String,
-    #[serde(rename = "nativeSrc")]
     pub native_src: String,
     pub r#type: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulExpressionStatement {
     pub src: String,
-    #[serde(rename = "nativeSrc")]
     pub native_src: String,
     pub expression: YulExpression,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulIf {
     pub src: String,
-    #[serde(rename = "nativeSrc")]
     pub native_src: String,
     pub condition: YulExpression,
     pub body: YulBlock,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulForLoop {
     pub src: String,
-    #[serde(rename = "nativeSrc")]
     pub native_src: String,
     pub pre: YulBlock,
     pub condition: YulExpression,
@@ -597,18 +564,18 @@ pub struct YulForLoop {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulSwitch {
     pub src: String,
-    #[serde(rename = "nativeSrc")]
     pub native_src: String,
     pub expression: YulExpression,
     pub cases: Vec<YulSwitchCase>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulSwitchCase {
     pub src: String,
-    #[serde(rename = "nativeSrc")]
     pub native_src: String,
     pub value: YulSwitchCaseValue,
     pub body: YulBlock,
@@ -622,9 +589,9 @@ pub enum YulSwitchCaseValue {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulLiteral {
     pub src: String,
-    #[serde(rename = "nativeSrc")]
     pub native_src: String,
     pub kind: String,
     pub value: String,
@@ -632,9 +599,9 @@ pub struct YulLiteral {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulFunctionDefinition {
     pub src: String,
-    #[serde(rename = "nativeSrc")]
     pub native_src: String,
     pub name: String,
     pub parameters: Vec<YulTypedName>,
@@ -642,9 +609,9 @@ pub struct YulFunctionDefinition {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulBreak {
     pub src: String,
-    #[serde(rename = "nativeSrc")]
     pub native_src: String,
 }
 
@@ -657,32 +624,29 @@ pub enum YulExpression {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulFunctionCall {
     pub src: String,
-    #[serde(rename = "nativeSrc")]
     pub native_src: String,
-    #[serde(rename = "functionName")]
     pub function_name: Box<YulExpression>,
     pub arguments: Vec<YulExpression>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulIdentifier {
     pub src: String,
-    #[serde(rename = "nativeSrc")]
     pub native_src: String,
     pub name: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ExternalReference {
     pub declaration: i64,
-    #[serde(rename = "isOffset")]
     pub is_offset: bool,
-    #[serde(rename = "isSlot")]
     pub is_slot: bool,
     pub src: SourceLocation,
-    #[serde(rename = "valueSize")]
     pub value_size: i64,
 }
 
@@ -875,36 +839,29 @@ pub struct Identifier {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct IdentifierPath {
     pub id: i64,
     pub name: String,
-    #[serde(rename = "nameLocations")]
     pub name_locations: Option<Vec<String>>,
-    #[serde(rename = "referencedDeclaration")]
     pub referenced_declaration: Option<i64>,
     pub src: SourceLocation,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Literal {
     pub id: i64,
     pub kind: LiteralKind,
     pub value: String,
-    #[serde(rename = "hexValue")]
     pub hex_value: Option<String>,
     pub subdenomination: Option<String>,
     pub src: SourceLocation,
-    #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
-    #[serde(rename = "isConstant")]
     pub is_constant: bool,
-    #[serde(rename = "isLValue")]
     pub is_l_value: bool,
-    #[serde(rename = "isPure")]
     pub is_pure: bool,
-    #[serde(rename = "lValueRequested")]
     pub l_value_requested: bool,
-    #[serde(rename = "formattedValue")]
     pub formatted_value: Option<String>,
 }
 
@@ -919,36 +876,28 @@ pub enum LiteralKind {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct NewExpression {
     pub id: i64,
-    #[serde(rename = "typeName")]
     pub type_name: TypeName,
     #[serde(default)]
     pub arguments: Option<Vec<Box<Expression>>>,
     pub src: SourceLocation,
-    #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
-    #[serde(rename = "argumentTypes")]
     pub argument_types: Option<Vec<TypeDescriptions>>,
-    #[serde(rename = "isConstant")]
     pub is_constant: bool,
-    #[serde(rename = "isLValue")]
     pub is_l_value: bool,
-    #[serde(rename = "isPure")]
     pub is_pure: bool,
-    #[serde(rename = "lValueRequested")]
     pub l_value_requested: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ElementaryTypeNameExpression {
     pub id: i64,
-    #[serde(rename = "typeName")]
     pub type_name: ElementaryTypeName,
     pub src: SourceLocation,
-    #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
-    #[serde(rename = "argumentTypes")]
     pub argument_types: Option<Vec<TypeDescriptions>>,
 }
 
@@ -963,55 +912,50 @@ pub enum TypeName {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ElementaryTypeName {
     pub id: i64,
     pub name: ElementaryType,
     pub src: SourceLocation,
-    #[serde(rename = "stateMutability")]
     pub state_mutability: Option<String>,
-    #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct UserDefinedTypeName {
     pub id: i64,
-    #[serde(rename = "pathNode")]
     pub path_node: Option<IdentifierPath>,
     pub referenced_declaration: Option<i64>,
     pub src: SourceLocation,
-    #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ArrayTypeName {
     pub id: i64,
-    #[serde(rename = "baseType")]
     pub base_type: TypeName,
     pub length: Option<Box<Expression>>,
     pub src: SourceLocation,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Mapping {
     pub id: i64,
-    #[serde(rename = "keyType")]
     pub key_type: TypeName,
-    #[serde(rename = "valueType")]
     pub value_type: TypeName,
     pub src: SourceLocation,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct FunctionTypeName {
     pub id: i64,
-    #[serde(rename = "parameterTypes")]
     pub parameter_types: ParameterList,
-    #[serde(rename = "returnParameterTypes")]
     pub return_parameter_types: ParameterList,
     pub visibility: String,
-    #[serde(rename = "stateMutability")]
     pub state_mutability: String,
     pub src: SourceLocation,
 }
@@ -1068,19 +1012,19 @@ impl<'de> Deserialize<'de> for SourceLocation {
 
 /// Type descriptions provided by the compiler.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
 pub struct TypeDescriptions {
-    #[serde(rename = "typeIdentifier", skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub type_identifier: Option<String>,
-    #[serde(rename = "typeString", skip_serializing_if = "Option::is_none")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub type_string: Option<String>,
 }
 
 /// Common type for binary operations.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct CommonType {
-    #[serde(rename = "typeIdentifier")]
     pub type_identifier: String,
-    #[serde(rename = "typeString")]
     pub type_string: String,
 }
 
