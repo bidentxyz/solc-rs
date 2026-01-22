@@ -354,11 +354,11 @@ pub enum Statement {
     Block(Block),
     Break(Break),
     Continue(Continue),
-    DoWhileStatement(Box<DoWhileStatement>),
+    DoWhileStatement(DoWhileStatement),
     EmitStatement(EmitStatement),
     ExpressionStatement(ExpressionStatement),
-    ForStatement(Box<ForStatement>),
-    IfStatement(Box<IfStatement>),
+    ForStatement(ForStatement),
+    IfStatement(IfStatement),
     InlineAssembly(InlineAssembly),
     PlaceholderStatement(PlaceholderStatement),
     Return(Return),
@@ -366,7 +366,7 @@ pub enum Statement {
     TryStatement(TryStatement),
     UncheckedBlock(UncheckedBlock),
     VariableDeclarationStatement(VariableDeclarationStatement),
-    WhileStatement(Box<WhileStatement>),
+    WhileStatement(WhileStatement),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -392,9 +392,9 @@ pub struct IfStatement {
     pub id: i64,
     pub condition: Box<Expression>,
     #[serde(rename = "trueBody")]
-    pub true_body: Statement,
+    pub true_body: Box<Statement>,
     #[serde(rename = "falseBody")]
-    pub false_body: Option<Statement>,
+    pub false_body: Option<Box<Statement>>,
     pub src: SourceLocation,
 }
 
@@ -406,7 +406,7 @@ pub struct ForStatement {
     pub condition: Box<Expression>,
     #[serde(rename = "loopExpression")]
     pub loop_expression: Option<Box<Expression>>,
-    pub body: Statement,
+    pub body: Box<Statement>,
     pub src: SourceLocation,
     #[serde(rename = "isSimpleCounterLoop")]
     is_simple_counter_loop: bool,
@@ -416,7 +416,7 @@ pub struct ForStatement {
 pub struct WhileStatement {
     pub id: i64,
     pub condition: Box<Expression>,
-    pub body: Statement,
+    pub body: Box<Statement>,
     pub src: SourceLocation,
 }
 
@@ -424,7 +424,7 @@ pub struct WhileStatement {
 pub struct DoWhileStatement {
     pub id: i64,
     pub condition: Box<Expression>,
-    pub body: Statement,
+    pub body: Box<Statement>,
     pub src: SourceLocation,
 }
 
