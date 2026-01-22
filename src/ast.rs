@@ -126,7 +126,7 @@ pub struct InheritanceSpecifier {
     pub id: i64,
     #[serde(rename = "baseName")]
     pub base_name: IdentifierPath,
-    pub arguments: Option<Vec<Expression>>,
+    pub arguments: Option<Vec<Box<Expression>>>,
     pub src: SourceLocation,
 }
 
@@ -147,7 +147,7 @@ pub struct VariableDeclaration {
     pub storage_location: StorageLocation,
     pub constant: bool,
     pub indexed: Option<bool>,
-    pub value: Option<Expression>,
+    pub value: Option<Box<Expression>>,
     pub documentation: Option<Documentation>,
     #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
@@ -228,7 +228,7 @@ pub struct ModifierInvocation {
     pub kind: ModifierInvocationKind,
     #[serde(rename = "modifierName")]
     pub modifier_name: IdentifierPath,
-    pub arguments: Option<Vec<Expression>>,
+    pub arguments: Option<Vec<Box<Expression>>>,
     pub src: SourceLocation,
 }
 
@@ -390,7 +390,7 @@ pub enum UncheckedBlockNode {}
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct IfStatement {
     pub id: i64,
-    pub condition: Expression,
+    pub condition: Box<Expression>,
     #[serde(rename = "trueBody")]
     pub true_body: Statement,
     #[serde(rename = "falseBody")]
@@ -402,10 +402,10 @@ pub struct IfStatement {
 pub struct ForStatement {
     pub id: i64,
     #[serde(rename = "initializationExpression")]
-    pub initialization_expression: Expression,
-    pub condition: Expression,
+    pub initialization_expression: Box<Expression>,
+    pub condition: Box<Expression>,
     #[serde(rename = "loopExpression")]
-    pub loop_expression: Option<Expression>,
+    pub loop_expression: Option<Box<Expression>>,
     pub body: Statement,
     pub src: SourceLocation,
     #[serde(rename = "isSimpleCounterLoop")]
@@ -415,7 +415,7 @@ pub struct ForStatement {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct WhileStatement {
     pub id: i64,
-    pub condition: Expression,
+    pub condition: Box<Expression>,
     pub body: Statement,
     pub src: SourceLocation,
 }
@@ -423,7 +423,7 @@ pub struct WhileStatement {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct DoWhileStatement {
     pub id: i64,
-    pub condition: Expression,
+    pub condition: Box<Expression>,
     pub body: Statement,
     pub src: SourceLocation,
 }
@@ -445,7 +445,7 @@ pub struct Return {
     pub id: i64,
     #[serde(rename = "functionReturnParameters")]
     pub function_return_parameters: i64,
-    pub expression: Option<Expression>,
+    pub expression: Option<Box<Expression>>,
     pub src: SourceLocation,
 }
 
@@ -469,7 +469,7 @@ pub struct RevertStatement {
 pub struct TryStatement {
     pub id: i64,
     #[serde(rename = "externalCall")]
-    pub external_call: Expression,
+    pub external_call: Box<Expression>,
     pub clauses: Vec<TryCatchClause>,
     pub src: SourceLocation,
 }
@@ -487,7 +487,7 @@ pub struct TryCatchClause {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ExpressionStatement {
     pub id: i64,
-    pub expression: Expression,
+    pub expression: Box<Expression>,
     pub src: SourceLocation,
 }
 
@@ -497,7 +497,7 @@ pub struct VariableDeclarationStatement {
     pub assignments: Vec<Option<i64>>,
     pub declarations: Vec<Option<VariableDeclaration>>,
     #[serde(rename = "initialValue")]
-    pub initial_value: Option<Expression>,
+    pub initial_value: Option<Box<Expression>>,
     pub src: SourceLocation,
     pub documentation: Option<Documentation>,
 }
@@ -692,145 +692,112 @@ pub struct PlaceholderStatement {
     pub src: SourceLocation,
 }
 
-// ============================================================================
-// Expressions
-// ============================================================================
-
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "nodeType")]
+#[allow(clippy::large_enum_variant)]
 pub enum Expression {
-    Assignment(Box<Assignment>),
-    BinaryOperation(Box<BinaryOperation>),
-    Conditional(Box<Conditional>),
-    ElementaryTypeNameExpression(Box<ElementaryTypeNameExpression>),
-    FunctionCall(Box<FunctionCall>),
-    Identifier(Box<Identifier>),
-    IndexAccess(Box<IndexAccess>),
-    IndexRangeAccess(Box<IndexRangeAccess>),
-    Literal(Box<Literal>),
-    MemberAccess(Box<MemberAccess>),
-    NewExpression(Box<NewExpression>),
-    TupleExpression(Box<TupleExpression>),
-    UnaryOperation(Box<UnaryOperation>),
-    VariableDeclarationStatement(Box<VariableDeclarationStatement>),
-    ExpressionStatement(Box<ExpressionStatement>),
+    Assignment(Assignment),
+    BinaryOperation(BinaryOperation),
+    Conditional(Conditional),
+    ElementaryTypeNameExpression(ElementaryTypeNameExpression),
+    FunctionCall(FunctionCall),
+    Identifier(Identifier),
+    IndexAccess(IndexAccess),
+    IndexRangeAccess(IndexRangeAccess),
+    Literal(Literal),
+    MemberAccess(MemberAccess),
+    NewExpression(NewExpression),
+    TupleExpression(TupleExpression),
+    UnaryOperation(UnaryOperation),
+    VariableDeclarationStatement(VariableDeclarationStatement),
+    ExpressionStatement(ExpressionStatement),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct BinaryOperation {
-    pub id: i64,
-    #[serde(rename = "leftExpression")]
-    pub left_expression: Expression,
-    #[serde(rename = "rightExpression")]
-    pub right_expression: Expression,
-    pub operator: String,
-    #[serde(rename = "commonType")]
-    pub common_type: CommonType,
-    pub src: SourceLocation,
-    #[serde(rename = "isConstant")]
-    pub is_constant: bool,
-    #[serde(rename = "isLValue")]
-    pub is_l_value: bool,
-    #[serde(rename = "isPure")]
-    pub is_pure: bool,
-    #[serde(rename = "lValueRequested")]
-    pub l_value_requested: bool,
-    #[serde(rename = "typeDescriptions")]
-    pub type_descriptions: TypeDescriptions,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct UnaryOperation {
-    pub id: i64,
-    #[serde(rename = "subExpression")]
-    pub sub_expression: Expression,
-    pub operator: String,
-    #[serde(rename = "isPrefix", alias = "prefix")]
-    pub is_prefix: bool,
-    pub src: SourceLocation,
-    #[serde(rename = "typeDescriptions")]
-    pub type_descriptions: TypeDescriptions,
-    #[serde(rename = "isConstant")]
-    pub is_constant: bool,
-    #[serde(rename = "isLValue")]
-    pub is_l_value: bool,
-    #[serde(rename = "isPure")]
-    pub is_pure: bool,
-    #[serde(rename = "lValueRequested")]
-    pub l_value_requested: bool,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Assignment {
     pub id: i64,
-    #[serde(rename = "leftHandSide")]
-    pub left_hand_side: Expression,
-    #[serde(rename = "rightHandSide")]
-    pub right_hand_side: Expression,
+    pub left_hand_side: Box<Expression>,
+    pub right_hand_side: Box<Expression>,
     pub operator: String,
     pub src: SourceLocation,
-    #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BinaryOperation {
+    pub id: i64,
+    pub left_expression: Box<Expression>,
+    pub right_expression: Box<Expression>,
+    pub operator: String, // TODO: this should be enum
+    pub common_type: CommonType,
+    pub src: SourceLocation,
+    pub is_constant: bool,
+    pub is_l_value: bool,
+    pub is_pure: bool,
+    pub l_value_requested: bool,
+    pub type_descriptions: TypeDescriptions,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Conditional {
     pub id: i64,
-    pub condition: Expression,
-    #[serde(rename = "trueExpression")]
-    pub true_expression: Expression,
-    #[serde(rename = "falseExpression")]
-    pub false_expression: Expression,
-    #[serde(rename = "isConstant")]
+    pub condition: Box<Expression>,
+    pub true_expression: Box<Expression>,
+    pub false_expression: Box<Expression>,
     pub is_constant: bool,
-    #[serde(rename = "isLValue")]
     pub is_l_value: bool,
-    #[serde(rename = "isPure")]
     pub is_pure: bool,
-    #[serde(rename = "lValueRequested")]
     pub l_value_requested: bool,
     pub src: SourceLocation,
-    #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct UnaryOperation {
+    pub id: i64,
+    pub sub_expression: Box<Expression>,
+    pub operator: String, // TODO: This should be enum
+    pub prefix: bool,
+    pub src: SourceLocation,
+    pub type_descriptions: TypeDescriptions,
+    pub is_constant: bool,
+    pub is_l_value: bool,
+    pub is_pure: bool,
+    pub l_value_requested: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct FunctionCall {
     pub id: i64,
     pub expression: FunctionCallExpression,
-    pub arguments: Vec<Expression>,
+    pub arguments: Vec<Box<Expression>>,
     pub names: Vec<String>,
     pub kind: String,
     pub src: SourceLocation,
-    #[serde(rename = "tryCall")]
     pub try_call: bool,
-    #[serde(rename = "nameLocations")]
-    #[serde(default)]
     pub name_locations: Option<Vec<String>>,
-    #[serde(rename = "isConstant")]
     pub is_constant: bool,
-    #[serde(rename = "isLValue")]
     pub is_l_value: bool,
-    #[serde(rename = "isPure")]
     pub is_pure: bool,
-    #[serde(rename = "lValueRequested")]
     pub l_value_requested: bool,
-    #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
-    #[serde(rename = "argumentTypes")]
     pub argument_types: Option<Vec<TypeDescriptions>>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct FunctionCallOptions {
     pub id: i64,
-    pub expression: Expression,
+    pub expression: Box<Expression>,
     pub names: Vec<String>,
-    pub options: Vec<Expression>,
+    pub options: Vec<Box<Expression>>,
     pub src: SourceLocation,
-    #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
-    #[serde(rename = "nameLocations")]
     #[serde(default)]
     pub name_locations: Option<Vec<String>>,
 }
@@ -847,79 +814,63 @@ pub enum FunctionCallExpression {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct MemberAccess {
     pub id: i64,
-    pub expression: Expression,
-    #[serde(rename = "memberName")]
+    pub expression: Box<Expression>,
     pub member_name: String,
-    #[serde(rename = "memberLocation")]
     pub member_location: Option<String>,
     pub src: SourceLocation,
-    #[serde(rename = "referencedDeclaration")]
     pub referenced_declaration: Option<i64>,
-    #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
-    #[serde(rename = "argumentTypes")]
     pub argument_types: Option<Vec<TypeDescriptions>>,
-    #[serde(rename = "isConstant")]
     pub is_constant: bool,
-    #[serde(rename = "isLValue")]
     pub is_l_value: bool,
-    #[serde(rename = "isPure")]
     pub is_pure: bool,
-    #[serde(rename = "lValueRequested")]
     pub l_value_requested: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct IndexAccess {
     pub id: i64,
-    #[serde(rename = "baseExpression")]
-    pub base_expression: Expression,
-    #[serde(rename = "indexExpression")]
-    pub index_expression: Option<Expression>,
+    pub base_expression: Box<Expression>,
+    pub index_expression: Option<Box<Expression>>,
     pub src: SourceLocation,
-    #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct IndexRangeAccess {
     pub id: i64,
-    #[serde(rename = "baseExpression")]
-    pub base_expression: Expression,
-    #[serde(rename = "startExpression")]
-    pub start_expression: Expression,
-    #[serde(rename = "endExpression")]
+    pub base_expression: Box<Expression>,
+    pub start_expression: Box<Expression>,
     #[serde(default)]
-    pub end_expression: Option<Expression>,
+    pub end_expression: Option<Box<Expression>>,
     pub src: SourceLocation,
-    #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct TupleExpression {
     pub id: i64,
-    pub components: Vec<Option<Expression>>,
+    pub components: Vec<Option<Box<Expression>>>,
     pub src: SourceLocation,
-    #[serde(rename = "typeDescriptions")]
+    pub is_inline_array: bool,
     pub type_descriptions: TypeDescriptions,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Identifier {
     pub id: i64,
     pub name: String,
-    #[serde(rename = "overloadedDeclarations")]
-    #[serde(default)]
     pub overloaded_declarations: Vec<i64>,
-    #[serde(rename = "referencedDeclaration")]
     pub referenced_declaration: Option<i64>,
     pub src: SourceLocation,
-    #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
-    #[serde(rename = "argumentTypes")]
     pub argument_types: Option<Vec<TypeDescriptions>>,
 }
 
@@ -973,7 +924,7 @@ pub struct NewExpression {
     #[serde(rename = "typeName")]
     pub type_name: TypeName,
     #[serde(default)]
-    pub arguments: Option<Vec<Expression>>,
+    pub arguments: Option<Vec<Box<Expression>>>,
     pub src: SourceLocation,
     #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
@@ -1000,10 +951,6 @@ pub struct ElementaryTypeNameExpression {
     #[serde(rename = "argumentTypes")]
     pub argument_types: Option<Vec<TypeDescriptions>>,
 }
-
-// ============================================================================
-// Type Names
-// ============================================================================
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "nodeType")]
@@ -1042,7 +989,7 @@ pub struct ArrayTypeName {
     pub id: i64,
     #[serde(rename = "baseType")]
     pub base_type: TypeName,
-    pub length: Option<Expression>,
+    pub length: Option<Box<Expression>>,
     pub src: SourceLocation,
 }
 
