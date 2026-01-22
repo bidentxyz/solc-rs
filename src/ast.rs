@@ -333,6 +333,7 @@ pub struct StructDefinition {
     #[serde(rename = "canonicalName")]
     pub canonical_name: String,
     visibility: Visibility,
+    /// Always empty
     pub nodes: Vec<StructDefinitionNode>,
     #[serde(rename = "nameLocation")]
     pub name_location: String,
@@ -351,6 +352,7 @@ pub struct EnumDefinition {
     pub documentation: Option<Documentation>,
     #[serde(rename = "canonicalName")]
     pub canonical_name: String,
+    /// Always empty
     pub nodes: Vec<EnumDefinitionNode>,
     #[serde(rename = "nameLocation")]
     pub name_location: String,
@@ -374,23 +376,19 @@ pub struct UserDefinedValueTypeDefinition {
     pub id: i64,
     pub name: String,
     pub src: SourceLocation,
-    #[serde(default)]
-    pub nodes: Vec<UserDefinedValueTypeDefinitionNode>,
     #[serde(rename = "canonicalName")]
-    pub canonical_name: Option<String>,
+    pub canonical_name: String,
     #[serde(rename = "nameLocation")]
-    pub name_location: Option<String>,
+    pub name_location: String,
     #[serde(rename = "underlyingType")]
     pub underlying_type: TypeName,
+    /// Always empty
+    pub nodes: Vec<UserDefinedValueTypeDefinitionNode>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "nodeType")]
 pub enum UserDefinedValueTypeDefinitionNode {}
-
-// ============================================================================
-// Using For
-// ============================================================================
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct UsingForDirective {
@@ -410,10 +408,6 @@ pub struct UsingForDirective {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "nodeType")]
 pub enum UsingForDirectiveNode {}
-
-// ============================================================================
-// Statements
-// ============================================================================
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "nodeType")]
