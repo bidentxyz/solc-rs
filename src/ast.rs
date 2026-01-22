@@ -348,12 +348,12 @@ pub struct EnumDefinition {
     pub name: String,
     pub members: Vec<EnumValue>,
     pub src: SourceLocation,
-    pub scope: Option<i64>,
     pub documentation: Option<Documentation>,
     #[serde(rename = "canonicalName")]
-    pub canonical_name: Option<String>,
-    #[serde(default)]
+    pub canonical_name: String,
     pub nodes: Vec<EnumDefinitionNode>,
+    #[serde(rename = "nameLocation")]
+    pub name_location: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -368,10 +368,6 @@ pub struct EnumValue {
     pub name_location: String,
     pub src: SourceLocation,
 }
-
-// ============================================================================
-// User Defined Value Type
-// ============================================================================
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct UserDefinedValueTypeDefinition {
