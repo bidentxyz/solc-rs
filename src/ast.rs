@@ -136,41 +136,33 @@ pub struct InheritanceSpecifier {
     pub id: i64,
     #[serde(rename = "baseName")]
     pub base_name: IdentifierPath,
-    #[serde(default)]
     pub arguments: Option<Vec<Expression>>,
     pub src: SourceLocation,
 }
-
-// ============================================================================
-// Variable
-// ============================================================================
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct VariableDeclaration {
     pub id: i64,
     pub name: String,
     #[serde(rename = "typeName")]
-    pub type_name: Option<TypeName>,
+    pub type_name: TypeName,
     pub src: SourceLocation,
     #[serde(rename = "nameLocation")]
-    pub name_location: Option<String>,
+    pub name_location: String,
     pub visibility: Visibility,
-    #[serde(rename = "stateMutability")]
-    pub state_mutability: Option<StateMutability>,
-    pub mutability: Option<Mutability>,
+    pub mutability: Mutability,
     #[serde(rename = "stateVariable")]
-    pub state_variable: Option<bool>,
+    pub state_variable: bool,
     #[serde(rename = "storageLocation")]
-    pub storage_location: Option<StorageLocation>,
-    pub constant: Option<bool>,
-    pub immutable: Option<bool>,
+    pub storage_location: StorageLocation,
+    pub constant: bool,
     pub indexed: Option<bool>,
     pub value: Option<Expression>,
     pub documentation: Option<Documentation>,
     #[serde(rename = "typeDescriptions")]
     pub type_descriptions: TypeDescriptions,
     pub overrides: Option<OverrideSpecifier>,
-    pub scope: Option<i64>,
+    pub scope: i64,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -180,14 +172,9 @@ pub enum VariableDeclarationNode {}
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct OverrideSpecifier {
     pub id: i64,
-    #[serde(default)]
     pub overrides: Vec<IdentifierPath>,
     pub src: SourceLocation,
 }
-
-// ============================================================================
-// Function
-// ============================================================================
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct FunctionDefinition {
