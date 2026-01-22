@@ -677,15 +677,109 @@ pub enum Expression {
     ExpressionStatement(ExpressionStatement),
 }
 
+/// Assignment operators for expressions.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub enum AssignmentOperator {
+    /// Multiply and assign
+    #[serde(rename = "*=")]
+    MulAssign,
+    /// Add and assign
+    #[serde(rename = "+=")]
+    AddAssign,
+    /// Subtract and assign
+    #[serde(rename = "-=")]
+    SubAssign,
+    /// Divide and assign
+    #[serde(rename = "/=")]
+    DivAssign,
+    /// Left shift and assign
+    #[serde(rename = "<<=")]
+    LeftShiftAssign,
+    /// Simple assignment
+    #[serde(rename = "=")]
+    Assign,
+    /// Right shift and assign
+    #[serde(rename = ">>=")]
+    RightShiftAssign,
+    /// Bitwise XOR and assign
+    #[serde(rename = "^=")]
+    BitwiseXorAssign,
+    /// Bitwise OR and assign
+    #[serde(rename = "|=")]
+    BitwiseOrAssign,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Assignment {
     pub id: i64,
     pub left_hand_side: Box<Expression>,
     pub right_hand_side: Box<Expression>,
-    pub operator: String,
+    pub operator: AssignmentOperator,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
+}
+
+/// Binary operators for expressions.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub enum BinaryOperator {
+    /// Not equal
+    #[serde(rename = "!=")]
+    NotEqual,
+    /// Modulo
+    #[serde(rename = "%")]
+    Modulo,
+    /// Bitwise AND
+    #[serde(rename = "&")]
+    BitwiseAnd,
+    /// Logical AND
+    #[serde(rename = "&&")]
+    LogicalAnd,
+    /// Multiplication
+    #[serde(rename = "*")]
+    Mul,
+    /// Exponentiation
+    #[serde(rename = "**")]
+    Exp,
+    /// Addition
+    #[serde(rename = "+")]
+    Add,
+    /// Subtraction
+    #[serde(rename = "-")]
+    Sub,
+    /// Division
+    #[serde(rename = "/")]
+    Div,
+    /// Less than
+    #[serde(rename = "<")]
+    Less,
+    /// Left shift
+    #[serde(rename = "<<")]
+    LeftShift,
+    /// Less than or equal
+    #[serde(rename = "<=")]
+    LessEqual,
+    /// Equality
+    #[serde(rename = "==")]
+    Equal,
+    /// Greater than
+    #[serde(rename = ">")]
+    Greater,
+    /// Greater than or equal
+    #[serde(rename = ">=")]
+    GreaterEqual,
+    /// Right shift
+    #[serde(rename = ">>")]
+    RightShift,
+    /// Bitwise XOR
+    #[serde(rename = "^")]
+    BitwiseXor,
+    /// Bitwise OR
+    #[serde(rename = "|")]
+    BitwiseOr,
+    /// Logical OR
+    #[serde(rename = "||")]
+    LogicalOr,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -694,7 +788,7 @@ pub struct BinaryOperation {
     pub id: i64,
     pub left_expression: Box<Expression>,
     pub right_expression: Box<Expression>,
-    pub operator: String, // TODO: this should be enum
+    pub operator: BinaryOperator,
     pub common_type: CommonType,
     pub src: SourceLocation,
     pub is_constant: bool,
@@ -719,12 +813,35 @@ pub struct Conditional {
     pub type_descriptions: TypeDescriptions,
 }
 
+/// Unary operators for expressions.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub enum UnaryOperator {
+    /// Logical NOT
+    #[serde(rename = "!")]
+    Not,
+    /// Increment
+    #[serde(rename = "++")]
+    Increment,
+    /// Unary minus
+    #[serde(rename = "-")]
+    Minus,
+    /// Decrement
+    #[serde(rename = "--")]
+    Decrement,
+    /// Delete
+    #[serde(rename = "delete")]
+    Delete,
+    /// Bitwise NOT
+    #[serde(rename = "~")]
+    BitwiseNot,
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UnaryOperation {
     pub id: i64,
     pub sub_expression: Box<Expression>,
-    pub operator: String, // TODO: This should be enum
+    pub operator: UnaryOperator,
     pub prefix: bool,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
