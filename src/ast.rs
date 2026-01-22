@@ -240,10 +240,9 @@ pub enum StateMutability {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ModifierInvocation {
     pub id: i64,
-    pub kind: Option<ModifierInvocationKind>,
+    pub kind: ModifierInvocationKind,
     #[serde(rename = "modifierName")]
     pub modifier_name: IdentifierPath,
-    #[serde(default)]
     pub arguments: Option<Vec<Expression>>,
     pub src: SourceLocation,
 }
@@ -261,32 +260,24 @@ pub struct ParameterList {
     pub id: i64,
     pub parameters: Vec<VariableDeclaration>,
     pub src: SourceLocation,
-    #[serde(default)]
-    pub nodes: Vec<ParameterListNode>,
+    pub nodes: Option<Vec<ParameterListNode>>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "nodeType")]
 pub enum ParameterListNode {}
 
-// ============================================================================
-// Modifier
-// ============================================================================
-
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ModifierDefinition {
     pub id: i64,
     pub name: String,
-    #[serde(rename = "virtual")]
     pub r#virtual: bool,
     pub visibility: Visibility,
     pub parameters: ParameterList,
-    pub body: Option<Block>,
+    pub body: Block,
     pub src: SourceLocation,
-    pub scope: Option<i64>,
     pub documentation: Option<Documentation>,
-    pub overrides: Option<OverrideSpecifier>,
-    #[serde(default)]
+    /// Always Empty
     pub nodes: Vec<ModifierDefinitionNode>,
 }
 
@@ -294,23 +285,18 @@ pub struct ModifierDefinition {
 #[serde(tag = "nodeType")]
 pub enum ModifierDefinitionNode {}
 
-// ============================================================================
-// Event
-// ============================================================================
-
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct EventDefinition {
     pub id: i64,
     pub name: String,
     pub anonymous: bool,
     #[serde(rename = "eventSelector")]
-    pub event_selector: Option<String>,
+    pub event_selector: String,
     pub parameters: ParameterList,
     pub src: SourceLocation,
     pub scope: Option<i64>,
     #[serde(rename = "nameLocation")]
     pub name_location: Option<String>,
-    #[serde(default)]
     pub nodes: Vec<EventDefinitionNode>,
     pub documentation: Option<Documentation>,
 }
