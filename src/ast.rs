@@ -294,9 +294,8 @@ pub struct EventDefinition {
     pub event_selector: String,
     pub parameters: ParameterList,
     pub src: SourceLocation,
-    pub scope: Option<i64>,
     #[serde(rename = "nameLocation")]
-    pub name_location: Option<String>,
+    pub name_location: String,
     pub nodes: Vec<EventDefinitionNode>,
     pub documentation: Option<Documentation>,
 }
