@@ -402,12 +402,14 @@ pub struct IfStatement {
 pub struct ForStatement {
     pub id: i64,
     #[serde(rename = "initializationExpression")]
-    pub initialization_expression: Option<Expression>,
-    pub condition: Option<Expression>,
+    pub initialization_expression: Expression,
+    pub condition: Expression,
     #[serde(rename = "loopExpression")]
     pub loop_expression: Option<Expression>,
     pub body: Statement,
     pub src: SourceLocation,
+    #[serde(rename = "isSimpleCounterLoop")]
+    is_simple_counter_loop: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -468,8 +470,6 @@ pub struct TryStatement {
     pub id: i64,
     #[serde(rename = "externalCall")]
     pub external_call: Expression,
-    #[serde(rename = "returnParameters")]
-    pub return_parameters: Option<ParameterList>,
     pub clauses: Vec<TryCatchClause>,
     pub src: SourceLocation,
 }
@@ -477,7 +477,6 @@ pub struct TryStatement {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct TryCatchClause {
     pub id: i64,
-    pub kind: Option<String>,
     #[serde(rename = "errorName")]
     pub error_name: Option<String>,
     pub parameters: Option<ParameterList>,
@@ -506,13 +505,173 @@ pub struct VariableDeclarationStatement {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct InlineAssembly {
     pub id: i64,
-    pub operations: Option<serde_json::Value>,
+    #[serde(rename = "AST")]
+    pub ast: YulBlock,
     #[serde(rename = "externalReferences")]
-    pub external_references: Option<Vec<ExternalReference>>,
+    pub external_references: Vec<ExternalReference>,
     pub src: SourceLocation,
     pub documentation: Option<Documentation>,
-    #[serde(default)]
-    pub flags: Vec<String>,
+    pub flags: Option<Vec<String>>,
+    #[serde(rename = "evmVersion")]
+    pub evm_version: String,
+}
+
+/// Represents a Yul statement in an inline assembly block.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "nodeType")]
+pub enum YulStatement {
+    YulBlock(YulBlock),
+    YulAssignment(YulAssignment),
+    YulFunctionCall(YulFunctionCall),
+    YulIf(YulIf),
+    YulForLoop(YulForLoop),
+    YulSwitch(YulSwitch),
+    YulBreak(YulBreak),
+    YulVariableDeclaration(YulVariableDeclaration),
+    YulFunctionDefinition(YulFunctionDefinition),
+    YulExpressionStatement(YulExpressionStatement),
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct YulBlock {
+    pub src: String,
+    #[serde(rename = "nativeSrc")]
+    pub native_src: String,
+    pub statements: Vec<YulStatement>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct YulAssignment {
+    pub src: String,
+    #[serde(rename = "nativeSrc")]
+    pub native_src: String,
+    #[serde(rename = "variableNames")]
+    pub variable_names: Vec<YulIdentifier>,
+    pub value: YulExpression,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct YulVariableDeclaration {
+    pub src: String,
+    #[serde(rename = "nativeSrc")]
+    pub native_src: String,
+    pub variables: Vec<YulTypedName>,
+    pub value: YulExpression,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct YulTypedName {
+    pub name: String,
+    pub src: String,
+    #[serde(rename = "nativeSrc")]
+    pub native_src: String,
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct YulExpressionStatement {
+    pub src: String,
+    #[serde(rename = "nativeSrc")]
+    pub native_src: String,
+    pub expression: YulExpression,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct YulIf {
+    pub src: String,
+    #[serde(rename = "nativeSrc")]
+    pub native_src: String,
+    pub condition: YulExpression,
+    pub body: YulBlock,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct YulForLoop {
+    pub src: String,
+    #[serde(rename = "nativeSrc")]
+    pub native_src: String,
+    pub pre: YulBlock,
+    pub condition: YulExpression,
+    pub post: YulBlock,
+    pub body: YulBlock,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct YulSwitch {
+    pub src: String,
+    #[serde(rename = "nativeSrc")]
+    pub native_src: String,
+    pub expression: YulExpression,
+    pub cases: Vec<YulSwitchCase>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct YulSwitchCase {
+    pub src: String,
+    #[serde(rename = "nativeSrc")]
+    pub native_src: String,
+    pub value: YulSwitchCaseValue,
+    pub body: YulBlock,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum YulSwitchCaseValue {
+    Literal(YulLiteral),
+    Default(String),
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct YulLiteral {
+    pub src: String,
+    #[serde(rename = "nativeSrc")]
+    pub native_src: String,
+    pub kind: String,
+    pub value: String,
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct YulFunctionDefinition {
+    pub src: String,
+    #[serde(rename = "nativeSrc")]
+    pub native_src: String,
+    pub name: String,
+    pub parameters: Vec<YulTypedName>,
+    pub body: YulBlock,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct YulBreak {
+    pub src: String,
+    #[serde(rename = "nativeSrc")]
+    pub native_src: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "nodeType")]
+pub enum YulExpression {
+    YulIdentifier(YulIdentifier),
+    YulLiteral(YulLiteral),
+    YulFunctionCall(YulFunctionCall),
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct YulFunctionCall {
+    pub src: String,
+    #[serde(rename = "nativeSrc")]
+    pub native_src: String,
+    #[serde(rename = "functionName")]
+    pub function_name: Box<YulExpression>,
+    pub arguments: Vec<YulExpression>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct YulIdentifier {
+    pub src: String,
+    #[serde(rename = "nativeSrc")]
+    pub native_src: String,
+    pub name: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -1123,10 +1282,6 @@ pub struct StructuredDocumentationCustom {
     pub tag: String,
     pub content: String,
 }
-
-// ============================================================================
-// Tests
-// ============================================================================
 
 #[cfg(test)]
 mod tests {
