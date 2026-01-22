@@ -42,12 +42,7 @@ pub struct PragmaDirective {
     pub id: i64,
     pub literals: Vec<String>,
     pub src: SourceLocation,
-    pub nodes: Vec<PragmaDirectiveNode>,
 }
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(tag = "nodeType")]
-pub enum PragmaDirectiveNode {}
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ImportDirective {
@@ -65,12 +60,7 @@ pub struct ImportDirective {
     pub src: SourceLocation,
     #[serde(rename = "nameLocation")]
     pub name_location: String,
-    pub nodes: Vec<ImportDirectiveNode>,
 }
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(tag = "nodeType")]
-pub enum ImportDirectiveNode {}
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SymbolAlias {
@@ -166,10 +156,6 @@ pub struct VariableDeclaration {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(tag = "nodeType")]
-pub enum VariableDeclarationNode {}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct OverrideSpecifier {
     pub id: i64,
     pub overrides: Vec<IdentifierPath>,
@@ -205,7 +191,6 @@ pub struct FunctionDefinition {
     pub function_selector: Option<String>,
     #[serde(rename = "nameLocation")]
     pub name_location: String,
-    pub nodes: Vec<VariableDeclarationNode>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -260,12 +245,7 @@ pub struct ParameterList {
     pub id: i64,
     pub parameters: Vec<VariableDeclaration>,
     pub src: SourceLocation,
-    pub nodes: Option<Vec<ParameterListNode>>,
 }
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(tag = "nodeType")]
-pub enum ParameterListNode {}
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ModifierDefinition {
@@ -277,13 +257,7 @@ pub struct ModifierDefinition {
     pub body: Block,
     pub src: SourceLocation,
     pub documentation: Option<Documentation>,
-    /// Always Empty
-    pub nodes: Vec<ModifierDefinitionNode>,
 }
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(tag = "nodeType")]
-pub enum ModifierDefinitionNode {}
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct EventDefinition {
@@ -296,13 +270,8 @@ pub struct EventDefinition {
     pub src: SourceLocation,
     #[serde(rename = "nameLocation")]
     pub name_location: String,
-    pub nodes: Vec<EventDefinitionNode>,
     pub documentation: Option<Documentation>,
 }
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(tag = "nodeType")]
-pub enum EventDefinitionNode {}
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ErrorDefinition {
@@ -315,12 +284,7 @@ pub struct ErrorDefinition {
     #[serde(rename = "nameLocation")]
     pub name_location: String,
     pub documentation: Option<Documentation>,
-    pub nodes: Vec<ErrorDefinitionNode>,
 }
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(tag = "nodeType")]
-pub enum ErrorDefinitionNode {}
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct StructDefinition {
@@ -333,15 +297,9 @@ pub struct StructDefinition {
     #[serde(rename = "canonicalName")]
     pub canonical_name: String,
     visibility: Visibility,
-    /// Always empty
-    pub nodes: Vec<StructDefinitionNode>,
     #[serde(rename = "nameLocation")]
     pub name_location: String,
 }
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(tag = "nodeType")]
-pub enum StructDefinitionNode {}
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct EnumDefinition {
@@ -352,15 +310,9 @@ pub struct EnumDefinition {
     pub documentation: Option<Documentation>,
     #[serde(rename = "canonicalName")]
     pub canonical_name: String,
-    /// Always empty
-    pub nodes: Vec<EnumDefinitionNode>,
     #[serde(rename = "nameLocation")]
     pub name_location: String,
 }
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(tag = "nodeType")]
-pub enum EnumDefinitionNode {}
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct EnumValue {
@@ -382,51 +334,38 @@ pub struct UserDefinedValueTypeDefinition {
     pub name_location: String,
     #[serde(rename = "underlyingType")]
     pub underlying_type: TypeName,
-    /// Always empty
-    pub nodes: Vec<UserDefinedValueTypeDefinitionNode>,
 }
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(tag = "nodeType")]
-pub enum UserDefinedValueTypeDefinitionNode {}
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct UsingForDirective {
     pub id: i64,
     #[serde(rename = "libraryName")]
-    pub library_name: Option<IdentifierPath>,
+    pub library_name: IdentifierPath,
     #[serde(rename = "typeName")]
-    pub type_name: Option<UserDefinedTypeName>,
+    pub type_name: Option<TypeName>,
     pub operations: Option<Vec<String>>,
     pub src: SourceLocation,
-    pub global: Option<bool>,
-    #[serde(default)]
-    pub nodes: Vec<UsingForDirectiveNode>,
-    pub scope: Option<i64>,
+    pub global: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "nodeType")]
-pub enum UsingForDirectiveNode {}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(tag = "nodeType")]
 pub enum Statement {
-    Block(Box<Block>),
-    Break(Box<Break>),
-    Continue(Box<Continue>),
+    Block(Block),
+    Break(Break),
+    Continue(Continue),
     DoWhileStatement(Box<DoWhileStatement>),
-    EmitStatement(Box<EmitStatement>),
-    ExpressionStatement(Box<ExpressionStatement>),
+    EmitStatement(EmitStatement),
+    ExpressionStatement(ExpressionStatement),
     ForStatement(Box<ForStatement>),
     IfStatement(Box<IfStatement>),
-    InlineAssembly(Box<InlineAssembly>),
-    PlaceholderStatement(Box<PlaceholderStatement>),
-    Return(Box<Return>),
-    RevertStatement(Box<RevertStatement>),
-    TryStatement(Box<TryStatement>),
-    UncheckedBlock(Box<UncheckedBlock>),
-    VariableDeclarationStatement(Box<VariableDeclarationStatement>),
+    InlineAssembly(InlineAssembly),
+    PlaceholderStatement(PlaceholderStatement),
+    Return(Return),
+    RevertStatement(RevertStatement),
+    TryStatement(TryStatement),
+    UncheckedBlock(UncheckedBlock),
+    VariableDeclarationStatement(VariableDeclarationStatement),
     WhileStatement(Box<WhileStatement>),
 }
 
@@ -435,21 +374,13 @@ pub struct Block {
     pub id: i64,
     pub statements: Vec<Statement>,
     pub src: SourceLocation,
-    #[serde(default)]
-    pub nodes: Vec<BlockNode>,
 }
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(tag = "nodeType")]
-pub enum BlockNode {}
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct UncheckedBlock {
     pub id: i64,
     pub statements: Vec<Statement>,
     pub src: SourceLocation,
-    #[serde(default)]
-    pub nodes: Vec<UncheckedBlockNode>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
