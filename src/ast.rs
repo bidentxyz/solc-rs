@@ -109,9 +109,8 @@ pub enum ContractDefinitionNode {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
+#[serde(rename_all = "camelCase")]
 pub struct InheritanceSpecifier {
-    pub node_type: String,
     pub id: i64,
     pub base_name: IdentifierPath,
     pub arguments: Option<Vec<Box<Expression>>>,
@@ -140,9 +139,8 @@ pub struct VariableDeclaration {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
+#[serde(rename_all = "camelCase")]
 pub struct OverrideSpecifier {
-    pub node_type: String,
     pub id: i64,
     pub overrides: Vec<IdentifierPath>,
     pub src: SourceLocation,
@@ -205,9 +203,8 @@ pub enum StateMutability {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
+#[serde(rename_all = "camelCase")]
 pub struct ModifierInvocation {
-    pub node_type: String,
     pub id: i64,
     pub kind: ModifierInvocationKind,
     pub modifier_name: IdentifierPath,
@@ -224,9 +221,8 @@ pub enum ModifierInvocationKind {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
+#[serde(rename_all = "camelCase")]
 pub struct ParameterList {
-    pub node_type: String,
     pub id: i64,
     pub parameters: Vec<VariableDeclaration>,
     pub src: SourceLocation,
@@ -348,6 +344,7 @@ pub enum Statement {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Block {
     pub id: i64,
     pub statements: Vec<Statement>,
@@ -355,6 +352,7 @@ pub struct Block {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct UncheckedBlock {
     pub id: i64,
     pub statements: Vec<Statement>,
@@ -384,6 +382,7 @@ pub struct ForStatement {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct WhileStatement {
     pub id: i64,
     pub condition: Box<Expression>,
@@ -392,6 +391,7 @@ pub struct WhileStatement {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct DoWhileStatement {
     pub id: i64,
     pub condition: Box<Expression>,
@@ -400,14 +400,12 @@ pub struct DoWhileStatement {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
 pub struct Continue {
     pub id: i64,
     pub src: SourceLocation,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
 pub struct Break {
     pub id: i64,
     pub src: SourceLocation,
@@ -423,7 +421,7 @@ pub struct Return {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
+#[serde(rename_all = "camelCase")]
 pub struct EmitStatement {
     pub id: i64,
     pub event_call: FunctionCall,
@@ -431,7 +429,7 @@ pub struct EmitStatement {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
+#[serde(rename_all = "camelCase")]
 pub struct RevertStatement {
     pub id: i64,
     pub error_call: FunctionCall,
@@ -458,6 +456,7 @@ pub struct TryCatchClause {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ExpressionStatement {
     pub id: i64,
     pub expression: Box<Expression>,
@@ -490,6 +489,7 @@ pub struct InlineAssembly {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "nodeType")]
+#[allow(clippy::large_enum_variant)]
 pub enum YulStatement {
     YulBlock(YulBlock),
     YulAssignment(YulAssignment),
@@ -530,7 +530,7 @@ pub struct YulVariableDeclaration {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
+#[serde(rename_all = "camelCase")]
 pub struct YulTypedName {
     pub name: String,
     pub src: String,
@@ -540,7 +540,7 @@ pub struct YulTypedName {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
+#[serde(rename_all = "camelCase")]
 pub struct YulExpressionStatement {
     pub src: String,
     pub native_src: String,
@@ -585,11 +585,53 @@ pub struct YulSwitchCase {
     pub body: YulBlock,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(untagged)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 pub enum YulSwitchCaseValue {
-    Literal(YulLiteral),
     Default(String),
+    Literal(YulLiteral),
+}
+
+impl<'de> serde::Deserialize<'de> for YulSwitchCaseValue {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        use serde::de::Error;
+
+        struct YulSwitchCaseValueVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for YulSwitchCaseValueVisitor {
+            type Value = YulSwitchCaseValue;
+
+            fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
+                formatter.write_str("a YulLiteral object or the string 'default'")
+            }
+
+            fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
+            where
+                E: Error,
+            {
+                if value == "default" {
+                    Ok(YulSwitchCaseValue::Default(value.to_string()))
+                } else {
+                    Err(Error::custom(format!(
+                        "expected 'default' string, got '{}'",
+                        value
+                    )))
+                }
+            }
+
+            fn visit_map<A>(self, map: A) -> Result<Self::Value, A::Error>
+            where
+                A: serde::de::MapAccess<'de>,
+            {
+                YulLiteral::deserialize(serde::de::value::MapAccessDeserializer::new(map))
+                    .map(YulSwitchCaseValue::Literal)
+            }
+        }
+
+        deserializer.deserialize_any(YulSwitchCaseValueVisitor)
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -613,7 +655,7 @@ pub struct YulFunctionDefinition {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
+#[serde(rename_all = "camelCase")]
 pub struct YulBreak {
     pub src: String,
     pub native_src: String,
@@ -655,7 +697,7 @@ pub struct ExternalReference {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
+#[serde(rename_all = "camelCase")]
 pub struct PlaceholderStatement {
     pub id: i64,
     pub src: SourceLocation,
@@ -713,6 +755,10 @@ pub struct Assignment {
     pub operator: AssignmentOperator,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
+    pub is_constant: bool,
+    pub is_l_value: bool,
+    pub is_pure: bool,
+    pub l_value_requested: bool,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -764,7 +810,7 @@ pub struct BinaryOperation {
     pub left_expression: Box<Expression>,
     pub right_expression: Box<Expression>,
     pub operator: BinaryOperator,
-    pub common_type: CommonType,
+    pub common_type: Option<CommonType>,
     pub src: SourceLocation,
     pub is_constant: bool,
     pub is_l_value: bool,
@@ -786,6 +832,7 @@ pub struct Conditional {
     pub l_value_requested: bool,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
+    pub argument_types: Option<Vec<TypeDescriptions>>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -849,6 +896,11 @@ pub struct FunctionCallOptions {
     pub type_descriptions: TypeDescriptions,
     #[serde(default)]
     pub name_locations: Option<Vec<String>>,
+    pub argument_types: Option<Vec<TypeDescriptions>>,
+    pub is_constant: bool,
+    pub is_l_value: bool,
+    pub is_pure: bool,
+    pub l_value_requested: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -887,6 +939,10 @@ pub struct IndexAccess {
     pub index_expression: Option<Box<Expression>>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
+    pub is_constant: bool,
+    pub is_l_value: bool,
+    pub is_pure: bool,
+    pub l_value_requested: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -894,10 +950,14 @@ pub struct IndexAccess {
 pub struct IndexRangeAccess {
     pub id: i64,
     pub base_expression: Box<Expression>,
-    pub start_expression: Box<Expression>,
+    pub start_expression: Option<Box<Expression>>,
     pub end_expression: Option<Box<Expression>>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
+    pub is_constant: bool,
+    pub is_l_value: bool,
+    pub is_pure: bool,
+    pub l_value_requested: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -908,6 +968,10 @@ pub struct TupleExpression {
     pub src: SourceLocation,
     pub is_inline_array: bool,
     pub type_descriptions: TypeDescriptions,
+    pub is_constant: bool,
+    pub is_l_value: bool,
+    pub is_pure: bool,
+    pub l_value_requested: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -982,6 +1046,10 @@ pub struct ElementaryTypeNameExpression {
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
     pub argument_types: Option<Vec<TypeDescriptions>>,
+    pub is_constant: bool,
+    pub is_l_value: bool,
+    pub is_pure: bool,
+    pub l_value_requested: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -1015,8 +1083,10 @@ pub struct UserDefinedTypeName {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
+#[serde(rename_all = "camelCase")]
 pub struct ArrayTypeName {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub node_type: Option<String>,
     pub id: i64,
     pub base_type: TypeName,
     pub length: Option<Box<Expression>>,
@@ -1029,8 +1099,17 @@ pub struct ArrayTypeName {
 pub struct Mapping {
     pub id: i64,
     pub key_type: TypeName,
+    #[serde(default)]
+    pub key_name: String,
+    #[serde(default)]
+    pub key_name_location: String,
     pub value_type: TypeName,
+    #[serde(default)]
+    pub value_name: String,
+    #[serde(default)]
+    pub value_name_location: String,
     pub src: SourceLocation,
+    pub type_descriptions: TypeDescriptions,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -1042,6 +1121,7 @@ pub struct FunctionTypeName {
     pub visibility: String,
     pub state_mutability: String,
     pub src: SourceLocation,
+    pub type_descriptions: TypeDescriptions,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -1215,10 +1295,9 @@ pub enum Mutability {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
+#[serde(rename_all = "camelCase")]
 pub struct StructuredDocumentation {
     pub id: i64,
-    pub node_type: String,
     pub text: String,
     pub src: SourceLocation,
     pub url: Option<String>,
@@ -1371,14 +1450,9 @@ mod tests {
                 let content =
                     fs::read_to_string(entry.path()).expect("Failed to read fixture file");
                 let result: Result<SourceUnit, serde_json::Error> = serde_json::from_str(&content);
-                if let Err(e) = result {
+                if let Err(_) = result {
                     let error_msg = find_deserialization_error(&content);
-                    panic!(
-                        "Failed to parse {:?}: {}\nError details:\n{}",
-                        entry.path(),
-                        e,
-                        error_msg
-                    );
+                    panic!("Failed to parse {:?}: {}", entry.path(), error_msg);
                 }
             }
         }
