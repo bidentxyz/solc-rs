@@ -536,7 +536,6 @@ pub struct YulTypedName {
     pub src: String,
     pub native_src: String,
     pub r#type: String,
-    pub node_type: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -870,7 +869,7 @@ pub struct UnaryOperation {
 #[serde(rename_all = "camelCase")]
 pub struct FunctionCall {
     pub id: i64,
-    pub expression: FunctionCallExpression,
+    pub expression: Box<FunctionCallExpression>,
     pub arguments: Vec<Box<Expression>>,
     pub names: Vec<String>,
     pub kind: String,
@@ -907,7 +906,7 @@ pub struct FunctionCallOptions {
 #[serde(tag = "nodeType")]
 pub enum FunctionCallExpression {
     ElementaryTypeNameExpression(ElementaryTypeNameExpression),
-    FunctionCall(Box<FunctionCall>),
+    FunctionCall(FunctionCall),
     FunctionCallOptions(FunctionCallOptions),
     Identifier(Identifier),
     MemberAccess(MemberAccess),
@@ -1055,10 +1054,10 @@ pub struct ElementaryTypeNameExpression {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "nodeType")]
 pub enum TypeName {
-    ArrayTypeName(Box<ArrayTypeName>),
+    ArrayTypeName(ArrayTypeName),
     ElementaryTypeName(ElementaryTypeName),
     FunctionTypeName(FunctionTypeName),
-    Mapping(Box<Mapping>),
+    Mapping(Mapping),
     UserDefinedTypeName(UserDefinedTypeName),
 }
 
@@ -1085,10 +1084,8 @@ pub struct UserDefinedTypeName {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ArrayTypeName {
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub node_type: Option<String>,
     pub id: i64,
-    pub base_type: TypeName,
+    pub base_type: Box<TypeName>,
     pub length: Option<Box<Expression>>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
@@ -1098,12 +1095,12 @@ pub struct ArrayTypeName {
 #[serde(rename_all = "camelCase")]
 pub struct Mapping {
     pub id: i64,
-    pub key_type: TypeName,
+    pub key_type: Box<TypeName>,
     #[serde(default)]
     pub key_name: String,
     #[serde(default)]
     pub key_name_location: String,
-    pub value_type: TypeName,
+    pub value_type: Box<TypeName>,
     #[serde(default)]
     pub value_name: String,
     #[serde(default)]
