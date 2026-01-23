@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct SourceUnit {
     pub id: i64,
-    pub absolute_path: String,
+    pub absolute_path: PathBuf,
     pub exported_symbols: HashMap<String, Vec<i64>>,
     pub src: SourceLocation,
     pub nodes: Vec<SourceUnitNode>,
@@ -356,10 +356,6 @@ pub struct UncheckedBlock {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(tag = "nodeType")]
-pub enum UncheckedBlockNode {}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IfStatement {
     pub id: i64,
@@ -378,7 +374,7 @@ pub struct ForStatement {
     pub loop_expression: Option<Box<Expression>>,
     pub body: Box<Statement>,
     pub src: SourceLocation,
-    is_simple_counter_loop: bool,
+    pub is_simple_counter_loop: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -484,7 +480,6 @@ pub struct InlineAssembly {
     pub evm_version: String,
 }
 
-/// Represents a Yul statement in an inline assembly block.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "nodeType")]
 pub enum YulStatement {
@@ -677,34 +672,24 @@ pub enum Expression {
     ExpressionStatement(ExpressionStatement),
 }
 
-/// Assignment operators for expressions.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum AssignmentOperator {
-    /// Multiply and assign
     #[serde(rename = "*=")]
     MulAssign,
-    /// Add and assign
     #[serde(rename = "+=")]
     AddAssign,
-    /// Subtract and assign
     #[serde(rename = "-=")]
     SubAssign,
-    /// Divide and assign
     #[serde(rename = "/=")]
     DivAssign,
-    /// Left shift and assign
     #[serde(rename = "<<=")]
     LeftShiftAssign,
-    /// Simple assignment
     #[serde(rename = "=")]
     Assign,
-    /// Right shift and assign
     #[serde(rename = ">>=")]
     RightShiftAssign,
-    /// Bitwise XOR and assign
     #[serde(rename = "^=")]
     BitwiseXorAssign,
-    /// Bitwise OR and assign
     #[serde(rename = "|=")]
     BitwiseOrAssign,
 }
@@ -720,64 +705,44 @@ pub struct Assignment {
     pub type_descriptions: TypeDescriptions,
 }
 
-/// Binary operators for expressions.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum BinaryOperator {
-    /// Not equal
     #[serde(rename = "!=")]
     NotEqual,
-    /// Modulo
     #[serde(rename = "%")]
     Modulo,
-    /// Bitwise AND
     #[serde(rename = "&")]
     BitwiseAnd,
-    /// Logical AND
     #[serde(rename = "&&")]
     LogicalAnd,
-    /// Multiplication
     #[serde(rename = "*")]
     Mul,
-    /// Exponentiation
     #[serde(rename = "**")]
     Exp,
-    /// Addition
     #[serde(rename = "+")]
     Add,
-    /// Subtraction
     #[serde(rename = "-")]
     Sub,
-    /// Division
     #[serde(rename = "/")]
     Div,
-    /// Less than
     #[serde(rename = "<")]
     Less,
-    /// Left shift
     #[serde(rename = "<<")]
     LeftShift,
-    /// Less than or equal
     #[serde(rename = "<=")]
     LessEqual,
-    /// Equality
     #[serde(rename = "==")]
     Equal,
-    /// Greater than
     #[serde(rename = ">")]
     Greater,
-    /// Greater than or equal
     #[serde(rename = ">=")]
     GreaterEqual,
-    /// Right shift
     #[serde(rename = ">>")]
     RightShift,
-    /// Bitwise XOR
     #[serde(rename = "^")]
     BitwiseXor,
-    /// Bitwise OR
     #[serde(rename = "|")]
     BitwiseOr,
-    /// Logical OR
     #[serde(rename = "||")]
     LogicalOr,
 }
@@ -813,25 +778,18 @@ pub struct Conditional {
     pub type_descriptions: TypeDescriptions,
 }
 
-/// Unary operators for expressions.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum UnaryOperator {
-    /// Logical NOT
     #[serde(rename = "!")]
     Not,
-    /// Increment
     #[serde(rename = "++")]
     Increment,
-    /// Unary minus
     #[serde(rename = "-")]
     Minus,
-    /// Decrement
     #[serde(rename = "--")]
     Decrement,
-    /// Delete
     #[serde(rename = "delete")]
     Delete,
-    /// Bitwise NOT
     #[serde(rename = "~")]
     BitwiseNot,
 }
@@ -927,7 +885,6 @@ pub struct IndexRangeAccess {
     pub id: i64,
     pub base_expression: Box<Expression>,
     pub start_expression: Box<Expression>,
-    #[serde(default)]
     pub end_expression: Option<Box<Expression>>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
@@ -997,7 +954,6 @@ pub enum LiteralKind {
 pub struct NewExpression {
     pub id: i64,
     pub type_name: TypeName,
-    #[serde(default)]
     pub arguments: Option<Vec<Box<Expression>>>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
@@ -1077,10 +1033,6 @@ pub struct FunctionTypeName {
     pub src: SourceLocation,
 }
 
-// ============================================================================
-// Common & Non-node Types
-// ============================================================================
-
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct SourceLocation {
     pub offset: usize,
@@ -1127,7 +1079,6 @@ impl<'de> Deserialize<'de> for SourceLocation {
     }
 }
 
-/// Type descriptions provided by the compiler.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct TypeDescriptions {
@@ -1137,7 +1088,6 @@ pub struct TypeDescriptions {
     pub type_string: Option<String>,
 }
 
-/// Common type for binary operations.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CommonType {
@@ -1145,7 +1095,6 @@ pub struct CommonType {
     pub type_string: String,
 }
 
-/// Elementary type names in Solidity.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ElementaryType {
     Uint(u16),
@@ -1229,12 +1178,12 @@ impl Serialize for ElementaryType {
     }
 }
 
-/// Documentation can be either a plain string or a structured documentation object
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(untagged)]
+#[allow(clippy::large_enum_variant)]
 pub enum Documentation {
     String(String),
-    Structured(Box<StructuredDocumentation>),
+    Structured(StructuredDocumentation),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -1254,8 +1203,8 @@ pub enum Mutability {
     Constant,
 }
 
-/// Structured documentation.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct StructuredDocumentation {
     pub id: i64,
     pub text: String,
@@ -1265,12 +1214,9 @@ pub struct StructuredDocumentation {
     pub title: Option<String>,
     pub notice: Option<String>,
     pub dev: Option<String>,
-    #[serde(default)]
-    pub params: Vec<StructuredDocumentationParameter>,
-    #[serde(default)]
-    pub returns: Vec<StructuredDocumentationReturn>,
-    #[serde(default)]
-    pub custom: Vec<StructuredDocumentationCustom>,
+    pub params: Option<Vec<StructuredDocumentationParameter>>,
+    pub returns: Option<Vec<StructuredDocumentationReturn>>,
+    pub custom: Option<Vec<StructuredDocumentationCustom>>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
