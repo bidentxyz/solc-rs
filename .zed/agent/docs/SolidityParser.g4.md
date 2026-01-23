@@ -1,3 +1,5 @@
+```
+
 /**
  * Solidity is a statically typed, contract-oriented, high-level language for implementing smart contracts on the Ethereum platform.
  */
@@ -620,3 +622,4 @@ yulFunctionCall: (YulIdentifier | YulEVMBuiltin) YulLParen (yulExpression (YulCo
 yulBoolean: YulTrue | YulFalse;
 yulLiteral: YulDecimalNumber | YulStringLiteral | YulHexNumber | yulBoolean | YulHexStringLiteral;
 yulExpression: yulPath | yulFunctionCall | yulLiteral;
+```
