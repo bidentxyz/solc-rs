@@ -109,8 +109,9 @@ pub enum ContractDefinitionNode {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct InheritanceSpecifier {
+    pub node_type: String,
     pub id: i64,
     pub base_name: IdentifierPath,
     pub arguments: Option<Vec<Box<Expression>>>,
@@ -139,7 +140,9 @@ pub struct VariableDeclaration {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct OverrideSpecifier {
+    pub node_type: String,
     pub id: i64,
     pub overrides: Vec<IdentifierPath>,
     pub src: SourceLocation,
@@ -202,8 +205,9 @@ pub enum StateMutability {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct ModifierInvocation {
+    pub node_type: String,
     pub id: i64,
     pub kind: ModifierInvocationKind,
     pub modifier_name: IdentifierPath,
@@ -220,7 +224,9 @@ pub enum ModifierInvocationKind {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct ParameterList {
+    pub node_type: String,
     pub id: i64,
     pub parameters: Vec<VariableDeclaration>,
     pub src: SourceLocation,
@@ -394,12 +400,14 @@ pub struct DoWhileStatement {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Continue {
     pub id: i64,
     pub src: SourceLocation,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Break {
     pub id: i64,
     pub src: SourceLocation,
@@ -415,7 +423,7 @@ pub struct Return {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct EmitStatement {
     pub id: i64,
     pub event_call: FunctionCall,
@@ -423,7 +431,7 @@ pub struct EmitStatement {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct RevertStatement {
     pub id: i64,
     pub error_call: FunctionCall,
@@ -522,16 +530,17 @@ pub struct YulVariableDeclaration {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct YulTypedName {
     pub name: String,
     pub src: String,
     pub native_src: String,
     pub r#type: String,
+    pub node_type: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct YulExpressionStatement {
     pub src: String,
     pub native_src: String,
@@ -604,7 +613,7 @@ pub struct YulFunctionDefinition {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct YulBreak {
     pub src: String,
     pub native_src: String,
@@ -646,6 +655,7 @@ pub struct ExternalReference {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct PlaceholderStatement {
     pub id: i64,
     pub src: SourceLocation,
@@ -1005,12 +1015,13 @@ pub struct UserDefinedTypeName {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct ArrayTypeName {
     pub id: i64,
     pub base_type: TypeName,
     pub length: Option<Box<Expression>>,
     pub src: SourceLocation,
+    pub type_descriptions: TypeDescriptions,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -1204,9 +1215,10 @@ pub enum Mutability {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct StructuredDocumentation {
     pub id: i64,
+    pub node_type: String,
     pub text: String,
     pub src: SourceLocation,
     pub url: Option<String>,
