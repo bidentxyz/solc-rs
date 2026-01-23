@@ -84,6 +84,8 @@ pub struct ContractDefinition {
     pub name_location: String,
     pub used_errors: Vec<i64>,
     pub used_events: Vec<i64>,
+    #[serde(rename = "internalFunctionIDs")]
+    pub internal_function_ids: Option<HashMap<String, i64>>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -113,7 +115,6 @@ pub enum ContractDefinitionNode {
 pub struct InheritanceSpecifier {
     pub id: i64,
     pub base_name: IdentifierPath,
-    pub arguments: Option<Vec<Box<Expression>>>,
     pub src: SourceLocation,
 }
 
@@ -136,6 +137,8 @@ pub struct VariableDeclaration {
     pub type_descriptions: TypeDescriptions,
     pub overrides: Option<OverrideSpecifier>,
     pub scope: i64,
+    pub base_functions: Option<Vec<i64>>,
+    pub function_selector: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -229,6 +232,7 @@ pub struct ParameterList {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ModifierDefinition {
     pub id: i64,
     pub name: String,
@@ -238,6 +242,7 @@ pub struct ModifierDefinition {
     pub body: Block,
     pub src: SourceLocation,
     pub documentation: Option<Documentation>,
+    pub name_location: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -275,7 +280,7 @@ pub struct StructDefinition {
     pub scope: i64,
     pub documentation: Option<Documentation>,
     pub canonical_name: String,
-    visibility: Visibility,
+    pub visibility: Visibility,
     pub name_location: String,
 }
 
@@ -317,7 +322,6 @@ pub struct UsingForDirective {
     pub id: i64,
     pub library_name: IdentifierPath,
     pub type_name: Option<TypeName>,
-    pub operations: Option<Vec<String>>,
     pub src: SourceLocation,
     pub global: bool,
 }
@@ -572,65 +576,23 @@ pub struct YulSwitch {
     pub src: String,
     pub native_src: String,
     pub expression: YulExpression,
-    pub cases: Vec<YulSwitchCase>,
+    pub cases: Vec<YulCase>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct YulSwitchCase {
+pub struct YulCase {
     pub src: String,
     pub native_src: String,
-    pub value: YulSwitchCaseValue,
+    pub value: YulCaseValue,
     pub body: YulBlock,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
-pub enum YulSwitchCaseValue {
-    Default(String),
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum YulCaseValue {
+    String(String),
     Literal(YulLiteral),
-}
-
-impl<'de> serde::Deserialize<'de> for YulSwitchCaseValue {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-    where
-        D: serde::Deserializer<'de>,
-    {
-        use serde::de::Error;
-
-        struct YulSwitchCaseValueVisitor;
-
-        impl<'de> serde::de::Visitor<'de> for YulSwitchCaseValueVisitor {
-            type Value = YulSwitchCaseValue;
-
-            fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
-                formatter.write_str("a YulLiteral object or the string 'default'")
-            }
-
-            fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
-            where
-                E: Error,
-            {
-                if value == "default" {
-                    Ok(YulSwitchCaseValue::Default(value.to_string()))
-                } else {
-                    Err(Error::custom(format!(
-                        "expected 'default' string, got '{}'",
-                        value
-                    )))
-                }
-            }
-
-            fn visit_map<A>(self, map: A) -> Result<Self::Value, A::Error>
-            where
-                A: serde::de::MapAccess<'de>,
-            {
-                YulLiteral::deserialize(serde::de::value::MapAccessDeserializer::new(map))
-                    .map(YulSwitchCaseValue::Literal)
-            }
-        }
-
-        deserializer.deserialize_any(YulSwitchCaseValueVisitor)
-    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -831,7 +793,6 @@ pub struct Conditional {
     pub l_value_requested: bool,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
-    pub argument_types: Option<Vec<TypeDescriptions>>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -893,8 +854,6 @@ pub struct FunctionCallOptions {
     pub options: Vec<Box<Expression>>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
-    #[serde(default)]
-    pub name_locations: Option<Vec<String>>,
     pub argument_types: Option<Vec<TypeDescriptions>>,
     pub is_constant: bool,
     pub is_l_value: bool,
@@ -950,7 +909,6 @@ pub struct IndexRangeAccess {
     pub id: i64,
     pub base_expression: Box<Expression>,
     pub start_expression: Option<Box<Expression>>,
-    pub end_expression: Option<Box<Expression>>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
     pub is_constant: bool,
@@ -1009,7 +967,6 @@ pub struct Literal {
     pub is_l_value: bool,
     pub is_pure: bool,
     pub l_value_requested: bool,
-    pub formatted_value: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -1027,7 +984,6 @@ pub enum LiteralKind {
 pub struct NewExpression {
     pub id: i64,
     pub type_name: TypeName,
-    pub arguments: Option<Vec<Box<Expression>>>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
     pub argument_types: Option<Vec<TypeDescriptions>>,
@@ -1297,32 +1253,6 @@ pub struct StructuredDocumentation {
     pub id: i64,
     pub text: String,
     pub src: SourceLocation,
-    pub url: Option<String>,
-    pub author: Option<String>,
-    pub title: Option<String>,
-    pub notice: Option<String>,
-    pub dev: Option<String>,
-    pub params: Option<Vec<StructuredDocumentationParameter>>,
-    pub returns: Option<Vec<StructuredDocumentationReturn>>,
-    pub custom: Option<Vec<StructuredDocumentationCustom>>,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct StructuredDocumentationParameter {
-    pub name: String,
-    pub description: String,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct StructuredDocumentationReturn {
-    pub name: Option<String>,
-    pub description: String,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct StructuredDocumentationCustom {
-    pub tag: String,
-    pub content: String,
 }
 
 #[cfg(test)]
