@@ -1260,6 +1260,7 @@ mod tests {
     use std::fs;
 
     use super::*;
+    use rayon::prelude::*;
     use serde::de::IntoDeserializer;
     use serde_json::Value;
     use serde_path_to_error::deserialize;
@@ -1365,23 +1366,20 @@ mod tests {
 
     #[test]
     fn fixtures() {
-        for entry in WalkDir::new("fixtures/ast")
+        let entries: Vec<walkdir::DirEntry> = WalkDir::new("fixtures/ast")
             .into_iter()
             .filter_map(Result::ok)
-        {
-            if !entry.file_type().is_file() {
-                continue;
-            }
+            .filter(|entry| entry.file_type().is_file())
+            .filter(|entry| entry.path().extension().map_or(false, |e| e == "json"))
+            .collect();
 
-            if entry.path().extension().map_or(false, |e| e == "json") {
-                let content =
-                    fs::read_to_string(entry.path()).expect("Failed to read fixture file");
-                let result: Result<SourceUnit, serde_json::Error> = serde_json::from_str(&content);
-                if let Err(_) = result {
-                    let error_msg = find_deserialization_error(&content);
-                    panic!("Failed to parse {:?}: {}", entry.path(), error_msg);
-                }
+        entries.par_iter().for_each(|entry| {
+            let content = fs::read_to_string(entry.path()).expect("Failed to read fixture file");
+            let result: Result<SourceUnit, serde_json::Error> = serde_json::from_str(&content);
+            if let Err(_) = result {
+                let error_msg = find_deserialization_error(&content);
+                panic!("Failed to parse {:?}: {}", entry.path(), error_msg);
             }
-        }
+        });
     }
 }
