@@ -3,7 +3,8 @@
 //! This module provides types for the compiler's `--standard-json` interface,
 //! including source files, language settings, and compilation options.
 
-use std::collections::BTreeMap;
+use std::collections::HashMap;
+use std::path::PathBuf;
 
 use serde::{Deserialize, Serialize};
 
@@ -15,7 +16,7 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct StandardJsonInput {
     pub language: Language,
-    pub sources: BTreeMap<String, Source>,
+    pub sources: HashMap<PathBuf, Source>,
     pub settings: Settings,
 }
 
@@ -67,9 +68,9 @@ pub struct Settings {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub metadata: Option<MetadataSettings>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub libraries: Option<BTreeMap<String, BTreeMap<String, String>>>,
+    pub libraries: Option<HashMap<String, HashMap<String, String>>>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub output_selection: Option<BTreeMap<String, BTreeMap<String, Vec<String>>>>,
+    pub output_selection: Option<HashMap<String, HashMap<String, Vec<String>>>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub model_checker: Option<ModelCheckerSettings>,
 }
@@ -128,7 +129,7 @@ pub struct YulDetails {
 #[serde(rename_all = "camelCase")]
 pub struct ModelCheckerSettings {
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub contracts: Option<BTreeMap<String, Vec<String>>>,
+    pub contracts: Option<HashMap<String, Vec<String>>>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub div_mod_no_slacks: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -259,12 +260,12 @@ impl StandardJsonInput {
     pub fn new() -> Self {
         Self {
             language: Language::Solidity,
-            sources: BTreeMap::new(),
+            sources: HashMap::new(),
             settings: Settings::default(),
         }
     }
 
-    pub fn add_source(mut self, name: impl Into<String>, content: impl Into<String>) -> Self {
+    pub fn add_source(mut self, name: impl Into<PathBuf>, content: impl Into<String>) -> Self {
         self.sources.insert(
             name.into(),
             Source {
@@ -279,7 +280,7 @@ impl StandardJsonInput {
 
     pub fn add_source_urls(
         mut self,
-        name: impl Into<String>,
+        name: impl Into<PathBuf>,
         urls: Vec<String>,
         hash: Option<String>,
     ) -> Self {
@@ -308,7 +309,7 @@ mod tests {
 
     #[test]
     fn source_content_exclusivity() {
-        let input = StandardJsonInput::new().add_source("A.sol", "contract A {}");
+        let input = StandardJsonInput::new().add_source(PathBuf::from("A.sol"), "contract A {}");
         let json = serde_json::to_value(&input).unwrap();
         assert_eq!(json["sources"]["A.sol"]["content"], "contract A {}");
         assert!(json["sources"]["A.sol"].get("urls").is_none());
@@ -317,7 +318,7 @@ mod tests {
     #[test]
     fn source_url_exclusivity() {
         let input = StandardJsonInput::new().add_source_urls(
-            "B.sol",
+            PathBuf::from("B.sol"),
             vec!["ipfs://Qm...".to_string()],
             Some("0x123".to_string()),
         );
@@ -342,7 +343,7 @@ mod tests {
         };
 
         let input = StandardJsonInput::new()
-            .add_source("A.sol", "contract A {}")
+            .add_source(PathBuf::from("A.sol"), "contract A {}")
             .model_checker(settings);
 
         let json = serde_json::to_value(&input).unwrap();
