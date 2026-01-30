@@ -377,7 +377,7 @@ pub struct IfStatement {
 #[serde(rename_all = "camelCase")]
 pub struct ForStatement {
     pub id: i64,
-    pub initialization_expression: Box<Expression>,
+    pub initialization_expression: Option<Box<Expression>>,
     pub condition: Box<Expression>,
     pub loop_expression: Option<Box<Expression>>,
     pub body: Box<Statement>,
