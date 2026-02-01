@@ -9,7 +9,7 @@ use std::path::PathBuf;
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct SourceUnit {
     pub id: i64,
@@ -36,14 +36,20 @@ pub enum SourceUnitNode {
     VariableDeclaration(VariableDeclaration),
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+impl Default for SourceUnitNode {
+    fn default() -> Self {
+        SourceUnitNode::PragmaDirective(PragmaDirective::default())
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub struct PragmaDirective {
     pub id: i64,
     pub literals: Vec<String>,
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ImportDirective {
     pub id: i64,
@@ -57,7 +63,7 @@ pub struct ImportDirective {
     pub name_location: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct SymbolAlias {
     pub foreign: Identifier,
@@ -65,7 +71,7 @@ pub struct SymbolAlias {
     pub name_location: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ContractDefinition {
     pub id: i64,
@@ -88,9 +94,10 @@ pub struct ContractDefinition {
     pub internal_function_ids: Option<HashMap<String, i64>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "lowercase")]
 pub enum ContractKind {
+    #[default]
     Contract,
     Interface,
     Library,
@@ -110,7 +117,13 @@ pub enum ContractDefinitionNode {
     VariableDeclaration(VariableDeclaration),
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+impl Default for ContractDefinitionNode {
+    fn default() -> Self {
+        ContractDefinitionNode::VariableDeclaration(VariableDeclaration::default())
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct InheritanceSpecifier {
     pub id: i64,
@@ -118,7 +131,7 @@ pub struct InheritanceSpecifier {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct VariableDeclaration {
     pub id: i64,
@@ -141,7 +154,7 @@ pub struct VariableDeclaration {
     pub function_selector: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct OverrideSpecifier {
     pub id: i64,
@@ -149,7 +162,7 @@ pub struct OverrideSpecifier {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct FunctionDefinition {
     pub id: i64,
@@ -176,10 +189,11 @@ pub struct FunctionDefinition {
     pub name_location: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "lowercase")]
 pub enum FunctionKind {
     Constructor,
+    #[default]
     Function,
     Receive,
     Fallback,
@@ -187,25 +201,27 @@ pub enum FunctionKind {
     FreeFunction,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "lowercase")]
 pub enum Visibility {
+    #[default]
     External,
     Public,
     Internal,
     Private,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "lowercase")]
 pub enum StateMutability {
+    #[default]
     Pure,
     View,
     Nonpayable,
     Payable,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ModifierInvocation {
     pub id: i64,
@@ -215,15 +231,16 @@ pub struct ModifierInvocation {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub enum ModifierInvocationKind {
+    #[default]
     Modifier,
     BaseConstructorSpecifier,
     ModifierInvocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ParameterList {
     pub id: i64,
@@ -231,7 +248,7 @@ pub struct ParameterList {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ModifierDefinition {
     pub id: i64,
@@ -245,7 +262,7 @@ pub struct ModifierDefinition {
     pub name_location: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct EventDefinition {
     pub id: i64,
@@ -258,7 +275,7 @@ pub struct EventDefinition {
     pub documentation: Option<Documentation>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ErrorDefinition {
     pub id: i64,
@@ -270,7 +287,7 @@ pub struct ErrorDefinition {
     pub documentation: Option<Documentation>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct StructDefinition {
     pub id: i64,
@@ -284,7 +301,7 @@ pub struct StructDefinition {
     pub name_location: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct EnumDefinition {
     pub id: i64,
@@ -296,7 +313,7 @@ pub struct EnumDefinition {
     pub name_location: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct EnumValue {
     pub id: i64,
@@ -305,7 +322,7 @@ pub struct EnumValue {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct UserDefinedValueTypeDefinition {
     pub id: i64,
@@ -316,7 +333,7 @@ pub struct UserDefinedValueTypeDefinition {
     pub underlying_type: TypeName,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct UsingForDirective {
     pub id: i64,
@@ -347,7 +364,13 @@ pub enum Statement {
     WhileStatement(WhileStatement),
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+impl Default for Statement {
+    fn default() -> Self {
+        Statement::Block(Block::default())
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct Block {
     pub id: i64,
@@ -355,7 +378,7 @@ pub struct Block {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct UncheckedBlock {
     pub id: i64,
@@ -363,7 +386,7 @@ pub struct UncheckedBlock {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct IfStatement {
     pub id: i64,
@@ -373,7 +396,7 @@ pub struct IfStatement {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ForStatement {
     pub id: i64,
@@ -385,7 +408,7 @@ pub struct ForStatement {
     pub is_simple_counter_loop: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct WhileStatement {
     pub id: i64,
@@ -394,7 +417,7 @@ pub struct WhileStatement {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct DoWhileStatement {
     pub id: i64,
@@ -403,19 +426,19 @@ pub struct DoWhileStatement {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub struct Continue {
     pub id: i64,
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub struct Break {
     pub id: i64,
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct Return {
     pub id: i64,
@@ -424,7 +447,7 @@ pub struct Return {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct EmitStatement {
     pub id: i64,
@@ -432,7 +455,7 @@ pub struct EmitStatement {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct RevertStatement {
     pub id: i64,
@@ -440,7 +463,7 @@ pub struct RevertStatement {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct TryStatement {
     pub id: i64,
@@ -449,7 +472,7 @@ pub struct TryStatement {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct TryCatchClause {
     pub id: i64,
@@ -459,7 +482,7 @@ pub struct TryCatchClause {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ExpressionStatement {
     pub id: i64,
@@ -467,7 +490,7 @@ pub struct ExpressionStatement {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct VariableDeclarationStatement {
     pub id: i64,
@@ -478,7 +501,7 @@ pub struct VariableDeclarationStatement {
     pub documentation: Option<Documentation>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct InlineAssembly {
     pub id: i64,
@@ -507,7 +530,13 @@ pub enum YulStatement {
     YulExpressionStatement(YulExpressionStatement),
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+impl Default for YulStatement {
+    fn default() -> Self {
+        YulStatement::YulBlock(YulBlock::default())
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulBlock {
     pub src: String,
@@ -515,7 +544,7 @@ pub struct YulBlock {
     pub statements: Vec<YulStatement>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulAssignment {
     pub src: String,
@@ -524,7 +553,7 @@ pub struct YulAssignment {
     pub value: YulExpression,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulVariableDeclaration {
     pub src: String,
@@ -533,7 +562,7 @@ pub struct YulVariableDeclaration {
     pub value: YulExpression,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulTypedName {
     pub name: String,
@@ -542,7 +571,7 @@ pub struct YulTypedName {
     pub r#type: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulExpressionStatement {
     pub src: String,
@@ -550,7 +579,7 @@ pub struct YulExpressionStatement {
     pub expression: YulExpression,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulIf {
     pub src: String,
@@ -559,7 +588,7 @@ pub struct YulIf {
     pub body: YulBlock,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulForLoop {
     pub src: String,
@@ -570,7 +599,7 @@ pub struct YulForLoop {
     pub body: YulBlock,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulSwitch {
     pub src: String,
@@ -579,7 +608,7 @@ pub struct YulSwitch {
     pub cases: Vec<YulCase>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulCase {
     pub src: String,
@@ -595,7 +624,13 @@ pub enum YulCaseValue {
     Literal(YulLiteral),
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+impl Default for YulCaseValue {
+    fn default() -> Self {
+        YulCaseValue::String(String::default())
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulLiteral {
     pub src: String,
@@ -605,7 +640,7 @@ pub struct YulLiteral {
     pub r#type: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulFunctionDefinition {
     pub src: String,
@@ -615,7 +650,7 @@ pub struct YulFunctionDefinition {
     pub body: YulBlock,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulBreak {
     pub src: String,
@@ -630,7 +665,13 @@ pub enum YulExpression {
     YulFunctionCall(YulFunctionCall),
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+impl Default for YulExpression {
+    fn default() -> Self {
+        YulExpression::YulIdentifier(YulIdentifier::default())
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulFunctionCall {
     pub src: String,
@@ -639,7 +680,7 @@ pub struct YulFunctionCall {
     pub arguments: Vec<YulExpression>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulIdentifier {
     pub src: String,
@@ -647,7 +688,7 @@ pub struct YulIdentifier {
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ExternalReference {
     pub declaration: i64,
@@ -657,7 +698,7 @@ pub struct ExternalReference {
     pub value_size: i64,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct PlaceholderStatement {
     pub id: i64,
@@ -685,8 +726,15 @@ pub enum Expression {
     ExpressionStatement(ExpressionStatement),
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+impl Default for Expression {
+    fn default() -> Self {
+        Expression::Literal(Literal::default())
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub enum AssignmentOperator {
+    #[default]
     #[serde(rename = "*=")]
     MulAssign,
     #[serde(rename = "+=")]
@@ -707,7 +755,7 @@ pub enum AssignmentOperator {
     BitwiseOrAssign,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct Assignment {
     pub id: i64,
@@ -722,8 +770,9 @@ pub struct Assignment {
     pub l_value_requested: bool,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub enum BinaryOperator {
+    #[default]
     #[serde(rename = "!=")]
     NotEqual,
     #[serde(rename = "%")]
@@ -764,7 +813,7 @@ pub enum BinaryOperator {
     LogicalOr,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct BinaryOperation {
     pub id: i64,
@@ -780,7 +829,7 @@ pub struct BinaryOperation {
     pub type_descriptions: TypeDescriptions,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct Conditional {
     pub id: i64,
@@ -795,8 +844,9 @@ pub struct Conditional {
     pub type_descriptions: TypeDescriptions,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
 pub enum UnaryOperator {
+    #[default]
     #[serde(rename = "!")]
     Not,
     #[serde(rename = "++")]
@@ -811,7 +861,7 @@ pub enum UnaryOperator {
     BitwiseNot,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct UnaryOperation {
     pub id: i64,
@@ -826,7 +876,7 @@ pub struct UnaryOperation {
     pub l_value_requested: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct FunctionCall {
     pub id: i64,
@@ -845,7 +895,7 @@ pub struct FunctionCall {
     pub argument_types: Option<Vec<TypeDescriptions>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct FunctionCallOptions {
     pub id: i64,
@@ -872,7 +922,13 @@ pub enum FunctionCallExpression {
     NewExpression(NewExpression),
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+impl Default for FunctionCallExpression {
+    fn default() -> Self {
+        FunctionCallExpression::Identifier(Identifier::default())
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct MemberAccess {
     pub id: i64,
@@ -889,7 +945,7 @@ pub struct MemberAccess {
     pub l_value_requested: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct IndexAccess {
     pub id: i64,
@@ -903,7 +959,7 @@ pub struct IndexAccess {
     pub l_value_requested: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct IndexRangeAccess {
     pub id: i64,
@@ -917,7 +973,7 @@ pub struct IndexRangeAccess {
     pub l_value_requested: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct TupleExpression {
     pub id: i64,
@@ -931,7 +987,7 @@ pub struct TupleExpression {
     pub l_value_requested: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct Identifier {
     pub id: i64,
@@ -943,7 +999,7 @@ pub struct Identifier {
     pub argument_types: Option<Vec<TypeDescriptions>>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct IdentifierPath {
     pub id: i64,
@@ -953,7 +1009,7 @@ pub struct IdentifierPath {
     pub src: SourceLocation,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct Literal {
     pub id: i64,
@@ -969,9 +1025,10 @@ pub struct Literal {
     pub l_value_requested: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub enum LiteralKind {
+    #[default]
     Bool,
     Number,
     String,
@@ -979,7 +1036,7 @@ pub enum LiteralKind {
     UnicodeString,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct NewExpression {
     pub id: i64,
@@ -993,7 +1050,7 @@ pub struct NewExpression {
     pub l_value_requested: bool,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ElementaryTypeNameExpression {
     pub id: i64,
@@ -1017,7 +1074,13 @@ pub enum TypeName {
     UserDefinedTypeName(UserDefinedTypeName),
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+impl Default for TypeName {
+    fn default() -> Self {
+        TypeName::ElementaryTypeName(ElementaryTypeName::default())
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ElementaryTypeName {
     pub id: i64,
@@ -1027,7 +1090,7 @@ pub struct ElementaryTypeName {
     pub type_descriptions: TypeDescriptions,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct UserDefinedTypeName {
     pub id: i64,
@@ -1037,7 +1100,7 @@ pub struct UserDefinedTypeName {
     pub type_descriptions: TypeDescriptions,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ArrayTypeName {
     pub id: i64,
@@ -1047,7 +1110,7 @@ pub struct ArrayTypeName {
     pub type_descriptions: TypeDescriptions,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct Mapping {
     pub id: i64,
@@ -1065,7 +1128,7 @@ pub struct Mapping {
     pub type_descriptions: TypeDescriptions,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct FunctionTypeName {
     pub id: i64,
@@ -1077,7 +1140,7 @@ pub struct FunctionTypeName {
     pub type_descriptions: TypeDescriptions,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub struct SourceLocation {
     pub offset: usize,
     pub length: usize,
@@ -1132,17 +1195,18 @@ pub struct TypeDescriptions {
     pub type_string: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct CommonType {
     pub type_identifier: String,
     pub type_string: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Default)]
 pub enum ElementaryType {
     Uint(u16),
     Int(u16),
+    #[default]
     Address,
     Payable,
     Bool,
@@ -1230,24 +1294,32 @@ pub enum Documentation {
     Structured(StructuredDocumentation),
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+impl Default for Documentation {
+    fn default() -> Self {
+        Documentation::String(String::default())
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "lowercase")]
 pub enum StorageLocation {
+    #[default]
     Default,
     Memory,
     Storage,
     Calldata,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "lowercase")]
 pub enum Mutability {
+    #[default]
     Mutable,
     Immutable,
     Constant,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct StructuredDocumentation {
     pub id: i64,
