@@ -224,8 +224,6 @@ Client with subprocess:
     transport.kill()?;
 
 All tests pass. ast-grep scan passed.
-
-Co-Authored-By: GLM 4.7 <253101093+zed-agent@users.noreply.github.com>
 ```
 
 ### Example 2: Feature Addition
@@ -245,8 +243,6 @@ Changes:
 Breaking change:
 
 - None (backward compatible)
-
-Co-Authored-By: GLM 4.7 <253101093+zed-agent@users.noreply.github.com>
 ```
 
 ### Example 3: Bug Fix
@@ -265,8 +261,6 @@ Changes:
 - Add regression test for large messages
 
 Fixes: #123
-
-Co-Authored-By: GLM 4.7 <253101093+zed-agent@users.noreply.github.com>
 ```
 
 ### Example 4: Refactor
@@ -288,8 +282,6 @@ Breaking change:
 
 - Error types are now re-exported from `crate::error` instead of individual
   modules
-
-Co-Authored-By: GLM 4.7 <253101093+zed-agent@users.noreply.github.com>
 ```
 
 ## Common Mistakes to Avoid
@@ -386,8 +378,6 @@ Usage:
     {Example code}
 
 All tests pass.
-
-Co-Authored-By: GLM 4.7 <253101093+zed-agent@users.noreply.github.com>
 ```
 
 ### Bug Fix
@@ -403,8 +393,6 @@ Changes:
 - {How the fix works}
 
 Fixes: #{issue_number}
-
-Co-Authored-By: GLM 4.7 <253101093+zed-agent@users.noreply.github.com>
 ```
 
 ### Refactor
@@ -422,8 +410,6 @@ Changes:
 Breaking change:
 
 - {Any breaking changes, or "None"}
-
-Co-Authored-By: GLM 4.7 <253101093+zed-agent@users.noreply.github.com>
 ```
 
 ### Breaking Change
@@ -450,6 +436,4 @@ Migration:
     // Change to:
 
     {New code}
-
-Co-Authored-By: GLM 4.7 <253101093+zed-agent@users.noreply.github.com>
 ```
