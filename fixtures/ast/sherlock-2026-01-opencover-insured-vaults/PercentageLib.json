@@ -1,0 +1,1118 @@
+{
+  "absolutePath": "src/libraries/PercentageLib.sol",
+  "id": 68236,
+  "exportedSymbols": {
+    "Math": [
+      53889
+    ],
+    "PercentageLib": [
+      68235
+    ],
+    "SECONDS_IN_YEAR": [
+      63962
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "74:1310:92",
+  "nodes": [
+    {
+      "id": 68151,
+      "nodeType": "PragmaDirective",
+      "src": "74:23:92",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "0.8",
+        ".30"
+      ]
+    },
+    {
+      "id": 68153,
+      "nodeType": "ImportDirective",
+      "src": "99:49:92",
+      "nodes": [],
+      "absolutePath": "src/Constants.sol",
+      "file": "../Constants.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 68236,
+      "sourceUnit": 63967,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 68152,
+            "name": "SECONDS_IN_YEAR",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 63962,
+            "src": "107:15:92",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 68155,
+      "nodeType": "ImportDirective",
+      "src": "149:65:92",
+      "nodes": [],
+      "absolutePath": "lib/openzeppelin-contracts-upgradeable/lib/openzeppelin-contracts/contracts/utils/math/Math.sol",
+      "file": "@openzeppelin/contracts/utils/math/Math.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 68236,
+      "sourceUnit": 53890,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 68154,
+            "name": "Math",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 53889,
+            "src": "157:4:92",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 68235,
+      "nodeType": "ContractDefinition",
+      "src": "317:1066:92",
+      "nodes": [
+        {
+          "id": 68159,
+          "nodeType": "UsingForDirective",
+          "src": "345:23:92",
+          "nodes": [],
+          "global": false,
+          "libraryName": {
+            "id": 68157,
+            "name": "Math",
+            "nameLocations": [
+              "351:4:92"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 53889,
+            "src": "351:4:92"
+          },
+          "typeName": {
+            "id": 68158,
+            "name": "uint256",
+            "nodeType": "ElementaryTypeName",
+            "src": "360:7:92",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            }
+          }
+        },
+        {
+          "id": 68163,
+          "nodeType": "VariableDeclaration",
+          "src": "451:50:92",
+          "nodes": [],
+          "constant": true,
+          "documentation": {
+            "id": 68160,
+            "nodeType": "StructuredDocumentation",
+            "src": "374:72:92",
+            "text": "@dev Basis points denominator representing 100% (10,000 bps = 100%)."
+          },
+          "mutability": "constant",
+          "name": "BPS_DENOMINATOR",
+          "nameLocation": "477:15:92",
+          "scope": 68235,
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_uint256",
+            "typeString": "uint256"
+          },
+          "typeName": {
+            "id": 68161,
+            "name": "uint256",
+            "nodeType": "ElementaryTypeName",
+            "src": "451:7:92",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            }
+          },
+          "value": {
+            "hexValue": "31305f303030",
+            "id": 68162,
+            "isConstant": false,
+            "isLValue": false,
+            "isPure": true,
+            "kind": "number",
+            "lValueRequested": false,
+            "nodeType": "Literal",
+            "src": "495:6:92",
+            "typeDescriptions": {
+              "typeIdentifier": "t_rational_10000_by_1",
+              "typeString": "int_const 10000"
+            },
+            "value": "10_000"
+          },
+          "visibility": "internal"
+        },
+        {
+          "id": 68183,
+          "nodeType": "FunctionDefinition",
+          "src": "575:159:92",
+          "nodes": [],
+          "body": {
+            "id": 68182,
+            "nodeType": "Block",
+            "src": "651:83:92",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "id": 68175,
+                      "name": "rateBps",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 68168,
+                      "src": "681:7:92",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint16",
+                        "typeString": "uint16"
+                      }
+                    },
+                    {
+                      "id": 68176,
+                      "name": "BPS_DENOMINATOR",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 68163,
+                      "src": "690:15:92",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "expression": {
+                          "id": 68177,
+                          "name": "Math",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 53889,
+                          "src": "707:4:92",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_Math_$53889_$",
+                            "typeString": "type(library Math)"
+                          }
+                        },
+                        "id": 68178,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "712:8:92",
+                        "memberName": "Rounding",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 52280,
+                        "src": "707:13:92",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_enum$_Rounding_$52280_$",
+                          "typeString": "type(enum Math.Rounding)"
+                        }
+                      },
+                      "id": 68179,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberLocation": "721:5:92",
+                      "memberName": "Floor",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 52276,
+                      "src": "707:19:92",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_enum$_Rounding_$52280",
+                        "typeString": "enum Math.Rounding"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_uint16",
+                        "typeString": "uint16"
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_enum$_Rounding_$52280",
+                        "typeString": "enum Math.Rounding"
+                      }
+                    ],
+                    "expression": {
+                      "id": 68173,
+                      "name": "value",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 68166,
+                      "src": "668:5:92",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 68174,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "674:6:92",
+                    "memberName": "mulDiv",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 52832,
+                    "src": "668:12:92",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_uint256_$_t_enum$_Rounding_$52280_$returns$_t_uint256_$attached_to$_t_uint256_$",
+                      "typeString": "function (uint256,uint256,uint256,enum Math.Rounding) pure returns (uint256)"
+                    }
+                  },
+                  "id": 68180,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "668:59:92",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "functionReturnParameters": 68172,
+                "id": 68181,
+                "nodeType": "Return",
+                "src": "661:66:92"
+              }
+            ]
+          },
+          "documentation": {
+            "id": 68164,
+            "nodeType": "StructuredDocumentation",
+            "src": "508:62:92",
+            "text": "@dev Calculate a percentage of a value using basis points."
+          },
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "bps",
+          "nameLocation": "584:3:92",
+          "parameters": {
+            "id": 68169,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68166,
+                "mutability": "mutable",
+                "name": "value",
+                "nameLocation": "596:5:92",
+                "nodeType": "VariableDeclaration",
+                "scope": 68183,
+                "src": "588:13:92",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68165,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "588:7:92",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68168,
+                "mutability": "mutable",
+                "name": "rateBps",
+                "nameLocation": "610:7:92",
+                "nodeType": "VariableDeclaration",
+                "scope": 68183,
+                "src": "603:14:92",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint16",
+                  "typeString": "uint16"
+                },
+                "typeName": {
+                  "id": 68167,
+                  "name": "uint16",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "603:6:92",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "587:31:92"
+          },
+          "returnParameters": {
+            "id": 68172,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68171,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 68183,
+                "src": "642:7:92",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68170,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "642:7:92",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "641:9:92"
+          },
+          "scope": 68235,
+          "stateMutability": "pure",
+          "virtual": false,
+          "visibility": "internal"
+        },
+        {
+          "id": 68214,
+          "nodeType": "FunctionDefinition",
+          "src": "880:227:92",
+          "nodes": [],
+          "body": {
+            "id": 68213,
+            "nodeType": "Block",
+            "src": "995:112:92",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "commonType": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "id": 68204,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "arguments": [
+                          {
+                            "id": 68201,
+                            "name": "rateBps",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 68188,
+                            "src": "1033:7:92",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint16",
+                              "typeString": "uint16"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint16",
+                              "typeString": "uint16"
+                            }
+                          ],
+                          "id": 68200,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "1025:7:92",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_uint256_$",
+                            "typeString": "type(uint256)"
+                          },
+                          "typeName": {
+                            "id": 68199,
+                            "name": "uint256",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "1025:7:92",
+                            "typeDescriptions": {}
+                          }
+                        },
+                        "id": 68202,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1025:16:92",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "*",
+                      "rightExpression": {
+                        "id": 68203,
+                        "name": "duration",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 68192,
+                        "src": "1044:8:92",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        }
+                      },
+                      "src": "1025:27:92",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "commonType": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "id": 68207,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "id": 68205,
+                        "name": "BPS_DENOMINATOR",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 68163,
+                        "src": "1054:15:92",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "*",
+                      "rightExpression": {
+                        "id": 68206,
+                        "name": "period",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 68190,
+                        "src": "1072:6:92",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        }
+                      },
+                      "src": "1054:24:92",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "expression": {
+                          "id": 68208,
+                          "name": "Math",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 53889,
+                          "src": "1080:4:92",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_Math_$53889_$",
+                            "typeString": "type(library Math)"
+                          }
+                        },
+                        "id": 68209,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1085:8:92",
+                        "memberName": "Rounding",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 52280,
+                        "src": "1080:13:92",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_enum$_Rounding_$52280_$",
+                          "typeString": "type(enum Math.Rounding)"
+                        }
+                      },
+                      "id": 68210,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "memberLocation": "1094:5:92",
+                      "memberName": "Floor",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 52276,
+                      "src": "1080:19:92",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_enum$_Rounding_$52280",
+                        "typeString": "enum Math.Rounding"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_enum$_Rounding_$52280",
+                        "typeString": "enum Math.Rounding"
+                      }
+                    ],
+                    "expression": {
+                      "id": 68197,
+                      "name": "value",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 68186,
+                      "src": "1012:5:92",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 68198,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1018:6:92",
+                    "memberName": "mulDiv",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 52832,
+                    "src": "1012:12:92",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$_t_uint256_$_t_enum$_Rounding_$52280_$returns$_t_uint256_$attached_to$_t_uint256_$",
+                      "typeString": "function (uint256,uint256,uint256,enum Math.Rounding) pure returns (uint256)"
+                    }
+                  },
+                  "id": 68211,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1012:88:92",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "functionReturnParameters": 68196,
+                "id": 68212,
+                "nodeType": "Return",
+                "src": "1005:95:92"
+              }
+            ]
+          },
+          "documentation": {
+            "id": 68184,
+            "nodeType": "StructuredDocumentation",
+            "src": "740:135:92",
+            "text": "@dev Calculate pro-rata percentage accrual over a specified duration,\n      where the rate is defined over the given period."
+          },
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "bpsProRata",
+          "nameLocation": "889:10:92",
+          "parameters": {
+            "id": 68193,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68186,
+                "mutability": "mutable",
+                "name": "value",
+                "nameLocation": "908:5:92",
+                "nodeType": "VariableDeclaration",
+                "scope": 68214,
+                "src": "900:13:92",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68185,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "900:7:92",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68188,
+                "mutability": "mutable",
+                "name": "rateBps",
+                "nameLocation": "922:7:92",
+                "nodeType": "VariableDeclaration",
+                "scope": 68214,
+                "src": "915:14:92",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint16",
+                  "typeString": "uint16"
+                },
+                "typeName": {
+                  "id": 68187,
+                  "name": "uint16",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "915:6:92",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68190,
+                "mutability": "mutable",
+                "name": "period",
+                "nameLocation": "938:6:92",
+                "nodeType": "VariableDeclaration",
+                "scope": 68214,
+                "src": "931:13:92",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint64",
+                  "typeString": "uint64"
+                },
+                "typeName": {
+                  "id": 68189,
+                  "name": "uint64",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "931:6:92",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68192,
+                "mutability": "mutable",
+                "name": "duration",
+                "nameLocation": "953:8:92",
+                "nodeType": "VariableDeclaration",
+                "scope": 68214,
+                "src": "946:15:92",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint64",
+                  "typeString": "uint64"
+                },
+                "typeName": {
+                  "id": 68191,
+                  "name": "uint64",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "946:6:92",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "899:63:92"
+          },
+          "returnParameters": {
+            "id": 68196,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68195,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 68214,
+                "src": "986:7:92",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68194,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "986:7:92",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "985:9:92"
+          },
+          "scope": 68235,
+          "stateMutability": "pure",
+          "virtual": false,
+          "visibility": "internal"
+        },
+        {
+          "id": 68234,
+          "nodeType": "FunctionDefinition",
+          "src": "1198:183:92",
+          "nodes": [],
+          "body": {
+            "id": 68233,
+            "nodeType": "Block",
+            "src": "1304:77:92",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "id": 68227,
+                      "name": "value",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 68217,
+                      "src": "1332:5:92",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "id": 68228,
+                      "name": "rateBps",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 68219,
+                      "src": "1339:7:92",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint16",
+                        "typeString": "uint16"
+                      }
+                    },
+                    {
+                      "id": 68229,
+                      "name": "SECONDS_IN_YEAR",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 63962,
+                      "src": "1348:15:92",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    {
+                      "id": 68230,
+                      "name": "duration",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 68221,
+                      "src": "1365:8:92",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_uint16",
+                        "typeString": "uint16"
+                      },
+                      {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      },
+                      {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    ],
+                    "id": 68226,
+                    "name": "bpsProRata",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 68214,
+                    "src": "1321:10:92",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint16_$_t_uint64_$_t_uint64_$returns$_t_uint256_$",
+                      "typeString": "function (uint256,uint16,uint64,uint64) pure returns (uint256)"
+                    }
+                  },
+                  "id": 68231,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1321:53:92",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "functionReturnParameters": 68225,
+                "id": 68232,
+                "nodeType": "Return",
+                "src": "1314:60:92"
+              }
+            ]
+          },
+          "documentation": {
+            "id": 68215,
+            "nodeType": "StructuredDocumentation",
+            "src": "1113:80:92",
+            "text": "@dev Calculate annual pro-rata percentage accrual over a specified duration."
+          },
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "annualBpsProRata",
+          "nameLocation": "1207:16:92",
+          "parameters": {
+            "id": 68222,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68217,
+                "mutability": "mutable",
+                "name": "value",
+                "nameLocation": "1232:5:92",
+                "nodeType": "VariableDeclaration",
+                "scope": 68234,
+                "src": "1224:13:92",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68216,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1224:7:92",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68219,
+                "mutability": "mutable",
+                "name": "rateBps",
+                "nameLocation": "1246:7:92",
+                "nodeType": "VariableDeclaration",
+                "scope": 68234,
+                "src": "1239:14:92",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint16",
+                  "typeString": "uint16"
+                },
+                "typeName": {
+                  "id": 68218,
+                  "name": "uint16",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1239:6:92",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68221,
+                "mutability": "mutable",
+                "name": "duration",
+                "nameLocation": "1262:8:92",
+                "nodeType": "VariableDeclaration",
+                "scope": 68234,
+                "src": "1255:15:92",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint64",
+                  "typeString": "uint64"
+                },
+                "typeName": {
+                  "id": 68220,
+                  "name": "uint64",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1255:6:92",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1223:48:92"
+          },
+          "returnParameters": {
+            "id": 68225,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68224,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 68234,
+                "src": "1295:7:92",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68223,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1295:7:92",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1294:9:92"
+          },
+          "scope": 68235,
+          "stateMutability": "pure",
+          "virtual": false,
+          "visibility": "internal"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [],
+      "canonicalName": "PercentageLib",
+      "contractDependencies": [],
+      "contractKind": "library",
+      "documentation": {
+        "id": 68156,
+        "nodeType": "StructuredDocumentation",
+        "src": "216:101:92",
+        "text": "@title PercentageLib\n @notice Utilities for percentage calculations using basis points (bps)."
+      },
+      "fullyImplemented": true,
+      "linearizedBaseContracts": [
+        68235
+      ],
+      "name": "PercentageLib",
+      "nameLocation": "325:13:92",
+      "scope": 68236,
+      "usedErrors": [],
+      "usedEvents": []
+    }
+  ],
+  "license": "Apache-2.0 WITH LicenseRef-Commons-Clause-1.0"
+}

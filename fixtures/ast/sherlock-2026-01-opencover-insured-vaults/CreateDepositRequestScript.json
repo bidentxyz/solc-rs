@@ -1,0 +1,2580 @@
+{
+  "absolutePath": "script/CreateLocalDepositRequest.s.sol",
+  "id": 60562,
+  "exportedSymbols": {
+    "BaseLocalScript": [
+      63805
+    ],
+    "CreateDepositRequestScript": [
+      60561
+    ],
+    "ICoveredMetavault": [
+      67878
+    ],
+    "IERC4626": [
+      47535
+    ],
+    "console": [
+      31266
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "39:2109:76",
+  "nodes": [
+    {
+      "id": 60369,
+      "nodeType": "PragmaDirective",
+      "src": "39:23:76",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "0.8",
+        ".30"
+      ]
+    },
+    {
+      "id": 60371,
+      "nodeType": "ImportDirective",
+      "src": "64:74:76",
+      "nodes": [],
+      "absolutePath": "src/interfaces/ICoveredMetavault.sol",
+      "file": "../src/interfaces/ICoveredMetavault.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 60562,
+      "sourceUnit": 67879,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 60370,
+            "name": "ICoveredMetavault",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 67878,
+            "src": "72:17:76",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 60373,
+      "nodeType": "ImportDirective",
+      "src": "139:62:76",
+      "nodes": [],
+      "absolutePath": "script/helpers/BaseLocalScript.sol",
+      "file": "./helpers/BaseLocalScript.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 60562,
+      "sourceUnit": 63806,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 60372,
+            "name": "BaseLocalScript",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 63805,
+            "src": "147:15:76",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 60375,
+      "nodeType": "ImportDirective",
+      "src": "203:73:76",
+      "nodes": [],
+      "absolutePath": "lib/openzeppelin-contracts-upgradeable/lib/openzeppelin-contracts/contracts/interfaces/IERC4626.sol",
+      "file": "@openzeppelin/contracts/interfaces/IERC4626.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 60562,
+      "sourceUnit": 47536,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 60374,
+            "name": "IERC4626",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 47535,
+            "src": "211:8:76",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 60377,
+      "nodeType": "ImportDirective",
+      "src": "278:45:76",
+      "nodes": [],
+      "absolutePath": "lib/forge-std/src/Script.sol",
+      "file": "forge-std/Script.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 60562,
+      "sourceUnit": 2110,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 60376,
+            "name": "console",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 31266,
+            "src": "286:7:76",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 60561,
+      "nodeType": "ContractDefinition",
+      "src": "325:1822:76",
+      "nodes": [
+        {
+          "id": 60382,
+          "nodeType": "VariableDeclaration",
+          "src": "386:54:76",
+          "nodes": [],
+          "constant": true,
+          "mutability": "constant",
+          "name": "DEPOSIT_AMOUNT_IN_UNDERLYING",
+          "nameLocation": "403:28:76",
+          "scope": 60561,
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_uint256",
+            "typeString": "uint256"
+          },
+          "typeName": {
+            "id": 60380,
+            "name": "uint256",
+            "nodeType": "ElementaryTypeName",
+            "src": "386:7:76",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            }
+          },
+          "value": {
+            "hexValue": "313030306536",
+            "id": 60381,
+            "isConstant": false,
+            "isLValue": false,
+            "isPure": true,
+            "kind": "number",
+            "lValueRequested": false,
+            "nodeType": "Literal",
+            "src": "434:6:76",
+            "typeDescriptions": {
+              "typeIdentifier": "t_rational_1000000000_by_1",
+              "typeString": "int_const 1000000000"
+            },
+            "value": "1000e6"
+          },
+          "visibility": "internal"
+        },
+        {
+          "id": 60385,
+          "nodeType": "VariableDeclaration",
+          "src": "460:11:76",
+          "nodes": [],
+          "constant": false,
+          "mutability": "mutable",
+          "name": "user",
+          "nameLocation": "467:4:76",
+          "scope": 60561,
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_struct$_Signer_$63724_storage",
+            "typeString": "struct BaseLocalScript.Signer"
+          },
+          "typeName": {
+            "id": 60384,
+            "nodeType": "UserDefinedTypeName",
+            "pathNode": {
+              "id": 60383,
+              "name": "Signer",
+              "nameLocations": [
+                "460:6:76"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 63724,
+              "src": "460:6:76"
+            },
+            "referencedDeclaration": 63724,
+            "src": "460:6:76",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_Signer_$63724_storage_ptr",
+              "typeString": "struct BaseLocalScript.Signer"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "id": 60399,
+          "nodeType": "FunctionDefinition",
+          "src": "478:85:76",
+          "nodes": [],
+          "body": {
+            "id": 60398,
+            "nodeType": "Block",
+            "src": "511:52:76",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 60389,
+                      "name": "super",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -25,
+                      "src": "521:5:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_super$_CreateDepositRequestScript_$60561_$",
+                        "typeString": "type(contract super CreateDepositRequestScript)"
+                      }
+                    },
+                    "id": 60391,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "527:5:76",
+                    "memberName": "setUp",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 63804,
+                    "src": "521:11:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
+                      "typeString": "function ()"
+                    }
+                  },
+                  "id": 60392,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "521:13:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60393,
+                "nodeType": "ExpressionStatement",
+                "src": "521:13:76"
+              },
+              {
+                "expression": {
+                  "id": 60396,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftHandSide": {
+                    "id": 60394,
+                    "name": "user",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 60385,
+                    "src": "544:4:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                      "typeString": "struct BaseLocalScript.Signer storage ref"
+                    }
+                  },
+                  "nodeType": "Assignment",
+                  "operator": "=",
+                  "rightHandSide": {
+                    "id": 60395,
+                    "name": "user2",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 63741,
+                    "src": "551:5:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                      "typeString": "struct BaseLocalScript.Signer storage ref"
+                    }
+                  },
+                  "src": "544:12:76",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                    "typeString": "struct BaseLocalScript.Signer storage ref"
+                  }
+                },
+                "id": 60397,
+                "nodeType": "ExpressionStatement",
+                "src": "544:12:76"
+              }
+            ]
+          },
+          "baseFunctions": [
+            63804
+          ],
+          "functionSelector": "0a9254e4",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "setUp",
+          "nameLocation": "487:5:76",
+          "overrides": {
+            "id": 60387,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [],
+            "src": "502:8:76"
+          },
+          "parameters": {
+            "id": 60386,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "492:2:76"
+          },
+          "returnParameters": {
+            "id": 60388,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "511:0:76"
+          },
+          "scope": 60561,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "public"
+        },
+        {
+          "id": 60560,
+          "nodeType": "FunctionDefinition",
+          "src": "569:1576:76",
+          "nodes": [],
+          "body": {
+            "id": 60559,
+            "nodeType": "Block",
+            "src": "591:1554:76",
+            "nodes": [],
+            "statements": [
+              {
+                "assignments": [
+                  60404
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 60404,
+                    "mutability": "mutable",
+                    "name": "vault",
+                    "nameLocation": "619:5:76",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 60559,
+                    "src": "601:23:76",
+                    "stateVariable": false,
+                    "storageLocation": "default",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                      "typeString": "contract ICoveredMetavault"
+                    },
+                    "typeName": {
+                      "id": 60403,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 60402,
+                        "name": "ICoveredMetavault",
+                        "nameLocations": [
+                          "601:17:76"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 67878,
+                        "src": "601:17:76"
+                      },
+                      "referencedDeclaration": 67878,
+                      "src": "601:17:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                        "typeString": "contract ICoveredMetavault"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 60411,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "arguments": [
+                        {
+                          "hexValue": "5641554c545f41444452455353",
+                          "id": 60408,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "string",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "659:15:76",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_stringliteral_e9aee28d84287277c524747b1be21f89c7e64ae2ae71089a4b6b0c73b993d018",
+                            "typeString": "literal_string \"VAULT_ADDRESS\""
+                          },
+                          "value": "VAULT_ADDRESS"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_stringliteral_e9aee28d84287277c524747b1be21f89c7e64ae2ae71089a4b6b0c73b993d018",
+                            "typeString": "literal_string \"VAULT_ADDRESS\""
+                          }
+                        ],
+                        "expression": {
+                          "id": 60406,
+                          "name": "vm",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 43,
+                          "src": "645:2:76",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_Vm_$23150",
+                            "typeString": "contract Vm"
+                          }
+                        },
+                        "id": 60407,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "648:10:76",
+                        "memberName": "envAddress",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 18443,
+                        "src": "645:13:76",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_view$_t_string_memory_ptr_$returns$_t_address_$",
+                          "typeString": "function (string memory) view external returns (address)"
+                        }
+                      },
+                      "id": 60409,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "645:30:76",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "id": 60405,
+                    "name": "ICoveredMetavault",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 67878,
+                    "src": "627:17:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_type$_t_contract$_ICoveredMetavault_$67878_$",
+                      "typeString": "type(contract ICoveredMetavault)"
+                    }
+                  },
+                  "id": 60410,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "typeConversion",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "627:49:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                    "typeString": "contract ICoveredMetavault"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "601:75:76"
+              },
+              {
+                "assignments": [
+                  60414
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 60414,
+                    "mutability": "mutable",
+                    "name": "asset",
+                    "nameLocation": "729:5:76",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 60559,
+                    "src": "720:14:76",
+                    "stateVariable": false,
+                    "storageLocation": "default",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC4626_$47535",
+                      "typeString": "contract IERC4626"
+                    },
+                    "typeName": {
+                      "id": 60413,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 60412,
+                        "name": "IERC4626",
+                        "nameLocations": [
+                          "720:8:76"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 47535,
+                        "src": "720:8:76"
+                      },
+                      "referencedDeclaration": 47535,
+                      "src": "720:8:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC4626_$47535",
+                        "typeString": "contract IERC4626"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 60420,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "arguments": [],
+                      "expression": {
+                        "argumentTypes": [],
+                        "expression": {
+                          "id": 60416,
+                          "name": "vault",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 60404,
+                          "src": "746:5:76",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                            "typeString": "contract ICoveredMetavault"
+                          }
+                        },
+                        "id": 60417,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "752:5:76",
+                        "memberName": "asset",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 47404,
+                        "src": "746:11:76",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_view$__$returns$_t_address_$",
+                          "typeString": "function () view external returns (address)"
+                        }
+                      },
+                      "id": 60418,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "746:13:76",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "id": 60415,
+                    "name": "IERC4626",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 47535,
+                    "src": "737:8:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_type$_t_contract$_IERC4626_$47535_$",
+                      "typeString": "type(contract IERC4626)"
+                    }
+                  },
+                  "id": 60419,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "typeConversion",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "737:23:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC4626_$47535",
+                    "typeString": "contract IERC4626"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "720:40:76"
+              },
+              {
+                "assignments": [
+                  60422
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 60422,
+                    "mutability": "mutable",
+                    "name": "assetSymbol",
+                    "nameLocation": "784:11:76",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 60559,
+                    "src": "770:25:76",
+                    "stateVariable": false,
+                    "storageLocation": "memory",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_memory_ptr",
+                      "typeString": "string"
+                    },
+                    "typeName": {
+                      "id": 60421,
+                      "name": "string",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "770:6:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage_ptr",
+                        "typeString": "string"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 60426,
+                "initialValue": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 60423,
+                      "name": "asset",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60414,
+                      "src": "798:5:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC4626_$47535",
+                        "typeString": "contract IERC4626"
+                      }
+                    },
+                    "id": 60424,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "804:6:76",
+                    "memberName": "symbol",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 49696,
+                    "src": "798:12:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_view$__$returns$_t_string_memory_ptr_$",
+                      "typeString": "function () view external returns (string memory)"
+                    }
+                  },
+                  "id": 60425,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "798:14:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string memory"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "770:42:76"
+              },
+              {
+                "assignments": [
+                  60428
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 60428,
+                    "mutability": "mutable",
+                    "name": "depositAmountInAsset",
+                    "nameLocation": "831:20:76",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 60559,
+                    "src": "823:28:76",
+                    "stateVariable": false,
+                    "storageLocation": "default",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "typeName": {
+                      "id": 60427,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "823:7:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 60433,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "id": 60431,
+                      "name": "DEPOSIT_AMOUNT_IN_UNDERLYING",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60382,
+                      "src": "876:28:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60429,
+                      "name": "asset",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60414,
+                      "src": "854:5:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC4626_$47535",
+                        "typeString": "contract IERC4626"
+                      }
+                    },
+                    "id": 60430,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "860:15:76",
+                    "memberName": "convertToShares",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 47418,
+                    "src": "854:21:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_view$_t_uint256_$returns$_t_uint256_$",
+                      "typeString": "function (uint256) view external returns (uint256)"
+                    }
+                  },
+                  "id": 60432,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "854:51:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "823:82:76"
+              },
+              {
+                "assignments": [
+                  60435
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 60435,
+                    "mutability": "mutable",
+                    "name": "userAssetBalance",
+                    "nameLocation": "965:16:76",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 60559,
+                    "src": "957:24:76",
+                    "stateVariable": false,
+                    "storageLocation": "default",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "typeName": {
+                      "id": 60434,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "957:7:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 60441,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 60438,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 60385,
+                        "src": "1000:4:76",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                          "typeString": "struct BaseLocalScript.Signer storage ref"
+                        }
+                      },
+                      "id": 60439,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1005:4:76",
+                      "memberName": "addr",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 63721,
+                      "src": "1000:9:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60436,
+                      "name": "asset",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60414,
+                      "src": "984:5:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC4626_$47535",
+                        "typeString": "contract IERC4626"
+                      }
+                    },
+                    "id": 60437,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "990:9:76",
+                    "memberName": "balanceOf",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 48940,
+                    "src": "984:15:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_uint256_$",
+                      "typeString": "function (address) view external returns (uint256)"
+                    }
+                  },
+                  "id": 60440,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "984:26:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "957:53:76"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "557365722063757272656e742061737365742062616c616e63653a",
+                      "id": 60445,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1032:29:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_3d742343f43b220f89a5433d15a185bf28829cc55a2f9c974af5e4e709b31300",
+                        "typeString": "literal_string \"User current asset balance:\""
+                      },
+                      "value": "User current asset balance:"
+                    },
+                    {
+                      "id": 60446,
+                      "name": "userAssetBalance",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60435,
+                      "src": "1063:16:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "id": 60447,
+                      "name": "assetSymbol",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60422,
+                      "src": "1081:11:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_3d742343f43b220f89a5433d15a185bf28829cc55a2f9c974af5e4e709b31300",
+                        "typeString": "literal_string \"User current asset balance:\""
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60442,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 31266,
+                      "src": "1020:7:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 60444,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1028:3:76",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 24457,
+                    "src": "1020:11:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory,uint256,string memory) pure"
+                    }
+                  },
+                  "id": 60448,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1020:73:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60449,
+                "nodeType": "ExpressionStatement",
+                "src": "1020:73:76"
+              },
+              {
+                "condition": {
+                  "commonType": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "id": 60452,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftExpression": {
+                    "id": 60450,
+                    "name": "userAssetBalance",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 60435,
+                    "src": "1107:16:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "BinaryOperation",
+                  "operator": "<",
+                  "rightExpression": {
+                    "id": 60451,
+                    "name": "depositAmountInAsset",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 60428,
+                    "src": "1126:20:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "src": "1107:39:76",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "id": 60477,
+                "nodeType": "IfStatement",
+                "src": "1103:321:76",
+                "trueBody": {
+                  "id": 60476,
+                  "nodeType": "Block",
+                  "src": "1148:276:76",
+                  "statements": [
+                    {
+                      "expression": {
+                        "arguments": [
+                          {
+                            "hexValue": "4552524f523a205573657220646f65736e2774206861766520656e6f7567682061737365747320666f72206465706f73697420726571756573742e",
+                            "id": 60456,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "string",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1174:61:76",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_stringliteral_e68eed5cceba51cb7edd628e0e2ea0be3966bff6e89598a3a34a679c661ad652",
+                              "typeString": "literal_string \"ERROR: User doesn't have enough assets for deposit request.\""
+                            },
+                            "value": "ERROR: User doesn't have enough assets for deposit request."
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_stringliteral_e68eed5cceba51cb7edd628e0e2ea0be3966bff6e89598a3a34a679c661ad652",
+                              "typeString": "literal_string \"ERROR: User doesn't have enough assets for deposit request.\""
+                            }
+                          ],
+                          "expression": {
+                            "id": 60453,
+                            "name": "console",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 31266,
+                            "src": "1162:7:76",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                              "typeString": "type(library console)"
+                            }
+                          },
+                          "id": 60455,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1170:3:76",
+                          "memberName": "log",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 23780,
+                          "src": "1162:11:76",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$__$",
+                            "typeString": "function (string memory) pure"
+                          }
+                        },
+                        "id": 60457,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1162:74:76",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_tuple$__$",
+                          "typeString": "tuple()"
+                        }
+                      },
+                      "id": 60458,
+                      "nodeType": "ExpressionStatement",
+                      "src": "1162:74:76"
+                    },
+                    {
+                      "expression": {
+                        "arguments": [
+                          {
+                            "hexValue": "5265717569726564206173736574733a",
+                            "id": 60462,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "string",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1262:18:76",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_stringliteral_71cf6a12102faf711a41e891750527488df7501fb9c338d18fd991b99c26443e",
+                              "typeString": "literal_string \"Required assets:\""
+                            },
+                            "value": "Required assets:"
+                          },
+                          {
+                            "id": 60463,
+                            "name": "depositAmountInAsset",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60428,
+                            "src": "1282:20:76",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          {
+                            "id": 60464,
+                            "name": "assetSymbol",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60422,
+                            "src": "1304:11:76",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_stringliteral_71cf6a12102faf711a41e891750527488df7501fb9c338d18fd991b99c26443e",
+                              "typeString": "literal_string \"Required assets:\""
+                            },
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            },
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          ],
+                          "expression": {
+                            "id": 60459,
+                            "name": "console",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 31266,
+                            "src": "1250:7:76",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                              "typeString": "type(library console)"
+                            }
+                          },
+                          "id": 60461,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1258:3:76",
+                          "memberName": "log",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 24457,
+                          "src": "1250:11:76",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                            "typeString": "function (string memory,uint256,string memory) pure"
+                          }
+                        },
+                        "id": 60465,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1250:66:76",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_tuple$__$",
+                          "typeString": "tuple()"
+                        }
+                      },
+                      "id": 60466,
+                      "nodeType": "ExpressionStatement",
+                      "src": "1250:66:76"
+                    },
+                    {
+                      "expression": {
+                        "arguments": [
+                          {
+                            "hexValue": "417661696c61626c65206173736574733a",
+                            "id": 60470,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "string",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1342:19:76",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_stringliteral_8b6def600499113fb9f07d78eb87568256186391288ea43c5cd756727e4786f2",
+                              "typeString": "literal_string \"Available assets:\""
+                            },
+                            "value": "Available assets:"
+                          },
+                          {
+                            "id": 60471,
+                            "name": "userAssetBalance",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60435,
+                            "src": "1363:16:76",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          {
+                            "id": 60472,
+                            "name": "assetSymbol",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60422,
+                            "src": "1381:11:76",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_stringliteral_8b6def600499113fb9f07d78eb87568256186391288ea43c5cd756727e4786f2",
+                              "typeString": "literal_string \"Available assets:\""
+                            },
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            },
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          ],
+                          "expression": {
+                            "id": 60467,
+                            "name": "console",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 31266,
+                            "src": "1330:7:76",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                              "typeString": "type(library console)"
+                            }
+                          },
+                          "id": 60469,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1338:3:76",
+                          "memberName": "log",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 24457,
+                          "src": "1330:11:76",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                            "typeString": "function (string memory,uint256,string memory) pure"
+                          }
+                        },
+                        "id": 60473,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1330:63:76",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_tuple$__$",
+                          "typeString": "tuple()"
+                        }
+                      },
+                      "id": 60474,
+                      "nodeType": "ExpressionStatement",
+                      "src": "1330:63:76"
+                    },
+                    {
+                      "functionReturnParameters": 60401,
+                      "id": 60475,
+                      "nodeType": "Return",
+                      "src": "1407:7:76"
+                    }
+                  ]
+                }
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 60481,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 60385,
+                        "src": "1452:4:76",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                          "typeString": "struct BaseLocalScript.Signer storage ref"
+                        }
+                      },
+                      "id": 60482,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1457:10:76",
+                      "memberName": "privateKey",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 63723,
+                      "src": "1452:15:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60478,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 43,
+                      "src": "1434:2:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$23150",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 60480,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1437:14:76",
+                    "memberName": "startBroadcast",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 20071,
+                    "src": "1434:17:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$__$",
+                      "typeString": "function (uint256) external"
+                    }
+                  },
+                  "id": 60483,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1434:34:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60484,
+                "nodeType": "ExpressionStatement",
+                "src": "1434:34:76"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "arguments": [
+                        {
+                          "id": 60490,
+                          "name": "vault",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 60404,
+                          "src": "1500:5:76",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                            "typeString": "contract ICoveredMetavault"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                            "typeString": "contract ICoveredMetavault"
+                          }
+                        ],
+                        "id": 60489,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "1492:7:76",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_$",
+                          "typeString": "type(address)"
+                        },
+                        "typeName": {
+                          "id": 60488,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "1492:7:76",
+                          "typeDescriptions": {}
+                        }
+                      },
+                      "id": 60491,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1492:14:76",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "id": 60492,
+                      "name": "depositAmountInAsset",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60428,
+                      "src": "1508:20:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60485,
+                      "name": "asset",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60414,
+                      "src": "1478:5:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC4626_$47535",
+                        "typeString": "contract IERC4626"
+                      }
+                    },
+                    "id": 60487,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1484:7:76",
+                    "memberName": "approve",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 48970,
+                    "src": "1478:13:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$returns$_t_bool_$",
+                      "typeString": "function (address,uint256) external returns (bool)"
+                    }
+                  },
+                  "id": 60493,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1478:51:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "id": 60494,
+                "nodeType": "ExpressionStatement",
+                "src": "1478:51:76"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "id": 60498,
+                      "name": "depositAmountInAsset",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60428,
+                      "src": "1560:20:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 60499,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 60385,
+                        "src": "1582:4:76",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                          "typeString": "struct BaseLocalScript.Signer storage ref"
+                        }
+                      },
+                      "id": 60500,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1587:4:76",
+                      "memberName": "addr",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 63721,
+                      "src": "1582:9:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 60501,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 60385,
+                        "src": "1593:4:76",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                          "typeString": "struct BaseLocalScript.Signer storage ref"
+                        }
+                      },
+                      "id": 60502,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1598:4:76",
+                      "memberName": "addr",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 63721,
+                      "src": "1593:9:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60495,
+                      "name": "vault",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60404,
+                      "src": "1539:5:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                        "typeString": "contract ICoveredMetavault"
+                      }
+                    },
+                    "id": 60497,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1545:14:76",
+                    "memberName": "requestDeposit",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 67937,
+                    "src": "1539:20:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_$_t_address_$returns$_t_uint256_$",
+                      "typeString": "function (uint256,address,address) external returns (uint256)"
+                    }
+                  },
+                  "id": 60503,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1539:64:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "id": 60504,
+                "nodeType": "ExpressionStatement",
+                "src": "1539:64:76"
+              },
+              {
+                "expression": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 60505,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 43,
+                      "src": "1613:2:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$23150",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 60507,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1616:13:76",
+                    "memberName": "stopBroadcast",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 20075,
+                    "src": "1613:16:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
+                      "typeString": "function () external"
+                    }
+                  },
+                  "id": 60508,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1613:18:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60509,
+                "nodeType": "ExpressionStatement",
+                "src": "1613:18:76"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "3d3d3d204445504f53495420524551554553542043524541544544203d3d3d",
+                      "id": 60513,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1715:33:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_306c16b40aef0b081496735269aad9f4f73b7eec694e01c964e72f1d38d9a629",
+                        "typeString": "literal_string \"=== DEPOSIT REQUEST CREATED ===\""
+                      },
+                      "value": "=== DEPOSIT REQUEST CREATED ==="
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_306c16b40aef0b081496735269aad9f4f73b7eec694e01c964e72f1d38d9a629",
+                        "typeString": "literal_string \"=== DEPOSIT REQUEST CREATED ===\""
+                      }
+                    ],
+                    "expression": {
+                      "id": 60510,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 31266,
+                      "src": "1703:7:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 60512,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1711:3:76",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 23780,
+                    "src": "1703:11:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory) pure"
+                    }
+                  },
+                  "id": 60514,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1703:46:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60515,
+                "nodeType": "ExpressionStatement",
+                "src": "1703:46:76"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "4173736574732072657175657374656420666f72206465706f7369743a",
+                      "id": 60519,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1771:31:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_5893f7e964029b0cd543893eaacff337fdf019b9be774477e208a21aad62fbbe",
+                        "typeString": "literal_string \"Assets requested for deposit:\""
+                      },
+                      "value": "Assets requested for deposit:"
+                    },
+                    {
+                      "id": 60520,
+                      "name": "depositAmountInAsset",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60428,
+                      "src": "1804:20:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "id": 60521,
+                      "name": "assetSymbol",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60422,
+                      "src": "1826:11:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_5893f7e964029b0cd543893eaacff337fdf019b9be774477e208a21aad62fbbe",
+                        "typeString": "literal_string \"Assets requested for deposit:\""
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60516,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 31266,
+                      "src": "1759:7:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 60518,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1767:3:76",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 24457,
+                    "src": "1759:11:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory,uint256,string memory) pure"
+                    }
+                  },
+                  "id": 60522,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1759:79:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60523,
+                "nodeType": "ExpressionStatement",
+                "src": "1759:79:76"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "557365722072656d61696e696e672061737365742062616c616e63653a",
+                      "id": 60527,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1860:31:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_78c6cb6ca8c44e6fb0e3e9faeded34f710b9666b7e14b258ba7cc6e293366b7f",
+                        "typeString": "literal_string \"User remaining asset balance:\""
+                      },
+                      "value": "User remaining asset balance:"
+                    },
+                    {
+                      "arguments": [
+                        {
+                          "expression": {
+                            "id": 60530,
+                            "name": "user",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60385,
+                            "src": "1909:4:76",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                              "typeString": "struct BaseLocalScript.Signer storage ref"
+                            }
+                          },
+                          "id": 60531,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1914:4:76",
+                          "memberName": "addr",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 63721,
+                          "src": "1909:9:76",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "expression": {
+                          "id": 60528,
+                          "name": "asset",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 60414,
+                          "src": "1893:5:76",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_IERC4626_$47535",
+                            "typeString": "contract IERC4626"
+                          }
+                        },
+                        "id": 60529,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1899:9:76",
+                        "memberName": "balanceOf",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 48940,
+                        "src": "1893:15:76",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_uint256_$",
+                          "typeString": "function (address) view external returns (uint256)"
+                        }
+                      },
+                      "id": 60532,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1893:26:76",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "id": 60533,
+                      "name": "assetSymbol",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60422,
+                      "src": "1921:11:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_78c6cb6ca8c44e6fb0e3e9faeded34f710b9666b7e14b258ba7cc6e293366b7f",
+                        "typeString": "literal_string \"User remaining asset balance:\""
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60524,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 31266,
+                      "src": "1848:7:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 60526,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1856:3:76",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 24457,
+                    "src": "1848:11:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory,uint256,string memory) pure"
+                    }
+                  },
+                  "id": 60534,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1848:85:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60535,
+                "nodeType": "ExpressionStatement",
+                "src": "1848:85:76"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "557365722070656e64696e67206465706f73697420726571756573743a",
+                      "id": 60539,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1955:31:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_87da25474907d3622379a9c5bd75de7b6a785cbd7452d182edaa320df0859cec",
+                        "typeString": "literal_string \"User pending deposit request:\""
+                      },
+                      "value": "User pending deposit request:"
+                    },
+                    {
+                      "arguments": [
+                        {
+                          "hexValue": "30",
+                          "id": 60542,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "2016:1:76",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0"
+                        },
+                        {
+                          "expression": {
+                            "id": 60543,
+                            "name": "user",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60385,
+                            "src": "2019:4:76",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                              "typeString": "struct BaseLocalScript.Signer storage ref"
+                            }
+                          },
+                          "id": 60544,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "2024:4:76",
+                          "memberName": "addr",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 63721,
+                          "src": "2019:9:76",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "expression": {
+                          "id": 60540,
+                          "name": "vault",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 60404,
+                          "src": "1988:5:76",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                            "typeString": "contract ICoveredMetavault"
+                          }
+                        },
+                        "id": 60541,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1994:21:76",
+                        "memberName": "pendingDepositRequest",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 67947,
+                        "src": "1988:27:76",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_view$_t_uint256_$_t_address_$returns$_t_uint256_$",
+                          "typeString": "function (uint256,address) view external returns (uint256)"
+                        }
+                      },
+                      "id": 60545,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1988:41:76",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "id": 60546,
+                      "name": "assetSymbol",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60422,
+                      "src": "2031:11:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_87da25474907d3622379a9c5bd75de7b6a785cbd7452d182edaa320df0859cec",
+                        "typeString": "literal_string \"User pending deposit request:\""
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60536,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 31266,
+                      "src": "1943:7:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 60538,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1951:3:76",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 24457,
+                    "src": "1943:11:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory,uint256,string memory) pure"
+                    }
+                  },
+                  "id": 60547,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1943:100:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60548,
+                "nodeType": "ExpressionStatement",
+                "src": "1943:100:76"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "5661756c7420746f74616c2070656e64696e67206465706f736974733a",
+                      "id": 60552,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "2065:31:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_fbdc8a80a67618e51b2cfeab650f49e312435c7680c1695f60198a197c8c26b6",
+                        "typeString": "literal_string \"Vault total pending deposits:\""
+                      },
+                      "value": "Vault total pending deposits:"
+                    },
+                    {
+                      "arguments": [],
+                      "expression": {
+                        "argumentTypes": [],
+                        "expression": {
+                          "id": 60553,
+                          "name": "vault",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 60404,
+                          "src": "2098:5:76",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                            "typeString": "contract ICoveredMetavault"
+                          }
+                        },
+                        "id": 60554,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "2104:18:76",
+                        "memberName": "totalPendingAssets",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 67631,
+                        "src": "2098:24:76",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_view$__$returns$_t_uint256_$",
+                          "typeString": "function () view external returns (uint256)"
+                        }
+                      },
+                      "id": 60555,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2098:26:76",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "id": 60556,
+                      "name": "assetSymbol",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60422,
+                      "src": "2126:11:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_fbdc8a80a67618e51b2cfeab650f49e312435c7680c1695f60198a197c8c26b6",
+                        "typeString": "literal_string \"Vault total pending deposits:\""
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60549,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 31266,
+                      "src": "2053:7:76",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 60551,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "2061:3:76",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 24457,
+                    "src": "2053:11:76",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory,uint256,string memory) pure"
+                    }
+                  },
+                  "id": 60557,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "2053:85:76",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60558,
+                "nodeType": "ExpressionStatement",
+                "src": "2053:85:76"
+              }
+            ]
+          },
+          "functionSelector": "c0406226",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "run",
+          "nameLocation": "578:3:76",
+          "parameters": {
+            "id": 60400,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "581:2:76"
+          },
+          "returnParameters": {
+            "id": 60401,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "591:0:76"
+          },
+          "scope": 60561,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "public"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [
+        {
+          "baseName": {
+            "id": 60378,
+            "name": "BaseLocalScript",
+            "nameLocations": [
+              "364:15:76"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 63805,
+            "src": "364:15:76"
+          },
+          "id": 60379,
+          "nodeType": "InheritanceSpecifier",
+          "src": "364:15:76"
+        }
+      ],
+      "canonicalName": "CreateDepositRequestScript",
+      "contractDependencies": [],
+      "contractKind": "contract",
+      "fullyImplemented": true,
+      "internalFunctionIDs": {
+        "23166": 1
+      },
+      "linearizedBaseContracts": [
+        60561,
+        63805,
+        2109,
+        17873,
+        8043,
+        5949,
+        59,
+        47
+      ],
+      "name": "CreateDepositRequestScript",
+      "nameLocation": "334:26:76",
+      "scope": 60562,
+      "usedErrors": [],
+      "usedEvents": []
+    }
+  ],
+  "license": "UNLICENSED"
+}

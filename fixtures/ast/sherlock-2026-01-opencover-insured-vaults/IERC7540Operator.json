@@ -1,0 +1,2226 @@
+{
+  "absolutePath": "src/interfaces/IERC7540.sol",
+  "id": 68062,
+  "exportedSymbols": {
+    "IERC7540": [
+      68061
+    ],
+    "IERC7540Deposit": [
+      67982
+    ],
+    "IERC7540Operator": [
+      67911
+    ],
+    "IERC7540Redeem": [
+      68053
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "74:6564:89",
+  "nodes": [
+    {
+      "id": 67880,
+      "nodeType": "PragmaDirective",
+      "src": "74:23:89",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "0.8",
+        ".30"
+      ]
+    },
+    {
+      "id": 67911,
+      "nodeType": "ContractDefinition",
+      "src": "262:992:89",
+      "nodes": [
+        {
+          "id": 67890,
+          "nodeType": "EventDefinition",
+          "src": "542:87:89",
+          "nodes": [],
+          "anonymous": false,
+          "documentation": {
+            "id": 67882,
+            "nodeType": "StructuredDocumentation",
+            "src": "295:242:89",
+            "text": "@notice Emitted when a controller authorises or revokes an operator.\n @param controller Controller granting or revoking rights.\n @param operator Operator address.\n @param approved True if authorised, false if revoked."
+          },
+          "eventSelector": "ceb576d9f15e4e200fdb5096d64d5dfd667e16def20c1eefd14256d8e3faa267",
+          "name": "OperatorSet",
+          "nameLocation": "548:11:89",
+          "parameters": {
+            "id": 67889,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67884,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "576:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67890,
+                "src": "560:26:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67883,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "560:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67886,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "operator",
+                "nameLocation": "604:8:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67890,
+                "src": "588:24:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67885,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "588:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67888,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "approved",
+                "nameLocation": "619:8:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67890,
+                "src": "614:13:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 67887,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "614:4:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "559:69:89"
+          }
+        },
+        {
+          "id": 67900,
+          "nodeType": "FunctionDefinition",
+          "src": "860:86:89",
+          "nodes": [],
+          "documentation": {
+            "id": 67891,
+            "nodeType": "StructuredDocumentation",
+            "src": "635:220:89",
+            "text": "@notice Authorises or revokes an operator for the caller.\n @param operator Operator address.\n @param approved True to authorise, false to revoke.\n @return success True if the operation succeeded."
+          },
+          "functionSelector": "558a7297",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "setOperator",
+          "nameLocation": "869:11:89",
+          "parameters": {
+            "id": 67896,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67893,
+                "mutability": "mutable",
+                "name": "operator",
+                "nameLocation": "889:8:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67900,
+                "src": "881:16:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67892,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "881:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67895,
+                "mutability": "mutable",
+                "name": "approved",
+                "nameLocation": "904:8:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67900,
+                "src": "899:13:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 67894,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "899:4:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "880:33:89"
+          },
+          "returnParameters": {
+            "id": 67899,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67898,
+                "mutability": "mutable",
+                "name": "success",
+                "nameLocation": "937:7:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67900,
+                "src": "932:12:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 67897,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "932:4:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "931:14:89"
+          },
+          "scope": 67911,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 67910,
+          "nodeType": "FunctionDefinition",
+          "src": "1158:94:89",
+          "nodes": [],
+          "documentation": {
+            "id": 67901,
+            "nodeType": "StructuredDocumentation",
+            "src": "952:201:89",
+            "text": "@notice Return whether an operator is authorised for a controller.\n @param controller Controller address.\n @param operator Operator address.\n @return status True if authorised."
+          },
+          "functionSelector": "b6363cf2",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "isOperator",
+          "nameLocation": "1167:10:89",
+          "parameters": {
+            "id": 67906,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67903,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "1186:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67910,
+                "src": "1178:18:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67902,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1178:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67905,
+                "mutability": "mutable",
+                "name": "operator",
+                "nameLocation": "1206:8:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67910,
+                "src": "1198:16:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67904,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1198:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1177:38:89"
+          },
+          "returnParameters": {
+            "id": 67909,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67908,
+                "mutability": "mutable",
+                "name": "status",
+                "nameLocation": "1244:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67910,
+                "src": "1239:11:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 67907,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1239:4:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1238:13:89"
+          },
+          "scope": 67911,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [],
+      "canonicalName": "IERC7540Operator",
+      "contractDependencies": [],
+      "contractKind": "interface",
+      "documentation": {
+        "id": 67881,
+        "nodeType": "StructuredDocumentation",
+        "src": "99:163:89",
+        "text": "@title IERC7540Operator\n @notice Operator delegation for ERC-7540 vaults.\n @dev Operators authorised by a controller may act on the controller's behalf."
+      },
+      "fullyImplemented": false,
+      "linearizedBaseContracts": [
+        67911
+      ],
+      "name": "IERC7540Operator",
+      "nameLocation": "272:16:89",
+      "scope": 68062,
+      "usedErrors": [],
+      "usedEvents": [
+        67890
+      ]
+    },
+    {
+      "id": 67982,
+      "nodeType": "ContractDefinition",
+      "src": "1431:2186:89",
+      "nodes": [
+        {
+          "id": 67925,
+          "nodeType": "EventDefinition",
+          "src": "1728:145:89",
+          "nodes": [],
+          "anonymous": false,
+          "documentation": {
+            "id": 67913,
+            "nodeType": "StructuredDocumentation",
+            "src": "1463:260:89",
+            "text": "@notice Emitted on deposit request.\n @param controller Controller authorised for the request.\n @param owner Asset owner.\n @param requestId Request identifier.\n @param sender Request submitter.\n @param assets Asset amount."
+          },
+          "eventSelector": "bb58420bb8ce44e11b84e214cc0de10ce5e7c24d0355b2815c3d758b514cae72",
+          "name": "DepositRequest",
+          "nameLocation": "1734:14:89",
+          "parameters": {
+            "id": 67924,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67915,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "1774:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67925,
+                "src": "1758:26:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67914,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1758:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67917,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "owner",
+                "nameLocation": "1802:5:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67925,
+                "src": "1786:21:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67916,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1786:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67919,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "requestId",
+                "nameLocation": "1825:9:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67925,
+                "src": "1809:25:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67918,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1809:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67921,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "sender",
+                "nameLocation": "1844:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67925,
+                "src": "1836:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67920,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1836:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67923,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "assets",
+                "nameLocation": "1860:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67925,
+                "src": "1852:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67922,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1852:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1748:124:89"
+          }
+        },
+        {
+          "id": 67937,
+          "nodeType": "FunctionDefinition",
+          "src": "2100:112:89",
+          "nodes": [],
+          "documentation": {
+            "id": 67926,
+            "nodeType": "StructuredDocumentation",
+            "src": "1879:216:89",
+            "text": "@notice Submit a deposit request.\n @param assets Asset amount.\n @param controller Controller for the resulting shares.\n @param owner Asset owner.\n @return requestId Request identifier."
+          },
+          "functionSelector": "85b77f45",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "requestDeposit",
+          "nameLocation": "2109:14:89",
+          "parameters": {
+            "id": 67933,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67928,
+                "mutability": "mutable",
+                "name": "assets",
+                "nameLocation": "2132:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67937,
+                "src": "2124:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67927,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2124:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67930,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "2148:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67937,
+                "src": "2140:18:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67929,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2140:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67932,
+                "mutability": "mutable",
+                "name": "owner",
+                "nameLocation": "2168:5:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67937,
+                "src": "2160:13:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67931,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2160:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2123:51:89"
+          },
+          "returnParameters": {
+            "id": 67936,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67935,
+                "mutability": "mutable",
+                "name": "requestId",
+                "nameLocation": "2201:9:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67937,
+                "src": "2193:17:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67934,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2193:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2192:19:89"
+          },
+          "scope": 67982,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 67947,
+          "nodeType": "FunctionDefinition",
+          "src": "2415:116:89",
+          "nodes": [],
+          "documentation": {
+            "id": 67938,
+            "nodeType": "StructuredDocumentation",
+            "src": "2218:192:89",
+            "text": "@notice Pending assets for a deposit request.\n @param requestId Request identifier.\n @param controller Controller address.\n @return pendingAssets Pending asset amount."
+          },
+          "functionSelector": "26c6f96c",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "pendingDepositRequest",
+          "nameLocation": "2424:21:89",
+          "parameters": {
+            "id": 67943,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67940,
+                "mutability": "mutable",
+                "name": "requestId",
+                "nameLocation": "2454:9:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67947,
+                "src": "2446:17:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67939,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2446:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67942,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "2473:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67947,
+                "src": "2465:18:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67941,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2465:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2445:39:89"
+          },
+          "returnParameters": {
+            "id": 67946,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67945,
+                "mutability": "mutable",
+                "name": "pendingAssets",
+                "nameLocation": "2516:13:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67947,
+                "src": "2508:21:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67944,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2508:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2507:23:89"
+          },
+          "scope": 67982,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 67957,
+          "nodeType": "FunctionDefinition",
+          "src": "2748:144:89",
+          "nodes": [],
+          "documentation": {
+            "id": 67948,
+            "nodeType": "StructuredDocumentation",
+            "src": "2537:206:89",
+            "text": "@notice Claimable assets for a settled deposit request.\n @param requestId Request identifier.\n @param controller Controller address.\n @return claimableAssets Claimable asset amount."
+          },
+          "functionSelector": "995ea21a",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "claimableDepositRequest",
+          "nameLocation": "2757:23:89",
+          "parameters": {
+            "id": 67953,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67950,
+                "mutability": "mutable",
+                "name": "requestId",
+                "nameLocation": "2789:9:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67957,
+                "src": "2781:17:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67949,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2781:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67952,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "2808:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67957,
+                "src": "2800:18:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67951,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2800:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2780:39:89"
+          },
+          "returnParameters": {
+            "id": 67956,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67955,
+                "mutability": "mutable",
+                "name": "claimableAssets",
+                "nameLocation": "2875:15:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67957,
+                "src": "2867:23:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67954,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2867:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2866:25:89"
+          },
+          "scope": 67982,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 67969,
+          "nodeType": "FunctionDefinition",
+          "src": "3140:105:89",
+          "nodes": [],
+          "documentation": {
+            "id": 67958,
+            "nodeType": "StructuredDocumentation",
+            "src": "2898:237:89",
+            "text": "@notice Claim shares from settled deposit requests.\n @param assets Asset amount to claim.\n @param receiver Share recipient.\n @param controller Controller authorised to claim.\n @return shares Shares minted."
+          },
+          "functionSelector": "2e2d2984",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "deposit",
+          "nameLocation": "3149:7:89",
+          "parameters": {
+            "id": 67965,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67960,
+                "mutability": "mutable",
+                "name": "assets",
+                "nameLocation": "3165:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67969,
+                "src": "3157:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67959,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3157:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67962,
+                "mutability": "mutable",
+                "name": "receiver",
+                "nameLocation": "3181:8:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67969,
+                "src": "3173:16:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67961,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3173:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67964,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "3199:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67969,
+                "src": "3191:18:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67963,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3191:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "3156:54:89"
+          },
+          "returnParameters": {
+            "id": 67968,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67967,
+                "mutability": "mutable",
+                "name": "shares",
+                "nameLocation": "3237:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67969,
+                "src": "3229:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67966,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3229:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "3228:16:89"
+          },
+          "scope": 67982,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 67981,
+          "nodeType": "FunctionDefinition",
+          "src": "3513:102:89",
+          "nodes": [],
+          "documentation": {
+            "id": 67970,
+            "nodeType": "StructuredDocumentation",
+            "src": "3251:257:89",
+            "text": "@notice Claim an exact amount of shares from settled deposit requests.\n @param shares Share amount to mint.\n @param receiver Share recipient.\n @param controller Controller authorised to claim.\n @return assets Assets consumed."
+          },
+          "functionSelector": "da39b3e7",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "mint",
+          "nameLocation": "3522:4:89",
+          "parameters": {
+            "id": 67977,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67972,
+                "mutability": "mutable",
+                "name": "shares",
+                "nameLocation": "3535:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67981,
+                "src": "3527:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67971,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3527:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67974,
+                "mutability": "mutable",
+                "name": "receiver",
+                "nameLocation": "3551:8:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67981,
+                "src": "3543:16:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67973,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3543:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67976,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "3569:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67981,
+                "src": "3561:18:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67975,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3561:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "3526:54:89"
+          },
+          "returnParameters": {
+            "id": 67980,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67979,
+                "mutability": "mutable",
+                "name": "assets",
+                "nameLocation": "3607:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67981,
+                "src": "3599:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67978,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3599:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "3598:16:89"
+          },
+          "scope": 67982,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [],
+      "canonicalName": "IERC7540Deposit",
+      "contractDependencies": [],
+      "contractKind": "interface",
+      "documentation": {
+        "id": 67912,
+        "nodeType": "StructuredDocumentation",
+        "src": "1256:175:89",
+        "text": "@title IERC7540Deposit\n @notice Asynchronous deposit requests and claims.\n @dev Lifecycle: request deposit -> settle -> claim via controller-aware `deposit`/`mint`."
+      },
+      "fullyImplemented": false,
+      "linearizedBaseContracts": [
+        67982
+      ],
+      "name": "IERC7540Deposit",
+      "nameLocation": "1441:15:89",
+      "scope": 68062,
+      "usedErrors": [],
+      "usedEvents": [
+        67925
+      ]
+    },
+    {
+      "id": 68053,
+      "nodeType": "ContractDefinition",
+      "src": "3772:2591:89",
+      "nodes": [
+        {
+          "id": 67996,
+          "nodeType": "EventDefinition",
+          "src": "4071:144:89",
+          "nodes": [],
+          "anonymous": false,
+          "documentation": {
+            "id": 67984,
+            "nodeType": "StructuredDocumentation",
+            "src": "3803:263:89",
+            "text": "@notice Emitted on redemption request.\n @param controller Controller authorised for the request.\n @param owner Share owner.\n @param requestId Request identifier.\n @param sender Request submitter.\n @param shares Share amount."
+          },
+          "eventSelector": "1fdc681a13d8c5da54e301c7ce6542dcde4581e4725043fdab2db12ddc574506",
+          "name": "RedeemRequest",
+          "nameLocation": "4077:13:89",
+          "parameters": {
+            "id": 67995,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67986,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "4116:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67996,
+                "src": "4100:26:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67985,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4100:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67988,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "owner",
+                "nameLocation": "4144:5:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67996,
+                "src": "4128:21:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67987,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4128:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67990,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "requestId",
+                "nameLocation": "4167:9:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67996,
+                "src": "4151:25:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67989,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4151:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67992,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "sender",
+                "nameLocation": "4186:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67996,
+                "src": "4178:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 67991,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4178:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 67994,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "shares",
+                "nameLocation": "4202:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 67996,
+                "src": "4194:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67993,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4194:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4090:124:89"
+          }
+        },
+        {
+          "id": 68008,
+          "nodeType": "FunctionDefinition",
+          "src": "4445:111:89",
+          "nodes": [],
+          "documentation": {
+            "id": 67997,
+            "nodeType": "StructuredDocumentation",
+            "src": "4221:219:89",
+            "text": "@notice Submit a redemption request.\n @param shares Share amount.\n @param controller Controller for the resulting assets.\n @param owner Share owner.\n @return requestId Request identifier."
+          },
+          "functionSelector": "7d41c86e",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "requestRedeem",
+          "nameLocation": "4454:13:89",
+          "parameters": {
+            "id": 68004,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 67999,
+                "mutability": "mutable",
+                "name": "shares",
+                "nameLocation": "4476:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68008,
+                "src": "4468:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 67998,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4468:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68001,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "4492:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68008,
+                "src": "4484:18:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68000,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4484:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68003,
+                "mutability": "mutable",
+                "name": "owner",
+                "nameLocation": "4512:5:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68008,
+                "src": "4504:13:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68002,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4504:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4467:51:89"
+          },
+          "returnParameters": {
+            "id": 68007,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68006,
+                "mutability": "mutable",
+                "name": "requestId",
+                "nameLocation": "4545:9:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68008,
+                "src": "4537:17:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68005,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4537:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4536:19:89"
+          },
+          "scope": 68053,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 68018,
+          "nodeType": "FunctionDefinition",
+          "src": "4762:115:89",
+          "nodes": [],
+          "documentation": {
+            "id": 68009,
+            "nodeType": "StructuredDocumentation",
+            "src": "4562:195:89",
+            "text": "@notice Pending shares for a redemption request.\n @param requestId Request identifier.\n @param controller Controller address.\n @return pendingShares Pending share amount."
+          },
+          "functionSelector": "f5a23d8d",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "pendingRedeemRequest",
+          "nameLocation": "4771:20:89",
+          "parameters": {
+            "id": 68014,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68011,
+                "mutability": "mutable",
+                "name": "requestId",
+                "nameLocation": "4800:9:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68018,
+                "src": "4792:17:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68010,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4792:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68013,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "4819:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68018,
+                "src": "4811:18:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68012,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4811:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4791:39:89"
+          },
+          "returnParameters": {
+            "id": 68017,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68016,
+                "mutability": "mutable",
+                "name": "pendingShares",
+                "nameLocation": "4862:13:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68018,
+                "src": "4854:21:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68015,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4854:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4853:23:89"
+          },
+          "scope": 68053,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 68028,
+          "nodeType": "FunctionDefinition",
+          "src": "5480:143:89",
+          "nodes": [],
+          "documentation": {
+            "id": 68019,
+            "nodeType": "StructuredDocumentation",
+            "src": "4883:592:89",
+            "text": "@notice Claimable shares for a settled redemption request.\n @dev This function returns the original share amount from the request once settled.\n      It does NOT decrease after `redeem` or `withdraw` is called because claims are tracked at the controller\n      aggregate level, not per-request. To check actual remaining claimable shares across all requests,\n      use `claimableRedeemShares(controller)` instead.\n @param requestId Request identifier.\n @param controller Controller address.\n @return claimableShares Claimable share amount."
+          },
+          "functionSelector": "eaed1d07",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "claimableRedeemRequest",
+          "nameLocation": "5489:22:89",
+          "parameters": {
+            "id": 68024,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68021,
+                "mutability": "mutable",
+                "name": "requestId",
+                "nameLocation": "5520:9:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68028,
+                "src": "5512:17:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68020,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5512:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68023,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "5539:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68028,
+                "src": "5531:18:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68022,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5531:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "5511:39:89"
+          },
+          "returnParameters": {
+            "id": 68027,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68026,
+                "mutability": "mutable",
+                "name": "claimableShares",
+                "nameLocation": "5606:15:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68028,
+                "src": "5598:23:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68025,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5598:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "5597:25:89"
+          },
+          "scope": 68053,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 68040,
+          "nodeType": "FunctionDefinition",
+          "src": "5878:104:89",
+          "nodes": [],
+          "documentation": {
+            "id": 68029,
+            "nodeType": "StructuredDocumentation",
+            "src": "5629:244:89",
+            "text": "@notice Claim assets from settled redemption requests.\n @param shares Share amount to redeem.\n @param receiver Asset recipient.\n @param controller Controller authorised to claim.\n @return assets Assets withdrawn."
+          },
+          "functionSelector": "ba087652",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "redeem",
+          "nameLocation": "5887:6:89",
+          "parameters": {
+            "id": 68036,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68031,
+                "mutability": "mutable",
+                "name": "shares",
+                "nameLocation": "5902:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68040,
+                "src": "5894:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68030,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5894:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68033,
+                "mutability": "mutable",
+                "name": "receiver",
+                "nameLocation": "5918:8:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68040,
+                "src": "5910:16:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68032,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5910:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68035,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "5936:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68040,
+                "src": "5928:18:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68034,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5928:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "5893:54:89"
+          },
+          "returnParameters": {
+            "id": 68039,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68038,
+                "mutability": "mutable",
+                "name": "assets",
+                "nameLocation": "5974:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68040,
+                "src": "5966:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68037,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5966:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "5965:16:89"
+          },
+          "scope": 68053,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 68052,
+          "nodeType": "FunctionDefinition",
+          "src": "6255:106:89",
+          "nodes": [],
+          "documentation": {
+            "id": 68041,
+            "nodeType": "StructuredDocumentation",
+            "src": "5988:262:89",
+            "text": "@notice Claim an exact amount of assets from settled redemption requests.\n @param assets Asset amount to withdraw.\n @param receiver Asset recipient.\n @param controller Controller authorised to claim.\n @return shares Shares burned."
+          },
+          "functionSelector": "b460af94",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "withdraw",
+          "nameLocation": "6264:8:89",
+          "parameters": {
+            "id": 68048,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68043,
+                "mutability": "mutable",
+                "name": "assets",
+                "nameLocation": "6281:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68052,
+                "src": "6273:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68042,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6273:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68045,
+                "mutability": "mutable",
+                "name": "receiver",
+                "nameLocation": "6297:8:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68052,
+                "src": "6289:16:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68044,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6289:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68047,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "6315:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68052,
+                "src": "6307:18:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68046,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6307:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "6272:54:89"
+          },
+          "returnParameters": {
+            "id": 68051,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68050,
+                "mutability": "mutable",
+                "name": "shares",
+                "nameLocation": "6353:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 68052,
+                "src": "6345:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68049,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6345:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "6344:16:89"
+          },
+          "scope": 68053,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [],
+      "canonicalName": "IERC7540Redeem",
+      "contractDependencies": [],
+      "contractKind": "interface",
+      "documentation": {
+        "id": 67983,
+        "nodeType": "StructuredDocumentation",
+        "src": "3619:153:89",
+        "text": "@title IERC7540Redeem\n @notice Asynchronous redemption requests and withdrawals.\n @dev Lifecycle: request redeem -> settle -> withdraw/redeem."
+      },
+      "fullyImplemented": false,
+      "linearizedBaseContracts": [
+        68053
+      ],
+      "name": "IERC7540Redeem",
+      "nameLocation": "3782:14:89",
+      "scope": 68062,
+      "usedErrors": [],
+      "usedEvents": [
+        67996
+      ]
+    },
+    {
+      "id": 68061,
+      "nodeType": "ContractDefinition",
+      "src": "6563:74:89",
+      "nodes": [],
+      "abstract": false,
+      "baseContracts": [
+        {
+          "baseName": {
+            "id": 68055,
+            "name": "IERC7540Deposit",
+            "nameLocations": [
+              "6585:15:89"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 67982,
+            "src": "6585:15:89"
+          },
+          "id": 68056,
+          "nodeType": "InheritanceSpecifier",
+          "src": "6585:15:89"
+        },
+        {
+          "baseName": {
+            "id": 68057,
+            "name": "IERC7540Redeem",
+            "nameLocations": [
+              "6602:14:89"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 68053,
+            "src": "6602:14:89"
+          },
+          "id": 68058,
+          "nodeType": "InheritanceSpecifier",
+          "src": "6602:14:89"
+        },
+        {
+          "baseName": {
+            "id": 68059,
+            "name": "IERC7540Operator",
+            "nameLocations": [
+              "6618:16:89"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 67911,
+            "src": "6618:16:89"
+          },
+          "id": 68060,
+          "nodeType": "InheritanceSpecifier",
+          "src": "6618:16:89"
+        }
+      ],
+      "canonicalName": "IERC7540",
+      "contractDependencies": [],
+      "contractKind": "interface",
+      "documentation": {
+        "id": 68054,
+        "nodeType": "StructuredDocumentation",
+        "src": "6365:198:89",
+        "text": "@title IERC7540\n @notice Aggregate interface for ERC-7540 asynchronous tokenised vaults.\n @dev Combines operator delegation, deposit request/claim, and redemption request/claim semantics."
+      },
+      "fullyImplemented": false,
+      "linearizedBaseContracts": [
+        68061,
+        67911,
+        68053,
+        67982
+      ],
+      "name": "IERC7540",
+      "nameLocation": "6573:8:89",
+      "scope": 68062,
+      "usedErrors": [],
+      "usedEvents": [
+        67890,
+        67925,
+        67996
+      ]
+    }
+  ],
+  "license": "Apache-2.0 WITH LicenseRef-Commons-Clause-1.0"
+}

@@ -1,0 +1,3179 @@
+{
+  "absolutePath": "script/CreateLocalRedemptionRequest.s.sol",
+  "id": 60800,
+  "exportedSymbols": {
+    "BaseLocalScript": [
+      63805
+    ],
+    "CreateRedemptionRequestScript": [
+      60799
+    ],
+    "ICoveredMetavault": [
+      67878
+    ],
+    "IERC4626": [
+      47535
+    ],
+    "console": [
+      31266
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "39:2503:77",
+  "nodes": [
+    {
+      "id": 60563,
+      "nodeType": "PragmaDirective",
+      "src": "39:23:77",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "0.8",
+        ".30"
+      ]
+    },
+    {
+      "id": 60565,
+      "nodeType": "ImportDirective",
+      "src": "64:74:77",
+      "nodes": [],
+      "absolutePath": "src/interfaces/ICoveredMetavault.sol",
+      "file": "../src/interfaces/ICoveredMetavault.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 60800,
+      "sourceUnit": 67879,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 60564,
+            "name": "ICoveredMetavault",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 67878,
+            "src": "72:17:77",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 60567,
+      "nodeType": "ImportDirective",
+      "src": "139:62:77",
+      "nodes": [],
+      "absolutePath": "script/helpers/BaseLocalScript.sol",
+      "file": "./helpers/BaseLocalScript.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 60800,
+      "sourceUnit": 63806,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 60566,
+            "name": "BaseLocalScript",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 63805,
+            "src": "147:15:77",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 60569,
+      "nodeType": "ImportDirective",
+      "src": "203:73:77",
+      "nodes": [],
+      "absolutePath": "lib/openzeppelin-contracts-upgradeable/lib/openzeppelin-contracts/contracts/interfaces/IERC4626.sol",
+      "file": "@openzeppelin/contracts/interfaces/IERC4626.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 60800,
+      "sourceUnit": 47536,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 60568,
+            "name": "IERC4626",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 47535,
+            "src": "211:8:77",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 60571,
+      "nodeType": "ImportDirective",
+      "src": "278:45:77",
+      "nodes": [],
+      "absolutePath": "lib/forge-std/src/Script.sol",
+      "file": "forge-std/Script.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 60800,
+      "sourceUnit": 2110,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 60570,
+            "name": "console",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 31266,
+            "src": "286:7:77",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 60799,
+      "nodeType": "ContractDefinition",
+      "src": "325:2216:77",
+      "nodes": [
+        {
+          "id": 60576,
+          "nodeType": "VariableDeclaration",
+          "src": "389:49:77",
+          "nodes": [],
+          "constant": true,
+          "mutability": "constant",
+          "name": "REDEEM_AMOUNT_IN_SHARES",
+          "nameLocation": "406:23:77",
+          "scope": 60799,
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_uint256",
+            "typeString": "uint256"
+          },
+          "typeName": {
+            "id": 60574,
+            "name": "uint256",
+            "nodeType": "ElementaryTypeName",
+            "src": "389:7:77",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            }
+          },
+          "value": {
+            "hexValue": "313030653138",
+            "id": 60575,
+            "isConstant": false,
+            "isLValue": false,
+            "isPure": true,
+            "kind": "number",
+            "lValueRequested": false,
+            "nodeType": "Literal",
+            "src": "432:6:77",
+            "typeDescriptions": {
+              "typeIdentifier": "t_rational_100000000000000000000_by_1",
+              "typeString": "int_const 100000000000000000000"
+            },
+            "value": "100e18"
+          },
+          "visibility": "internal"
+        },
+        {
+          "id": 60579,
+          "nodeType": "VariableDeclaration",
+          "src": "445:11:77",
+          "nodes": [],
+          "constant": false,
+          "mutability": "mutable",
+          "name": "user",
+          "nameLocation": "452:4:77",
+          "scope": 60799,
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_struct$_Signer_$63724_storage",
+            "typeString": "struct BaseLocalScript.Signer"
+          },
+          "typeName": {
+            "id": 60578,
+            "nodeType": "UserDefinedTypeName",
+            "pathNode": {
+              "id": 60577,
+              "name": "Signer",
+              "nameLocations": [
+                "445:6:77"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 63724,
+              "src": "445:6:77"
+            },
+            "referencedDeclaration": 63724,
+            "src": "445:6:77",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_Signer_$63724_storage_ptr",
+              "typeString": "struct BaseLocalScript.Signer"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "id": 60593,
+          "nodeType": "FunctionDefinition",
+          "src": "463:85:77",
+          "nodes": [],
+          "body": {
+            "id": 60592,
+            "nodeType": "Block",
+            "src": "496:52:77",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 60583,
+                      "name": "super",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -25,
+                      "src": "506:5:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_super$_CreateRedemptionRequestScript_$60799_$",
+                        "typeString": "type(contract super CreateRedemptionRequestScript)"
+                      }
+                    },
+                    "id": 60585,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "512:5:77",
+                    "memberName": "setUp",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 63804,
+                    "src": "506:11:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
+                      "typeString": "function ()"
+                    }
+                  },
+                  "id": 60586,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "506:13:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60587,
+                "nodeType": "ExpressionStatement",
+                "src": "506:13:77"
+              },
+              {
+                "expression": {
+                  "id": 60590,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftHandSide": {
+                    "id": 60588,
+                    "name": "user",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 60579,
+                    "src": "529:4:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                      "typeString": "struct BaseLocalScript.Signer storage ref"
+                    }
+                  },
+                  "nodeType": "Assignment",
+                  "operator": "=",
+                  "rightHandSide": {
+                    "id": 60589,
+                    "name": "user2",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 63741,
+                    "src": "536:5:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                      "typeString": "struct BaseLocalScript.Signer storage ref"
+                    }
+                  },
+                  "src": "529:12:77",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                    "typeString": "struct BaseLocalScript.Signer storage ref"
+                  }
+                },
+                "id": 60591,
+                "nodeType": "ExpressionStatement",
+                "src": "529:12:77"
+              }
+            ]
+          },
+          "baseFunctions": [
+            63804
+          ],
+          "functionSelector": "0a9254e4",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "setUp",
+          "nameLocation": "472:5:77",
+          "overrides": {
+            "id": 60581,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [],
+            "src": "487:8:77"
+          },
+          "parameters": {
+            "id": 60580,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "477:2:77"
+          },
+          "returnParameters": {
+            "id": 60582,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "496:0:77"
+          },
+          "scope": 60799,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "public"
+        },
+        {
+          "id": 60798,
+          "nodeType": "FunctionDefinition",
+          "src": "554:1985:77",
+          "nodes": [],
+          "body": {
+            "id": 60797,
+            "nodeType": "Block",
+            "src": "576:1963:77",
+            "nodes": [],
+            "statements": [
+              {
+                "assignments": [
+                  60598
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 60598,
+                    "mutability": "mutable",
+                    "name": "vault",
+                    "nameLocation": "604:5:77",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 60797,
+                    "src": "586:23:77",
+                    "stateVariable": false,
+                    "storageLocation": "default",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                      "typeString": "contract ICoveredMetavault"
+                    },
+                    "typeName": {
+                      "id": 60597,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 60596,
+                        "name": "ICoveredMetavault",
+                        "nameLocations": [
+                          "586:17:77"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 67878,
+                        "src": "586:17:77"
+                      },
+                      "referencedDeclaration": 67878,
+                      "src": "586:17:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                        "typeString": "contract ICoveredMetavault"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 60605,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "arguments": [
+                        {
+                          "hexValue": "5641554c545f41444452455353",
+                          "id": 60602,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "string",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "644:15:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_stringliteral_e9aee28d84287277c524747b1be21f89c7e64ae2ae71089a4b6b0c73b993d018",
+                            "typeString": "literal_string \"VAULT_ADDRESS\""
+                          },
+                          "value": "VAULT_ADDRESS"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_stringliteral_e9aee28d84287277c524747b1be21f89c7e64ae2ae71089a4b6b0c73b993d018",
+                            "typeString": "literal_string \"VAULT_ADDRESS\""
+                          }
+                        ],
+                        "expression": {
+                          "id": 60600,
+                          "name": "vm",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 43,
+                          "src": "630:2:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_Vm_$23150",
+                            "typeString": "contract Vm"
+                          }
+                        },
+                        "id": 60601,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "633:10:77",
+                        "memberName": "envAddress",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 18443,
+                        "src": "630:13:77",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_view$_t_string_memory_ptr_$returns$_t_address_$",
+                          "typeString": "function (string memory) view external returns (address)"
+                        }
+                      },
+                      "id": 60603,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "630:30:77",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "id": 60599,
+                    "name": "ICoveredMetavault",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 67878,
+                    "src": "612:17:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_type$_t_contract$_ICoveredMetavault_$67878_$",
+                      "typeString": "type(contract ICoveredMetavault)"
+                    }
+                  },
+                  "id": 60604,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "typeConversion",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "612:49:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                    "typeString": "contract ICoveredMetavault"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "586:75:77"
+              },
+              {
+                "assignments": [
+                  60607
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 60607,
+                    "mutability": "mutable",
+                    "name": "vaultSymbol",
+                    "nameLocation": "685:11:77",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 60797,
+                    "src": "671:25:77",
+                    "stateVariable": false,
+                    "storageLocation": "memory",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_memory_ptr",
+                      "typeString": "string"
+                    },
+                    "typeName": {
+                      "id": 60606,
+                      "name": "string",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "671:6:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage_ptr",
+                        "typeString": "string"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 60611,
+                "initialValue": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 60608,
+                      "name": "vault",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60598,
+                      "src": "699:5:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                        "typeString": "contract ICoveredMetavault"
+                      }
+                    },
+                    "id": 60609,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "705:6:77",
+                    "memberName": "symbol",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 49696,
+                    "src": "699:12:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_view$__$returns$_t_string_memory_ptr_$",
+                      "typeString": "function () view external returns (string memory)"
+                    }
+                  },
+                  "id": 60610,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "699:14:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string memory"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "671:42:77"
+              },
+              {
+                "assignments": [
+                  60614
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 60614,
+                    "mutability": "mutable",
+                    "name": "asset",
+                    "nameLocation": "733:5:77",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 60797,
+                    "src": "724:14:77",
+                    "stateVariable": false,
+                    "storageLocation": "default",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IERC4626_$47535",
+                      "typeString": "contract IERC4626"
+                    },
+                    "typeName": {
+                      "id": 60613,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 60612,
+                        "name": "IERC4626",
+                        "nameLocations": [
+                          "724:8:77"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 47535,
+                        "src": "724:8:77"
+                      },
+                      "referencedDeclaration": 47535,
+                      "src": "724:8:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC4626_$47535",
+                        "typeString": "contract IERC4626"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 60620,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "arguments": [],
+                      "expression": {
+                        "argumentTypes": [],
+                        "expression": {
+                          "id": 60616,
+                          "name": "vault",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 60598,
+                          "src": "750:5:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                            "typeString": "contract ICoveredMetavault"
+                          }
+                        },
+                        "id": 60617,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "756:5:77",
+                        "memberName": "asset",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 47404,
+                        "src": "750:11:77",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_view$__$returns$_t_address_$",
+                          "typeString": "function () view external returns (address)"
+                        }
+                      },
+                      "id": 60618,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "750:13:77",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "id": 60615,
+                    "name": "IERC4626",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 47535,
+                    "src": "741:8:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_type$_t_contract$_IERC4626_$47535_$",
+                      "typeString": "type(contract IERC4626)"
+                    }
+                  },
+                  "id": 60619,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "typeConversion",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "741:23:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IERC4626_$47535",
+                    "typeString": "contract IERC4626"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "724:40:77"
+              },
+              {
+                "assignments": [
+                  60622
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 60622,
+                    "mutability": "mutable",
+                    "name": "assetSymbol",
+                    "nameLocation": "788:11:77",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 60797,
+                    "src": "774:25:77",
+                    "stateVariable": false,
+                    "storageLocation": "memory",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_memory_ptr",
+                      "typeString": "string"
+                    },
+                    "typeName": {
+                      "id": 60621,
+                      "name": "string",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "774:6:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage_ptr",
+                        "typeString": "string"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 60626,
+                "initialValue": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 60623,
+                      "name": "asset",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60614,
+                      "src": "802:5:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IERC4626_$47535",
+                        "typeString": "contract IERC4626"
+                      }
+                    },
+                    "id": 60624,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "808:6:77",
+                    "memberName": "symbol",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 49696,
+                    "src": "802:12:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_view$__$returns$_t_string_memory_ptr_$",
+                      "typeString": "function () view external returns (string memory)"
+                    }
+                  },
+                  "id": 60625,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "802:14:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string memory"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "774:42:77"
+              },
+              {
+                "assignments": [
+                  60628
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 60628,
+                    "mutability": "mutable",
+                    "name": "claimableAssets",
+                    "nameLocation": "919:15:77",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 60797,
+                    "src": "911:23:77",
+                    "stateVariable": false,
+                    "storageLocation": "default",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "typeName": {
+                      "id": 60627,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "911:7:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 60634,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 60631,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 60579,
+                        "src": "954:4:77",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                          "typeString": "struct BaseLocalScript.Signer storage ref"
+                        }
+                      },
+                      "id": 60632,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "959:4:77",
+                      "memberName": "addr",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 63721,
+                      "src": "954:9:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60629,
+                      "name": "vault",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60598,
+                      "src": "937:5:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                        "typeString": "contract ICoveredMetavault"
+                      }
+                    },
+                    "id": 60630,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "943:10:77",
+                    "memberName": "maxDeposit",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 47434,
+                    "src": "937:16:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_uint256_$",
+                      "typeString": "function (address) view external returns (uint256)"
+                    }
+                  },
+                  "id": 60633,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "937:27:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "911:53:77"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "5573657220636c61696d61626c65206465706f736974206173736574733a",
+                      "id": 60638,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "986:32:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_19d566080815f782aca0c5558a911fe7fd63a3703cdf879048077625b0a7ff44",
+                        "typeString": "literal_string \"User claimable deposit assets:\""
+                      },
+                      "value": "User claimable deposit assets:"
+                    },
+                    {
+                      "id": 60639,
+                      "name": "claimableAssets",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60628,
+                      "src": "1020:15:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "id": 60640,
+                      "name": "assetSymbol",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60622,
+                      "src": "1037:11:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_19d566080815f782aca0c5558a911fe7fd63a3703cdf879048077625b0a7ff44",
+                        "typeString": "literal_string \"User claimable deposit assets:\""
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60635,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 31266,
+                      "src": "974:7:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 60637,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "982:3:77",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 24457,
+                    "src": "974:11:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory,uint256,string memory) pure"
+                    }
+                  },
+                  "id": 60641,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "974:75:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60642,
+                "nodeType": "ExpressionStatement",
+                "src": "974:75:77"
+              },
+              {
+                "condition": {
+                  "commonType": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "id": 60645,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftExpression": {
+                    "id": 60643,
+                    "name": "claimableAssets",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 60628,
+                    "src": "1064:15:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "BinaryOperation",
+                  "operator": ">",
+                  "rightExpression": {
+                    "hexValue": "30",
+                    "id": 60644,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "1082:1:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_0_by_1",
+                      "typeString": "int_const 0"
+                    },
+                    "value": "0"
+                  },
+                  "src": "1064:19:77",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "id": 60673,
+                "nodeType": "IfStatement",
+                "src": "1060:255:77",
+                "trueBody": {
+                  "id": 60672,
+                  "nodeType": "Block",
+                  "src": "1085:230:77",
+                  "statements": [
+                    {
+                      "expression": {
+                        "arguments": [
+                          {
+                            "expression": {
+                              "id": 60649,
+                              "name": "user",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 60579,
+                              "src": "1112:4:77",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                                "typeString": "struct BaseLocalScript.Signer storage ref"
+                              }
+                            },
+                            "id": 60650,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "1117:10:77",
+                            "memberName": "privateKey",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 63723,
+                            "src": "1112:15:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "expression": {
+                            "id": 60646,
+                            "name": "vm",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 43,
+                            "src": "1099:2:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_Vm_$23150",
+                              "typeString": "contract Vm"
+                            }
+                          },
+                          "id": 60648,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1102:9:77",
+                          "memberName": "broadcast",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 19974,
+                          "src": "1099:12:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$__$",
+                            "typeString": "function (uint256) external"
+                          }
+                        },
+                        "id": 60651,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1099:29:77",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_tuple$__$",
+                          "typeString": "tuple()"
+                        }
+                      },
+                      "id": 60652,
+                      "nodeType": "ExpressionStatement",
+                      "src": "1099:29:77"
+                    },
+                    {
+                      "assignments": [
+                        60654
+                      ],
+                      "declarations": [
+                        {
+                          "constant": false,
+                          "id": 60654,
+                          "mutability": "mutable",
+                          "name": "claimedShares",
+                          "nameLocation": "1150:13:77",
+                          "nodeType": "VariableDeclaration",
+                          "scope": 60672,
+                          "src": "1142:21:77",
+                          "stateVariable": false,
+                          "storageLocation": "default",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          "typeName": {
+                            "id": 60653,
+                            "name": "uint256",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "1142:7:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "visibility": "internal"
+                        }
+                      ],
+                      "id": 60663,
+                      "initialValue": {
+                        "arguments": [
+                          {
+                            "id": 60657,
+                            "name": "claimableAssets",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60628,
+                            "src": "1180:15:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          {
+                            "expression": {
+                              "id": 60658,
+                              "name": "user",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 60579,
+                              "src": "1197:4:77",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                                "typeString": "struct BaseLocalScript.Signer storage ref"
+                              }
+                            },
+                            "id": 60659,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "1202:4:77",
+                            "memberName": "addr",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 63721,
+                            "src": "1197:9:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "expression": {
+                              "id": 60660,
+                              "name": "user",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 60579,
+                              "src": "1208:4:77",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                                "typeString": "struct BaseLocalScript.Signer storage ref"
+                              }
+                            },
+                            "id": 60661,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "1213:4:77",
+                            "memberName": "addr",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 63721,
+                            "src": "1208:9:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            },
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "expression": {
+                            "id": 60655,
+                            "name": "vault",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60598,
+                            "src": "1166:5:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                              "typeString": "contract ICoveredMetavault"
+                            }
+                          },
+                          "id": 60656,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1172:7:77",
+                          "memberName": "deposit",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 67969,
+                          "src": "1166:13:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_$_t_address_$returns$_t_uint256_$",
+                            "typeString": "function (uint256,address,address) external returns (uint256)"
+                          }
+                        },
+                        "id": 60662,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1166:52:77",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "nodeType": "VariableDeclarationStatement",
+                      "src": "1142:76:77"
+                    },
+                    {
+                      "expression": {
+                        "arguments": [
+                          {
+                            "hexValue": "436c61696d6564207368617265732066726f6d206465706f736974733a",
+                            "id": 60667,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "string",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1244:31:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_stringliteral_691bc14ff1dc0549accb7e857944cd9716a5319cd65d7e66b43a971a66b2790e",
+                              "typeString": "literal_string \"Claimed shares from deposits:\""
+                            },
+                            "value": "Claimed shares from deposits:"
+                          },
+                          {
+                            "id": 60668,
+                            "name": "claimedShares",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60654,
+                            "src": "1277:13:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          {
+                            "id": 60669,
+                            "name": "vaultSymbol",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60607,
+                            "src": "1292:11:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_stringliteral_691bc14ff1dc0549accb7e857944cd9716a5319cd65d7e66b43a971a66b2790e",
+                              "typeString": "literal_string \"Claimed shares from deposits:\""
+                            },
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            },
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          ],
+                          "expression": {
+                            "id": 60664,
+                            "name": "console",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 31266,
+                            "src": "1232:7:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                              "typeString": "type(library console)"
+                            }
+                          },
+                          "id": 60666,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1240:3:77",
+                          "memberName": "log",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 24457,
+                          "src": "1232:11:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                            "typeString": "function (string memory,uint256,string memory) pure"
+                          }
+                        },
+                        "id": 60670,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1232:72:77",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_tuple$__$",
+                          "typeString": "tuple()"
+                        }
+                      },
+                      "id": 60671,
+                      "nodeType": "ExpressionStatement",
+                      "src": "1232:72:77"
+                    }
+                  ]
+                }
+              },
+              {
+                "assignments": [
+                  60675
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 60675,
+                    "mutability": "mutable",
+                    "name": "userShares",
+                    "nameLocation": "1396:10:77",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 60797,
+                    "src": "1388:18:77",
+                    "stateVariable": false,
+                    "storageLocation": "default",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "typeName": {
+                      "id": 60674,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1388:7:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 60681,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 60678,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 60579,
+                        "src": "1425:4:77",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                          "typeString": "struct BaseLocalScript.Signer storage ref"
+                        }
+                      },
+                      "id": 60679,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1430:4:77",
+                      "memberName": "addr",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 63721,
+                      "src": "1425:9:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60676,
+                      "name": "vault",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60598,
+                      "src": "1409:5:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                        "typeString": "contract ICoveredMetavault"
+                      }
+                    },
+                    "id": 60677,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1415:9:77",
+                    "memberName": "balanceOf",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 48940,
+                    "src": "1409:15:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_uint256_$",
+                      "typeString": "function (address) view external returns (uint256)"
+                    }
+                  },
+                  "id": 60680,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1409:26:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "1388:47:77"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "557365722063757272656e74207368617265733a",
+                      "id": 60685,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1457:22:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_def6018aefe5866b4d79df7d37dea5db627af950b40702c7e03b20b88639d91f",
+                        "typeString": "literal_string \"User current shares:\""
+                      },
+                      "value": "User current shares:"
+                    },
+                    {
+                      "id": 60686,
+                      "name": "userShares",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60675,
+                      "src": "1481:10:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "id": 60687,
+                      "name": "vaultSymbol",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60607,
+                      "src": "1493:11:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_def6018aefe5866b4d79df7d37dea5db627af950b40702c7e03b20b88639d91f",
+                        "typeString": "literal_string \"User current shares:\""
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60682,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 31266,
+                      "src": "1445:7:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 60684,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1453:3:77",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 24457,
+                    "src": "1445:11:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory,uint256,string memory) pure"
+                    }
+                  },
+                  "id": 60688,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1445:60:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60689,
+                "nodeType": "ExpressionStatement",
+                "src": "1445:60:77"
+              },
+              {
+                "condition": {
+                  "commonType": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "id": 60692,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftExpression": {
+                    "id": 60690,
+                    "name": "userShares",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 60675,
+                    "src": "1519:10:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "BinaryOperation",
+                  "operator": "<",
+                  "rightExpression": {
+                    "id": 60691,
+                    "name": "REDEEM_AMOUNT_IN_SHARES",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 60576,
+                    "src": "1532:23:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "src": "1519:36:77",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "id": 60717,
+                "nodeType": "IfStatement",
+                "src": "1515:310:77",
+                "trueBody": {
+                  "id": 60716,
+                  "nodeType": "Block",
+                  "src": "1557:268:77",
+                  "statements": [
+                    {
+                      "expression": {
+                        "arguments": [
+                          {
+                            "hexValue": "4552524f523a205573657220646f65736e2774206861766520656e6f7567682073686172657320666f7220726564656d7074696f6e2e",
+                            "id": 60696,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "string",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1583:56:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_stringliteral_e65e5a90eb2da9d47290774d717fe1318d4426705e4078c181b0b07861dbc808",
+                              "typeString": "literal_string \"ERROR: User doesn't have enough shares for redemption.\""
+                            },
+                            "value": "ERROR: User doesn't have enough shares for redemption."
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_stringliteral_e65e5a90eb2da9d47290774d717fe1318d4426705e4078c181b0b07861dbc808",
+                              "typeString": "literal_string \"ERROR: User doesn't have enough shares for redemption.\""
+                            }
+                          ],
+                          "expression": {
+                            "id": 60693,
+                            "name": "console",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 31266,
+                            "src": "1571:7:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                              "typeString": "type(library console)"
+                            }
+                          },
+                          "id": 60695,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1579:3:77",
+                          "memberName": "log",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 23780,
+                          "src": "1571:11:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$__$",
+                            "typeString": "function (string memory) pure"
+                          }
+                        },
+                        "id": 60697,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1571:69:77",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_tuple$__$",
+                          "typeString": "tuple()"
+                        }
+                      },
+                      "id": 60698,
+                      "nodeType": "ExpressionStatement",
+                      "src": "1571:69:77"
+                    },
+                    {
+                      "expression": {
+                        "arguments": [
+                          {
+                            "hexValue": "5265717569726564207368617265733a",
+                            "id": 60702,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "string",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1666:18:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_stringliteral_db1a29cc48ae909f7b3aee8c195dde6411b166bdeb62a05b5c5429122f53a8a1",
+                              "typeString": "literal_string \"Required shares:\""
+                            },
+                            "value": "Required shares:"
+                          },
+                          {
+                            "id": 60703,
+                            "name": "REDEEM_AMOUNT_IN_SHARES",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60576,
+                            "src": "1686:23:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          {
+                            "id": 60704,
+                            "name": "vaultSymbol",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60607,
+                            "src": "1711:11:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_stringliteral_db1a29cc48ae909f7b3aee8c195dde6411b166bdeb62a05b5c5429122f53a8a1",
+                              "typeString": "literal_string \"Required shares:\""
+                            },
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            },
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          ],
+                          "expression": {
+                            "id": 60699,
+                            "name": "console",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 31266,
+                            "src": "1654:7:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                              "typeString": "type(library console)"
+                            }
+                          },
+                          "id": 60701,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1662:3:77",
+                          "memberName": "log",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 24457,
+                          "src": "1654:11:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                            "typeString": "function (string memory,uint256,string memory) pure"
+                          }
+                        },
+                        "id": 60705,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1654:69:77",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_tuple$__$",
+                          "typeString": "tuple()"
+                        }
+                      },
+                      "id": 60706,
+                      "nodeType": "ExpressionStatement",
+                      "src": "1654:69:77"
+                    },
+                    {
+                      "expression": {
+                        "arguments": [
+                          {
+                            "hexValue": "417661696c61626c65207368617265733a",
+                            "id": 60710,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "string",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1749:19:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_stringliteral_dc71cb220d11f056cf9b15dec28642c30736283b5f9c43a5e386594378400909",
+                              "typeString": "literal_string \"Available shares:\""
+                            },
+                            "value": "Available shares:"
+                          },
+                          {
+                            "id": 60711,
+                            "name": "userShares",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60675,
+                            "src": "1770:10:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          {
+                            "id": 60712,
+                            "name": "vaultSymbol",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60607,
+                            "src": "1782:11:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_stringliteral_dc71cb220d11f056cf9b15dec28642c30736283b5f9c43a5e386594378400909",
+                              "typeString": "literal_string \"Available shares:\""
+                            },
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            },
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          ],
+                          "expression": {
+                            "id": 60707,
+                            "name": "console",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 31266,
+                            "src": "1737:7:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                              "typeString": "type(library console)"
+                            }
+                          },
+                          "id": 60709,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1745:3:77",
+                          "memberName": "log",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 24457,
+                          "src": "1737:11:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                            "typeString": "function (string memory,uint256,string memory) pure"
+                          }
+                        },
+                        "id": 60713,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1737:57:77",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_tuple$__$",
+                          "typeString": "tuple()"
+                        }
+                      },
+                      "id": 60714,
+                      "nodeType": "ExpressionStatement",
+                      "src": "1737:57:77"
+                    },
+                    {
+                      "functionReturnParameters": 60595,
+                      "id": 60715,
+                      "nodeType": "Return",
+                      "src": "1808:7:77"
+                    }
+                  ]
+                }
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 60721,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 60579,
+                        "src": "1853:4:77",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                          "typeString": "struct BaseLocalScript.Signer storage ref"
+                        }
+                      },
+                      "id": 60722,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1858:10:77",
+                      "memberName": "privateKey",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 63723,
+                      "src": "1853:15:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60718,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 43,
+                      "src": "1835:2:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$23150",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 60720,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1838:14:77",
+                    "memberName": "startBroadcast",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 20071,
+                    "src": "1835:17:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$__$",
+                      "typeString": "function (uint256) external"
+                    }
+                  },
+                  "id": 60723,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1835:34:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60724,
+                "nodeType": "ExpressionStatement",
+                "src": "1835:34:77"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "arguments": [
+                        {
+                          "id": 60730,
+                          "name": "vault",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 60598,
+                          "src": "1901:5:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                            "typeString": "contract ICoveredMetavault"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                            "typeString": "contract ICoveredMetavault"
+                          }
+                        ],
+                        "id": 60729,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "1893:7:77",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_$",
+                          "typeString": "type(address)"
+                        },
+                        "typeName": {
+                          "id": 60728,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "1893:7:77",
+                          "typeDescriptions": {}
+                        }
+                      },
+                      "id": 60731,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1893:14:77",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "id": 60732,
+                      "name": "REDEEM_AMOUNT_IN_SHARES",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60576,
+                      "src": "1909:23:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60725,
+                      "name": "vault",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60598,
+                      "src": "1879:5:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                        "typeString": "contract ICoveredMetavault"
+                      }
+                    },
+                    "id": 60727,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1885:7:77",
+                    "memberName": "approve",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 48970,
+                    "src": "1879:13:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_uint256_$returns$_t_bool_$",
+                      "typeString": "function (address,uint256) external returns (bool)"
+                    }
+                  },
+                  "id": 60733,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1879:54:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "id": 60734,
+                "nodeType": "ExpressionStatement",
+                "src": "1879:54:77"
+              },
+              {
+                "assignments": [
+                  60736
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 60736,
+                    "mutability": "mutable",
+                    "name": "requestId",
+                    "nameLocation": "1951:9:77",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 60797,
+                    "src": "1943:17:77",
+                    "stateVariable": false,
+                    "storageLocation": "default",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "typeName": {
+                      "id": 60735,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1943:7:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 60745,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "id": 60739,
+                      "name": "REDEEM_AMOUNT_IN_SHARES",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60576,
+                      "src": "1983:23:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 60740,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 60579,
+                        "src": "2008:4:77",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                          "typeString": "struct BaseLocalScript.Signer storage ref"
+                        }
+                      },
+                      "id": 60741,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "2013:4:77",
+                      "memberName": "addr",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 63721,
+                      "src": "2008:9:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 60742,
+                        "name": "user",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 60579,
+                        "src": "2019:4:77",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                          "typeString": "struct BaseLocalScript.Signer storage ref"
+                        }
+                      },
+                      "id": 60743,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "2024:4:77",
+                      "memberName": "addr",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 63721,
+                      "src": "2019:9:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60737,
+                      "name": "vault",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60598,
+                      "src": "1963:5:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                        "typeString": "contract ICoveredMetavault"
+                      }
+                    },
+                    "id": 60738,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1969:13:77",
+                    "memberName": "requestRedeem",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 68008,
+                    "src": "1963:19:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_$_t_address_$returns$_t_uint256_$",
+                      "typeString": "function (uint256,address,address) external returns (uint256)"
+                    }
+                  },
+                  "id": 60744,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1963:66:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "1943:86:77"
+              },
+              {
+                "expression": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 60746,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 43,
+                      "src": "2039:2:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$23150",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 60748,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "2042:13:77",
+                    "memberName": "stopBroadcast",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 20075,
+                    "src": "2039:16:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
+                      "typeString": "function () external"
+                    }
+                  },
+                  "id": 60749,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "2039:18:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60750,
+                "nodeType": "ExpressionStatement",
+                "src": "2039:18:77"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "3d3d3d20524544454d5054494f4e20524551554553542043524541544544203d3d3d",
+                      "id": 60754,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "2145:36:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_b82c3f977b79b54f09852ee624faf07f1846b5d1e11105518345de51dbf047e8",
+                        "typeString": "literal_string \"=== REDEMPTION REQUEST CREATED ===\""
+                      },
+                      "value": "=== REDEMPTION REQUEST CREATED ==="
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_b82c3f977b79b54f09852ee624faf07f1846b5d1e11105518345de51dbf047e8",
+                        "typeString": "literal_string \"=== REDEMPTION REQUEST CREATED ===\""
+                      }
+                    ],
+                    "expression": {
+                      "id": 60751,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 31266,
+                      "src": "2133:7:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 60753,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "2141:3:77",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 23780,
+                    "src": "2133:11:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory) pure"
+                    }
+                  },
+                  "id": 60755,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "2133:49:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60756,
+                "nodeType": "ExpressionStatement",
+                "src": "2133:49:77"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "526571756573742049443a",
+                      "id": 60760,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "2204:13:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_172959551cf6a0b7909a2671385075c6185d5f58fac49410315b13adb63c4c1c",
+                        "typeString": "literal_string \"Request ID:\""
+                      },
+                      "value": "Request ID:"
+                    },
+                    {
+                      "id": 60761,
+                      "name": "requestId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60736,
+                      "src": "2219:9:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_172959551cf6a0b7909a2671385075c6185d5f58fac49410315b13adb63c4c1c",
+                        "typeString": "literal_string \"Request ID:\""
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60757,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 31266,
+                      "src": "2192:7:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 60759,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "2200:3:77",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 23893,
+                    "src": "2192:11:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$returns$__$",
+                      "typeString": "function (string memory,uint256) pure"
+                    }
+                  },
+                  "id": 60762,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "2192:37:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60763,
+                "nodeType": "ExpressionStatement",
+                "src": "2192:37:77"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "5368617265732072657175657374656420666f7220726564656d7074696f6e3a",
+                      "id": 60767,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "2251:34:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_30a6e3aac4af4013f8bb8c15345052bdf3ed46496972acfa721efdf18a7b9fe5",
+                        "typeString": "literal_string \"Shares requested for redemption:\""
+                      },
+                      "value": "Shares requested for redemption:"
+                    },
+                    {
+                      "id": 60768,
+                      "name": "REDEEM_AMOUNT_IN_SHARES",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60576,
+                      "src": "2287:23:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "id": 60769,
+                      "name": "vaultSymbol",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60607,
+                      "src": "2312:11:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_30a6e3aac4af4013f8bb8c15345052bdf3ed46496972acfa721efdf18a7b9fe5",
+                        "typeString": "literal_string \"Shares requested for redemption:\""
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60764,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 31266,
+                      "src": "2239:7:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 60766,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "2247:3:77",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 24457,
+                    "src": "2239:11:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory,uint256,string memory) pure"
+                    }
+                  },
+                  "id": 60770,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "2239:85:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60771,
+                "nodeType": "ExpressionStatement",
+                "src": "2239:85:77"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "557365722072656d61696e696e67207368617265733a",
+                      "id": 60775,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "2346:24:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_21b796f3b7c3092892942bea80e05f587a3cf6f1a9c45e897c8caf86fab6a9d7",
+                        "typeString": "literal_string \"User remaining shares:\""
+                      },
+                      "value": "User remaining shares:"
+                    },
+                    {
+                      "arguments": [
+                        {
+                          "expression": {
+                            "id": 60778,
+                            "name": "user",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60579,
+                            "src": "2388:4:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                              "typeString": "struct BaseLocalScript.Signer storage ref"
+                            }
+                          },
+                          "id": 60779,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "2393:4:77",
+                          "memberName": "addr",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 63721,
+                          "src": "2388:9:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "expression": {
+                          "id": 60776,
+                          "name": "vault",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 60598,
+                          "src": "2372:5:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                            "typeString": "contract ICoveredMetavault"
+                          }
+                        },
+                        "id": 60777,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "2378:9:77",
+                        "memberName": "balanceOf",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 48940,
+                        "src": "2372:15:77",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_uint256_$",
+                          "typeString": "function (address) view external returns (uint256)"
+                        }
+                      },
+                      "id": 60780,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2372:26:77",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "id": 60781,
+                      "name": "vaultSymbol",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60607,
+                      "src": "2400:11:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_21b796f3b7c3092892942bea80e05f587a3cf6f1a9c45e897c8caf86fab6a9d7",
+                        "typeString": "literal_string \"User remaining shares:\""
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60772,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 31266,
+                      "src": "2334:7:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 60774,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "2342:3:77",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 24457,
+                    "src": "2334:11:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory,uint256,string memory) pure"
+                    }
+                  },
+                  "id": 60782,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "2334:78:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60783,
+                "nodeType": "ExpressionStatement",
+                "src": "2334:78:77"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "557365722070656e64696e6720726564656d7074696f6e20726571756573743a",
+                      "id": 60787,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "2434:34:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_b8b5146a2218e6c31a7fea93abf411435576936f38a4df41c1bb1f03a78090d5",
+                        "typeString": "literal_string \"User pending redemption request:\""
+                      },
+                      "value": "User pending redemption request:"
+                    },
+                    {
+                      "arguments": [
+                        {
+                          "id": 60790,
+                          "name": "requestId",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 60736,
+                          "src": "2497:9:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        {
+                          "expression": {
+                            "id": 60791,
+                            "name": "user",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 60579,
+                            "src": "2508:4:77",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_Signer_$63724_storage",
+                              "typeString": "struct BaseLocalScript.Signer storage ref"
+                            }
+                          },
+                          "id": 60792,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "2513:4:77",
+                          "memberName": "addr",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 63721,
+                          "src": "2508:9:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "expression": {
+                          "id": 60788,
+                          "name": "vault",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 60598,
+                          "src": "2470:5:77",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_ICoveredMetavault_$67878",
+                            "typeString": "contract ICoveredMetavault"
+                          }
+                        },
+                        "id": 60789,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "2476:20:77",
+                        "memberName": "pendingRedeemRequest",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 68018,
+                        "src": "2470:26:77",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_view$_t_uint256_$_t_address_$returns$_t_uint256_$",
+                          "typeString": "function (uint256,address) view external returns (uint256)"
+                        }
+                      },
+                      "id": 60793,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2470:48:77",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "id": 60794,
+                      "name": "vaultSymbol",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 60607,
+                      "src": "2520:11:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_b8b5146a2218e6c31a7fea93abf411435576936f38a4df41c1bb1f03a78090d5",
+                        "typeString": "literal_string \"User pending redemption request:\""
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 60784,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 31266,
+                      "src": "2422:7:77",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$31266_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 60786,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "2430:3:77",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 24457,
+                    "src": "2422:11:77",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory,uint256,string memory) pure"
+                    }
+                  },
+                  "id": 60795,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "2422:110:77",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 60796,
+                "nodeType": "ExpressionStatement",
+                "src": "2422:110:77"
+              }
+            ]
+          },
+          "functionSelector": "c0406226",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "run",
+          "nameLocation": "563:3:77",
+          "parameters": {
+            "id": 60594,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "566:2:77"
+          },
+          "returnParameters": {
+            "id": 60595,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "576:0:77"
+          },
+          "scope": 60799,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "public"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [
+        {
+          "baseName": {
+            "id": 60572,
+            "name": "BaseLocalScript",
+            "nameLocations": [
+              "367:15:77"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 63805,
+            "src": "367:15:77"
+          },
+          "id": 60573,
+          "nodeType": "InheritanceSpecifier",
+          "src": "367:15:77"
+        }
+      ],
+      "canonicalName": "CreateRedemptionRequestScript",
+      "contractDependencies": [],
+      "contractKind": "contract",
+      "fullyImplemented": true,
+      "internalFunctionIDs": {
+        "23166": 1
+      },
+      "linearizedBaseContracts": [
+        60799,
+        63805,
+        2109,
+        17873,
+        8043,
+        5949,
+        59,
+        47
+      ],
+      "name": "CreateRedemptionRequestScript",
+      "nameLocation": "334:29:77",
+      "scope": 60800,
+      "usedErrors": [],
+      "usedEvents": []
+    }
+  ],
+  "license": "UNLICENSED"
+}

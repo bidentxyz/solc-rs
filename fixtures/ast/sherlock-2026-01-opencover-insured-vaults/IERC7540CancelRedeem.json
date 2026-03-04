@@ -1,0 +1,930 @@
+{
+  "absolutePath": "src/interfaces/IERC7540Cancel.sol",
+  "id": 68136,
+  "exportedSymbols": {
+    "IERC7540CancelDeposit": [
+      68099
+    ],
+    "IERC7540CancelRedeem": [
+      68135
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "74:3213:90",
+  "nodes": [
+    {
+      "id": 68063,
+      "nodeType": "PragmaDirective",
+      "src": "74:23:90",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "0.8",
+        ".30"
+      ]
+    },
+    {
+      "id": 68099,
+      "nodeType": "ContractDefinition",
+      "src": "263:1476:90",
+      "nodes": [
+        {
+          "id": 68073,
+          "nodeType": "EventDefinition",
+          "src": "580:98:90",
+          "nodes": [],
+          "anonymous": false,
+          "documentation": {
+            "id": 68065,
+            "nodeType": "StructuredDocumentation",
+            "src": "301:274:90",
+            "text": "@notice Emitted when cancellation of a pending deposit is requested.\n @param controller Controller whose request is cancelled.\n @param requestId Request identifier (0 for aggregate implementations).\n @param sender Caller submitting the cancellation."
+          },
+          "eventSelector": "4ae0134aad5d0e98e82f45680facd628ee6b5aa85ad9a85248a7ef47319f8c50",
+          "name": "CancelDepositRequest",
+          "nameLocation": "586:20:90",
+          "parameters": {
+            "id": 68072,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68067,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "623:10:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68073,
+                "src": "607:26:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68066,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "607:7:90",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68069,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "requestId",
+                "nameLocation": "651:9:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68073,
+                "src": "635:25:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68068,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "635:7:90",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68071,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "sender",
+                "nameLocation": "670:6:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68073,
+                "src": "662:14:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68070,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "662:7:90",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "606:71:90"
+          }
+        },
+        {
+          "id": 68086,
+          "nodeType": "EventDefinition",
+          "src": "1088:152:90",
+          "nodes": [],
+          "anonymous": false,
+          "documentation": {
+            "id": 68074,
+            "nodeType": "StructuredDocumentation",
+            "src": "684:399:90",
+            "text": "@notice Emitted when assets are returned as part of a deposit cancellation.\n @param controller Controller whose request is being refunded.\n @param receiver Recipient of the refunded assets.\n @param requestId Request identifier (0 for aggregate implementations).\n @param sender Caller processing the refund.\n @param assets Asset amount refunded to the receiver."
+          },
+          "eventSelector": "295a9a8b44c0ac92394b0da92ef469784ff064156f08dab8316760c064c6cd2f",
+          "name": "CancelDepositClaim",
+          "nameLocation": "1094:18:90",
+          "parameters": {
+            "id": 68085,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68076,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "1138:10:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68086,
+                "src": "1122:26:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68075,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1122:7:90",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68078,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "receiver",
+                "nameLocation": "1166:8:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68086,
+                "src": "1150:24:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68077,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1150:7:90",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68080,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "requestId",
+                "nameLocation": "1192:9:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68086,
+                "src": "1176:25:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68079,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1176:7:90",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68082,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "sender",
+                "nameLocation": "1211:6:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68086,
+                "src": "1203:14:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68081,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1203:7:90",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68084,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "assets",
+                "nameLocation": "1227:6:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68086,
+                "src": "1219:14:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68083,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1219:7:90",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1112:127:90"
+          }
+        },
+        {
+          "id": 68098,
+          "nodeType": "FunctionDefinition",
+          "src": "1600:137:90",
+          "nodes": [],
+          "documentation": {
+            "id": 68087,
+            "nodeType": "StructuredDocumentation",
+            "src": "1246:349:90",
+            "text": "@notice Cancel a pending deposit request and refund the assets synchronously.\n @param requestId Request identifier (0 for aggregate implementations).\n @param controller Controller whose pending request is cancelled.\n @param receiver Recipient of the refunded assets.\n @return assets Asset amount refunded immediately."
+          },
+          "functionSelector": "06bf8e95",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "cancelDepositRequest",
+          "nameLocation": "1609:20:90",
+          "parameters": {
+            "id": 68094,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68089,
+                "mutability": "mutable",
+                "name": "requestId",
+                "nameLocation": "1638:9:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68098,
+                "src": "1630:17:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68088,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1630:7:90",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68091,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "1657:10:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68098,
+                "src": "1649:18:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68090,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1649:7:90",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68093,
+                "mutability": "mutable",
+                "name": "receiver",
+                "nameLocation": "1677:8:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68098,
+                "src": "1669:16:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68092,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1669:7:90",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1629:57:90"
+          },
+          "returnParameters": {
+            "id": 68097,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68096,
+                "mutability": "mutable",
+                "name": "assets",
+                "nameLocation": "1729:6:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68098,
+                "src": "1721:14:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68095,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1721:7:90",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1720:16:90"
+          },
+          "scope": 68099,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [],
+      "canonicalName": "IERC7540CancelDeposit",
+      "contractDependencies": [],
+      "contractKind": "interface",
+      "documentation": {
+        "id": 68064,
+        "nodeType": "StructuredDocumentation",
+        "src": "99:164:90",
+        "text": "@title IERC7540CancelDeposit\n @notice ERC-7540 deposit cancellation (synchronous subset of ERC-7887).\n @dev Spec: https://eips.ethereum.org/EIPS/eip-7887"
+      },
+      "fullyImplemented": false,
+      "linearizedBaseContracts": [
+        68099
+      ],
+      "name": "IERC7540CancelDeposit",
+      "nameLocation": "273:21:90",
+      "scope": 68136,
+      "usedErrors": [],
+      "usedEvents": [
+        68073,
+        68086
+      ]
+    },
+    {
+      "id": 68135,
+      "nodeType": "ContractDefinition",
+      "src": "1907:1379:90",
+      "nodes": [
+        {
+          "id": 68109,
+          "nodeType": "EventDefinition",
+          "src": "2192:97:90",
+          "nodes": [],
+          "anonymous": false,
+          "documentation": {
+            "id": 68101,
+            "nodeType": "StructuredDocumentation",
+            "src": "1944:243:90",
+            "text": "@notice Emitted when cancellation of a pending redemption is requested.\n @param controller Controller whose request is cancelled.\n @param requestId Request identifier.\n @param sender Caller submitting the cancellation."
+          },
+          "eventSelector": "a16c0f2cab616ed5d17cd544655b00d7062a1df7c457960cc8b9bf60770f9236",
+          "name": "CancelRedeemRequest",
+          "nameLocation": "2198:19:90",
+          "parameters": {
+            "id": 68108,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68103,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "2234:10:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68109,
+                "src": "2218:26:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68102,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2218:7:90",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68105,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "requestId",
+                "nameLocation": "2262:9:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68109,
+                "src": "2246:25:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68104,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2246:7:90",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68107,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "sender",
+                "nameLocation": "2281:6:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68109,
+                "src": "2273:14:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68106,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2273:7:90",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2217:71:90"
+          }
+        },
+        {
+          "id": 68122,
+          "nodeType": "EventDefinition",
+          "src": "2668:151:90",
+          "nodes": [],
+          "anonymous": false,
+          "documentation": {
+            "id": 68110,
+            "nodeType": "StructuredDocumentation",
+            "src": "2295:368:90",
+            "text": "@notice Emitted when shares are returned as part of a redemption cancellation.\n @param controller Controller whose request is being refunded.\n @param receiver Recipient of the refunded shares.\n @param requestId Request identifier.\n @param sender Caller processing the refund.\n @param shares Share amount refunded to the receiver."
+          },
+          "eventSelector": "9c133d4657dc9cd12f4c08cef86ef778dbbe03f3ad3b661ff14d36bc3febb1fb",
+          "name": "CancelRedeemClaim",
+          "nameLocation": "2674:17:90",
+          "parameters": {
+            "id": 68121,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68112,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "2717:10:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68122,
+                "src": "2701:26:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68111,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2701:7:90",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68114,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "receiver",
+                "nameLocation": "2745:8:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68122,
+                "src": "2729:24:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68113,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2729:7:90",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68116,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "requestId",
+                "nameLocation": "2771:9:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68122,
+                "src": "2755:25:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68115,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2755:7:90",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68118,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "sender",
+                "nameLocation": "2790:6:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68122,
+                "src": "2782:14:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68117,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2782:7:90",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68120,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "shares",
+                "nameLocation": "2806:6:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68122,
+                "src": "2798:14:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68119,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2798:7:90",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2691:127:90"
+          }
+        },
+        {
+          "id": 68134,
+          "nodeType": "FunctionDefinition",
+          "src": "3148:136:90",
+          "nodes": [],
+          "documentation": {
+            "id": 68123,
+            "nodeType": "StructuredDocumentation",
+            "src": "2825:318:90",
+            "text": "@notice Cancel a pending redemption request and refund the shares synchronously.\n @param requestId Request identifier.\n @param controller Controller whose pending request is cancelled.\n @param receiver Recipient of the refunded shares.\n @return shares Share amount refunded immediately."
+          },
+          "functionSelector": "6fe0edbb",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "cancelRedeemRequest",
+          "nameLocation": "3157:19:90",
+          "parameters": {
+            "id": 68130,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68125,
+                "mutability": "mutable",
+                "name": "requestId",
+                "nameLocation": "3185:9:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68134,
+                "src": "3177:17:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68124,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3177:7:90",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68127,
+                "mutability": "mutable",
+                "name": "controller",
+                "nameLocation": "3204:10:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68134,
+                "src": "3196:18:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68126,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3196:7:90",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 68129,
+                "mutability": "mutable",
+                "name": "receiver",
+                "nameLocation": "3224:8:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68134,
+                "src": "3216:16:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 68128,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3216:7:90",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "3176:57:90"
+          },
+          "returnParameters": {
+            "id": 68133,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 68132,
+                "mutability": "mutable",
+                "name": "shares",
+                "nameLocation": "3276:6:90",
+                "nodeType": "VariableDeclaration",
+                "scope": 68134,
+                "src": "3268:14:90",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 68131,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3268:7:90",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "3267:16:90"
+          },
+          "scope": 68135,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [],
+      "canonicalName": "IERC7540CancelRedeem",
+      "contractDependencies": [],
+      "contractKind": "interface",
+      "documentation": {
+        "id": 68100,
+        "nodeType": "StructuredDocumentation",
+        "src": "1741:166:90",
+        "text": "@title IERC7540CancelRedeem\n @notice ERC-7540 redemption cancellation (synchronous subset of ERC-7887).\n @dev Spec: https://eips.ethereum.org/EIPS/eip-7887"
+      },
+      "fullyImplemented": false,
+      "linearizedBaseContracts": [
+        68135
+      ],
+      "name": "IERC7540CancelRedeem",
+      "nameLocation": "1917:20:90",
+      "scope": 68136,
+      "usedErrors": [],
+      "usedEvents": [
+        68109,
+        68122
+      ]
+    }
+  ],
+  "license": "Apache-2.0 WITH LicenseRef-Commons-Clause-1.0"
+}
