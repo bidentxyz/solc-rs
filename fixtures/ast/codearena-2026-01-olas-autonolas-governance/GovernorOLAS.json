@@ -1,0 +1,2692 @@
+{
+  "absolutePath": "contracts/GovernorOLAS.sol",
+  "id": 553,
+  "exportedSymbols": {
+    "Governor": [
+      23738
+    ],
+    "GovernorCompatibilityBravo": [
+      25732
+    ],
+    "GovernorOLAS": [
+      552
+    ],
+    "GovernorSettings": [
+      26063
+    ],
+    "GovernorTimelockControl": [
+      13232
+    ],
+    "GovernorVotes": [
+      26482
+    ],
+    "GovernorVotesQuorumFraction": [
+      26685
+    ],
+    "IERC165": [
+      29685
+    ],
+    "IGovernor": [
+      24035
+    ],
+    "IVotes": [
+      26804
+    ],
+    "TimelockController": [
+      24949
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "32:5230:2",
+  "nodes": [
+    {
+      "id": 328,
+      "nodeType": "PragmaDirective",
+      "src": "32:24:2",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "^",
+        "0.8",
+        ".20"
+      ]
+    },
+    {
+      "id": 330,
+      "nodeType": "ImportDirective",
+      "src": "58:80:2",
+      "nodes": [],
+      "absolutePath": "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+      "file": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 553,
+      "sourceUnit": 29686,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 329,
+            "name": "IERC165",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 29685,
+            "src": "66:7:2",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 333,
+      "nodeType": "ImportDirective",
+      "src": "139:84:2",
+      "nodes": [],
+      "absolutePath": "node_modules/@openzeppelin/contracts/governance/Governor.sol",
+      "file": "@openzeppelin/contracts/governance/Governor.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 553,
+      "sourceUnit": 23739,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 331,
+            "name": "Governor",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 23738,
+            "src": "147:8:2",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        },
+        {
+          "foreign": {
+            "id": 332,
+            "name": "IGovernor",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 24035,
+            "src": "157:9:2",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 335,
+      "nodeType": "ImportDirective",
+      "src": "224:100:2",
+      "nodes": [],
+      "absolutePath": "node_modules/@openzeppelin/contracts/governance/extensions/GovernorSettings.sol",
+      "file": "@openzeppelin/contracts/governance/extensions/GovernorSettings.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 553,
+      "sourceUnit": 26064,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 334,
+            "name": "GovernorSettings",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 26063,
+            "src": "232:16:2",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 337,
+      "nodeType": "ImportDirective",
+      "src": "325:129:2",
+      "nodes": [],
+      "absolutePath": "node_modules/@openzeppelin/contracts/governance/compatibility/GovernorCompatibilityBravo.sol",
+      "file": "@openzeppelin/contracts/governance/compatibility/GovernorCompatibilityBravo.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 553,
+      "sourceUnit": 25733,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 336,
+            "name": "GovernorCompatibilityBravo",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 25732,
+            "src": "338:26:2",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 340,
+      "nodeType": "ImportDirective",
+      "src": "455:102:2",
+      "nodes": [],
+      "absolutePath": "node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotes.sol",
+      "file": "@openzeppelin/contracts/governance/extensions/GovernorVotes.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 553,
+      "sourceUnit": 26483,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 338,
+            "name": "GovernorVotes",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 26482,
+            "src": "463:13:2",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        },
+        {
+          "foreign": {
+            "id": 339,
+            "name": "IVotes",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 26804,
+            "src": "478:6:2",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 342,
+      "nodeType": "ImportDirective",
+      "src": "558:128:2",
+      "nodes": [],
+      "absolutePath": "node_modules/@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol",
+      "file": "@openzeppelin/contracts/governance/extensions/GovernorVotesQuorumFraction.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 553,
+      "sourceUnit": 26686,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 341,
+            "name": "GovernorVotesQuorumFraction",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 26685,
+            "src": "571:27:2",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 345,
+      "nodeType": "ImportDirective",
+      "src": "687:96:2",
+      "nodes": [],
+      "absolutePath": "contracts/utils/GovernorTimelockControl.sol",
+      "file": "./utils/GovernorTimelockControl.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 553,
+      "sourceUnit": 13233,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 343,
+            "name": "GovernorTimelockControl",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 13232,
+            "src": "695:23:2",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        },
+        {
+          "foreign": {
+            "id": 344,
+            "name": "TimelockController",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 24949,
+            "src": "720:18:2",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 552,
+      "nodeType": "ContractDefinition",
+      "src": "984:4277:2",
+      "nodes": [
+        {
+          "id": 396,
+          "nodeType": "FunctionDefinition",
+          "src": "1163:559:2",
+          "nodes": [],
+          "body": {
+            "id": 395,
+            "nodeType": "Block",
+            "src": "1720:2:2",
+            "nodes": [],
+            "statements": []
+          },
+          "implemented": true,
+          "kind": "constructor",
+          "modifiers": [
+            {
+              "arguments": [
+                {
+                  "hexValue": "476f7665726e6f72204f4c4153",
+                  "id": 377,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "kind": "string",
+                  "lValueRequested": false,
+                  "nodeType": "Literal",
+                  "src": "1452:15:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_stringliteral_9c9120de2b6b49b35a6228e4952efb36f71dc15d31dd12558b55f3a7f007bbde",
+                    "typeString": "literal_string \"Governor OLAS\""
+                  },
+                  "value": "Governor OLAS"
+                }
+              ],
+              "id": 378,
+              "kind": "baseConstructorSpecifier",
+              "modifierName": {
+                "id": 376,
+                "name": "Governor",
+                "nameLocations": [
+                  "1443:8:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 23738,
+                "src": "1443:8:2"
+              },
+              "nodeType": "ModifierInvocation",
+              "src": "1443:25:2"
+            },
+            {
+              "arguments": [
+                {
+                  "id": 380,
+                  "name": "initialVotingDelay",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 366,
+                  "src": "1494:18:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                {
+                  "id": 381,
+                  "name": "initialVotingPeriod",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 368,
+                  "src": "1514:19:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                {
+                  "id": 382,
+                  "name": "initialProposalThreshold",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 370,
+                  "src": "1535:24:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                }
+              ],
+              "id": 383,
+              "kind": "baseConstructorSpecifier",
+              "modifierName": {
+                "id": 379,
+                "name": "GovernorSettings",
+                "nameLocations": [
+                  "1477:16:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 26063,
+                "src": "1477:16:2"
+              },
+              "nodeType": "ModifierInvocation",
+              "src": "1477:83:2"
+            },
+            {
+              "arguments": [
+                {
+                  "id": 385,
+                  "name": "governanceToken",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 361,
+                  "src": "1583:15:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IVotes_$26804",
+                    "typeString": "contract IVotes"
+                  }
+                }
+              ],
+              "id": 386,
+              "kind": "baseConstructorSpecifier",
+              "modifierName": {
+                "id": 384,
+                "name": "GovernorVotes",
+                "nameLocations": [
+                  "1569:13:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 26482,
+                "src": "1569:13:2"
+              },
+              "nodeType": "ModifierInvocation",
+              "src": "1569:30:2"
+            },
+            {
+              "arguments": [
+                {
+                  "id": 388,
+                  "name": "quorumFraction",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 372,
+                  "src": "1636:14:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                }
+              ],
+              "id": 389,
+              "kind": "baseConstructorSpecifier",
+              "modifierName": {
+                "id": 387,
+                "name": "GovernorVotesQuorumFraction",
+                "nameLocations": [
+                  "1608:27:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 26685,
+                "src": "1608:27:2"
+              },
+              "nodeType": "ModifierInvocation",
+              "src": "1608:43:2"
+            },
+            {
+              "arguments": [
+                {
+                  "id": 391,
+                  "name": "timelock",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 364,
+                  "src": "1684:8:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_TimelockController_$24949",
+                    "typeString": "contract TimelockController"
+                  }
+                },
+                {
+                  "id": 392,
+                  "name": "initialGovernorDelay",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 374,
+                  "src": "1694:20:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                }
+              ],
+              "id": 393,
+              "kind": "baseConstructorSpecifier",
+              "modifierName": {
+                "id": 390,
+                "name": "GovernorTimelockControl",
+                "nameLocations": [
+                  "1660:23:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 13232,
+                "src": "1660:23:2"
+              },
+              "nodeType": "ModifierInvocation",
+              "src": "1660:55:2"
+            }
+          ],
+          "name": "",
+          "nameLocation": "-1:-1:-1",
+          "parameters": {
+            "id": 375,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 361,
+                "mutability": "mutable",
+                "name": "governanceToken",
+                "nameLocation": "1191:15:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 396,
+                "src": "1184:22:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_IVotes_$26804",
+                  "typeString": "contract IVotes"
+                },
+                "typeName": {
+                  "id": 360,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 359,
+                    "name": "IVotes",
+                    "nameLocations": [
+                      "1184:6:2"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 26804,
+                    "src": "1184:6:2"
+                  },
+                  "referencedDeclaration": 26804,
+                  "src": "1184:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_IVotes_$26804",
+                    "typeString": "contract IVotes"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 364,
+                "mutability": "mutable",
+                "name": "timelock",
+                "nameLocation": "1235:8:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 396,
+                "src": "1216:27:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_TimelockController_$24949",
+                  "typeString": "contract TimelockController"
+                },
+                "typeName": {
+                  "id": 363,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 362,
+                    "name": "TimelockController",
+                    "nameLocations": [
+                      "1216:18:2"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 24949,
+                    "src": "1216:18:2"
+                  },
+                  "referencedDeclaration": 24949,
+                  "src": "1216:18:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_TimelockController_$24949",
+                    "typeString": "contract TimelockController"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 366,
+                "mutability": "mutable",
+                "name": "initialVotingDelay",
+                "nameLocation": "1261:18:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 396,
+                "src": "1253:26:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 365,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1253:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 368,
+                "mutability": "mutable",
+                "name": "initialVotingPeriod",
+                "nameLocation": "1297:19:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 396,
+                "src": "1289:27:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 367,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1289:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 370,
+                "mutability": "mutable",
+                "name": "initialProposalThreshold",
+                "nameLocation": "1334:24:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 396,
+                "src": "1326:32:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 369,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1326:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 372,
+                "mutability": "mutable",
+                "name": "quorumFraction",
+                "nameLocation": "1376:14:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 396,
+                "src": "1368:22:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 371,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1368:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 374,
+                "mutability": "mutable",
+                "name": "initialGovernorDelay",
+                "nameLocation": "1408:20:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 396,
+                "src": "1400:28:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 373,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1400:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1174:260:2"
+          },
+          "returnParameters": {
+            "id": 394,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "1720:0:2"
+          },
+          "scope": 552,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "public"
+        },
+        {
+          "id": 415,
+          "nodeType": "FunctionDefinition",
+          "src": "1844:209:2",
+          "nodes": [],
+          "body": {
+            "id": 414,
+            "nodeType": "Block",
+            "src": "2006:47:2",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "id": 411,
+                      "name": "proposalId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 399,
+                      "src": "2035:10:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    ],
+                    "expression": {
+                      "id": 409,
+                      "name": "super",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -25,
+                      "src": "2023:5:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_super$_GovernorOLAS_$552_$",
+                        "typeString": "type(contract super GovernorOLAS)"
+                      }
+                    },
+                    "id": 410,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "2029:5:2",
+                    "memberName": "state",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 12941,
+                    "src": "2023:11:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_view$_t_uint256_$returns$_t_enum$_ProposalState_$23753_$",
+                      "typeString": "function (uint256) view returns (enum IGovernor.ProposalState)"
+                    }
+                  },
+                  "id": 412,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "2023:23:2",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_ProposalState_$23753",
+                    "typeString": "enum IGovernor.ProposalState"
+                  }
+                },
+                "functionReturnParameters": 408,
+                "id": 413,
+                "nodeType": "Return",
+                "src": "2016:30:2"
+              }
+            ]
+          },
+          "baseFunctions": [
+            12941,
+            22756,
+            23860
+          ],
+          "documentation": {
+            "id": 397,
+            "nodeType": "StructuredDocumentation",
+            "src": "1728:111:2",
+            "text": "@dev Current state of a proposal, following Compound\u2019s convention.\n @param proposalId Proposal Id."
+          },
+          "functionSelector": "3e4f49e6",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "state",
+          "nameLocation": "1853:5:2",
+          "overrides": {
+            "id": 404,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [
+              {
+                "id": 401,
+                "name": "IGovernor",
+                "nameLocations": [
+                  "1924:9:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 24035,
+                "src": "1924:9:2"
+              },
+              {
+                "id": 402,
+                "name": "Governor",
+                "nameLocations": [
+                  "1935:8:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 23738,
+                "src": "1935:8:2"
+              },
+              {
+                "id": 403,
+                "name": "GovernorTimelockControl",
+                "nameLocations": [
+                  "1945:23:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 13232,
+                "src": "1945:23:2"
+              }
+            ],
+            "src": "1915:54:2"
+          },
+          "parameters": {
+            "id": 400,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 399,
+                "mutability": "mutable",
+                "name": "proposalId",
+                "nameLocation": "1867:10:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 415,
+                "src": "1859:18:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 398,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1859:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1858:20:2"
+          },
+          "returnParameters": {
+            "id": 408,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 407,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 415,
+                "src": "1987:13:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_ProposalState_$23753",
+                  "typeString": "enum IGovernor.ProposalState"
+                },
+                "typeName": {
+                  "id": 406,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 405,
+                    "name": "ProposalState",
+                    "nameLocations": [
+                      "1987:13:2"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 23753,
+                    "src": "1987:13:2"
+                  },
+                  "referencedDeclaration": 23753,
+                  "src": "1987:13:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_ProposalState_$23753",
+                    "typeString": "enum IGovernor.ProposalState"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1986:15:2"
+          },
+          "scope": 552,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "public"
+        },
+        {
+          "id": 445,
+          "nodeType": "FunctionDefinition",
+          "src": "2635:320:2",
+          "nodes": [],
+          "body": {
+            "id": 444,
+            "nodeType": "Block",
+            "src": "2877:78:2",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "id": 438,
+                      "name": "targets",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 419,
+                      "src": "2908:7:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                        "typeString": "address[] memory"
+                      }
+                    },
+                    {
+                      "id": 439,
+                      "name": "values",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 422,
+                      "src": "2917:6:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                        "typeString": "uint256[] memory"
+                      }
+                    },
+                    {
+                      "id": 440,
+                      "name": "calldatas",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 425,
+                      "src": "2925:9:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_bytes_memory_ptr_$dyn_memory_ptr",
+                        "typeString": "bytes memory[] memory"
+                      }
+                    },
+                    {
+                      "id": 441,
+                      "name": "description",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 427,
+                      "src": "2936:11:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                        "typeString": "address[] memory"
+                      },
+                      {
+                        "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                        "typeString": "uint256[] memory"
+                      },
+                      {
+                        "typeIdentifier": "t_array$_t_bytes_memory_ptr_$dyn_memory_ptr",
+                        "typeString": "bytes memory[] memory"
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 436,
+                      "name": "super",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -25,
+                      "src": "2894:5:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_super$_GovernorOLAS_$552_$",
+                        "typeString": "type(contract super GovernorOLAS)"
+                      }
+                    },
+                    "id": 437,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "2900:7:2",
+                    "memberName": "propose",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 25052,
+                    "src": "2894:13:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_nonpayable$_t_array$_t_address_$dyn_memory_ptr_$_t_array$_t_uint256_$dyn_memory_ptr_$_t_array$_t_bytes_memory_ptr_$dyn_memory_ptr_$_t_string_memory_ptr_$returns$_t_uint256_$",
+                      "typeString": "function (address[] memory,uint256[] memory,bytes memory[] memory,string memory) returns (uint256)"
+                    }
+                  },
+                  "id": 442,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "2894:54:2",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "functionReturnParameters": 435,
+                "id": 443,
+                "nodeType": "Return",
+                "src": "2887:61:2"
+              }
+            ]
+          },
+          "baseFunctions": [
+            22996,
+            23945,
+            25052
+          ],
+          "documentation": {
+            "id": 416,
+            "nodeType": "StructuredDocumentation",
+            "src": "2059:571:2",
+            "text": "@dev Create a new proposal to change the protocol / contract parameters.\n @param targets The ordered list of target addresses for calls to be made during proposal execution.\n @param values The ordered list of values to be passed to the calls made during proposal execution.\n @param calldatas The ordered list of data to be passed to each individual function call during proposal execution.\n @param description A human readable description of the proposal and the changes it will enact.\n @return The Id of the newly created proposal."
+          },
+          "functionSelector": "7d5e81e2",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "propose",
+          "nameLocation": "2644:7:2",
+          "overrides": {
+            "id": 432,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [
+              {
+                "id": 429,
+                "name": "IGovernor",
+                "nameLocations": [
+                  "2810:9:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 24035,
+                "src": "2810:9:2"
+              },
+              {
+                "id": 430,
+                "name": "Governor",
+                "nameLocations": [
+                  "2821:8:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 23738,
+                "src": "2821:8:2"
+              },
+              {
+                "id": 431,
+                "name": "GovernorCompatibilityBravo",
+                "nameLocations": [
+                  "2831:26:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 25732,
+                "src": "2831:26:2"
+              }
+            ],
+            "src": "2801:57:2"
+          },
+          "parameters": {
+            "id": 428,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 419,
+                "mutability": "mutable",
+                "name": "targets",
+                "nameLocation": "2678:7:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 445,
+                "src": "2661:24:2",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                  "typeString": "address[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 417,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2661:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 418,
+                  "nodeType": "ArrayTypeName",
+                  "src": "2661:9:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                    "typeString": "address[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 422,
+                "mutability": "mutable",
+                "name": "values",
+                "nameLocation": "2712:6:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 445,
+                "src": "2695:23:2",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                  "typeString": "uint256[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 420,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2695:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 421,
+                  "nodeType": "ArrayTypeName",
+                  "src": "2695:9:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 425,
+                "mutability": "mutable",
+                "name": "calldatas",
+                "nameLocation": "2743:9:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 445,
+                "src": "2728:24:2",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_bytes_memory_ptr_$dyn_memory_ptr",
+                  "typeString": "bytes[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 423,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2728:5:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "id": 424,
+                  "nodeType": "ArrayTypeName",
+                  "src": "2728:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                    "typeString": "bytes[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 427,
+                "mutability": "mutable",
+                "name": "description",
+                "nameLocation": "2776:11:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 445,
+                "src": "2762:25:2",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_memory_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 426,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2762:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2651:142:2"
+          },
+          "returnParameters": {
+            "id": 435,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 434,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 445,
+                "src": "2868:7:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 433,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2868:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2867:9:2"
+          },
+          "scope": 552,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "public"
+        },
+        {
+          "id": 459,
+          "nodeType": "FunctionDefinition",
+          "src": "3109:145:2",
+          "nodes": [],
+          "body": {
+            "id": 458,
+            "nodeType": "Block",
+            "src": "3205:49:2",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 454,
+                      "name": "super",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -25,
+                      "src": "3222:5:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_super$_GovernorOLAS_$552_$",
+                        "typeString": "type(contract super GovernorOLAS)"
+                      }
+                    },
+                    "id": 455,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "3228:17:2",
+                    "memberName": "proposalThreshold",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 25968,
+                    "src": "3222:23:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_view$__$returns$_t_uint256_$",
+                      "typeString": "function () view returns (uint256)"
+                    }
+                  },
+                  "id": 456,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "3222:25:2",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "functionReturnParameters": 453,
+                "id": 457,
+                "nodeType": "Return",
+                "src": "3215:32:2"
+              }
+            ]
+          },
+          "baseFunctions": [
+            22799,
+            25968
+          ],
+          "documentation": {
+            "id": 446,
+            "nodeType": "StructuredDocumentation",
+            "src": "2961:143:2",
+            "text": "@dev Gets the voting power for the proposal threshold.\n @return The voting power required in order for a voter to become a proposer."
+          },
+          "functionSelector": "b58131b0",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "proposalThreshold",
+          "nameLocation": "3118:17:2",
+          "overrides": {
+            "id": 450,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [
+              {
+                "id": 448,
+                "name": "Governor",
+                "nameLocations": [
+                  "3159:8:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 23738,
+                "src": "3159:8:2"
+              },
+              {
+                "id": 449,
+                "name": "GovernorSettings",
+                "nameLocations": [
+                  "3169:16:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 26063,
+                "src": "3169:16:2"
+              }
+            ],
+            "src": "3150:36:2"
+          },
+          "parameters": {
+            "id": 447,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "3135:2:2"
+          },
+          "returnParameters": {
+            "id": 453,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 452,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 459,
+                "src": "3196:7:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 451,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3196:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "3195:9:2"
+          },
+          "scope": 552,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "public"
+        },
+        {
+          "id": 490,
+          "nodeType": "FunctionDefinition",
+          "src": "3608:327:2",
+          "nodes": [],
+          "body": {
+            "id": 489,
+            "nodeType": "Block",
+            "src": "3847:88:2",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "id": 482,
+                      "name": "proposalId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 462,
+                      "src": "3872:10:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "id": 483,
+                      "name": "targets",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 465,
+                      "src": "3884:7:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                        "typeString": "address[] memory"
+                      }
+                    },
+                    {
+                      "id": 484,
+                      "name": "values",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 468,
+                      "src": "3893:6:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                        "typeString": "uint256[] memory"
+                      }
+                    },
+                    {
+                      "id": 485,
+                      "name": "calldatas",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 471,
+                      "src": "3901:9:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_bytes_memory_ptr_$dyn_memory_ptr",
+                        "typeString": "bytes memory[] memory"
+                      }
+                    },
+                    {
+                      "id": 486,
+                      "name": "descriptionHash",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 473,
+                      "src": "3912:15:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                        "typeString": "address[] memory"
+                      },
+                      {
+                        "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                        "typeString": "uint256[] memory"
+                      },
+                      {
+                        "typeIdentifier": "t_array$_t_bytes_memory_ptr_$dyn_memory_ptr",
+                        "typeString": "bytes memory[] memory"
+                      },
+                      {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    ],
+                    "expression": {
+                      "id": 479,
+                      "name": "super",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -25,
+                      "src": "3857:5:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_super$_GovernorOLAS_$552_$",
+                        "typeString": "type(contract super GovernorOLAS)"
+                      }
+                    },
+                    "id": 481,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "3863:8:2",
+                    "memberName": "_execute",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 13088,
+                    "src": "3857:14:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$_t_array$_t_address_$dyn_memory_ptr_$_t_array$_t_uint256_$dyn_memory_ptr_$_t_array$_t_bytes_memory_ptr_$dyn_memory_ptr_$_t_bytes32_$returns$__$",
+                      "typeString": "function (uint256,address[] memory,uint256[] memory,bytes memory[] memory,bytes32)"
+                    }
+                  },
+                  "id": 487,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "3857:71:2",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 488,
+                "nodeType": "ExpressionStatement",
+                "src": "3857:71:2"
+              }
+            ]
+          },
+          "baseFunctions": [
+            13088,
+            23141
+          ],
+          "documentation": {
+            "id": 460,
+            "nodeType": "StructuredDocumentation",
+            "src": "3260:343:2",
+            "text": "@dev Executes a proposal.\n @param proposalId Proposal Id.\n @param targets The ordered list of target addresses.\n @param values The ordered list of values.\n @param calldatas The ordered list of data to be passed to each individual function call.\n @param descriptionHash Hashed description of the proposal."
+          },
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "_execute",
+          "nameLocation": "3617:8:2",
+          "overrides": {
+            "id": 477,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [
+              {
+                "id": 475,
+                "name": "Governor",
+                "nameLocations": [
+                  "3812:8:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 23738,
+                "src": "3812:8:2"
+              },
+              {
+                "id": 476,
+                "name": "GovernorTimelockControl",
+                "nameLocations": [
+                  "3822:23:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 13232,
+                "src": "3822:23:2"
+              }
+            ],
+            "src": "3803:43:2"
+          },
+          "parameters": {
+            "id": 474,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 462,
+                "mutability": "mutable",
+                "name": "proposalId",
+                "nameLocation": "3643:10:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 490,
+                "src": "3635:18:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 461,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3635:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 465,
+                "mutability": "mutable",
+                "name": "targets",
+                "nameLocation": "3680:7:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 490,
+                "src": "3663:24:2",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                  "typeString": "address[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 463,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3663:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 464,
+                  "nodeType": "ArrayTypeName",
+                  "src": "3663:9:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                    "typeString": "address[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 468,
+                "mutability": "mutable",
+                "name": "values",
+                "nameLocation": "3714:6:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 490,
+                "src": "3697:23:2",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                  "typeString": "uint256[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 466,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3697:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 467,
+                  "nodeType": "ArrayTypeName",
+                  "src": "3697:9:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 471,
+                "mutability": "mutable",
+                "name": "calldatas",
+                "nameLocation": "3745:9:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 490,
+                "src": "3730:24:2",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_bytes_memory_ptr_$dyn_memory_ptr",
+                  "typeString": "bytes[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 469,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3730:5:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "id": 470,
+                  "nodeType": "ArrayTypeName",
+                  "src": "3730:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                    "typeString": "bytes[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 473,
+                "mutability": "mutable",
+                "name": "descriptionHash",
+                "nameLocation": "3772:15:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 490,
+                "src": "3764:23:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 472,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3764:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "3625:168:2"
+          },
+          "returnParameters": {
+            "id": 478,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "3847:0:2"
+          },
+          "scope": 552,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "internal"
+        },
+        {
+          "id": 519,
+          "nodeType": "FunctionDefinition",
+          "src": "4303:310:2",
+          "nodes": [],
+          "body": {
+            "id": 518,
+            "nodeType": "Block",
+            "src": "4531:82:2",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "id": 512,
+                      "name": "targets",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 494,
+                      "src": "4562:7:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                        "typeString": "address[] memory"
+                      }
+                    },
+                    {
+                      "id": 513,
+                      "name": "values",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 497,
+                      "src": "4571:6:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                        "typeString": "uint256[] memory"
+                      }
+                    },
+                    {
+                      "id": 514,
+                      "name": "calldatas",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 500,
+                      "src": "4579:9:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_bytes_memory_ptr_$dyn_memory_ptr",
+                        "typeString": "bytes memory[] memory"
+                      }
+                    },
+                    {
+                      "id": 515,
+                      "name": "descriptionHash",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 502,
+                      "src": "4590:15:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                        "typeString": "address[] memory"
+                      },
+                      {
+                        "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                        "typeString": "uint256[] memory"
+                      },
+                      {
+                        "typeIdentifier": "t_array$_t_bytes_memory_ptr_$dyn_memory_ptr",
+                        "typeString": "bytes memory[] memory"
+                      },
+                      {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    ],
+                    "expression": {
+                      "id": 510,
+                      "name": "super",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -25,
+                      "src": "4548:5:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_super$_GovernorOLAS_$552_$",
+                        "typeString": "type(contract super GovernorOLAS)"
+                      }
+                    },
+                    "id": 511,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "4554:7:2",
+                    "memberName": "_cancel",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 13139,
+                    "src": "4548:13:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_nonpayable$_t_array$_t_address_$dyn_memory_ptr_$_t_array$_t_uint256_$dyn_memory_ptr_$_t_array$_t_bytes_memory_ptr_$dyn_memory_ptr_$_t_bytes32_$returns$_t_uint256_$",
+                      "typeString": "function (address[] memory,uint256[] memory,bytes memory[] memory,bytes32) returns (uint256)"
+                    }
+                  },
+                  "id": 516,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "4548:58:2",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "functionReturnParameters": 509,
+                "id": 517,
+                "nodeType": "Return",
+                "src": "4541:65:2"
+              }
+            ]
+          },
+          "baseFunctions": [
+            13139,
+            23304
+          ],
+          "documentation": {
+            "id": 491,
+            "nodeType": "StructuredDocumentation",
+            "src": "3941:357:2",
+            "text": "@dev Cancels a proposal.\n @param targets The ordered list of target addresses.\n @param values The ordered list of values.\n @param calldatas The ordered list of data to be passed to each individual function call.\n @param descriptionHash Hashed description of the proposal.\n @return The Id of the newly created proposal."
+          },
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "_cancel",
+          "nameLocation": "4312:7:2",
+          "overrides": {
+            "id": 506,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [
+              {
+                "id": 504,
+                "name": "Governor",
+                "nameLocations": [
+                  "4478:8:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 23738,
+                "src": "4478:8:2"
+              },
+              {
+                "id": 505,
+                "name": "GovernorTimelockControl",
+                "nameLocations": [
+                  "4488:23:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 13232,
+                "src": "4488:23:2"
+              }
+            ],
+            "src": "4469:43:2"
+          },
+          "parameters": {
+            "id": 503,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 494,
+                "mutability": "mutable",
+                "name": "targets",
+                "nameLocation": "4346:7:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 519,
+                "src": "4329:24:2",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_address_$dyn_memory_ptr",
+                  "typeString": "address[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 492,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4329:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 493,
+                  "nodeType": "ArrayTypeName",
+                  "src": "4329:9:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                    "typeString": "address[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 497,
+                "mutability": "mutable",
+                "name": "values",
+                "nameLocation": "4380:6:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 519,
+                "src": "4363:23:2",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                  "typeString": "uint256[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 495,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4363:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 496,
+                  "nodeType": "ArrayTypeName",
+                  "src": "4363:9:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 500,
+                "mutability": "mutable",
+                "name": "calldatas",
+                "nameLocation": "4411:9:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 519,
+                "src": "4396:24:2",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_bytes_memory_ptr_$dyn_memory_ptr",
+                  "typeString": "bytes[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 498,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "4396:5:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "id": 499,
+                  "nodeType": "ArrayTypeName",
+                  "src": "4396:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                    "typeString": "bytes[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 502,
+                "mutability": "mutable",
+                "name": "descriptionHash",
+                "nameLocation": "4438:15:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 519,
+                "src": "4430:23:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 501,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4430:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4319:140:2"
+          },
+          "returnParameters": {
+            "id": 509,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 508,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 519,
+                "src": "4522:7:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 507,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4522:7:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4521:9:2"
+          },
+          "scope": 552,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "internal"
+        },
+        {
+          "id": 533,
+          "nodeType": "FunctionDefinition",
+          "src": "4693:138:2",
+          "nodes": [],
+          "body": {
+            "id": 532,
+            "nodeType": "Block",
+            "src": "4790:41:2",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 528,
+                      "name": "super",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -25,
+                      "src": "4807:5:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_super$_GovernorOLAS_$552_$",
+                        "typeString": "type(contract super GovernorOLAS)"
+                      }
+                    },
+                    "id": 529,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "4813:9:2",
+                    "memberName": "_executor",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 13152,
+                    "src": "4807:15:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
+                      "typeString": "function () view returns (address)"
+                    }
+                  },
+                  "id": 530,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "4807:17:2",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "functionReturnParameters": 527,
+                "id": 531,
+                "nodeType": "Return",
+                "src": "4800:24:2"
+              }
+            ]
+          },
+          "baseFunctions": [
+            13152,
+            23671
+          ],
+          "documentation": {
+            "id": 520,
+            "nodeType": "StructuredDocumentation",
+            "src": "4619:69:2",
+            "text": "@dev Gets the executor address.\n @return Executor address."
+          },
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "_executor",
+          "nameLocation": "4702:9:2",
+          "overrides": {
+            "id": 524,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [
+              {
+                "id": 522,
+                "name": "Governor",
+                "nameLocations": [
+                  "4737:8:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 23738,
+                "src": "4737:8:2"
+              },
+              {
+                "id": 523,
+                "name": "GovernorTimelockControl",
+                "nameLocations": [
+                  "4747:23:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 13232,
+                "src": "4747:23:2"
+              }
+            ],
+            "src": "4728:43:2"
+          },
+          "parameters": {
+            "id": 521,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "4711:2:2"
+          },
+          "returnParameters": {
+            "id": 527,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 526,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 533,
+                "src": "4781:7:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 525,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4781:7:2",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4780:9:2"
+          },
+          "scope": 552,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "internal"
+        },
+        {
+          "id": 551,
+          "nodeType": "FunctionDefinition",
+          "src": "5036:223:2",
+          "nodes": [],
+          "body": {
+            "id": 550,
+            "nodeType": "Block",
+            "src": "5199:60:2",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "id": 547,
+                      "name": "interfaceId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 536,
+                      "src": "5240:11:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes4",
+                        "typeString": "bytes4"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_bytes4",
+                        "typeString": "bytes4"
+                      }
+                    ],
+                    "expression": {
+                      "id": 545,
+                      "name": "super",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -25,
+                      "src": "5216:5:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_super$_GovernorOLAS_$552_$",
+                        "typeString": "type(contract super GovernorOLAS)"
+                      }
+                    },
+                    "id": 546,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "5222:17:2",
+                    "memberName": "supportsInterface",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 12874,
+                    "src": "5216:23:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_view$_t_bytes4_$returns$_t_bool_$",
+                      "typeString": "function (bytes4) view returns (bool)"
+                    }
+                  },
+                  "id": 548,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "5216:36:2",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "functionReturnParameters": 544,
+                "id": 549,
+                "nodeType": "Return",
+                "src": "5209:43:2"
+              }
+            ]
+          },
+          "baseFunctions": [
+            12874,
+            22617,
+            29684
+          ],
+          "documentation": {
+            "id": 534,
+            "nodeType": "StructuredDocumentation",
+            "src": "4837:194:2",
+            "text": "@dev Gets information about the interface support.\n @param interfaceId A specified interface Id.\n @return True if this contract implements the interface defined by interfaceId."
+          },
+          "functionSelector": "01ffc9a7",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "supportsInterface",
+          "nameLocation": "5045:17:2",
+          "overrides": {
+            "id": 541,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [
+              {
+                "id": 538,
+                "name": "IERC165",
+                "nameLocations": [
+                  "5128:7:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 29685,
+                "src": "5128:7:2"
+              },
+              {
+                "id": 539,
+                "name": "Governor",
+                "nameLocations": [
+                  "5137:8:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 23738,
+                "src": "5137:8:2"
+              },
+              {
+                "id": 540,
+                "name": "GovernorTimelockControl",
+                "nameLocations": [
+                  "5147:23:2"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 13232,
+                "src": "5147:23:2"
+              }
+            ],
+            "src": "5119:52:2"
+          },
+          "parameters": {
+            "id": 537,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 536,
+                "mutability": "mutable",
+                "name": "interfaceId",
+                "nameLocation": "5070:11:2",
+                "nodeType": "VariableDeclaration",
+                "scope": 551,
+                "src": "5063:18:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes4",
+                  "typeString": "bytes4"
+                },
+                "typeName": {
+                  "id": 535,
+                  "name": "bytes4",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5063:6:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "5062:20:2"
+          },
+          "returnParameters": {
+            "id": 544,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 543,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 551,
+                "src": "5189:4:2",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 542,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5189:4:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "5188:6:2"
+          },
+          "scope": 552,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "public"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [
+        {
+          "baseName": {
+            "id": 347,
+            "name": "Governor",
+            "nameLocations": [
+              "1013:8:2"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 23738,
+            "src": "1013:8:2"
+          },
+          "id": 348,
+          "nodeType": "InheritanceSpecifier",
+          "src": "1013:8:2"
+        },
+        {
+          "baseName": {
+            "id": 349,
+            "name": "GovernorSettings",
+            "nameLocations": [
+              "1027:16:2"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 26063,
+            "src": "1027:16:2"
+          },
+          "id": 350,
+          "nodeType": "InheritanceSpecifier",
+          "src": "1027:16:2"
+        },
+        {
+          "baseName": {
+            "id": 351,
+            "name": "GovernorCompatibilityBravo",
+            "nameLocations": [
+              "1049:26:2"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 25732,
+            "src": "1049:26:2"
+          },
+          "id": 352,
+          "nodeType": "InheritanceSpecifier",
+          "src": "1049:26:2"
+        },
+        {
+          "baseName": {
+            "id": 353,
+            "name": "GovernorVotes",
+            "nameLocations": [
+              "1081:13:2"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 26482,
+            "src": "1081:13:2"
+          },
+          "id": 354,
+          "nodeType": "InheritanceSpecifier",
+          "src": "1081:13:2"
+        },
+        {
+          "baseName": {
+            "id": 355,
+            "name": "GovernorVotesQuorumFraction",
+            "nameLocations": [
+              "1100:27:2"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 26685,
+            "src": "1100:27:2"
+          },
+          "id": 356,
+          "nodeType": "InheritanceSpecifier",
+          "src": "1100:27:2"
+        },
+        {
+          "baseName": {
+            "id": 357,
+            "name": "GovernorTimelockControl",
+            "nameLocations": [
+              "1133:23:2"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 13232,
+            "src": "1133:23:2"
+          },
+          "id": 358,
+          "nodeType": "InheritanceSpecifier",
+          "src": "1133:23:2"
+        }
+      ],
+      "canonicalName": "GovernorOLAS",
+      "contractDependencies": [],
+      "contractKind": "contract",
+      "documentation": {
+        "id": 346,
+        "nodeType": "StructuredDocumentation",
+        "src": "785:199:2",
+        "text": "@title Governor OLAS - Smart contract for Autonolas governance\n @author Aleksandr Kuperman - <aleksandr.kuperman@valory.xyz>\n @dev The OpenZeppelin functions are used as is, version 4.8.3."
+      },
+      "fullyImplemented": true,
+      "linearizedBaseContracts": [
+        552,
+        13232,
+        26685,
+        26482,
+        25732,
+        26063,
+        23738,
+        26845,
+        26941,
+        25885,
+        26726,
+        24035,
+        29649,
+        29673,
+        29685,
+        28664
+      ],
+      "name": "GovernorOLAS",
+      "nameLocation": "993:12:2",
+      "scope": 553,
+      "usedErrors": [
+        12806,
+        32098
+      ],
+      "usedEvents": [
+        12827,
+        12832,
+        23778,
+        23783,
+        23788,
+        23801,
+        23816,
+        25903,
+        25909,
+        25915,
+        26505,
+        26697
+      ]
+    }
+  ],
+  "license": "MIT"
+}

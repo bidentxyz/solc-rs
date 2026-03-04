@@ -1,0 +1,926 @@
+{
+  "absolutePath": "node_modules/@openzeppelin/contracts/governance/utils/IVotes.sol",
+  "id": 26805,
+  "exportedSymbols": {
+    "IVotes": [
+      26804
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "110:1954:89",
+  "nodes": [
+    {
+      "id": 26728,
+      "nodeType": "PragmaDirective",
+      "src": "110:23:89",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "^",
+        "0.8",
+        ".0"
+      ]
+    },
+    {
+      "id": 26804,
+      "nodeType": "ContractDefinition",
+      "src": "268:1795:89",
+      "nodes": [
+        {
+          "id": 26738,
+          "nodeType": "EventDefinition",
+          "src": "367:107:89",
+          "nodes": [],
+          "anonymous": false,
+          "documentation": {
+            "id": 26730,
+            "nodeType": "StructuredDocumentation",
+            "src": "291:71:89",
+            "text": " @dev Emitted when an account changes their delegate."
+          },
+          "eventSelector": "3134e8a2e6d97e929a7e54011ea5485d7d196dd5f0ba4d4ef95803e8e3fc257f",
+          "name": "DelegateChanged",
+          "nameLocation": "373:15:89",
+          "parameters": {
+            "id": 26737,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 26732,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "delegator",
+                "nameLocation": "405:9:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26738,
+                "src": "389:25:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 26731,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "389:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26734,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "fromDelegate",
+                "nameLocation": "432:12:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26738,
+                "src": "416:28:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 26733,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "416:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26736,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "toDelegate",
+                "nameLocation": "462:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26738,
+                "src": "446:26:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 26735,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "446:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "388:85:89"
+          }
+        },
+        {
+          "id": 26747,
+          "nodeType": "EventDefinition",
+          "src": "609:98:89",
+          "nodes": [],
+          "anonymous": false,
+          "documentation": {
+            "id": 26739,
+            "nodeType": "StructuredDocumentation",
+            "src": "480:124:89",
+            "text": " @dev Emitted when a token transfer or delegate change results in changes to a delegate's number of votes."
+          },
+          "eventSelector": "dec2bacdd2f05b59de34da9b523dff8be42e5e38e818c82fdb0bae774387a724",
+          "name": "DelegateVotesChanged",
+          "nameLocation": "615:20:89",
+          "parameters": {
+            "id": 26746,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 26741,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "delegate",
+                "nameLocation": "652:8:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26747,
+                "src": "636:24:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 26740,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "636:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26743,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "previousBalance",
+                "nameLocation": "670:15:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26747,
+                "src": "662:23:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 26742,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "662:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26745,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "newBalance",
+                "nameLocation": "695:10:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26747,
+                "src": "687:18:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 26744,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "687:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "635:71:89"
+          }
+        },
+        {
+          "id": 26755,
+          "nodeType": "FunctionDefinition",
+          "src": "797:67:89",
+          "nodes": [],
+          "documentation": {
+            "id": 26748,
+            "nodeType": "StructuredDocumentation",
+            "src": "713:79:89",
+            "text": " @dev Returns the current amount of votes that `account` has."
+          },
+          "functionSelector": "9ab24eb0",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "getVotes",
+          "nameLocation": "806:8:89",
+          "parameters": {
+            "id": 26751,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 26750,
+                "mutability": "mutable",
+                "name": "account",
+                "nameLocation": "823:7:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26755,
+                "src": "815:15:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 26749,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "815:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "814:17:89"
+          },
+          "returnParameters": {
+            "id": 26754,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 26753,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 26755,
+                "src": "855:7:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 26752,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "855:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "854:9:89"
+          },
+          "scope": 26804,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 26765,
+          "nodeType": "FunctionDefinition",
+          "src": "989:92:89",
+          "nodes": [],
+          "documentation": {
+            "id": 26756,
+            "nodeType": "StructuredDocumentation",
+            "src": "870:114:89",
+            "text": " @dev Returns the amount of votes that `account` had at the end of a past block (`blockNumber`)."
+          },
+          "functionSelector": "3a46b1a8",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "getPastVotes",
+          "nameLocation": "998:12:89",
+          "parameters": {
+            "id": 26761,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 26758,
+                "mutability": "mutable",
+                "name": "account",
+                "nameLocation": "1019:7:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26765,
+                "src": "1011:15:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 26757,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1011:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26760,
+                "mutability": "mutable",
+                "name": "blockNumber",
+                "nameLocation": "1036:11:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26765,
+                "src": "1028:19:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 26759,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1028:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1010:38:89"
+          },
+          "returnParameters": {
+            "id": 26764,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 26763,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 26765,
+                "src": "1072:7:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 26762,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1072:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1071:9:89"
+          },
+          "scope": 26804,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 26773,
+          "nodeType": "FunctionDefinition",
+          "src": "1457:81:89",
+          "nodes": [],
+          "documentation": {
+            "id": 26766,
+            "nodeType": "StructuredDocumentation",
+            "src": "1087:365:89",
+            "text": " @dev Returns the total supply of votes available at the end of a past block (`blockNumber`).\n NOTE: This value is the sum of all available votes, which is not necessarily the sum of all delegated votes.\n Votes that have not been delegated are still part of total supply, even though they would not participate in a\n vote."
+          },
+          "functionSelector": "8e539e8c",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "getPastTotalSupply",
+          "nameLocation": "1466:18:89",
+          "parameters": {
+            "id": 26769,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 26768,
+                "mutability": "mutable",
+                "name": "blockNumber",
+                "nameLocation": "1493:11:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26773,
+                "src": "1485:19:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 26767,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1485:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1484:21:89"
+          },
+          "returnParameters": {
+            "id": 26772,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 26771,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 26773,
+                "src": "1529:7:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 26770,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1529:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1528:9:89"
+          },
+          "scope": 26804,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 26781,
+          "nodeType": "FunctionDefinition",
+          "src": "1620:68:89",
+          "nodes": [],
+          "documentation": {
+            "id": 26774,
+            "nodeType": "StructuredDocumentation",
+            "src": "1544:71:89",
+            "text": " @dev Returns the delegate that `account` has chosen."
+          },
+          "functionSelector": "587cde1e",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "delegates",
+          "nameLocation": "1629:9:89",
+          "parameters": {
+            "id": 26777,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 26776,
+                "mutability": "mutable",
+                "name": "account",
+                "nameLocation": "1647:7:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26781,
+                "src": "1639:15:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 26775,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1639:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1638:17:89"
+          },
+          "returnParameters": {
+            "id": 26780,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 26779,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 26781,
+                "src": "1679:7:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 26778,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1679:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1678:9:89"
+          },
+          "scope": 26804,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 26787,
+          "nodeType": "FunctionDefinition",
+          "src": "1770:46:89",
+          "nodes": [],
+          "documentation": {
+            "id": 26782,
+            "nodeType": "StructuredDocumentation",
+            "src": "1694:71:89",
+            "text": " @dev Delegates votes from the sender to `delegatee`."
+          },
+          "functionSelector": "5c19a95c",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "delegate",
+          "nameLocation": "1779:8:89",
+          "parameters": {
+            "id": 26785,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 26784,
+                "mutability": "mutable",
+                "name": "delegatee",
+                "nameLocation": "1796:9:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26787,
+                "src": "1788:17:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 26783,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1788:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1787:19:89"
+          },
+          "returnParameters": {
+            "id": 26786,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "1815:0:89"
+          },
+          "scope": 26804,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 26803,
+          "nodeType": "FunctionDefinition",
+          "src": "1894:167:89",
+          "nodes": [],
+          "documentation": {
+            "id": 26788,
+            "nodeType": "StructuredDocumentation",
+            "src": "1822:67:89",
+            "text": " @dev Delegates votes from signer to `delegatee`."
+          },
+          "functionSelector": "c3cda520",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "delegateBySig",
+          "nameLocation": "1903:13:89",
+          "parameters": {
+            "id": 26801,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 26790,
+                "mutability": "mutable",
+                "name": "delegatee",
+                "nameLocation": "1934:9:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26803,
+                "src": "1926:17:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 26789,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1926:7:89",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26792,
+                "mutability": "mutable",
+                "name": "nonce",
+                "nameLocation": "1961:5:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26803,
+                "src": "1953:13:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 26791,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1953:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26794,
+                "mutability": "mutable",
+                "name": "expiry",
+                "nameLocation": "1984:6:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26803,
+                "src": "1976:14:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 26793,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1976:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26796,
+                "mutability": "mutable",
+                "name": "v",
+                "nameLocation": "2006:1:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26803,
+                "src": "2000:7:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 26795,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2000:5:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26798,
+                "mutability": "mutable",
+                "name": "r",
+                "nameLocation": "2025:1:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26803,
+                "src": "2017:9:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 26797,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2017:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 26800,
+                "mutability": "mutable",
+                "name": "s",
+                "nameLocation": "2044:1:89",
+                "nodeType": "VariableDeclaration",
+                "scope": 26803,
+                "src": "2036:9:89",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 26799,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2036:7:89",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1916:135:89"
+          },
+          "returnParameters": {
+            "id": 26802,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "2060:0:89"
+          },
+          "scope": 26804,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [],
+      "canonicalName": "IVotes",
+      "contractDependencies": [],
+      "contractKind": "interface",
+      "documentation": {
+        "id": 26729,
+        "nodeType": "StructuredDocumentation",
+        "src": "135:132:89",
+        "text": " @dev Common interface for {ERC20Votes}, {ERC721Votes}, and other {Votes}-enabled contracts.\n _Available since v4.5._"
+      },
+      "fullyImplemented": false,
+      "linearizedBaseContracts": [
+        26804
+      ],
+      "name": "IVotes",
+      "nameLocation": "278:6:89",
+      "scope": 26805,
+      "usedErrors": [],
+      "usedEvents": [
+        26738,
+        26747
+      ]
+    }
+  ],
+  "license": "MIT"
+}
