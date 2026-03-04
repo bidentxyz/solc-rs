@@ -89,7 +89,7 @@ pub struct ContractDefinition {
     pub contract_dependencies: Vec<i64>,
     pub name_location: String,
     pub used_errors: Vec<i64>,
-    pub used_events: Vec<i64>,
+    pub used_events: Option<Vec<i64>>,
     #[serde(rename = "internalFunctionIDs")]
     pub internal_function_ids: Option<HashMap<String, i64>>,
 }
@@ -405,7 +405,7 @@ pub struct ForStatement {
     pub loop_expression: Option<Box<Expression>>,
     pub body: Box<Statement>,
     pub src: SourceLocation,
-    pub is_simple_counter_loop: bool,
+    pub is_simple_counter_loop: Option<bool>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
@@ -540,7 +540,7 @@ impl Default for YulStatement {
 #[serde(rename_all = "camelCase")]
 pub struct YulBlock {
     pub src: String,
-    pub native_src: String,
+    pub native_src: Option<String>,
     pub statements: Vec<YulStatement>,
 }
 
@@ -548,7 +548,7 @@ pub struct YulBlock {
 #[serde(rename_all = "camelCase")]
 pub struct YulAssignment {
     pub src: String,
-    pub native_src: String,
+    pub native_src: Option<String>,
     pub variable_names: Vec<YulIdentifier>,
     pub value: YulExpression,
 }
@@ -557,7 +557,7 @@ pub struct YulAssignment {
 #[serde(rename_all = "camelCase")]
 pub struct YulVariableDeclaration {
     pub src: String,
-    pub native_src: String,
+    pub native_src: Option<String>,
     pub variables: Vec<YulTypedName>,
     pub value: YulExpression,
 }
@@ -567,7 +567,7 @@ pub struct YulVariableDeclaration {
 pub struct YulTypedName {
     pub name: String,
     pub src: String,
-    pub native_src: String,
+    pub native_src: Option<String>,
     pub r#type: String,
 }
 
@@ -575,7 +575,7 @@ pub struct YulTypedName {
 #[serde(rename_all = "camelCase")]
 pub struct YulExpressionStatement {
     pub src: String,
-    pub native_src: String,
+    pub native_src: Option<String>,
     pub expression: YulExpression,
 }
 
@@ -583,7 +583,7 @@ pub struct YulExpressionStatement {
 #[serde(rename_all = "camelCase")]
 pub struct YulIf {
     pub src: String,
-    pub native_src: String,
+    pub native_src: Option<String>,
     pub condition: YulExpression,
     pub body: YulBlock,
 }
@@ -592,7 +592,7 @@ pub struct YulIf {
 #[serde(rename_all = "camelCase")]
 pub struct YulForLoop {
     pub src: String,
-    pub native_src: String,
+    pub native_src: Option<String>,
     pub pre: YulBlock,
     pub condition: YulExpression,
     pub post: YulBlock,
@@ -603,7 +603,7 @@ pub struct YulForLoop {
 #[serde(rename_all = "camelCase")]
 pub struct YulSwitch {
     pub src: String,
-    pub native_src: String,
+    pub native_src: Option<String>,
     pub expression: YulExpression,
     pub cases: Vec<YulCase>,
 }
@@ -612,7 +612,7 @@ pub struct YulSwitch {
 #[serde(rename_all = "camelCase")]
 pub struct YulCase {
     pub src: String,
-    pub native_src: String,
+    pub native_src: Option<String>,
     pub value: YulCaseValue,
     pub body: YulBlock,
 }
@@ -634,7 +634,7 @@ impl Default for YulCaseValue {
 #[serde(rename_all = "camelCase")]
 pub struct YulLiteral {
     pub src: String,
-    pub native_src: String,
+    pub native_src: Option<String>,
     pub kind: String,
     pub value: String,
     pub r#type: String,
@@ -644,7 +644,7 @@ pub struct YulLiteral {
 #[serde(rename_all = "camelCase")]
 pub struct YulFunctionDefinition {
     pub src: String,
-    pub native_src: String,
+    pub native_src: Option<String>,
     pub name: String,
     pub parameters: Vec<YulTypedName>,
     pub body: YulBlock,
@@ -654,7 +654,7 @@ pub struct YulFunctionDefinition {
 #[serde(rename_all = "camelCase")]
 pub struct YulBreak {
     pub src: String,
-    pub native_src: String,
+    pub native_src: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -675,7 +675,7 @@ impl Default for YulExpression {
 #[serde(rename_all = "camelCase")]
 pub struct YulFunctionCall {
     pub src: String,
-    pub native_src: String,
+    pub native_src: Option<String>,
     pub function_name: Box<YulExpression>,
     pub arguments: Vec<YulExpression>,
 }
@@ -684,7 +684,7 @@ pub struct YulFunctionCall {
 #[serde(rename_all = "camelCase")]
 pub struct YulIdentifier {
     pub src: String,
-    pub native_src: String,
+    pub native_src: Option<String>,
     pub name: String,
 }
 
