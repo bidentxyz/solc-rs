@@ -1,0 +1,1472 @@
+{
+  "absolutePath": "contracts/smart-wallet/OwnableSmartWalletFactory.sol",
+  "id": 8703,
+  "exportedSymbols": {
+    "Clones": [
+      41613
+    ],
+    "IOwnableSmartWallet": [
+      8786
+    ],
+    "IOwnableSmartWalletFactory": [
+      8817
+    ],
+    "OwnableSmartWallet": [
+      8588
+    ],
+    "OwnableSmartWalletFactory": [
+      8702
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "33:1579:25",
+  "nodes": [
+    {
+      "id": 8590,
+      "nodeType": "PragmaDirective",
+      "src": "33:24:25",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "^",
+        "0.8",
+        ".13"
+      ]
+    },
+    {
+      "id": 8592,
+      "nodeType": "ImportDirective",
+      "src": "59:64:25",
+      "nodes": [],
+      "absolutePath": "node_modules/@openzeppelin/contracts/proxy/Clones.sol",
+      "file": "@openzeppelin/contracts/proxy/Clones.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 8703,
+      "sourceUnit": 41614,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 8591,
+            "name": "Clones",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 41613,
+            "src": "67:6:25",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 8594,
+      "nodeType": "ImportDirective",
+      "src": "124:60:25",
+      "nodes": [],
+      "absolutePath": "contracts/smart-wallet/OwnableSmartWallet.sol",
+      "file": "./OwnableSmartWallet.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 8703,
+      "sourceUnit": 8589,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 8593,
+            "name": "OwnableSmartWallet",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 8588,
+            "src": "132:18:25",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 8596,
+      "nodeType": "ImportDirective",
+      "src": "185:73:25",
+      "nodes": [],
+      "absolutePath": "contracts/smart-wallet/interfaces/IOwnableSmartWallet.sol",
+      "file": "./interfaces/IOwnableSmartWallet.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 8703,
+      "sourceUnit": 8787,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 8595,
+            "name": "IOwnableSmartWallet",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 8786,
+            "src": "193:19:25",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 8598,
+      "nodeType": "ImportDirective",
+      "src": "259:87:25",
+      "nodes": [],
+      "absolutePath": "contracts/smart-wallet/interfaces/IOwnableSmartWalletFactory.sol",
+      "file": "./interfaces/IOwnableSmartWalletFactory.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 8703,
+      "sourceUnit": 8818,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 8597,
+            "name": "IOwnableSmartWalletFactory",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 8817,
+            "src": "267:26:25",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 8702,
+      "nodeType": "ContractDefinition",
+      "src": "388:1223:25",
+      "nodes": [
+        {
+          "id": 8604,
+          "nodeType": "VariableDeclaration",
+          "src": "511:37:25",
+          "nodes": [],
+          "constant": false,
+          "documentation": {
+            "id": 8602,
+            "nodeType": "StructuredDocumentation",
+            "src": "460:46:25",
+            "text": "@dev Address of the contract to clone from"
+          },
+          "functionSelector": "fc0d0117",
+          "mutability": "immutable",
+          "name": "masterWallet",
+          "nameLocation": "536:12:25",
+          "scope": 8702,
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_address",
+            "typeString": "address"
+          },
+          "typeName": {
+            "id": 8603,
+            "name": "address",
+            "nodeType": "ElementaryTypeName",
+            "src": "511:7:25",
+            "stateMutability": "nonpayable",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            }
+          },
+          "visibility": "public"
+        },
+        {
+          "id": 8609,
+          "nodeType": "VariableDeclaration",
+          "src": "773:44:25",
+          "nodes": [],
+          "baseFunctions": [
+            8816
+          ],
+          "constant": false,
+          "documentation": {
+            "id": 8605,
+            "nodeType": "StructuredDocumentation",
+            "src": "555:213:25",
+            "text": "@dev Whether a wallet is created by this factory\n @notice Can be used to verify that the address is actually\n         OwnableSmartWallet and not an impersonating malicious\n         account"
+          },
+          "functionSelector": "2c03abe2",
+          "mutability": "mutable",
+          "name": "walletExists",
+          "nameLocation": "805:12:25",
+          "scope": 8702,
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+            "typeString": "mapping(address => bool)"
+          },
+          "typeName": {
+            "id": 8608,
+            "keyType": {
+              "id": 8606,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "781:7:25",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "nodeType": "Mapping",
+            "src": "773:24:25",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+              "typeString": "mapping(address => bool)"
+            },
+            "valueType": {
+              "id": 8607,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "792:4:25",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            }
+          },
+          "visibility": "public"
+        },
+        {
+          "id": 8631,
+          "nodeType": "FunctionDefinition",
+          "src": "824:152:25",
+          "nodes": [],
+          "body": {
+            "id": 8630,
+            "nodeType": "Block",
+            "src": "838:138:25",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 8620,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftHandSide": {
+                    "id": 8612,
+                    "name": "masterWallet",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 8604,
+                    "src": "848:12:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "Assignment",
+                  "operator": "=",
+                  "rightHandSide": {
+                    "arguments": [
+                      {
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "id": 8617,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "NewExpression",
+                          "src": "871:22:25",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_OwnableSmartWallet_$8588_$",
+                            "typeString": "function () returns (contract OwnableSmartWallet)"
+                          },
+                          "typeName": {
+                            "id": 8616,
+                            "nodeType": "UserDefinedTypeName",
+                            "pathNode": {
+                              "id": 8615,
+                              "name": "OwnableSmartWallet",
+                              "nodeType": "IdentifierPath",
+                              "referencedDeclaration": 8588,
+                              "src": "875:18:25"
+                            },
+                            "referencedDeclaration": 8588,
+                            "src": "875:18:25",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_OwnableSmartWallet_$8588",
+                              "typeString": "contract OwnableSmartWallet"
+                            }
+                          }
+                        },
+                        "id": 8618,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "871:24:25",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_OwnableSmartWallet_$8588",
+                          "typeString": "contract OwnableSmartWallet"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_OwnableSmartWallet_$8588",
+                          "typeString": "contract OwnableSmartWallet"
+                        }
+                      ],
+                      "id": 8614,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "863:7:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_address_$",
+                        "typeString": "type(address)"
+                      },
+                      "typeName": {
+                        "id": 8613,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "863:7:25",
+                        "typeDescriptions": {}
+                      }
+                    },
+                    "id": 8619,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "863:33:25",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "src": "848:48:25",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "id": 8621,
+                "nodeType": "ExpressionStatement",
+                "src": "848:48:25"
+              },
+              {
+                "eventCall": {
+                  "arguments": [
+                    {
+                      "id": 8623,
+                      "name": "masterWallet",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8604,
+                      "src": "926:12:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "arguments": [
+                        {
+                          "id": 8626,
+                          "name": "this",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -28,
+                          "src": "948:4:25",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_OwnableSmartWalletFactory_$8702",
+                            "typeString": "contract OwnableSmartWalletFactory"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_contract$_OwnableSmartWalletFactory_$8702",
+                            "typeString": "contract OwnableSmartWalletFactory"
+                          }
+                        ],
+                        "id": 8625,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "940:7:25",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_$",
+                          "typeString": "type(address)"
+                        },
+                        "typeName": {
+                          "id": 8624,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "940:7:25",
+                          "typeDescriptions": {}
+                        }
+                      },
+                      "id": 8627,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "940:13:25",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "id": 8622,
+                    "name": "WalletCreated",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 8794,
+                    "src": "912:13:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$returns$__$",
+                      "typeString": "function (address,address)"
+                    }
+                  },
+                  "id": 8628,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "912:42:25",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 8629,
+                "nodeType": "EmitStatement",
+                "src": "907:47:25"
+              }
+            ]
+          },
+          "implemented": true,
+          "kind": "constructor",
+          "modifiers": [],
+          "name": "",
+          "nameLocation": "-1:-1:-1",
+          "parameters": {
+            "id": 8610,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "835:2:25"
+          },
+          "returnParameters": {
+            "id": 8611,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "838:0:25"
+          },
+          "scope": 8702,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "public"
+        },
+        {
+          "id": 8644,
+          "nodeType": "FunctionDefinition",
+          "src": "982:124:25",
+          "nodes": [],
+          "body": {
+            "id": 8643,
+            "nodeType": "Block",
+            "src": "1040:66:25",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 8641,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftHandSide": {
+                    "id": 8636,
+                    "name": "wallet",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 8634,
+                    "src": "1050:6:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "Assignment",
+                  "operator": "=",
+                  "rightHandSide": {
+                    "arguments": [
+                      {
+                        "expression": {
+                          "id": 8638,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -15,
+                          "src": "1073:3:25",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 8639,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "src": "1073:10:25",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 8637,
+                      "name": "_createWallet",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8701,
+                      "src": "1059:13:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$_t_address_$",
+                        "typeString": "function (address) returns (address)"
+                      }
+                    },
+                    "id": 8640,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1059:25:25",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "src": "1050:34:25",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "id": 8642,
+                "nodeType": "ExpressionStatement",
+                "src": "1050:34:25"
+              }
+            ]
+          },
+          "baseFunctions": [
+            8802
+          ],
+          "functionSelector": "11ebbf24",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "createWallet",
+          "nameLocation": "991:12:25",
+          "parameters": {
+            "id": 8632,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "1003:2:25"
+          },
+          "returnParameters": {
+            "id": 8635,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 8634,
+                "mutability": "mutable",
+                "name": "wallet",
+                "nameLocation": "1032:6:25",
+                "nodeType": "VariableDeclaration",
+                "scope": 8644,
+                "src": "1024:14:25",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 8633,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1024:7:25",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1023:16:25"
+          },
+          "scope": 8702,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 8658,
+          "nodeType": "FunctionDefinition",
+          "src": "1112:132:25",
+          "nodes": [],
+          "body": {
+            "id": 8657,
+            "nodeType": "Block",
+            "src": "1183:61:25",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 8655,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftHandSide": {
+                    "id": 8651,
+                    "name": "wallet",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 8649,
+                    "src": "1193:6:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "Assignment",
+                  "operator": "=",
+                  "rightHandSide": {
+                    "arguments": [
+                      {
+                        "id": 8653,
+                        "name": "owner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8646,
+                        "src": "1216:5:25",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 8652,
+                      "name": "_createWallet",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8701,
+                      "src": "1202:13:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$_t_address_$",
+                        "typeString": "function (address) returns (address)"
+                      }
+                    },
+                    "id": 8654,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1202:20:25",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "src": "1193:29:25",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "id": 8656,
+                "nodeType": "ExpressionStatement",
+                "src": "1193:29:25"
+              }
+            ]
+          },
+          "baseFunctions": [
+            8809
+          ],
+          "functionSelector": "b054a9e8",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "createWallet",
+          "nameLocation": "1121:12:25",
+          "parameters": {
+            "id": 8647,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 8646,
+                "mutability": "mutable",
+                "name": "owner",
+                "nameLocation": "1142:5:25",
+                "nodeType": "VariableDeclaration",
+                "scope": 8658,
+                "src": "1134:13:25",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 8645,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1134:7:25",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1133:15:25"
+          },
+          "returnParameters": {
+            "id": 8650,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 8649,
+                "mutability": "mutable",
+                "name": "wallet",
+                "nameLocation": "1175:6:25",
+                "nodeType": "VariableDeclaration",
+                "scope": 8658,
+                "src": "1167:14:25",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 8648,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1167:7:25",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1166:16:25"
+          },
+          "scope": 8702,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 8701,
+          "nodeType": "FunctionDefinition",
+          "src": "1250:359:25",
+          "nodes": [],
+          "body": {
+            "id": 8700,
+            "nodeType": "Block",
+            "src": "1322:287:25",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "commonType": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "id": 8671,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "id": 8666,
+                        "name": "owner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8660,
+                        "src": "1340:5:25",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "!=",
+                      "rightExpression": {
+                        "arguments": [
+                          {
+                            "hexValue": "30",
+                            "id": 8669,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1357:1:25",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_0_by_1",
+                              "typeString": "int_const 0"
+                            },
+                            "value": "0"
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_rational_0_by_1",
+                              "typeString": "int_const 0"
+                            }
+                          ],
+                          "id": 8668,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "1349:7:25",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": {
+                            "id": 8667,
+                            "name": "address",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "1349:7:25",
+                            "typeDescriptions": {}
+                          }
+                        },
+                        "id": 8670,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1349:10:25",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "src": "1340:19:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    {
+                      "hexValue": "57616c6c65742063616e6e6f7420626520616464726573732030",
+                      "id": 8672,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1361:28:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_731bea6a28fcf9f8484ee4dd300165be555d0bf3c5027505627d186573d17b0f",
+                        "typeString": "literal_string \"Wallet cannot be address 0\""
+                      },
+                      "value": "Wallet cannot be address 0"
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      {
+                        "typeIdentifier": "t_stringliteral_731bea6a28fcf9f8484ee4dd300165be555d0bf3c5027505627d186573d17b0f",
+                        "typeString": "literal_string \"Wallet cannot be address 0\""
+                      }
+                    ],
+                    "id": 8665,
+                    "name": "require",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [
+                      -18,
+                      -18
+                    ],
+                    "referencedDeclaration": -18,
+                    "src": "1332:7:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (bool,string memory) pure"
+                    }
+                  },
+                  "id": 8673,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1332:58:25",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 8674,
+                "nodeType": "ExpressionStatement",
+                "src": "1332:58:25"
+              },
+              {
+                "expression": {
+                  "id": 8680,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftHandSide": {
+                    "id": 8675,
+                    "name": "wallet",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 8663,
+                    "src": "1401:6:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "Assignment",
+                  "operator": "=",
+                  "rightHandSide": {
+                    "arguments": [
+                      {
+                        "id": 8678,
+                        "name": "masterWallet",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8604,
+                        "src": "1423:12:25",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "id": 8676,
+                        "name": "Clones",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 41613,
+                        "src": "1410:6:25",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_Clones_$41613_$",
+                          "typeString": "type(library Clones)"
+                        }
+                      },
+                      "id": 8677,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "clone",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 41556,
+                      "src": "1410:12:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$_t_address_$",
+                        "typeString": "function (address) returns (address)"
+                      }
+                    },
+                    "id": 8679,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1410:26:25",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "src": "1401:35:25",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "id": 8681,
+                "nodeType": "ExpressionStatement",
+                "src": "1401:35:25"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "id": 8686,
+                      "name": "owner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8660,
+                      "src": "1485:5:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "arguments": [
+                        {
+                          "id": 8683,
+                          "name": "wallet",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 8663,
+                          "src": "1466:6:25",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 8682,
+                        "name": "IOwnableSmartWallet",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 8786,
+                        "src": "1446:19:25",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_IOwnableSmartWallet_$8786_$",
+                          "typeString": "type(contract IOwnableSmartWallet)"
+                        }
+                      },
+                      "id": 8684,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1446:27:25",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IOwnableSmartWallet_$8786",
+                        "typeString": "contract IOwnableSmartWallet"
+                      }
+                    },
+                    "id": 8685,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "initialize",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 8721,
+                    "src": "1446:38:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$_t_address_$returns$__$",
+                      "typeString": "function (address) external"
+                    }
+                  },
+                  "id": 8687,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1446:45:25",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 8688,
+                "nodeType": "ExpressionStatement",
+                "src": "1446:45:25"
+              },
+              {
+                "expression": {
+                  "id": 8693,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftHandSide": {
+                    "baseExpression": {
+                      "id": 8689,
+                      "name": "walletExists",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8609,
+                      "src": "1516:12:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                        "typeString": "mapping(address => bool)"
+                      }
+                    },
+                    "id": 8691,
+                    "indexExpression": {
+                      "id": 8690,
+                      "name": "wallet",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8663,
+                      "src": "1529:6:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": true,
+                    "nodeType": "IndexAccess",
+                    "src": "1516:20:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "nodeType": "Assignment",
+                  "operator": "=",
+                  "rightHandSide": {
+                    "hexValue": "74727565",
+                    "id": 8692,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "bool",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "1539:4:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "value": "true"
+                  },
+                  "src": "1516:27:25",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "id": 8694,
+                "nodeType": "ExpressionStatement",
+                "src": "1516:27:25"
+              },
+              {
+                "eventCall": {
+                  "arguments": [
+                    {
+                      "id": 8696,
+                      "name": "wallet",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8663,
+                      "src": "1573:6:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "id": 8697,
+                      "name": "owner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8660,
+                      "src": "1581:5:25",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "id": 8695,
+                    "name": "WalletCreated",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 8794,
+                    "src": "1559:13:25",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$returns$__$",
+                      "typeString": "function (address,address)"
+                    }
+                  },
+                  "id": 8698,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1559:28:25",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 8699,
+                "nodeType": "EmitStatement",
+                "src": "1554:33:25"
+              }
+            ]
+          },
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "_createWallet",
+          "nameLocation": "1259:13:25",
+          "parameters": {
+            "id": 8661,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 8660,
+                "mutability": "mutable",
+                "name": "owner",
+                "nameLocation": "1281:5:25",
+                "nodeType": "VariableDeclaration",
+                "scope": 8701,
+                "src": "1273:13:25",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 8659,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1273:7:25",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1272:15:25"
+          },
+          "returnParameters": {
+            "id": 8664,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 8663,
+                "mutability": "mutable",
+                "name": "wallet",
+                "nameLocation": "1314:6:25",
+                "nodeType": "VariableDeclaration",
+                "scope": 8701,
+                "src": "1306:14:25",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 8662,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1306:7:25",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1305:16:25"
+          },
+          "scope": 8702,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "internal"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [
+        {
+          "baseName": {
+            "id": 8600,
+            "name": "IOwnableSmartWalletFactory",
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 8817,
+            "src": "426:26:25"
+          },
+          "id": 8601,
+          "nodeType": "InheritanceSpecifier",
+          "src": "426:26:25"
+        }
+      ],
+      "canonicalName": "OwnableSmartWalletFactory",
+      "contractDependencies": [
+        8588
+      ],
+      "contractKind": "contract",
+      "documentation": {
+        "id": 8599,
+        "nodeType": "StructuredDocumentation",
+        "src": "348:40:25",
+        "text": "@title Ownable smart wallet factory"
+      },
+      "fullyImplemented": true,
+      "linearizedBaseContracts": [
+        8702,
+        8817,
+        8795
+      ],
+      "name": "OwnableSmartWalletFactory",
+      "nameLocation": "397:25:25",
+      "scope": 8703,
+      "usedErrors": []
+    }
+  ],
+  "license": "MIT"
+}

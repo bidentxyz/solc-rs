@@ -1,0 +1,863 @@
+{
+  "absolutePath": "contracts/liquid-staking/StakingFundsVaultDeployer.sol",
+  "id": 8051,
+  "exportedSymbols": {
+    "Clones": [
+      41613
+    ],
+    "LPTokenFactory": [
+      2751
+    ],
+    "StakingFundsVault": [
+      7985
+    ],
+    "StakingFundsVaultDeployer": [
+      8050
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "33:774:22",
+  "nodes": [
+    {
+      "id": 7987,
+      "nodeType": "PragmaDirective",
+      "src": "33:24:22",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "^",
+        "0.8",
+        ".13"
+      ]
+    },
+    {
+      "id": 7989,
+      "nodeType": "ImportDirective",
+      "src": "59:66:22",
+      "nodes": [],
+      "absolutePath": "node_modules/@openzeppelin/contracts/proxy/Clones.sol",
+      "file": "@openzeppelin/contracts/proxy/Clones.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 8051,
+      "sourceUnit": 41614,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 7988,
+            "name": "Clones",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 41613,
+            "src": "68:6:22",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 7991,
+      "nodeType": "ImportDirective",
+      "src": "126:60:22",
+      "nodes": [],
+      "absolutePath": "contracts/liquid-staking/StakingFundsVault.sol",
+      "file": "./StakingFundsVault.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 8051,
+      "sourceUnit": 7986,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 7990,
+            "name": "StakingFundsVault",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 7985,
+            "src": "135:17:22",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 7993,
+      "nodeType": "ImportDirective",
+      "src": "187:54:22",
+      "nodes": [],
+      "absolutePath": "contracts/liquid-staking/LPTokenFactory.sol",
+      "file": "./LPTokenFactory.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 8051,
+      "sourceUnit": 2752,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 7992,
+            "name": "LPTokenFactory",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 2751,
+            "src": "196:14:22",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 8050,
+      "nodeType": "ContractDefinition",
+      "src": "243:564:22",
+      "nodes": [
+        {
+          "id": 7997,
+          "nodeType": "EventDefinition",
+          "src": "285:49:22",
+          "nodes": [],
+          "anonymous": false,
+          "eventSelector": "8594accdf7e0ec79f2b4c93a0c92187c4618dda7056c356d109cd2b1b86145c0",
+          "name": "NewVaultDeployed",
+          "nameLocation": "291:16:22",
+          "parameters": {
+            "id": 7996,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 7995,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "instance",
+                "nameLocation": "324:8:22",
+                "nodeType": "VariableDeclaration",
+                "scope": 7997,
+                "src": "308:24:22",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 7994,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "308:7:22",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "307:26:22"
+          }
+        },
+        {
+          "id": 7999,
+          "nodeType": "VariableDeclaration",
+          "src": "340:22:22",
+          "nodes": [],
+          "constant": false,
+          "mutability": "mutable",
+          "name": "implementation",
+          "nameLocation": "348:14:22",
+          "scope": 8050,
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_address",
+            "typeString": "address"
+          },
+          "typeName": {
+            "id": 7998,
+            "name": "address",
+            "nodeType": "ElementaryTypeName",
+            "src": "340:7:22",
+            "stateMutability": "nonpayable",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "id": 8013,
+          "nodeType": "FunctionDefinition",
+          "src": "368:80:22",
+          "nodes": [],
+          "body": {
+            "id": 8012,
+            "nodeType": "Block",
+            "src": "382:66:22",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 8010,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftHandSide": {
+                    "id": 8002,
+                    "name": "implementation",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 7999,
+                    "src": "392:14:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "Assignment",
+                  "operator": "=",
+                  "rightHandSide": {
+                    "arguments": [
+                      {
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "id": 8007,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "NewExpression",
+                          "src": "417:21:22",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_StakingFundsVault_$7985_$",
+                            "typeString": "function () returns (contract StakingFundsVault)"
+                          },
+                          "typeName": {
+                            "id": 8006,
+                            "nodeType": "UserDefinedTypeName",
+                            "pathNode": {
+                              "id": 8005,
+                              "name": "StakingFundsVault",
+                              "nodeType": "IdentifierPath",
+                              "referencedDeclaration": 7985,
+                              "src": "421:17:22"
+                            },
+                            "referencedDeclaration": 7985,
+                            "src": "421:17:22",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_StakingFundsVault_$7985",
+                              "typeString": "contract StakingFundsVault"
+                            }
+                          }
+                        },
+                        "id": 8008,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "417:23:22",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_StakingFundsVault_$7985",
+                          "typeString": "contract StakingFundsVault"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_StakingFundsVault_$7985",
+                          "typeString": "contract StakingFundsVault"
+                        }
+                      ],
+                      "id": 8004,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "409:7:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_address_$",
+                        "typeString": "type(address)"
+                      },
+                      "typeName": {
+                        "id": 8003,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "409:7:22",
+                        "typeDescriptions": {}
+                      }
+                    },
+                    "id": 8009,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "409:32:22",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "src": "392:49:22",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "id": 8011,
+                "nodeType": "ExpressionStatement",
+                "src": "392:49:22"
+              }
+            ]
+          },
+          "implemented": true,
+          "kind": "constructor",
+          "modifiers": [],
+          "name": "",
+          "nameLocation": "-1:-1:-1",
+          "parameters": {
+            "id": 8000,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "379:2:22"
+          },
+          "returnParameters": {
+            "id": 8001,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "382:0:22"
+          },
+          "scope": 8050,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "public"
+        },
+        {
+          "id": 8049,
+          "nodeType": "FunctionDefinition",
+          "src": "454:351:22",
+          "nodes": [],
+          "body": {
+            "id": 8048,
+            "nodeType": "Block",
+            "src": "568:237:22",
+            "nodes": [],
+            "statements": [
+              {
+                "assignments": [
+                  8023
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 8023,
+                    "mutability": "mutable",
+                    "name": "newVault",
+                    "nameLocation": "586:8:22",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 8048,
+                    "src": "578:16:22",
+                    "stateVariable": false,
+                    "storageLocation": "default",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    },
+                    "typeName": {
+                      "id": 8022,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "578:7:22",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 8028,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "id": 8026,
+                      "name": "implementation",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 7999,
+                      "src": "610:14:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 8024,
+                      "name": "Clones",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 41613,
+                      "src": "597:6:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_Clones_$41613_$",
+                        "typeString": "type(library Clones)"
+                      }
+                    },
+                    "id": 8025,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "clone",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 41556,
+                    "src": "597:12:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$_t_address_$",
+                      "typeString": "function (address) returns (address)"
+                    }
+                  },
+                  "id": 8027,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "597:28:22",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "578:47:22"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "id": 8036,
+                      "name": "_liquidStakingManager",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8015,
+                      "src": "678:21:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "arguments": [
+                        {
+                          "id": 8038,
+                          "name": "_tokenFactory",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 8017,
+                          "src": "716:13:22",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 8037,
+                        "name": "LPTokenFactory",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2751,
+                        "src": "701:14:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_LPTokenFactory_$2751_$",
+                          "typeString": "type(contract LPTokenFactory)"
+                        }
+                      },
+                      "id": 8039,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "701:29:22",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_LPTokenFactory_$2751",
+                        "typeString": "contract LPTokenFactory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_contract$_LPTokenFactory_$2751",
+                        "typeString": "contract LPTokenFactory"
+                      }
+                    ],
+                    "expression": {
+                      "arguments": [
+                        {
+                          "arguments": [
+                            {
+                              "id": 8032,
+                              "name": "newVault",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 8023,
+                              "src": "662:8:22",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            ],
+                            "id": 8031,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "654:8:22",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_payable_$",
+                              "typeString": "type(address payable)"
+                            },
+                            "typeName": {
+                              "id": 8030,
+                              "name": "address",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "654:8:22",
+                              "stateMutability": "payable",
+                              "typeDescriptions": {}
+                            }
+                          },
+                          "id": 8033,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "654:17:22",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        ],
+                        "id": 8029,
+                        "name": "StakingFundsVault",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7985,
+                        "src": "636:17:22",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_StakingFundsVault_$7985_$",
+                          "typeString": "type(contract StakingFundsVault)"
+                        }
+                      },
+                      "id": 8034,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "636:36:22",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_StakingFundsVault_$7985",
+                        "typeString": "contract StakingFundsVault"
+                      }
+                    },
+                    "id": 8035,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "init",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 6711,
+                    "src": "636:41:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_contract$_LPTokenFactory_$2751_$returns$__$",
+                      "typeString": "function (address,contract LPTokenFactory) external"
+                    }
+                  },
+                  "id": 8040,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "636:95:22",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 8041,
+                "nodeType": "ExpressionStatement",
+                "src": "636:95:22"
+              },
+              {
+                "eventCall": {
+                  "arguments": [
+                    {
+                      "id": 8043,
+                      "name": "newVault",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 8023,
+                      "src": "763:8:22",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "id": 8042,
+                    "name": "NewVaultDeployed",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 7997,
+                    "src": "746:16:22",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
+                      "typeString": "function (address)"
+                    }
+                  },
+                  "id": 8044,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "746:26:22",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 8045,
+                "nodeType": "EmitStatement",
+                "src": "741:31:22"
+              },
+              {
+                "expression": {
+                  "id": 8046,
+                  "name": "newVault",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 8023,
+                  "src": "790:8:22",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "functionReturnParameters": 8021,
+                "id": 8047,
+                "nodeType": "Return",
+                "src": "783:15:22"
+              }
+            ]
+          },
+          "functionSelector": "0db46dc2",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "deployStakingFundsVault",
+          "nameLocation": "463:23:22",
+          "parameters": {
+            "id": 8018,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 8015,
+                "mutability": "mutable",
+                "name": "_liquidStakingManager",
+                "nameLocation": "495:21:22",
+                "nodeType": "VariableDeclaration",
+                "scope": 8049,
+                "src": "487:29:22",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 8014,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "487:7:22",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 8017,
+                "mutability": "mutable",
+                "name": "_tokenFactory",
+                "nameLocation": "526:13:22",
+                "nodeType": "VariableDeclaration",
+                "scope": 8049,
+                "src": "518:21:22",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 8016,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "518:7:22",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "486:54:22"
+          },
+          "returnParameters": {
+            "id": 8021,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 8020,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 8049,
+                "src": "559:7:22",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 8019,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "559:7:22",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "558:9:22"
+          },
+          "scope": 8050,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [],
+      "canonicalName": "StakingFundsVaultDeployer",
+      "contractDependencies": [
+        7985
+      ],
+      "contractKind": "contract",
+      "fullyImplemented": true,
+      "linearizedBaseContracts": [
+        8050
+      ],
+      "name": "StakingFundsVaultDeployer",
+      "nameLocation": "252:25:22",
+      "scope": 8051,
+      "usedErrors": []
+    }
+  ],
+  "license": "MIT"
+}

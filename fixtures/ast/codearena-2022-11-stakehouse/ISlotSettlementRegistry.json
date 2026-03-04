@@ -1,0 +1,3213 @@
+{
+  "absolutePath": "node_modules/@blockswaplab/stakehouse-contract-interfaces/contracts/interfaces/ISlotSettlementRegistry.sol",
+  "id": 37392,
+  "exportedSymbols": {
+    "ISlotSettlementRegistry": [
+      37391
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "0:7753:58",
+  "nodes": [
+    {
+      "id": 37117,
+      "nodeType": "PragmaDirective",
+      "src": "0:24:58",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "^",
+        "0.8",
+        ".10"
+      ]
+    },
+    {
+      "id": 37391,
+      "nodeType": "ContractDefinition",
+      "src": "64:7688:58",
+      "nodes": [
+        {
+          "id": 37124,
+          "nodeType": "EventDefinition",
+          "src": "235:50:58",
+          "nodes": [],
+          "anonymous": false,
+          "documentation": {
+            "id": 37118,
+            "nodeType": "StructuredDocumentation",
+            "src": "157:73:58",
+            "text": "@notice Collateralised SLOT deducted from a collateralised SLOT owner"
+          },
+          "eventSelector": "9c8ecd10c59f1251f815980958a9a83626631566c51b7200b33bfb3bdef578d4",
+          "name": "SlotSlashed",
+          "nameLocation": "241:11:58",
+          "parameters": {
+            "id": 37123,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37120,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "memberId",
+                "nameLocation": "259:8:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37124,
+                "src": "253:14:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_memory_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37119,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "253:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37122,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "amount",
+                "nameLocation": "277:6:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37124,
+                "src": "269:14:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37121,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "269:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "252:32:58"
+          }
+        },
+        {
+          "id": 37131,
+          "nodeType": "EventDefinition",
+          "src": "347:59:58",
+          "nodes": [],
+          "anonymous": false,
+          "documentation": {
+            "id": 37125,
+            "nodeType": "StructuredDocumentation",
+            "src": "291:51:58",
+            "text": "@notice Collateralised SLOT purchased from KNOT"
+          },
+          "eventSelector": "62f476a5c4e34b59832e4ba42ab1630298d3db47780764a3fb949b3a6e5b10f9",
+          "name": "SlashedSlotPurchased",
+          "nameLocation": "353:20:58",
+          "parameters": {
+            "id": 37130,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37127,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "memberId",
+                "nameLocation": "380:8:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37131,
+                "src": "374:14:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_memory_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37126,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "374:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37129,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "amount",
+                "nameLocation": "398:6:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37131,
+                "src": "390:14:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37128,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "390:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "373:32:58"
+          }
+        },
+        {
+          "id": 37136,
+          "nodeType": "EventDefinition",
+          "src": "492:35:58",
+          "nodes": [],
+          "anonymous": false,
+          "documentation": {
+            "id": 37132,
+            "nodeType": "StructuredDocumentation",
+            "src": "412:75:58",
+            "text": "@notice KNOT has exited the protocol exercising their redemption rights"
+          },
+          "eventSelector": "28b24fb4740856f80c3146affe22711a3a4ba96fa70ae964d51ebe1000d94204",
+          "name": "RageQuitKnot",
+          "nameLocation": "498:12:58",
+          "parameters": {
+            "id": 37135,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37134,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "memberId",
+                "nameLocation": "517:8:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37136,
+                "src": "511:14:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_memory_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37133,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "511:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "510:16:58"
+          }
+        },
+        {
+          "id": 37142,
+          "nodeType": "EventDefinition",
+          "src": "533:74:58",
+          "nodes": [],
+          "anonymous": false,
+          "eventSelector": "318a4de3839154734bd81ae571709d8905c82413f8f6c5d25678029d82fc6e1b",
+          "name": "CollateralisedOwnerAddedToKnot",
+          "nameLocation": "539:30:58",
+          "parameters": {
+            "id": 37141,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37138,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "knotId",
+                "nameLocation": "576:6:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37142,
+                "src": "570:12:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_memory_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37137,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "570:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37140,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "owner",
+                "nameLocation": "600:5:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37142,
+                "src": "584:21:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37139,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "584:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "569:37:58"
+          }
+        },
+        {
+          "id": 37149,
+          "nodeType": "EventDefinition",
+          "src": "677:69:58",
+          "nodes": [],
+          "anonymous": false,
+          "documentation": {
+            "id": 37143,
+            "nodeType": "StructuredDocumentation",
+            "src": "613:59:58",
+            "text": "@notice User is able to trigger beacon chain withdrawal"
+          },
+          "eventSelector": "fb7684be1ab2d304af42e1ec9674784a57b41c63de3b3430f7b30dfce22bcc5c",
+          "name": "UserEnabledForWithdrawal",
+          "nameLocation": "683:24:58",
+          "parameters": {
+            "id": 37148,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37145,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "user",
+                "nameLocation": "724:4:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37149,
+                "src": "708:20:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37144,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "708:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37147,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "memberId",
+                "nameLocation": "736:8:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37149,
+                "src": "730:14:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_memory_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37146,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "730:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "707:38:58"
+          }
+        },
+        {
+          "id": 37156,
+          "nodeType": "EventDefinition",
+          "src": "845:58:58",
+          "nodes": [],
+          "anonymous": false,
+          "documentation": {
+            "id": 37150,
+            "nodeType": "StructuredDocumentation",
+            "src": "752:88:58",
+            "text": "@notice User has withdrawn ETH from beacon chain - do not allow any more withdrawals"
+          },
+          "eventSelector": "688ba695caf8a4b986152b554ff92b9398937923e0feaa50b959657eb35a7e1d",
+          "name": "UserWithdrawn",
+          "nameLocation": "851:13:58",
+          "parameters": {
+            "id": 37155,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37152,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "user",
+                "nameLocation": "881:4:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37156,
+                "src": "865:20:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37151,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "865:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37154,
+                "indexed": false,
+                "mutability": "mutable",
+                "name": "memberId",
+                "nameLocation": "893:8:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37156,
+                "src": "887:14:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_memory_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37153,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "887:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "864:38:58"
+          }
+        },
+        {
+          "id": 37166,
+          "nodeType": "FunctionDefinition",
+          "src": "1062:119:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37157,
+            "nodeType": "StructuredDocumentation",
+            "src": "961:96:58",
+            "text": "@notice Total collateralised SLOT owned by an account across all KNOTs in a given StakeHouse"
+          },
+          "functionSelector": "1342e91a",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "totalUserCollateralisedSLOTBalanceInHouse",
+          "nameLocation": "1071:41:58",
+          "parameters": {
+            "id": 37162,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37159,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "1121:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37166,
+                "src": "1113:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37158,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1113:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37161,
+                "mutability": "mutable",
+                "name": "_user",
+                "nameLocation": "1142:5:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37166,
+                "src": "1134:13:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37160,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1134:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1112:36:58"
+          },
+          "returnParameters": {
+            "id": 37165,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37164,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37166,
+                "src": "1172:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37163,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1172:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1171:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37178,
+          "nodeType": "FunctionDefinition",
+          "src": "1282:149:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37167,
+            "nodeType": "StructuredDocumentation",
+            "src": "1187:90:58",
+            "text": "@notice Total collateralised SLOT owned by an account for a given KNOT in a Stakehouse"
+          },
+          "functionSelector": "53cc78fa",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "totalUserCollateralisedSLOTBalanceForKnot",
+          "nameLocation": "1291:41:58",
+          "parameters": {
+            "id": 37174,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37169,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "1341:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37178,
+                "src": "1333:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37168,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1333:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37171,
+                "mutability": "mutable",
+                "name": "_user",
+                "nameLocation": "1362:5:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37178,
+                "src": "1354:13:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37170,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1354:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37173,
+                "mutability": "mutable",
+                "name": "_blsPublicKey",
+                "nameLocation": "1384:13:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37178,
+                "src": "1369:28:58",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_calldata_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37172,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1369:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1332:66:58"
+          },
+          "returnParameters": {
+            "id": 37177,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37176,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37178,
+                "src": "1422:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37175,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1422:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1421:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37187,
+          "nodeType": "FunctionDefinition",
+          "src": "1579:104:58",
+          "nodes": [],
+          "functionSelector": "5f7d1d17",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "isCollateralisedOwner",
+          "nameLocation": "1588:21:58",
+          "parameters": {
+            "id": 37183,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37180,
+                "mutability": "mutable",
+                "name": "blsPublicKey",
+                "nameLocation": "1625:12:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37187,
+                "src": "1610:27:58",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_calldata_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37179,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1610:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37182,
+                "mutability": "mutable",
+                "name": "_user",
+                "nameLocation": "1647:5:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37187,
+                "src": "1639:13:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37181,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1639:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1609:44:58"
+          },
+          "returnParameters": {
+            "id": 37186,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37185,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37187,
+                "src": "1677:4:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 37184,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1677:4:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1676:6:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37197,
+          "nodeType": "FunctionDefinition",
+          "src": "1825:114:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37188,
+            "nodeType": "StructuredDocumentation",
+            "src": "1689:131:58",
+            "text": "@notice If a user account has been able to rage quit a KNOT, this flag is set to true to allow beacon chain funds to be claimed"
+          },
+          "functionSelector": "4a160c9b",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "isUserEnabledForKnotWithdrawal",
+          "nameLocation": "1834:30:58",
+          "parameters": {
+            "id": 37193,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37190,
+                "mutability": "mutable",
+                "name": "_user",
+                "nameLocation": "1873:5:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37197,
+                "src": "1865:13:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37189,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1865:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37192,
+                "mutability": "mutable",
+                "name": "_blsPublicKey",
+                "nameLocation": "1895:13:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37197,
+                "src": "1880:28:58",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_calldata_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37191,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1880:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1864:45:58"
+          },
+          "returnParameters": {
+            "id": 37196,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37195,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37197,
+                "src": "1933:4:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 37194,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1933:4:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1932:6:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37207,
+          "nodeType": "FunctionDefinition",
+          "src": "2067:97:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37198,
+            "nodeType": "StructuredDocumentation",
+            "src": "1945:117:58",
+            "text": "@notice Once beacon chain funds have been redeemed, this flag is set to true in order to block double withdrawals"
+          },
+          "functionSelector": "3bb9fdd7",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "userWithdrawn",
+          "nameLocation": "2076:13:58",
+          "parameters": {
+            "id": 37203,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37200,
+                "mutability": "mutable",
+                "name": "_user",
+                "nameLocation": "2098:5:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37207,
+                "src": "2090:13:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37199,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2090:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37202,
+                "mutability": "mutable",
+                "name": "_blsPublicKey",
+                "nameLocation": "2120:13:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37207,
+                "src": "2105:28:58",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_calldata_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37201,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2105:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2089:45:58"
+          },
+          "returnParameters": {
+            "id": 37206,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37205,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37207,
+                "src": "2158:4:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 37204,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2158:4:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2157:6:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37215,
+          "nodeType": "FunctionDefinition",
+          "src": "2302:111:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37208,
+            "nodeType": "StructuredDocumentation",
+            "src": "2170:127:58",
+            "text": "@notice Total number of collateralised SLOT owners for a given KNOT\n @param _blsPublicKey BLS public key of the KNOT"
+          },
+          "functionSelector": "d109200c",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "numberOfCollateralisedSlotOwnersForKnot",
+          "nameLocation": "2311:39:58",
+          "parameters": {
+            "id": 37211,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37210,
+                "mutability": "mutable",
+                "name": "_blsPublicKey",
+                "nameLocation": "2366:13:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37215,
+                "src": "2351:28:58",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_calldata_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37209,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2351:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2350:30:58"
+          },
+          "returnParameters": {
+            "id": 37214,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37213,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37215,
+                "src": "2404:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37212,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2404:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2403:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37225,
+          "nodeType": "FunctionDefinition",
+          "src": "2517:117:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37216,
+            "nodeType": "StructuredDocumentation",
+            "src": "2419:93:58",
+            "text": "@notice Fetch a collateralised SLOT owner address for a specific KNOT at a specific index"
+          },
+          "functionSelector": "0ac98209",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "getCollateralisedOwnerAtIndex",
+          "nameLocation": "2526:29:58",
+          "parameters": {
+            "id": 37221,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37218,
+                "mutability": "mutable",
+                "name": "_blsPublicKey",
+                "nameLocation": "2571:13:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37225,
+                "src": "2556:28:58",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_calldata_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37217,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2556:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37220,
+                "mutability": "mutable",
+                "name": "_index",
+                "nameLocation": "2594:6:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37225,
+                "src": "2586:14:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37219,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2586:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2555:46:58"
+          },
+          "returnParameters": {
+            "id": 37224,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37223,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37225,
+                "src": "2625:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37222,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2625:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2624:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37236,
+          "nodeType": "FunctionDefinition",
+          "src": "2910:121:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37226,
+            "nodeType": "StructuredDocumentation",
+            "src": "2640:265:58",
+            "text": "@dev Get the sum of total collateralized SLOT balances for multiple sETH tokens for specific owner\n @param _sETHList List of sETH token addresses from different Stakehouses\n @param _owner Address that has an sETH token balance within the sETH list"
+          },
+          "functionSelector": "42e620f8",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "getCollateralizedSlotAccumulation",
+          "nameLocation": "2919:33:58",
+          "parameters": {
+            "id": 37232,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37229,
+                "mutability": "mutable",
+                "name": "_sETHList",
+                "nameLocation": "2972:9:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37236,
+                "src": "2953:28:58",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_address_$dyn_calldata_ptr",
+                  "typeString": "address[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 37227,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2953:7:58",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 37228,
+                  "nodeType": "ArrayTypeName",
+                  "src": "2953:9:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
+                    "typeString": "address[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37231,
+                "mutability": "mutable",
+                "name": "_owner",
+                "nameLocation": "2991:6:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37236,
+                "src": "2983:14:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37230,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2983:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2952:46:58"
+          },
+          "returnParameters": {
+            "id": 37235,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37234,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37236,
+                "src": "3022:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37233,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3022:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "3021:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37244,
+          "nodeType": "FunctionDefinition",
+          "src": "3170:120:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37237,
+            "nodeType": "StructuredDocumentation",
+            "src": "3037:128:58",
+            "text": "@notice Total amount of SLOT that has been slashed but not topped up yet\n @param _blsPublicKey BLS public key of KNOT"
+          },
+          "functionSelector": "47790b9d",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "currentSlashedAmountForKnot",
+          "nameLocation": "3179:27:58",
+          "parameters": {
+            "id": 37240,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37239,
+                "mutability": "mutable",
+                "name": "_blsPublicKey",
+                "nameLocation": "3222:13:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37244,
+                "src": "3207:28:58",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_calldata_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37238,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3207:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "3206:30:58"
+          },
+          "returnParameters": {
+            "id": 37243,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37242,
+                "mutability": "mutable",
+                "name": "currentSlashedAmount",
+                "nameLocation": "3268:20:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37244,
+                "src": "3260:28:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37241,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3260:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "3259:30:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37256,
+          "nodeType": "FunctionDefinition",
+          "src": "3565:179:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37245,
+            "nodeType": "StructuredDocumentation",
+            "src": "3296:264:58",
+            "text": "@notice Total amount of collateralised sETH owned by an account for a given KNOT\n @param _stakeHouse Address of Stakehouse registry contract\n @param _user Collateralised SLOT owner address\n @param _blsPublicKey BLS pub key of the validator"
+          },
+          "functionSelector": "41d92d22",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "totalUserCollateralisedSETHBalanceForKnot",
+          "nameLocation": "3574:41:58",
+          "parameters": {
+            "id": 37252,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37247,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "3633:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37256,
+                "src": "3625:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37246,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3625:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37249,
+                "mutability": "mutable",
+                "name": "_user",
+                "nameLocation": "3662:5:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37256,
+                "src": "3654:13:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37248,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3654:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37251,
+                "mutability": "mutable",
+                "name": "_blsPublicKey",
+                "nameLocation": "3692:13:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37256,
+                "src": "3677:28:58",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_calldata_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37250,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3677:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "3615:96:58"
+          },
+          "returnParameters": {
+            "id": 37255,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37254,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37256,
+                "src": "3735:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37253,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "3735:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "3734:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37266,
+          "nodeType": "FunctionDefinition",
+          "src": "3956:141:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37257,
+            "nodeType": "StructuredDocumentation",
+            "src": "3750:201:58",
+            "text": "@notice Total collateralised sETH owned by a user across all KNOTs in the house\n @param _stakeHouse Address of the Stakehouse registry\n @param _user Collateralised SLOT owner in house"
+          },
+          "functionSelector": "d0b3c106",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "totalUserCollateralisedSETHBalanceInHouse",
+          "nameLocation": "3965:41:58",
+          "parameters": {
+            "id": 37262,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37259,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "4024:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37266,
+                "src": "4016:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37258,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4016:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37261,
+                "mutability": "mutable",
+                "name": "_user",
+                "nameLocation": "4053:5:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37266,
+                "src": "4045:13:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37260,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4045:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4006:58:58"
+          },
+          "returnParameters": {
+            "id": 37265,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37264,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37266,
+                "src": "4088:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37263,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4088:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4087:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37274,
+          "nodeType": "FunctionDefinition",
+          "src": "4316:113:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37267,
+            "nodeType": "StructuredDocumentation",
+            "src": "4103:208:58",
+            "text": "@notice The total collateralised sETH circulating for the house i.e. (8 * number of knots) - total slashed\n @param _stakeHouse Address of the Stakehouse registry in order to fetch its exchange rate"
+          },
+          "functionSelector": "aef5e9f8",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "totalCollateralisedSETHForStakehouse",
+          "nameLocation": "4325:36:58",
+          "parameters": {
+            "id": 37270,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37269,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "4379:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37274,
+                "src": "4371:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37268,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4371:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4361:35:58"
+          },
+          "returnParameters": {
+            "id": 37273,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37272,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37274,
+                "src": "4420:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37271,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4420:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4419:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37282,
+          "nodeType": "FunctionDefinition",
+          "src": "4560:86:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37275,
+            "nodeType": "StructuredDocumentation",
+            "src": "4435:120:58",
+            "text": "@notice Minimum amount of collateralised sETH a user must hold at a house level in order to rage quit a healthy knot"
+          },
+          "functionSelector": "7ae57b9e",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "sETHRedemptionThreshold",
+          "nameLocation": "4569:23:58",
+          "parameters": {
+            "id": 37278,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37277,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "4601:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37282,
+                "src": "4593:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37276,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4593:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4592:21:58"
+          },
+          "returnParameters": {
+            "id": 37281,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37280,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37282,
+                "src": "4637:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37279,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4637:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4636:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37290,
+          "nodeType": "FunctionDefinition",
+          "src": "4847:92:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37283,
+            "nodeType": "StructuredDocumentation",
+            "src": "4652:190:58",
+            "text": "@notice Given the total SLOT in the house (8 * number of KNOTs), how much is in circulation when filtering out total slashed\n @param _stakeHouse Address of the Stakehouse registry"
+          },
+          "functionSelector": "c81078fc",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "circulatingSlot",
+          "nameLocation": "4856:15:58",
+          "parameters": {
+            "id": 37286,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37285,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "4889:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37290,
+                "src": "4881:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37284,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4881:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4871:35:58"
+          },
+          "returnParameters": {
+            "id": 37289,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37288,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37290,
+                "src": "4930:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37287,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "4930:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "4929:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37298,
+          "nodeType": "FunctionDefinition",
+          "src": "5165:106:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37291,
+            "nodeType": "StructuredDocumentation",
+            "src": "4945:215:58",
+            "text": "@notice Given the total amount of collateralised SLOT in the house (4 * number of KNOTs), how much is in circulation when filtering out total slashed\n @param _stakeHouse Address of the Stakehouse registry"
+          },
+          "functionSelector": "5a936df3",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "circulatingCollateralisedSlot",
+          "nameLocation": "5174:29:58",
+          "parameters": {
+            "id": 37294,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37293,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "5221:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37298,
+                "src": "5213:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37292,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5213:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "5203:35:58"
+          },
+          "returnParameters": {
+            "id": 37297,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37296,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37298,
+                "src": "5262:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37295,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5262:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "5261:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37306,
+          "nodeType": "FunctionDefinition",
+          "src": "5465:77:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37299,
+            "nodeType": "StructuredDocumentation",
+            "src": "5277:183:58",
+            "text": "@notice Amount of sETH required per SLOT at the house level in order to rage quit\n @param _stakeHouse Address of the Stakehouse registry in order to fetch its exchange rate"
+          },
+          "functionSelector": "f066d82e",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "redemptionRate",
+          "nameLocation": "5474:14:58",
+          "parameters": {
+            "id": 37302,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37301,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "5497:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37306,
+                "src": "5489:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37300,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5489:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "5488:21:58"
+          },
+          "returnParameters": {
+            "id": 37305,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37304,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37306,
+                "src": "5533:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37303,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5533:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "5532:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37314,
+          "nodeType": "FunctionDefinition",
+          "src": "5773:75:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37307,
+            "nodeType": "StructuredDocumentation",
+            "src": "5548:220:58",
+            "text": "@notice Amount of sETH per SLOT for a given house calculated as total dETH minted in house / total SLOT from all KNOTs\n @param _stakeHouse Address of the Stakehouse registry in order to fetch its exchange rate"
+          },
+          "functionSelector": "dc3b7c8b",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "exchangeRate",
+          "nameLocation": "5782:12:58",
+          "parameters": {
+            "id": 37310,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37309,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "5803:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37314,
+                "src": "5795:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37308,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5795:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "5794:21:58"
+          },
+          "returnParameters": {
+            "id": 37313,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37312,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37314,
+                "src": "5839:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37311,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5839:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "5838:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37322,
+          "nodeType": "FunctionDefinition",
+          "src": "5940:84:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37315,
+            "nodeType": "StructuredDocumentation",
+            "src": "5854:81:58",
+            "text": "@notice Returns the address of the sETH token for a given Stakehouse registry"
+          },
+          "functionSelector": "606b5e0f",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "stakeHouseShareTokens",
+          "nameLocation": "5949:21:58",
+          "parameters": {
+            "id": 37318,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37317,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "5979:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37322,
+                "src": "5971:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37316,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "5971:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "5970:21:58"
+          },
+          "returnParameters": {
+            "id": 37321,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37320,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37322,
+                "src": "6015:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37319,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6015:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "6014:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37330,
+          "nodeType": "FunctionDefinition",
+          "src": "6108:85:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37323,
+            "nodeType": "StructuredDocumentation",
+            "src": "6030:73:58",
+            "text": "@notice Returns the address of the associated house for an sETH token"
+          },
+          "functionSelector": "640927c1",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "shareTokensToStakeHouse",
+          "nameLocation": "6117:23:58",
+          "parameters": {
+            "id": 37326,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37325,
+                "mutability": "mutable",
+                "name": "_sETHToken",
+                "nameLocation": "6149:10:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37330,
+                "src": "6141:18:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37324,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6141:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "6140:20:58"
+          },
+          "returnParameters": {
+            "id": 37329,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37328,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37330,
+                "src": "6184:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37327,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6184:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "6183:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37338,
+          "nodeType": "FunctionDefinition",
+          "src": "6280:91:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37331,
+            "nodeType": "StructuredDocumentation",
+            "src": "6199:76:58",
+            "text": "@notice Returns the total amount of SLOT slashed at the Stakehouse level"
+          },
+          "functionSelector": "bdae761c",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "stakeHouseCurrentSLOTSlashed",
+          "nameLocation": "6289:28:58",
+          "parameters": {
+            "id": 37334,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37333,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "6326:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37338,
+                "src": "6318:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37332,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6318:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "6317:21:58"
+          },
+          "returnParameters": {
+            "id": 37337,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37336,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37338,
+                "src": "6362:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37335,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6362:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "6361:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37346,
+          "nodeType": "FunctionDefinition",
+          "src": "6445:105:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37339,
+            "nodeType": "StructuredDocumentation",
+            "src": "6377:63:58",
+            "text": "@notice Returns the total amount of SLOT slashed for a KNOT"
+          },
+          "functionSelector": "58ba2af9",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "currentSlashedAmountOfSLOTForKnot",
+          "nameLocation": "6454:33:58",
+          "parameters": {
+            "id": 37342,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37341,
+                "mutability": "mutable",
+                "name": "_blsPublicKey",
+                "nameLocation": "6503:13:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37346,
+                "src": "6488:28:58",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_calldata_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 37340,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6488:5:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "6487:30:58"
+          },
+          "returnParameters": {
+            "id": 37345,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37344,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37346,
+                "src": "6541:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37343,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6541:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "6540:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37354,
+          "nodeType": "FunctionDefinition",
+          "src": "6651:80:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37347,
+            "nodeType": "StructuredDocumentation",
+            "src": "6556:90:58",
+            "text": "@notice Total dETH minted by adding knots and minting inflation rewards within a house"
+          },
+          "functionSelector": "6f6b761e",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "dETHMintedInHouse",
+          "nameLocation": "6660:17:58",
+          "parameters": {
+            "id": 37350,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37349,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "6686:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37354,
+                "src": "6678:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37348,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6678:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "6677:21:58"
+          },
+          "returnParameters": {
+            "id": 37353,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37352,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37354,
+                "src": "6722:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37351,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6722:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "6721:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37362,
+          "nodeType": "FunctionDefinition",
+          "src": "6819:86:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37355,
+            "nodeType": "StructuredDocumentation",
+            "src": "6737:77:58",
+            "text": "@notice Total SLOT minted for all KNOTs that have not rage quit the house"
+          },
+          "functionSelector": "efd9a64a",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "activeSlotMintedInHouse",
+          "nameLocation": "6828:23:58",
+          "parameters": {
+            "id": 37358,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37357,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "6860:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37362,
+                "src": "6852:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37356,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6852:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "6851:21:58"
+          },
+          "returnParameters": {
+            "id": 37361,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37360,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37362,
+                "src": "6896:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37359,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "6896:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "6895:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37370,
+          "nodeType": "FunctionDefinition",
+          "src": "7008:100:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37363,
+            "nodeType": "StructuredDocumentation",
+            "src": "6911:92:58",
+            "text": "@notice Total collateralised SLOT minted for all KNOTs that have not rage quit the house"
+          },
+          "functionSelector": "9cf3f1ce",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "activeCollateralisedSlotMintedInHouse",
+          "nameLocation": "7017:37:58",
+          "parameters": {
+            "id": 37366,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37365,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "7063:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37370,
+                "src": "7055:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37364,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "7055:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "7054:21:58"
+          },
+          "returnParameters": {
+            "id": 37369,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37368,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37370,
+                "src": "7099:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37367,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "7099:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "7098:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37380,
+          "nodeType": "FunctionDefinition",
+          "src": "7330:102:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37371,
+            "nodeType": "StructuredDocumentation",
+            "src": "7114:211:58",
+            "text": "@notice Helper for calculating an active sETH balance from a SLOT amount\n @param _stakeHouse Target Stakehouse registry - each has their own exchange rate\n @param _slotAmount SLOT amount in wei"
+          },
+          "functionSelector": "efef09c9",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "sETHForSLOTBalance",
+          "nameLocation": "7339:18:58",
+          "parameters": {
+            "id": 37376,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37373,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "7366:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37380,
+                "src": "7358:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37372,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "7358:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37375,
+                "mutability": "mutable",
+                "name": "_slotAmount",
+                "nameLocation": "7387:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37380,
+                "src": "7379:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37374,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "7379:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "7357:42:58"
+          },
+          "returnParameters": {
+            "id": 37379,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37378,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37380,
+                "src": "7423:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37377,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "7423:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "7422:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 37390,
+          "nodeType": "FunctionDefinition",
+          "src": "7647:102:58",
+          "nodes": [],
+          "documentation": {
+            "id": 37381,
+            "nodeType": "StructuredDocumentation",
+            "src": "7438:204:58",
+            "text": "@notice Helper for calculating a SLOT balance from an sETH amount\n @param _stakeHouse Target Stakehouse registry - each has their own exchange rate\n @param _sETHAmount sETH amount in wei"
+          },
+          "functionSelector": "b5ab26d3",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "slotForSETHBalance",
+          "nameLocation": "7656:18:58",
+          "parameters": {
+            "id": 37386,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37383,
+                "mutability": "mutable",
+                "name": "_stakeHouse",
+                "nameLocation": "7683:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37390,
+                "src": "7675:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 37382,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "7675:7:58",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 37385,
+                "mutability": "mutable",
+                "name": "_sETHAmount",
+                "nameLocation": "7704:11:58",
+                "nodeType": "VariableDeclaration",
+                "scope": 37390,
+                "src": "7696:19:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37384,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "7696:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "7674:42:58"
+          },
+          "returnParameters": {
+            "id": 37389,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 37388,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 37390,
+                "src": "7740:7:58",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 37387,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "7740:7:58",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "7739:9:58"
+          },
+          "scope": 37391,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [],
+      "canonicalName": "ISlotSettlementRegistry",
+      "contractDependencies": [],
+      "contractKind": "interface",
+      "fullyImplemented": false,
+      "linearizedBaseContracts": [
+        37391
+      ],
+      "name": "ISlotSettlementRegistry",
+      "nameLocation": "74:23:58",
+      "scope": 37392,
+      "usedErrors": []
+    }
+  ],
+  "license": "BUSL-1.1"
+}

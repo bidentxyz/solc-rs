@@ -1,0 +1,818 @@
+{
+  "absolutePath": "contracts/liquid-staking/SavETHVaultDeployer.sol",
+  "id": 6605,
+  "exportedSymbols": {
+    "Clones": [
+      41613
+    ],
+    "LPTokenFactory": [
+      2751
+    ],
+    "SavETHVault": [
+      6542
+    ],
+    "SavETHVaultDeployer": [
+      6604
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "0:764:20",
+  "nodes": [
+    {
+      "id": 6544,
+      "nodeType": "PragmaDirective",
+      "src": "0:24:20",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "^",
+        "0.8",
+        ".13"
+      ]
+    },
+    {
+      "id": 6546,
+      "nodeType": "ImportDirective",
+      "src": "59:66:20",
+      "nodes": [],
+      "absolutePath": "node_modules/@openzeppelin/contracts/proxy/Clones.sol",
+      "file": "@openzeppelin/contracts/proxy/Clones.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 6605,
+      "sourceUnit": 41614,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 6545,
+            "name": "Clones",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 41613,
+            "src": "68:6:20",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 6548,
+      "nodeType": "ImportDirective",
+      "src": "126:48:20",
+      "nodes": [],
+      "absolutePath": "contracts/liquid-staking/SavETHVault.sol",
+      "file": "./SavETHVault.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 6605,
+      "sourceUnit": 6543,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 6547,
+            "name": "SavETHVault",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 6542,
+            "src": "135:11:20",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 6550,
+      "nodeType": "ImportDirective",
+      "src": "175:54:20",
+      "nodes": [],
+      "absolutePath": "contracts/liquid-staking/LPTokenFactory.sol",
+      "file": "./LPTokenFactory.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 6605,
+      "sourceUnit": 2752,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 6549,
+            "name": "LPTokenFactory",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 2751,
+            "src": "184:14:20",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 6604,
+      "nodeType": "ContractDefinition",
+      "src": "231:533:20",
+      "nodes": [
+        {
+          "id": 6554,
+          "nodeType": "EventDefinition",
+          "src": "267:49:20",
+          "nodes": [],
+          "anonymous": false,
+          "eventSelector": "8594accdf7e0ec79f2b4c93a0c92187c4618dda7056c356d109cd2b1b86145c0",
+          "name": "NewVaultDeployed",
+          "nameLocation": "273:16:20",
+          "parameters": {
+            "id": 6553,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 6552,
+                "indexed": true,
+                "mutability": "mutable",
+                "name": "instance",
+                "nameLocation": "306:8:20",
+                "nodeType": "VariableDeclaration",
+                "scope": 6554,
+                "src": "290:24:20",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 6551,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "290:7:20",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "289:26:20"
+          }
+        },
+        {
+          "id": 6556,
+          "nodeType": "VariableDeclaration",
+          "src": "322:22:20",
+          "nodes": [],
+          "constant": false,
+          "mutability": "mutable",
+          "name": "implementation",
+          "nameLocation": "330:14:20",
+          "scope": 6604,
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_address",
+            "typeString": "address"
+          },
+          "typeName": {
+            "id": 6555,
+            "name": "address",
+            "nodeType": "ElementaryTypeName",
+            "src": "322:7:20",
+            "stateMutability": "nonpayable",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "id": 6570,
+          "nodeType": "FunctionDefinition",
+          "src": "350:74:20",
+          "nodes": [],
+          "body": {
+            "id": 6569,
+            "nodeType": "Block",
+            "src": "364:60:20",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 6567,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftHandSide": {
+                    "id": 6559,
+                    "name": "implementation",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 6556,
+                    "src": "374:14:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "Assignment",
+                  "operator": "=",
+                  "rightHandSide": {
+                    "arguments": [
+                      {
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "id": 6564,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "NewExpression",
+                          "src": "399:15:20",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_SavETHVault_$6542_$",
+                            "typeString": "function () returns (contract SavETHVault)"
+                          },
+                          "typeName": {
+                            "id": 6563,
+                            "nodeType": "UserDefinedTypeName",
+                            "pathNode": {
+                              "id": 6562,
+                              "name": "SavETHVault",
+                              "nodeType": "IdentifierPath",
+                              "referencedDeclaration": 6542,
+                              "src": "403:11:20"
+                            },
+                            "referencedDeclaration": 6542,
+                            "src": "403:11:20",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_SavETHVault_$6542",
+                              "typeString": "contract SavETHVault"
+                            }
+                          }
+                        },
+                        "id": 6565,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "399:17:20",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_SavETHVault_$6542",
+                          "typeString": "contract SavETHVault"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_SavETHVault_$6542",
+                          "typeString": "contract SavETHVault"
+                        }
+                      ],
+                      "id": 6561,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "391:7:20",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_address_$",
+                        "typeString": "type(address)"
+                      },
+                      "typeName": {
+                        "id": 6560,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "391:7:20",
+                        "typeDescriptions": {}
+                      }
+                    },
+                    "id": 6566,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "391:26:20",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "src": "374:43:20",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "id": 6568,
+                "nodeType": "ExpressionStatement",
+                "src": "374:43:20"
+              }
+            ]
+          },
+          "implemented": true,
+          "kind": "constructor",
+          "modifiers": [],
+          "name": "",
+          "nameLocation": "-1:-1:-1",
+          "parameters": {
+            "id": 6557,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "361:2:20"
+          },
+          "returnParameters": {
+            "id": 6558,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "364:0:20"
+          },
+          "scope": 6604,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "public"
+        },
+        {
+          "id": 6603,
+          "nodeType": "FunctionDefinition",
+          "src": "430:332:20",
+          "nodes": [],
+          "body": {
+            "id": 6602,
+            "nodeType": "Block",
+            "src": "539:223:20",
+            "nodes": [],
+            "statements": [
+              {
+                "assignments": [
+                  6580
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 6580,
+                    "mutability": "mutable",
+                    "name": "newVault",
+                    "nameLocation": "557:8:20",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 6602,
+                    "src": "549:16:20",
+                    "stateVariable": false,
+                    "storageLocation": "default",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    },
+                    "typeName": {
+                      "id": 6579,
+                      "name": "address",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "549:7:20",
+                      "stateMutability": "nonpayable",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 6585,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "id": 6583,
+                      "name": "implementation",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 6556,
+                      "src": "581:14:20",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 6581,
+                      "name": "Clones",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 41613,
+                      "src": "568:6:20",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_Clones_$41613_$",
+                        "typeString": "type(library Clones)"
+                      }
+                    },
+                    "id": 6582,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "clone",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 41556,
+                    "src": "568:12:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$_t_address_$",
+                      "typeString": "function (address) returns (address)"
+                    }
+                  },
+                  "id": 6584,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "568:28:20",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "549:47:20"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "id": 6590,
+                      "name": "_liquidStakingManger",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 6572,
+                      "src": "634:20:20",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "arguments": [
+                        {
+                          "id": 6592,
+                          "name": "_lpTokenFactory",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6574,
+                          "src": "671:15:20",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 6591,
+                        "name": "LPTokenFactory",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2751,
+                        "src": "656:14:20",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_LPTokenFactory_$2751_$",
+                          "typeString": "type(contract LPTokenFactory)"
+                        }
+                      },
+                      "id": 6593,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "656:31:20",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_LPTokenFactory_$2751",
+                        "typeString": "contract LPTokenFactory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_contract$_LPTokenFactory_$2751",
+                        "typeString": "contract LPTokenFactory"
+                      }
+                    ],
+                    "expression": {
+                      "arguments": [
+                        {
+                          "id": 6587,
+                          "name": "newVault",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6580,
+                          "src": "619:8:20",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 6586,
+                        "name": "SavETHVault",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 6542,
+                        "src": "607:11:20",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_SavETHVault_$6542_$",
+                          "typeString": "type(contract SavETHVault)"
+                        }
+                      },
+                      "id": 6588,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "607:21:20",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_SavETHVault_$6542",
+                        "typeString": "contract SavETHVault"
+                      }
+                    },
+                    "id": 6589,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "init",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 5818,
+                    "src": "607:26:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_contract$_LPTokenFactory_$2751_$returns$__$",
+                      "typeString": "function (address,contract LPTokenFactory) external"
+                    }
+                  },
+                  "id": 6594,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "607:81:20",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 6595,
+                "nodeType": "ExpressionStatement",
+                "src": "607:81:20"
+              },
+              {
+                "eventCall": {
+                  "arguments": [
+                    {
+                      "id": 6597,
+                      "name": "newVault",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 6580,
+                      "src": "720:8:20",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "id": 6596,
+                    "name": "NewVaultDeployed",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 6554,
+                    "src": "703:16:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
+                      "typeString": "function (address)"
+                    }
+                  },
+                  "id": 6598,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "703:26:20",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 6599,
+                "nodeType": "EmitStatement",
+                "src": "698:31:20"
+              },
+              {
+                "expression": {
+                  "id": 6600,
+                  "name": "newVault",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 6580,
+                  "src": "747:8:20",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "functionReturnParameters": 6578,
+                "id": 6601,
+                "nodeType": "Return",
+                "src": "740:15:20"
+              }
+            ]
+          },
+          "functionSelector": "4573d2df",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "deploySavETHVault",
+          "nameLocation": "439:17:20",
+          "parameters": {
+            "id": 6575,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 6572,
+                "mutability": "mutable",
+                "name": "_liquidStakingManger",
+                "nameLocation": "465:20:20",
+                "nodeType": "VariableDeclaration",
+                "scope": 6603,
+                "src": "457:28:20",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 6571,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "457:7:20",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 6574,
+                "mutability": "mutable",
+                "name": "_lpTokenFactory",
+                "nameLocation": "495:15:20",
+                "nodeType": "VariableDeclaration",
+                "scope": 6603,
+                "src": "487:23:20",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 6573,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "487:7:20",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "456:55:20"
+          },
+          "returnParameters": {
+            "id": 6578,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 6577,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 6603,
+                "src": "530:7:20",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 6576,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "530:7:20",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "529:9:20"
+          },
+          "scope": 6604,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [],
+      "canonicalName": "SavETHVaultDeployer",
+      "contractDependencies": [
+        6542
+      ],
+      "contractKind": "contract",
+      "fullyImplemented": true,
+      "linearizedBaseContracts": [
+        6604
+      ],
+      "name": "SavETHVaultDeployer",
+      "nameLocation": "240:19:20",
+      "scope": 6605,
+      "usedErrors": []
+    }
+  ],
+  "license": "MIT"
+}
