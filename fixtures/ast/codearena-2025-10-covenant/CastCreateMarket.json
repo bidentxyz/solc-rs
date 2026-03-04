@@ -1,0 +1,2089 @@
+{
+  "absolutePath": "script/CreateMarket.s.sol",
+  "id": 49766,
+  "exportedSymbols": {
+    "CastCreateMarket": [
+      49765
+    ],
+    "CreateMarketParams": [
+      49634
+    ],
+    "ICovenant": [
+      54463
+    ],
+    "MarketId": [
+      54133
+    ],
+    "MarketParams": [
+      54142
+    ],
+    "Script": [
+      1328
+    ],
+    "console": [
+      25521
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "39:1709:60",
+  "nodes": [
+    {
+      "id": 49615,
+      "nodeType": "PragmaDirective",
+      "src": "39:24:60",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "^",
+        "0.8",
+        ".30"
+      ]
+    },
+    {
+      "id": 49617,
+      "nodeType": "ImportDirective",
+      "src": "65:44:60",
+      "nodes": [],
+      "absolutePath": "lib/forge-std/src/Script.sol",
+      "file": "forge-std/Script.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 49766,
+      "sourceUnit": 1329,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 49616,
+            "name": "Script",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 1328,
+            "src": "73:6:60",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 49619,
+      "nodeType": "ImportDirective",
+      "src": "110:46:60",
+      "nodes": [],
+      "absolutePath": "lib/forge-std/src/console.sol",
+      "file": "forge-std/console.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 49766,
+      "sourceUnit": 25522,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 49618,
+            "name": "console",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 25521,
+            "src": "118:7:60",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 49623,
+      "nodeType": "ImportDirective",
+      "src": "157:82:60",
+      "nodes": [],
+      "absolutePath": "src/interfaces/ICovenant.sol",
+      "file": "../src/interfaces/ICovenant.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 49766,
+      "sourceUnit": 54464,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 49620,
+            "name": "ICovenant",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 54463,
+            "src": "165:9:60",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        },
+        {
+          "foreign": {
+            "id": 49621,
+            "name": "MarketParams",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 54142,
+            "src": "176:12:60",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        },
+        {
+          "foreign": {
+            "id": 49622,
+            "name": "MarketId",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 54133,
+            "src": "190:8:60",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 49634,
+      "nodeType": "StructDefinition",
+      "src": "310:136:60",
+      "nodes": [],
+      "canonicalName": "CreateMarketParams",
+      "members": [
+        {
+          "constant": false,
+          "id": 49625,
+          "mutability": "mutable",
+          "name": "baseToken",
+          "nameLocation": "350:9:60",
+          "nodeType": "VariableDeclaration",
+          "scope": 49634,
+          "src": "342:17:60",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_address",
+            "typeString": "address"
+          },
+          "typeName": {
+            "id": 49624,
+            "name": "address",
+            "nodeType": "ElementaryTypeName",
+            "src": "342:7:60",
+            "stateMutability": "nonpayable",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 49627,
+          "mutability": "mutable",
+          "name": "covenant",
+          "nameLocation": "373:8:60",
+          "nodeType": "VariableDeclaration",
+          "scope": 49634,
+          "src": "365:16:60",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_address",
+            "typeString": "address"
+          },
+          "typeName": {
+            "id": 49626,
+            "name": "address",
+            "nodeType": "ElementaryTypeName",
+            "src": "365:7:60",
+            "stateMutability": "nonpayable",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 49629,
+          "mutability": "mutable",
+          "name": "curator",
+          "nameLocation": "395:7:60",
+          "nodeType": "VariableDeclaration",
+          "scope": 49634,
+          "src": "387:15:60",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_address",
+            "typeString": "address"
+          },
+          "typeName": {
+            "id": 49628,
+            "name": "address",
+            "nodeType": "ElementaryTypeName",
+            "src": "387:7:60",
+            "stateMutability": "nonpayable",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 49631,
+          "mutability": "mutable",
+          "name": "lex",
+          "nameLocation": "416:3:60",
+          "nodeType": "VariableDeclaration",
+          "scope": 49634,
+          "src": "408:11:60",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_address",
+            "typeString": "address"
+          },
+          "typeName": {
+            "id": 49630,
+            "name": "address",
+            "nodeType": "ElementaryTypeName",
+            "src": "408:7:60",
+            "stateMutability": "nonpayable",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 49633,
+          "mutability": "mutable",
+          "name": "quoteToken",
+          "nameLocation": "433:10:60",
+          "nodeType": "VariableDeclaration",
+          "scope": 49634,
+          "src": "425:18:60",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_address",
+            "typeString": "address"
+          },
+          "typeName": {
+            "id": 49632,
+            "name": "address",
+            "nodeType": "ElementaryTypeName",
+            "src": "425:7:60",
+            "stateMutability": "nonpayable",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            }
+          },
+          "visibility": "internal"
+        }
+      ],
+      "name": "CreateMarketParams",
+      "nameLocation": "317:18:60",
+      "scope": 49766,
+      "visibility": "public"
+    },
+    {
+      "id": 49765,
+      "nodeType": "ContractDefinition",
+      "src": "448:1299:60",
+      "nodes": [
+        {
+          "id": 49764,
+          "nodeType": "FunctionDefinition",
+          "src": "490:1255:60",
+          "nodes": [],
+          "body": {
+            "id": 49763,
+            "nodeType": "Block",
+            "src": "514:1231:60",
+            "nodes": [],
+            "statements": [
+              {
+                "assignments": [
+                  49640
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 49640,
+                    "mutability": "mutable",
+                    "name": "jsonString",
+                    "nameLocation": "572:10:60",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 49763,
+                    "src": "558:24:60",
+                    "stateVariable": false,
+                    "storageLocation": "memory",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_memory_ptr",
+                      "typeString": "string"
+                    },
+                    "typeName": {
+                      "id": 49639,
+                      "name": "string",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "558:6:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage_ptr",
+                        "typeString": "string"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 49645,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "hexValue": "2e2f7363726970742f4372656174654d61726b6574506172616d732e6a736f6e",
+                      "id": 49643,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "597:34:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_0df766bee0ea219b09f121fc620de9d368400be42f8c13424eb0991aa4e02b33",
+                        "typeString": "literal_string \"./script/CreateMarketParams.json\""
+                      },
+                      "value": "./script/CreateMarketParams.json"
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_0df766bee0ea219b09f121fc620de9d368400be42f8c13424eb0991aa4e02b33",
+                        "typeString": "literal_string \"./script/CreateMarketParams.json\""
+                      }
+                    ],
+                    "expression": {
+                      "id": 49641,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1273,
+                      "src": "585:2:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$17397",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 49642,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "588:8:60",
+                    "memberName": "readFile",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 14446,
+                    "src": "585:11:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_view$_t_string_memory_ptr_$returns$_t_string_memory_ptr_$",
+                      "typeString": "function (string memory) view external returns (string memory)"
+                    }
+                  },
+                  "id": 49644,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "585:47:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string memory"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "558:74:60"
+              },
+              {
+                "assignments": [
+                  49647
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 49647,
+                    "mutability": "mutable",
+                    "name": "jsonData",
+                    "nameLocation": "673:8:60",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 49763,
+                    "src": "660:21:60",
+                    "stateVariable": false,
+                    "storageLocation": "memory",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory_ptr",
+                      "typeString": "bytes"
+                    },
+                    "typeName": {
+                      "id": 49646,
+                      "name": "bytes",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "660:5:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_storage_ptr",
+                        "typeString": "bytes"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 49652,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "id": 49650,
+                      "name": "jsonString",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 49640,
+                      "src": "697:10:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 49648,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1273,
+                      "src": "684:2:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$17397",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 49649,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "687:9:60",
+                    "memberName": "parseJson",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 14744,
+                    "src": "684:12:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_pure$_t_string_memory_ptr_$returns$_t_bytes_memory_ptr_$",
+                      "typeString": "function (string memory) pure external returns (bytes memory)"
+                    }
+                  },
+                  "id": 49651,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "684:24:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes memory"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "660:48:60"
+              },
+              {
+                "assignments": [
+                  49655
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 49655,
+                    "mutability": "mutable",
+                    "name": "createParams",
+                    "nameLocation": "744:12:60",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 49763,
+                    "src": "718:38:60",
+                    "stateVariable": false,
+                    "storageLocation": "memory",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_CreateMarketParams_$49634_memory_ptr",
+                      "typeString": "struct CreateMarketParams"
+                    },
+                    "typeName": {
+                      "id": 49654,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 49653,
+                        "name": "CreateMarketParams",
+                        "nameLocations": [
+                          "718:18:60"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 49634,
+                        "src": "718:18:60"
+                      },
+                      "referencedDeclaration": 49634,
+                      "src": "718:18:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_CreateMarketParams_$49634_storage_ptr",
+                        "typeString": "struct CreateMarketParams"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 49662,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "id": 49658,
+                      "name": "jsonData",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 49647,
+                      "src": "770:8:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory_ptr",
+                        "typeString": "bytes memory"
+                      }
+                    },
+                    {
+                      "components": [
+                        {
+                          "id": 49659,
+                          "name": "CreateMarketParams",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 49634,
+                          "src": "781:18:60",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_struct$_CreateMarketParams_$49634_storage_ptr_$",
+                            "typeString": "type(struct CreateMarketParams storage pointer)"
+                          }
+                        }
+                      ],
+                      "id": 49660,
+                      "isConstant": false,
+                      "isInlineArray": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "TupleExpression",
+                      "src": "780:20:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_struct$_CreateMarketParams_$49634_storage_ptr_$",
+                        "typeString": "type(struct CreateMarketParams storage pointer)"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_bytes_memory_ptr",
+                        "typeString": "bytes memory"
+                      },
+                      {
+                        "typeIdentifier": "t_type$_t_struct$_CreateMarketParams_$49634_storage_ptr_$",
+                        "typeString": "type(struct CreateMarketParams storage pointer)"
+                      }
+                    ],
+                    "expression": {
+                      "id": 49656,
+                      "name": "abi",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -1,
+                      "src": "759:3:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_abi",
+                        "typeString": "abi"
+                      }
+                    },
+                    "id": 49657,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "lValueRequested": false,
+                    "memberLocation": "763:6:60",
+                    "memberName": "decode",
+                    "nodeType": "MemberAccess",
+                    "src": "759:10:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_abidecode_pure$__$returns$__$",
+                      "typeString": "function () pure"
+                    }
+                  },
+                  "id": 49661,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "759:42:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_CreateMarketParams_$49634_memory_ptr",
+                    "typeString": "struct CreateMarketParams memory"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "718:83:60"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "4d61726b657420506172616d6574657273",
+                      "id": 49666,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "867:19:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_eb7fcf6befbbc3cf322147e3371f15c990b7808839405a1383854c531beef3f3",
+                        "typeString": "literal_string \"Market Parameters\""
+                      },
+                      "value": "Market Parameters"
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_eb7fcf6befbbc3cf322147e3371f15c990b7808839405a1383854c531beef3f3",
+                        "typeString": "literal_string \"Market Parameters\""
+                      }
+                    ],
+                    "expression": {
+                      "id": 49663,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "855:7:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 49665,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "863:3:60",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18035,
+                    "src": "855:11:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory) pure"
+                    }
+                  },
+                  "id": 49667,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "855:32:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 49668,
+                "nodeType": "ExpressionStatement",
+                "src": "855:32:60"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 49672,
+                        "name": "createParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49655,
+                        "src": "909:12:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_CreateMarketParams_$49634_memory_ptr",
+                          "typeString": "struct CreateMarketParams memory"
+                        }
+                      },
+                      "id": 49673,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "922:8:60",
+                      "memberName": "covenant",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 49627,
+                      "src": "909:21:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 49669,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "897:7:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 49671,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "905:3:60",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18063,
+                    "src": "897:11:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_address_$returns$__$",
+                      "typeString": "function (address) pure"
+                    }
+                  },
+                  "id": 49674,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "897:34:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 49675,
+                "nodeType": "ExpressionStatement",
+                "src": "897:34:60"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 49679,
+                        "name": "createParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49655,
+                        "src": "953:12:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_CreateMarketParams_$49634_memory_ptr",
+                          "typeString": "struct CreateMarketParams memory"
+                        }
+                      },
+                      "id": 49680,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "966:9:60",
+                      "memberName": "baseToken",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 49625,
+                      "src": "953:22:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 49676,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "941:7:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 49678,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "949:3:60",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18063,
+                    "src": "941:11:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_address_$returns$__$",
+                      "typeString": "function (address) pure"
+                    }
+                  },
+                  "id": 49681,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "941:35:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 49682,
+                "nodeType": "ExpressionStatement",
+                "src": "941:35:60"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 49686,
+                        "name": "createParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49655,
+                        "src": "998:12:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_CreateMarketParams_$49634_memory_ptr",
+                          "typeString": "struct CreateMarketParams memory"
+                        }
+                      },
+                      "id": 49687,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1011:10:60",
+                      "memberName": "quoteToken",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 49633,
+                      "src": "998:23:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 49683,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "986:7:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 49685,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "994:3:60",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18063,
+                    "src": "986:11:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_address_$returns$__$",
+                      "typeString": "function (address) pure"
+                    }
+                  },
+                  "id": 49688,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "986:36:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 49689,
+                "nodeType": "ExpressionStatement",
+                "src": "986:36:60"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 49693,
+                        "name": "createParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49655,
+                        "src": "1044:12:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_CreateMarketParams_$49634_memory_ptr",
+                          "typeString": "struct CreateMarketParams memory"
+                        }
+                      },
+                      "id": 49694,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1057:7:60",
+                      "memberName": "curator",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 49629,
+                      "src": "1044:20:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 49690,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1032:7:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 49692,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1040:3:60",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18063,
+                    "src": "1032:11:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_address_$returns$__$",
+                      "typeString": "function (address) pure"
+                    }
+                  },
+                  "id": 49695,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1032:33:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 49696,
+                "nodeType": "ExpressionStatement",
+                "src": "1032:33:60"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 49700,
+                        "name": "createParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49655,
+                        "src": "1087:12:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_CreateMarketParams_$49634_memory_ptr",
+                          "typeString": "struct CreateMarketParams memory"
+                        }
+                      },
+                      "id": 49701,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1100:3:60",
+                      "memberName": "lex",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 49631,
+                      "src": "1087:16:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 49697,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1075:7:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 49699,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1083:3:60",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18063,
+                    "src": "1075:11:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_address_$returns$__$",
+                      "typeString": "function (address) pure"
+                    }
+                  },
+                  "id": 49702,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1075:29:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 49703,
+                "nodeType": "ExpressionStatement",
+                "src": "1075:29:60"
+              },
+              {
+                "expression": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 49704,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1273,
+                      "src": "1148:2:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$17397",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 49706,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1151:14:60",
+                    "memberName": "startBroadcast",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 15019,
+                    "src": "1148:17:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
+                      "typeString": "function () external"
+                    }
+                  },
+                  "id": 49707,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1148:19:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 49708,
+                "nodeType": "ExpressionStatement",
+                "src": "1148:19:60"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 49714,
+                        "name": "createParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49655,
+                        "src": "1229:12:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_CreateMarketParams_$49634_memory_ptr",
+                          "typeString": "struct CreateMarketParams memory"
+                        }
+                      },
+                      "id": 49715,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1242:7:60",
+                      "memberName": "curator",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 49629,
+                      "src": "1229:20:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "hexValue": "74727565",
+                      "id": 49716,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "bool",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1251:4:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "value": "true"
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    ],
+                    "expression": {
+                      "arguments": [
+                        {
+                          "expression": {
+                            "id": 49710,
+                            "name": "createParams",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 49655,
+                            "src": "1188:12:60",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_CreateMarketParams_$49634_memory_ptr",
+                              "typeString": "struct CreateMarketParams memory"
+                            }
+                          },
+                          "id": 49711,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1201:8:60",
+                          "memberName": "covenant",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 49627,
+                          "src": "1188:21:60",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 49709,
+                        "name": "ICovenant",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 54463,
+                        "src": "1178:9:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_ICovenant_$54463_$",
+                          "typeString": "type(contract ICovenant)"
+                        }
+                      },
+                      "id": 49712,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1178:32:60",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ICovenant_$54463",
+                        "typeString": "contract ICovenant"
+                      }
+                    },
+                    "id": 49713,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1211:17:60",
+                    "memberName": "setEnabledCurator",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 54405,
+                    "src": "1178:50:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_bool_$returns$__$",
+                      "typeString": "function (address,bool) external"
+                    }
+                  },
+                  "id": 49717,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1178:78:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 49718,
+                "nodeType": "ExpressionStatement",
+                "src": "1178:78:60"
+              },
+              {
+                "assignments": [
+                  49721
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 49721,
+                    "mutability": "mutable",
+                    "name": "marketParams",
+                    "nameLocation": "1310:12:60",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 49763,
+                    "src": "1290:32:60",
+                    "stateVariable": false,
+                    "storageLocation": "memory",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_MarketParams_$54142_memory_ptr",
+                      "typeString": "struct MarketParams"
+                    },
+                    "typeName": {
+                      "id": 49720,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 49719,
+                        "name": "MarketParams",
+                        "nameLocations": [
+                          "1290:12:60"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 54142,
+                        "src": "1290:12:60"
+                      },
+                      "referencedDeclaration": 54142,
+                      "src": "1290:12:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_MarketParams_$54142_storage_ptr",
+                        "typeString": "struct MarketParams"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 49732,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 49723,
+                        "name": "createParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49655,
+                        "src": "1363:12:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_CreateMarketParams_$49634_memory_ptr",
+                          "typeString": "struct CreateMarketParams memory"
+                        }
+                      },
+                      "id": 49724,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1376:9:60",
+                      "memberName": "baseToken",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 49625,
+                      "src": "1363:22:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 49725,
+                        "name": "createParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49655,
+                        "src": "1411:12:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_CreateMarketParams_$49634_memory_ptr",
+                          "typeString": "struct CreateMarketParams memory"
+                        }
+                      },
+                      "id": 49726,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1424:10:60",
+                      "memberName": "quoteToken",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 49633,
+                      "src": "1411:23:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 49727,
+                        "name": "createParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49655,
+                        "src": "1457:12:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_CreateMarketParams_$49634_memory_ptr",
+                          "typeString": "struct CreateMarketParams memory"
+                        }
+                      },
+                      "id": 49728,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1470:7:60",
+                      "memberName": "curator",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 49629,
+                      "src": "1457:20:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 49729,
+                        "name": "createParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49655,
+                        "src": "1496:12:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_CreateMarketParams_$49634_memory_ptr",
+                          "typeString": "struct CreateMarketParams memory"
+                        }
+                      },
+                      "id": 49730,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1509:3:60",
+                      "memberName": "lex",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 49631,
+                      "src": "1496:16:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "id": 49722,
+                    "name": "MarketParams",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 54142,
+                    "src": "1325:12:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_type$_t_struct$_MarketParams_$54142_storage_ptr_$",
+                      "typeString": "type(struct MarketParams storage pointer)"
+                    }
+                  },
+                  "id": 49731,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "structConstructorCall",
+                  "lValueRequested": false,
+                  "nameLocations": [
+                    "1352:9:60",
+                    "1399:10:60",
+                    "1448:7:60",
+                    "1491:3:60"
+                  ],
+                  "names": [
+                    "baseToken",
+                    "quoteToken",
+                    "curator",
+                    "lex"
+                  ],
+                  "nodeType": "FunctionCall",
+                  "src": "1325:198:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_MarketParams_$54142_memory_ptr",
+                    "typeString": "struct MarketParams memory"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "1290:233:60"
+              },
+              {
+                "assignments": [
+                  49735
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 49735,
+                    "mutability": "mutable",
+                    "name": "marketId",
+                    "nameLocation": "1542:8:60",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 49763,
+                    "src": "1533:17:60",
+                    "stateVariable": false,
+                    "storageLocation": "default",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_userDefinedValueType$_MarketId_$54133",
+                      "typeString": "MarketId"
+                    },
+                    "typeName": {
+                      "id": 49734,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 49733,
+                        "name": "MarketId",
+                        "nameLocations": [
+                          "1533:8:60"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 54133,
+                        "src": "1533:8:60"
+                      },
+                      "referencedDeclaration": 54133,
+                      "src": "1533:8:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_userDefinedValueType$_MarketId_$54133",
+                        "typeString": "MarketId"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 49744,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "id": 49741,
+                      "name": "marketParams",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 49721,
+                      "src": "1599:12:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_MarketParams_$54142_memory_ptr",
+                        "typeString": "struct MarketParams memory"
+                      }
+                    },
+                    {
+                      "hexValue": "",
+                      "id": 49742,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "hexString",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1613:5:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+                        "typeString": "literal_string \"\""
+                      },
+                      "value": ""
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_struct$_MarketParams_$54142_memory_ptr",
+                        "typeString": "struct MarketParams memory"
+                      },
+                      {
+                        "typeIdentifier": "t_stringliteral_c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+                        "typeString": "literal_string \"\""
+                      }
+                    ],
+                    "expression": {
+                      "arguments": [
+                        {
+                          "expression": {
+                            "id": 49737,
+                            "name": "createParams",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 49655,
+                            "src": "1563:12:60",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_CreateMarketParams_$49634_memory_ptr",
+                              "typeString": "struct CreateMarketParams memory"
+                            }
+                          },
+                          "id": 49738,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1576:8:60",
+                          "memberName": "covenant",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 49627,
+                          "src": "1563:21:60",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 49736,
+                        "name": "ICovenant",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 54463,
+                        "src": "1553:9:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_ICovenant_$54463_$",
+                          "typeString": "type(contract ICovenant)"
+                        }
+                      },
+                      "id": 49739,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1553:32:60",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ICovenant_$54463",
+                        "typeString": "contract ICovenant"
+                      }
+                    },
+                    "id": 49740,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1586:12:60",
+                    "memberName": "createMarket",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 54286,
+                    "src": "1553:45:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$_t_struct$_MarketParams_$54142_memory_ptr_$_t_bytes_memory_ptr_$returns$_t_userDefinedValueType$_MarketId_$54133_$",
+                      "typeString": "function (struct MarketParams memory,bytes memory) external returns (MarketId)"
+                    }
+                  },
+                  "id": 49743,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1553:66:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_userDefinedValueType$_MarketId_$54133",
+                    "typeString": "MarketId"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "1533:86:60"
+              },
+              {
+                "expression": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 49745,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1273,
+                      "src": "1630:2:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$17397",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 49747,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1633:13:60",
+                    "memberName": "stopBroadcast",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 15035,
+                    "src": "1630:16:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
+                      "typeString": "function () external"
+                    }
+                  },
+                  "id": 49748,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1630:18:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 49749,
+                "nodeType": "ExpressionStatement",
+                "src": "1630:18:60"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "4d61726b657420637265617465642e20204d61726b65644964203d20",
+                      "id": 49753,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1671:30:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_9d168ff9ae420b05160176a7de019a99d10dc032d0516d0eb96b804c345d91cd",
+                        "typeString": "literal_string \"Market created.  MarkedId = \""
+                      },
+                      "value": "Market created.  MarkedId = "
+                    },
+                    {
+                      "arguments": [
+                        {
+                          "arguments": [
+                            {
+                              "id": 49758,
+                              "name": "marketId",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 49735,
+                              "src": "1727:8:60",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_userDefinedValueType$_MarketId_$54133",
+                                "typeString": "MarketId"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_userDefinedValueType$_MarketId_$54133",
+                                "typeString": "MarketId"
+                              }
+                            ],
+                            "expression": {
+                              "id": 49756,
+                              "name": "MarketId",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 54133,
+                              "src": "1711:8:60",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_userDefinedValueType$_MarketId_$54133_$",
+                                "typeString": "type(MarketId)"
+                              }
+                            },
+                            "id": 49757,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "memberLocation": "1720:6:60",
+                            "memberName": "unwrap",
+                            "nodeType": "MemberAccess",
+                            "src": "1711:15:60",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_unwrap_pure$_t_userDefinedValueType$_MarketId_$54133_$returns$_t_bytes20_$",
+                              "typeString": "function (MarketId) pure returns (bytes20)"
+                            }
+                          },
+                          "id": 49759,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1711:25:60",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes20",
+                            "typeString": "bytes20"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_bytes20",
+                            "typeString": "bytes20"
+                          }
+                        ],
+                        "id": 49755,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "1703:7:60",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_$",
+                          "typeString": "type(address)"
+                        },
+                        "typeName": {
+                          "id": 49754,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "1703:7:60",
+                          "typeDescriptions": {}
+                        }
+                      },
+                      "id": 49760,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1703:34:60",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_9d168ff9ae420b05160176a7de019a99d10dc032d0516d0eb96b804c345d91cd",
+                        "typeString": "literal_string \"Market created.  MarkedId = \""
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 49750,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1659:7:60",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 49752,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1667:3:60",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18216,
+                    "src": "1659:11:60",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_address_$returns$__$",
+                      "typeString": "function (string memory,address) pure"
+                    }
+                  },
+                  "id": 49761,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1659:79:60",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 49762,
+                "nodeType": "ExpressionStatement",
+                "src": "1659:79:60"
+              }
+            ]
+          },
+          "functionSelector": "c0406226",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "run",
+          "nameLocation": "499:3:60",
+          "parameters": {
+            "id": 49637,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "502:2:60"
+          },
+          "returnParameters": {
+            "id": 49638,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "514:0:60"
+          },
+          "scope": 49765,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [
+        {
+          "baseName": {
+            "id": 49635,
+            "name": "Script",
+            "nameLocations": [
+              "477:6:60"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 1328,
+            "src": "477:6:60"
+          },
+          "id": 49636,
+          "nodeType": "InheritanceSpecifier",
+          "src": "477:6:60"
+        }
+      ],
+      "canonicalName": "CastCreateMarket",
+      "contractDependencies": [],
+      "contractKind": "contract",
+      "fullyImplemented": true,
+      "internalFunctionIDs": {
+        "17450": 1
+      },
+      "linearizedBaseContracts": [
+        49765,
+        1328,
+        13307,
+        6836,
+        4776,
+        1289,
+        1277
+      ],
+      "name": "CastCreateMarket",
+      "nameLocation": "457:16:60",
+      "scope": 49766,
+      "usedErrors": [],
+      "usedEvents": []
+    }
+  ],
+  "license": "UNLICENSED"
+}

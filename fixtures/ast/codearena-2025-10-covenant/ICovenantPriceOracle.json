@@ -1,0 +1,636 @@
+{
+  "absolutePath": "src/curators/interfaces/ICovenantPriceOracle.sol",
+  "id": 53040,
+  "exportedSymbols": {
+    "ICovenantPriceOracle": [
+      53039
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "37:2923:68",
+  "nodes": [
+    {
+      "id": 52989,
+      "nodeType": "PragmaDirective",
+      "src": "37:24:68",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        ">=",
+        "0.8",
+        ".0"
+      ]
+    },
+    {
+      "id": 53039,
+      "nodeType": "ContractDefinition",
+      "src": "486:2473:68",
+      "nodes": [
+        {
+          "id": 53000,
+          "nodeType": "FunctionDefinition",
+          "src": "1006:99:68",
+          "nodes": [],
+          "documentation": {
+            "id": 52991,
+            "nodeType": "StructuredDocumentation",
+            "src": "523:478:68",
+            "text": "@notice priceUpdate for pulled pricing (e.g., Pyth, Redstone, Chainlink datastreams)\n @notice allows pushing pricing to be verified on-chain. Function is payable to receive required payment.\n @param base The token that is being priced (use here for routing purposes).\n @param quote The token that is the unit of account (use here for routing purposes).\n @param updateData Update data package (contains price and other info to be verified onchain)"
+          },
+          "functionSelector": "7d8cfe6a",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "updatePriceFeeds",
+          "nameLocation": "1015:16:68",
+          "parameters": {
+            "id": 52998,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 52993,
+                "mutability": "mutable",
+                "name": "base",
+                "nameLocation": "1040:4:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53000,
+                "src": "1032:12:68",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 52992,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1032:7:68",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 52995,
+                "mutability": "mutable",
+                "name": "quote",
+                "nameLocation": "1054:5:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53000,
+                "src": "1046:13:68",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 52994,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1046:7:68",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 52997,
+                "mutability": "mutable",
+                "name": "updateData",
+                "nameLocation": "1076:10:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53000,
+                "src": "1061:25:68",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_calldata_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 52996,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1061:5:68",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1031:56:68"
+          },
+          "returnParameters": {
+            "id": 52999,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "1104:0:68"
+          },
+          "scope": 53039,
+          "stateMutability": "payable",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 53012,
+          "nodeType": "FunctionDefinition",
+          "src": "1460:150:68",
+          "nodes": [],
+          "documentation": {
+            "id": 53001,
+            "nodeType": "StructuredDocumentation",
+            "src": "1111:344:68",
+            "text": "@notice Returns the required fee to update an oracle price.\n @param base The token that is being priced (use here for routing purposes).\n @param quote The token that is the unit of account (use here for routing purposes).\n @param updateData Array of price update data.\n @return updateFee The required fee in Wei."
+          },
+          "functionSelector": "9e6f7199",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "getUpdateFee",
+          "nameLocation": "1469:12:68",
+          "parameters": {
+            "id": 53008,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 53003,
+                "mutability": "mutable",
+                "name": "base",
+                "nameLocation": "1499:4:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53012,
+                "src": "1491:12:68",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 53002,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1491:7:68",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 53005,
+                "mutability": "mutable",
+                "name": "quote",
+                "nameLocation": "1521:5:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53012,
+                "src": "1513:13:68",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 53004,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1513:7:68",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 53007,
+                "mutability": "mutable",
+                "name": "updateData",
+                "nameLocation": "1551:10:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53012,
+                "src": "1536:25:68",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes_calldata_ptr",
+                  "typeString": "bytes"
+                },
+                "typeName": {
+                  "id": 53006,
+                  "name": "bytes",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1536:5:68",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1481:86:68"
+          },
+          "returnParameters": {
+            "id": 53011,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 53010,
+                "mutability": "mutable",
+                "name": "updateFee",
+                "nameLocation": "1599:9:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53012,
+                "src": "1591:17:68",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint128",
+                  "typeString": "uint128"
+                },
+                "typeName": {
+                  "id": 53009,
+                  "name": "uint128",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1591:7:68",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint128",
+                    "typeString": "uint128"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1590:19:68"
+          },
+          "scope": 53039,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 53024,
+          "nodeType": "FunctionDefinition",
+          "src": "2090:114:68",
+          "nodes": [],
+          "documentation": {
+            "id": 53013,
+            "nodeType": "StructuredDocumentation",
+            "src": "1616:469:68",
+            "text": "@notice Preview of getQuote, with a longer lookback window to avoid quote blocking\n @notice One-sided price: How much quote token you would get for inAmount of base token, assuming no price spread.\n @param inAmount The amount of `base` to convert.\n @param base The token that is being priced.\n @param quote The token that is the unit of account.\n @return outAmount The amount of `quote` that is equivalent to `inAmount` of `base`."
+          },
+          "functionSelector": "8514a7e2",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "previewGetQuote",
+          "nameLocation": "2099:15:68",
+          "parameters": {
+            "id": 53020,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 53015,
+                "mutability": "mutable",
+                "name": "inAmount",
+                "nameLocation": "2123:8:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53024,
+                "src": "2115:16:68",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 53014,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2115:7:68",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 53017,
+                "mutability": "mutable",
+                "name": "base",
+                "nameLocation": "2141:4:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53024,
+                "src": "2133:12:68",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 53016,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2133:7:68",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 53019,
+                "mutability": "mutable",
+                "name": "quote",
+                "nameLocation": "2155:5:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53024,
+                "src": "2147:13:68",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 53018,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2147:7:68",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2114:47:68"
+          },
+          "returnParameters": {
+            "id": 53023,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 53022,
+                "mutability": "mutable",
+                "name": "outAmount",
+                "nameLocation": "2193:9:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53024,
+                "src": "2185:17:68",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 53021,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2185:7:68",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2184:19:68"
+          },
+          "scope": 53039,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 53038,
+          "nodeType": "FunctionDefinition",
+          "src": "2787:170:68",
+          "nodes": [],
+          "documentation": {
+            "id": 53025,
+            "nodeType": "StructuredDocumentation",
+            "src": "2210:572:68",
+            "text": "@notice Preview of getQuotes, with a longer lookback window to avoid quote blocking\n @notice Two-sided price: How much quote token you would get/spend for selling/buying inAmount of base token.\n @param inAmount The amount of `base` to convert.\n @param base The token that is being priced.\n @param quote The token that is the unit of account.\n @return bidOutAmount The amount of `quote` you would get for selling `inAmount` of `base`.\n @return askOutAmount The amount of `quote` you would spend for buying `inAmount` of `base`."
+          },
+          "functionSelector": "47c14065",
+          "implemented": false,
+          "kind": "function",
+          "modifiers": [],
+          "name": "previewGetQuotes",
+          "nameLocation": "2796:16:68",
+          "parameters": {
+            "id": 53032,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 53027,
+                "mutability": "mutable",
+                "name": "inAmount",
+                "nameLocation": "2830:8:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53038,
+                "src": "2822:16:68",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 53026,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2822:7:68",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 53029,
+                "mutability": "mutable",
+                "name": "base",
+                "nameLocation": "2856:4:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53038,
+                "src": "2848:12:68",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 53028,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2848:7:68",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 53031,
+                "mutability": "mutable",
+                "name": "quote",
+                "nameLocation": "2878:5:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53038,
+                "src": "2870:13:68",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 53030,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2870:7:68",
+                  "stateMutability": "nonpayable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2812:77:68"
+          },
+          "returnParameters": {
+            "id": 53037,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 53034,
+                "mutability": "mutable",
+                "name": "bidOutAmount",
+                "nameLocation": "2921:12:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53038,
+                "src": "2913:20:68",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 53033,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2913:7:68",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 53036,
+                "mutability": "mutable",
+                "name": "askOutAmount",
+                "nameLocation": "2943:12:68",
+                "nodeType": "VariableDeclaration",
+                "scope": 53038,
+                "src": "2935:20:68",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 53035,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2935:7:68",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2912:44:68"
+          },
+          "scope": 53039,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [],
+      "canonicalName": "ICovenantPriceOracle",
+      "contractDependencies": [],
+      "contractKind": "interface",
+      "documentation": {
+        "id": 52990,
+        "nodeType": "StructuredDocumentation",
+        "src": "63:421:68",
+        "text": " @title ICovenantPriceOracle\n @author Covenant Labs\n @notice Defines the expanded interface for Covenant oracles (vs Euler Labs interface as defined in Eulers IPriceOracle.sol)\n @notice Follows closely oracle interface of Euler Labs, https://github.com/euler-xyz/euler-price-oracle/\n @notice All functions return a value.  if bid/ask price not implemented, then getQuotes returns bid = ask = getQuote()*"
+      },
+      "fullyImplemented": false,
+      "linearizedBaseContracts": [
+        53039
+      ],
+      "name": "ICovenantPriceOracle",
+      "nameLocation": "496:20:68",
+      "scope": 53040,
+      "usedErrors": [],
+      "usedEvents": []
+    }
+  ],
+  "license": "AGPL-3.0"
+}

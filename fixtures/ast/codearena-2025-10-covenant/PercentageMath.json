@@ -1,0 +1,1103 @@
+{
+  "absolutePath": "lib/aave-v3-core/contracts/protocol/libraries/math/PercentageMath.sol",
+  "id": 34,
+  "exportedSymbols": {
+    "PercentageMath": [
+      33
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "37:2312:0",
+  "nodes": [
+    {
+      "id": 1,
+      "nodeType": "PragmaDirective",
+      "src": "37:23:0",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "^",
+        "0.8",
+        ".0"
+      ]
+    },
+    {
+      "id": 33,
+      "nodeType": "ContractDefinition",
+      "src": "410:1938:0",
+      "nodes": [
+        {
+          "id": 5,
+          "nodeType": "VariableDeclaration",
+          "src": "478:49:0",
+          "nodes": [],
+          "constant": true,
+          "mutability": "constant",
+          "name": "PERCENTAGE_FACTOR",
+          "nameLocation": "504:17:0",
+          "scope": 33,
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_uint256",
+            "typeString": "uint256"
+          },
+          "typeName": {
+            "id": 3,
+            "name": "uint256",
+            "nodeType": "ElementaryTypeName",
+            "src": "478:7:0",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            }
+          },
+          "value": {
+            "hexValue": "316534",
+            "id": 4,
+            "isConstant": false,
+            "isLValue": false,
+            "isPure": true,
+            "kind": "number",
+            "lValueRequested": false,
+            "nodeType": "Literal",
+            "src": "524:3:0",
+            "typeDescriptions": {
+              "typeIdentifier": "t_rational_10000_by_1",
+              "typeString": "int_const 10000"
+            },
+            "value": "1e4"
+          },
+          "visibility": "internal"
+        },
+        {
+          "id": 8,
+          "nodeType": "VariableDeclaration",
+          "src": "569:56:0",
+          "nodes": [],
+          "constant": true,
+          "mutability": "constant",
+          "name": "HALF_PERCENTAGE_FACTOR",
+          "nameLocation": "595:22:0",
+          "scope": 33,
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_uint256",
+            "typeString": "uint256"
+          },
+          "typeName": {
+            "id": 6,
+            "name": "uint256",
+            "nodeType": "ElementaryTypeName",
+            "src": "569:7:0",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            }
+          },
+          "value": {
+            "hexValue": "302e356534",
+            "id": 7,
+            "isConstant": false,
+            "isLValue": false,
+            "isPure": true,
+            "kind": "number",
+            "lValueRequested": false,
+            "nodeType": "Literal",
+            "src": "620:5:0",
+            "typeDescriptions": {
+              "typeIdentifier": "t_rational_5000_by_1",
+              "typeString": "int_const 5000"
+            },
+            "value": "0.5e4"
+          },
+          "visibility": "internal"
+        },
+        {
+          "id": 20,
+          "nodeType": "FunctionDefinition",
+          "src": "1005:496:0",
+          "nodes": [],
+          "body": {
+            "id": 19,
+            "nodeType": "Block",
+            "src": "1099:402:0",
+            "nodes": [],
+            "statements": [
+              {
+                "AST": {
+                  "nativeSrc": "1207:290:0",
+                  "nodeType": "YulBlock",
+                  "src": "1207:290:0",
+                  "statements": [
+                    {
+                      "body": {
+                        "nativeSrc": "1368:30:0",
+                        "nodeType": "YulBlock",
+                        "src": "1368:30:0",
+                        "statements": [
+                          {
+                            "expression": {
+                              "arguments": [
+                                {
+                                  "kind": "number",
+                                  "nativeSrc": "1385:1:0",
+                                  "nodeType": "YulLiteral",
+                                  "src": "1385:1:0",
+                                  "type": "",
+                                  "value": "0"
+                                },
+                                {
+                                  "kind": "number",
+                                  "nativeSrc": "1388:1:0",
+                                  "nodeType": "YulLiteral",
+                                  "src": "1388:1:0",
+                                  "type": "",
+                                  "value": "0"
+                                }
+                              ],
+                              "functionName": {
+                                "name": "revert",
+                                "nativeSrc": "1378:6:0",
+                                "nodeType": "YulIdentifier",
+                                "src": "1378:6:0"
+                              },
+                              "nativeSrc": "1378:12:0",
+                              "nodeType": "YulFunctionCall",
+                              "src": "1378:12:0"
+                            },
+                            "nativeSrc": "1378:12:0",
+                            "nodeType": "YulExpressionStatement",
+                            "src": "1378:12:0"
+                          }
+                        ]
+                      },
+                      "condition": {
+                        "arguments": [
+                          {
+                            "arguments": [
+                              {
+                                "arguments": [
+                                  {
+                                    "name": "percentage",
+                                    "nativeSrc": "1255:10:0",
+                                    "nodeType": "YulIdentifier",
+                                    "src": "1255:10:0"
+                                  }
+                                ],
+                                "functionName": {
+                                  "name": "iszero",
+                                  "nativeSrc": "1248:6:0",
+                                  "nodeType": "YulIdentifier",
+                                  "src": "1248:6:0"
+                                },
+                                "nativeSrc": "1248:18:0",
+                                "nodeType": "YulFunctionCall",
+                                "src": "1248:18:0"
+                              },
+                              {
+                                "arguments": [
+                                  {
+                                    "arguments": [
+                                      {
+                                        "name": "value",
+                                        "nativeSrc": "1288:5:0",
+                                        "nodeType": "YulIdentifier",
+                                        "src": "1288:5:0"
+                                      },
+                                      {
+                                        "arguments": [
+                                          {
+                                            "arguments": [
+                                              {
+                                                "arguments": [
+                                                  {
+                                                    "kind": "number",
+                                                    "nativeSrc": "1307:1:0",
+                                                    "nodeType": "YulLiteral",
+                                                    "src": "1307:1:0",
+                                                    "type": "",
+                                                    "value": "0"
+                                                  }
+                                                ],
+                                                "functionName": {
+                                                  "name": "not",
+                                                  "nativeSrc": "1303:3:0",
+                                                  "nodeType": "YulIdentifier",
+                                                  "src": "1303:3:0"
+                                                },
+                                                "nativeSrc": "1303:6:0",
+                                                "nodeType": "YulFunctionCall",
+                                                "src": "1303:6:0"
+                                              },
+                                              {
+                                                "name": "HALF_PERCENTAGE_FACTOR",
+                                                "nativeSrc": "1311:22:0",
+                                                "nodeType": "YulIdentifier",
+                                                "src": "1311:22:0"
+                                              }
+                                            ],
+                                            "functionName": {
+                                              "name": "sub",
+                                              "nativeSrc": "1299:3:0",
+                                              "nodeType": "YulIdentifier",
+                                              "src": "1299:3:0"
+                                            },
+                                            "nativeSrc": "1299:35:0",
+                                            "nodeType": "YulFunctionCall",
+                                            "src": "1299:35:0"
+                                          },
+                                          {
+                                            "name": "percentage",
+                                            "nativeSrc": "1336:10:0",
+                                            "nodeType": "YulIdentifier",
+                                            "src": "1336:10:0"
+                                          }
+                                        ],
+                                        "functionName": {
+                                          "name": "div",
+                                          "nativeSrc": "1295:3:0",
+                                          "nodeType": "YulIdentifier",
+                                          "src": "1295:3:0"
+                                        },
+                                        "nativeSrc": "1295:52:0",
+                                        "nodeType": "YulFunctionCall",
+                                        "src": "1295:52:0"
+                                      }
+                                    ],
+                                    "functionName": {
+                                      "name": "gt",
+                                      "nativeSrc": "1285:2:0",
+                                      "nodeType": "YulIdentifier",
+                                      "src": "1285:2:0"
+                                    },
+                                    "nativeSrc": "1285:63:0",
+                                    "nodeType": "YulFunctionCall",
+                                    "src": "1285:63:0"
+                                  }
+                                ],
+                                "functionName": {
+                                  "name": "iszero",
+                                  "nativeSrc": "1278:6:0",
+                                  "nodeType": "YulIdentifier",
+                                  "src": "1278:6:0"
+                                },
+                                "nativeSrc": "1278:71:0",
+                                "nodeType": "YulFunctionCall",
+                                "src": "1278:71:0"
+                              }
+                            ],
+                            "functionName": {
+                              "name": "or",
+                              "nativeSrc": "1234:2:0",
+                              "nodeType": "YulIdentifier",
+                              "src": "1234:2:0"
+                            },
+                            "nativeSrc": "1234:125:0",
+                            "nodeType": "YulFunctionCall",
+                            "src": "1234:125:0"
+                          }
+                        ],
+                        "functionName": {
+                          "name": "iszero",
+                          "nativeSrc": "1218:6:0",
+                          "nodeType": "YulIdentifier",
+                          "src": "1218:6:0"
+                        },
+                        "nativeSrc": "1218:149:0",
+                        "nodeType": "YulFunctionCall",
+                        "src": "1218:149:0"
+                      },
+                      "nativeSrc": "1215:183:0",
+                      "nodeType": "YulIf",
+                      "src": "1215:183:0"
+                    },
+                    {
+                      "nativeSrc": "1406:85:0",
+                      "nodeType": "YulAssignment",
+                      "src": "1406:85:0",
+                      "value": {
+                        "arguments": [
+                          {
+                            "arguments": [
+                              {
+                                "arguments": [
+                                  {
+                                    "name": "value",
+                                    "nativeSrc": "1428:5:0",
+                                    "nodeType": "YulIdentifier",
+                                    "src": "1428:5:0"
+                                  },
+                                  {
+                                    "name": "percentage",
+                                    "nativeSrc": "1435:10:0",
+                                    "nodeType": "YulIdentifier",
+                                    "src": "1435:10:0"
+                                  }
+                                ],
+                                "functionName": {
+                                  "name": "mul",
+                                  "nativeSrc": "1424:3:0",
+                                  "nodeType": "YulIdentifier",
+                                  "src": "1424:3:0"
+                                },
+                                "nativeSrc": "1424:22:0",
+                                "nodeType": "YulFunctionCall",
+                                "src": "1424:22:0"
+                              },
+                              {
+                                "name": "HALF_PERCENTAGE_FACTOR",
+                                "nativeSrc": "1448:22:0",
+                                "nodeType": "YulIdentifier",
+                                "src": "1448:22:0"
+                              }
+                            ],
+                            "functionName": {
+                              "name": "add",
+                              "nativeSrc": "1420:3:0",
+                              "nodeType": "YulIdentifier",
+                              "src": "1420:3:0"
+                            },
+                            "nativeSrc": "1420:51:0",
+                            "nodeType": "YulFunctionCall",
+                            "src": "1420:51:0"
+                          },
+                          {
+                            "name": "PERCENTAGE_FACTOR",
+                            "nativeSrc": "1473:17:0",
+                            "nodeType": "YulIdentifier",
+                            "src": "1473:17:0"
+                          }
+                        ],
+                        "functionName": {
+                          "name": "div",
+                          "nativeSrc": "1416:3:0",
+                          "nodeType": "YulIdentifier",
+                          "src": "1416:3:0"
+                        },
+                        "nativeSrc": "1416:75:0",
+                        "nodeType": "YulFunctionCall",
+                        "src": "1416:75:0"
+                      },
+                      "variableNames": [
+                        {
+                          "name": "result",
+                          "nativeSrc": "1406:6:0",
+                          "nodeType": "YulIdentifier",
+                          "src": "1406:6:0"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "evmVersion": "cancun",
+                "externalReferences": [
+                  {
+                    "declaration": 8,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "1311:22:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 8,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "1448:22:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 5,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "1473:17:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 13,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "1255:10:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 13,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "1336:10:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 13,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "1435:10:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 16,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "1406:6:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 11,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "1288:5:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 11,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "1428:5:0",
+                    "valueSize": 1
+                  }
+                ],
+                "id": 18,
+                "nodeType": "InlineAssembly",
+                "src": "1198:299:0"
+              }
+            ]
+          },
+          "documentation": {
+            "id": 9,
+            "nodeType": "StructuredDocumentation",
+            "src": "630:372:0",
+            "text": " @notice Executes a percentage multiplication\n @dev assembly optimized for improved gas savings, see https://twitter.com/transmissions11/status/1451131036377571328\n @param value The value of which the percentage needs to be calculated\n @param percentage The percentage of the value to be calculated\n @return result value percentmul percentage"
+          },
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "percentMul",
+          "nameLocation": "1014:10:0",
+          "parameters": {
+            "id": 14,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 11,
+                "mutability": "mutable",
+                "name": "value",
+                "nameLocation": "1033:5:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 20,
+                "src": "1025:13:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 10,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1025:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13,
+                "mutability": "mutable",
+                "name": "percentage",
+                "nameLocation": "1048:10:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 20,
+                "src": "1040:18:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 12,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1040:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1024:35:0"
+          },
+          "returnParameters": {
+            "id": 17,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 16,
+                "mutability": "mutable",
+                "name": "result",
+                "nameLocation": "1091:6:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 20,
+                "src": "1083:14:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 15,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1083:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1082:16:0"
+          },
+          "scope": 33,
+          "stateMutability": "pure",
+          "virtual": false,
+          "visibility": "internal"
+        },
+        {
+          "id": 32,
+          "nodeType": "FunctionDefinition",
+          "src": "1874:472:0",
+          "nodes": [],
+          "body": {
+            "id": 31,
+            "nodeType": "Block",
+            "src": "1968:378:0",
+            "nodes": [],
+            "statements": [
+              {
+                "AST": {
+                  "nativeSrc": "2075:267:0",
+                  "nodeType": "YulBlock",
+                  "src": "2075:267:0",
+                  "statements": [
+                    {
+                      "body": {
+                        "nativeSrc": "2217:30:0",
+                        "nodeType": "YulBlock",
+                        "src": "2217:30:0",
+                        "statements": [
+                          {
+                            "expression": {
+                              "arguments": [
+                                {
+                                  "kind": "number",
+                                  "nativeSrc": "2234:1:0",
+                                  "nodeType": "YulLiteral",
+                                  "src": "2234:1:0",
+                                  "type": "",
+                                  "value": "0"
+                                },
+                                {
+                                  "kind": "number",
+                                  "nativeSrc": "2237:1:0",
+                                  "nodeType": "YulLiteral",
+                                  "src": "2237:1:0",
+                                  "type": "",
+                                  "value": "0"
+                                }
+                              ],
+                              "functionName": {
+                                "name": "revert",
+                                "nativeSrc": "2227:6:0",
+                                "nodeType": "YulIdentifier",
+                                "src": "2227:6:0"
+                              },
+                              "nativeSrc": "2227:12:0",
+                              "nodeType": "YulFunctionCall",
+                              "src": "2227:12:0"
+                            },
+                            "nativeSrc": "2227:12:0",
+                            "nodeType": "YulExpressionStatement",
+                            "src": "2227:12:0"
+                          }
+                        ]
+                      },
+                      "condition": {
+                        "arguments": [
+                          {
+                            "arguments": [
+                              {
+                                "name": "percentage",
+                                "nativeSrc": "2105:10:0",
+                                "nodeType": "YulIdentifier",
+                                "src": "2105:10:0"
+                              }
+                            ],
+                            "functionName": {
+                              "name": "iszero",
+                              "nativeSrc": "2098:6:0",
+                              "nodeType": "YulIdentifier",
+                              "src": "2098:6:0"
+                            },
+                            "nativeSrc": "2098:18:0",
+                            "nodeType": "YulFunctionCall",
+                            "src": "2098:18:0"
+                          },
+                          {
+                            "arguments": [
+                              {
+                                "arguments": [
+                                  {
+                                    "arguments": [
+                                      {
+                                        "name": "value",
+                                        "nativeSrc": "2143:5:0",
+                                        "nodeType": "YulIdentifier",
+                                        "src": "2143:5:0"
+                                      },
+                                      {
+                                        "arguments": [
+                                          {
+                                            "arguments": [
+                                              {
+                                                "arguments": [
+                                                  {
+                                                    "kind": "number",
+                                                    "nativeSrc": "2162:1:0",
+                                                    "nodeType": "YulLiteral",
+                                                    "src": "2162:1:0",
+                                                    "type": "",
+                                                    "value": "0"
+                                                  }
+                                                ],
+                                                "functionName": {
+                                                  "name": "not",
+                                                  "nativeSrc": "2158:3:0",
+                                                  "nodeType": "YulIdentifier",
+                                                  "src": "2158:3:0"
+                                                },
+                                                "nativeSrc": "2158:6:0",
+                                                "nodeType": "YulFunctionCall",
+                                                "src": "2158:6:0"
+                                              },
+                                              {
+                                                "arguments": [
+                                                  {
+                                                    "name": "percentage",
+                                                    "nativeSrc": "2170:10:0",
+                                                    "nodeType": "YulIdentifier",
+                                                    "src": "2170:10:0"
+                                                  },
+                                                  {
+                                                    "kind": "number",
+                                                    "nativeSrc": "2182:1:0",
+                                                    "nodeType": "YulLiteral",
+                                                    "src": "2182:1:0",
+                                                    "type": "",
+                                                    "value": "2"
+                                                  }
+                                                ],
+                                                "functionName": {
+                                                  "name": "div",
+                                                  "nativeSrc": "2166:3:0",
+                                                  "nodeType": "YulIdentifier",
+                                                  "src": "2166:3:0"
+                                                },
+                                                "nativeSrc": "2166:18:0",
+                                                "nodeType": "YulFunctionCall",
+                                                "src": "2166:18:0"
+                                              }
+                                            ],
+                                            "functionName": {
+                                              "name": "sub",
+                                              "nativeSrc": "2154:3:0",
+                                              "nodeType": "YulIdentifier",
+                                              "src": "2154:3:0"
+                                            },
+                                            "nativeSrc": "2154:31:0",
+                                            "nodeType": "YulFunctionCall",
+                                            "src": "2154:31:0"
+                                          },
+                                          {
+                                            "name": "PERCENTAGE_FACTOR",
+                                            "nativeSrc": "2187:17:0",
+                                            "nodeType": "YulIdentifier",
+                                            "src": "2187:17:0"
+                                          }
+                                        ],
+                                        "functionName": {
+                                          "name": "div",
+                                          "nativeSrc": "2150:3:0",
+                                          "nodeType": "YulIdentifier",
+                                          "src": "2150:3:0"
+                                        },
+                                        "nativeSrc": "2150:55:0",
+                                        "nodeType": "YulFunctionCall",
+                                        "src": "2150:55:0"
+                                      }
+                                    ],
+                                    "functionName": {
+                                      "name": "gt",
+                                      "nativeSrc": "2140:2:0",
+                                      "nodeType": "YulIdentifier",
+                                      "src": "2140:2:0"
+                                    },
+                                    "nativeSrc": "2140:66:0",
+                                    "nodeType": "YulFunctionCall",
+                                    "src": "2140:66:0"
+                                  }
+                                ],
+                                "functionName": {
+                                  "name": "iszero",
+                                  "nativeSrc": "2133:6:0",
+                                  "nodeType": "YulIdentifier",
+                                  "src": "2133:6:0"
+                                },
+                                "nativeSrc": "2133:74:0",
+                                "nodeType": "YulFunctionCall",
+                                "src": "2133:74:0"
+                              }
+                            ],
+                            "functionName": {
+                              "name": "iszero",
+                              "nativeSrc": "2126:6:0",
+                              "nodeType": "YulIdentifier",
+                              "src": "2126:6:0"
+                            },
+                            "nativeSrc": "2126:82:0",
+                            "nodeType": "YulFunctionCall",
+                            "src": "2126:82:0"
+                          }
+                        ],
+                        "functionName": {
+                          "name": "or",
+                          "nativeSrc": "2086:2:0",
+                          "nodeType": "YulIdentifier",
+                          "src": "2086:2:0"
+                        },
+                        "nativeSrc": "2086:130:0",
+                        "nodeType": "YulFunctionCall",
+                        "src": "2086:130:0"
+                      },
+                      "nativeSrc": "2083:164:0",
+                      "nodeType": "YulIf",
+                      "src": "2083:164:0"
+                    },
+                    {
+                      "nativeSrc": "2255:81:0",
+                      "nodeType": "YulAssignment",
+                      "src": "2255:81:0",
+                      "value": {
+                        "arguments": [
+                          {
+                            "arguments": [
+                              {
+                                "arguments": [
+                                  {
+                                    "name": "value",
+                                    "nativeSrc": "2277:5:0",
+                                    "nodeType": "YulIdentifier",
+                                    "src": "2277:5:0"
+                                  },
+                                  {
+                                    "name": "PERCENTAGE_FACTOR",
+                                    "nativeSrc": "2284:17:0",
+                                    "nodeType": "YulIdentifier",
+                                    "src": "2284:17:0"
+                                  }
+                                ],
+                                "functionName": {
+                                  "name": "mul",
+                                  "nativeSrc": "2273:3:0",
+                                  "nodeType": "YulIdentifier",
+                                  "src": "2273:3:0"
+                                },
+                                "nativeSrc": "2273:29:0",
+                                "nodeType": "YulFunctionCall",
+                                "src": "2273:29:0"
+                              },
+                              {
+                                "arguments": [
+                                  {
+                                    "name": "percentage",
+                                    "nativeSrc": "2308:10:0",
+                                    "nodeType": "YulIdentifier",
+                                    "src": "2308:10:0"
+                                  },
+                                  {
+                                    "kind": "number",
+                                    "nativeSrc": "2320:1:0",
+                                    "nodeType": "YulLiteral",
+                                    "src": "2320:1:0",
+                                    "type": "",
+                                    "value": "2"
+                                  }
+                                ],
+                                "functionName": {
+                                  "name": "div",
+                                  "nativeSrc": "2304:3:0",
+                                  "nodeType": "YulIdentifier",
+                                  "src": "2304:3:0"
+                                },
+                                "nativeSrc": "2304:18:0",
+                                "nodeType": "YulFunctionCall",
+                                "src": "2304:18:0"
+                              }
+                            ],
+                            "functionName": {
+                              "name": "add",
+                              "nativeSrc": "2269:3:0",
+                              "nodeType": "YulIdentifier",
+                              "src": "2269:3:0"
+                            },
+                            "nativeSrc": "2269:54:0",
+                            "nodeType": "YulFunctionCall",
+                            "src": "2269:54:0"
+                          },
+                          {
+                            "name": "percentage",
+                            "nativeSrc": "2325:10:0",
+                            "nodeType": "YulIdentifier",
+                            "src": "2325:10:0"
+                          }
+                        ],
+                        "functionName": {
+                          "name": "div",
+                          "nativeSrc": "2265:3:0",
+                          "nodeType": "YulIdentifier",
+                          "src": "2265:3:0"
+                        },
+                        "nativeSrc": "2265:71:0",
+                        "nodeType": "YulFunctionCall",
+                        "src": "2265:71:0"
+                      },
+                      "variableNames": [
+                        {
+                          "name": "result",
+                          "nativeSrc": "2255:6:0",
+                          "nodeType": "YulIdentifier",
+                          "src": "2255:6:0"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "evmVersion": "cancun",
+                "externalReferences": [
+                  {
+                    "declaration": 5,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "2187:17:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 5,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "2284:17:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 25,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "2105:10:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 25,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "2170:10:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 25,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "2308:10:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 25,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "2325:10:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 28,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "2255:6:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 23,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "2143:5:0",
+                    "valueSize": 1
+                  },
+                  {
+                    "declaration": 23,
+                    "isOffset": false,
+                    "isSlot": false,
+                    "src": "2277:5:0",
+                    "valueSize": 1
+                  }
+                ],
+                "id": 30,
+                "nodeType": "InlineAssembly",
+                "src": "2066:276:0"
+              }
+            ]
+          },
+          "documentation": {
+            "id": 21,
+            "nodeType": "StructuredDocumentation",
+            "src": "1505:366:0",
+            "text": " @notice Executes a percentage division\n @dev assembly optimized for improved gas savings, see https://twitter.com/transmissions11/status/1451131036377571328\n @param value The value of which the percentage needs to be calculated\n @param percentage The percentage of the value to be calculated\n @return result value percentdiv percentage"
+          },
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "percentDiv",
+          "nameLocation": "1883:10:0",
+          "parameters": {
+            "id": 26,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 23,
+                "mutability": "mutable",
+                "name": "value",
+                "nameLocation": "1902:5:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 32,
+                "src": "1894:13:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 22,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1894:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 25,
+                "mutability": "mutable",
+                "name": "percentage",
+                "nameLocation": "1917:10:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 32,
+                "src": "1909:18:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 24,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1909:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1893:35:0"
+          },
+          "returnParameters": {
+            "id": 29,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 28,
+                "mutability": "mutable",
+                "name": "result",
+                "nameLocation": "1960:6:0",
+                "nodeType": "VariableDeclaration",
+                "scope": 32,
+                "src": "1952:14:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 27,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1952:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1951:16:0"
+          },
+          "scope": 33,
+          "stateMutability": "pure",
+          "virtual": false,
+          "visibility": "internal"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [],
+      "canonicalName": "PercentageMath",
+      "contractDependencies": [],
+      "contractKind": "library",
+      "documentation": {
+        "id": 2,
+        "nodeType": "StructuredDocumentation",
+        "src": "62:347:0",
+        "text": " @title PercentageMath library\n @author Aave\n @notice Provides functions to perform percentage calculations\n @dev Percentages are defined by default with 2 decimals of precision (100.00). The precision is indicated by PERCENTAGE_FACTOR\n @dev Operations are rounded. If a value is >=.5, will be rounded up, otherwise rounded down."
+      },
+      "fullyImplemented": true,
+      "linearizedBaseContracts": [
+        33
+      ],
+      "name": "PercentageMath",
+      "nameLocation": "418:14:0",
+      "scope": 34,
+      "usedErrors": [],
+      "usedEvents": []
+    }
+  ],
+  "license": "BUSL-1.1"
+}

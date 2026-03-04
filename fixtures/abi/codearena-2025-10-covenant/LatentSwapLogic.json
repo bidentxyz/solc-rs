@@ -1,0 +1,542 @@
+[
+  {
+    "type": "function",
+    "name": "calcRatio",
+    "inputs": [
+      {
+        "name": "lexParams",
+        "type": "tuple",
+        "internalType": "struct LexParams",
+        "components": [
+          {
+            "name": "covenantCore",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "initLnRateBias",
+            "type": "int64",
+            "internalType": "int64"
+          },
+          {
+            "name": "edgeSqrtPriceX96_B",
+            "type": "uint160",
+            "internalType": "uint160"
+          },
+          {
+            "name": "edgeSqrtPriceX96_A",
+            "type": "uint160",
+            "internalType": "uint160"
+          },
+          {
+            "name": "limHighSqrtPriceX96",
+            "type": "uint160",
+            "internalType": "uint160"
+          },
+          {
+            "name": "limMaxSqrtPriceX96",
+            "type": "uint160",
+            "internalType": "uint160"
+          },
+          {
+            "name": "debtDuration",
+            "type": "uint32",
+            "internalType": "uint32"
+          },
+          {
+            "name": "swapFee",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "targetXvsL",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      },
+      {
+        "name": "marketState",
+        "type": "tuple",
+        "internalType": "struct LatentSwapLogic.LexFullState",
+        "components": [
+          {
+            "name": "lexState",
+            "type": "tuple",
+            "internalType": "struct LexState",
+            "components": [
+              {
+                "name": "lastDebtNotionalPrice",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "lastBaseTokenPrice",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "lastETWAPBaseSupply",
+                "type": "uint256",
+                "internalType": "uint256"
+              },
+              {
+                "name": "lastSqrtPriceX96",
+                "type": "uint160",
+                "internalType": "uint160"
+              },
+              {
+                "name": "lastUpdateTimestamp",
+                "type": "uint96",
+                "internalType": "uint96"
+              },
+              {
+                "name": "lastLnRateBias",
+                "type": "int64",
+                "internalType": "int64"
+              }
+            ]
+          },
+          {
+            "name": "lexConfig",
+            "type": "tuple",
+            "internalType": "struct LexConfig",
+            "components": [
+              {
+                "name": "protocolFee",
+                "type": "uint32",
+                "internalType": "uint32"
+              },
+              {
+                "name": "aToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "zToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "noCapLimit",
+                "type": "uint8",
+                "internalType": "uint8"
+              },
+              {
+                "name": "scaleDecimals",
+                "type": "int8",
+                "internalType": "int8"
+              },
+              {
+                "name": "adaptive",
+                "type": "bool",
+                "internalType": "bool"
+              }
+            ]
+          },
+          {
+            "name": "baseTokenSupply",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "supplyAmounts",
+            "type": "uint256[2]",
+            "internalType": "uint256[2]"
+          },
+          {
+            "name": "dexAmounts",
+            "type": "uint256[2]",
+            "internalType": "uint256[2]"
+          },
+          {
+            "name": "dexAmountsScaled",
+            "type": "uint256[3]",
+            "internalType": "uint256[3]"
+          },
+          {
+            "name": "synthAmountsScaled",
+            "type": "uint256[3]",
+            "internalType": "uint256[3]"
+          },
+          {
+            "name": "liquidityRatioX96",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "liquidity",
+            "type": "uint160",
+            "internalType": "uint160"
+          },
+          {
+            "name": "accruedProtocolFee",
+            "type": "uint96",
+            "internalType": "uint96"
+          },
+          {
+            "name": "underCollateralized",
+            "type": "bool",
+            "internalType": "bool"
+          }
+        ]
+      },
+      {
+        "name": "base",
+        "type": "AssetType",
+        "internalType": "enum AssetType"
+      },
+      {
+        "name": "quote",
+        "type": "AssetType",
+        "internalType": "enum AssetType"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "price",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "computeMaxLTVandTargetdXdL",
+    "inputs": [
+      {
+        "name": "edgeSqrtPriceX96_A",
+        "type": "uint160",
+        "internalType": "uint160"
+      },
+      {
+        "name": "edgeSqrtPriceX96_B",
+        "type": "uint160",
+        "internalType": "uint160"
+      },
+      {
+        "name": "limMaxSqrtPriceX96",
+        "type": "uint160",
+        "internalType": "uint160"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "maxLTV",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "target_dXdL_X96",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "getDebtPriceDiscount",
+    "inputs": [
+      {
+        "name": "edgeSqrtPriceX96_A",
+        "type": "uint160",
+        "internalType": "uint160"
+      },
+      {
+        "name": "edgeSqrtPriceX96_B",
+        "type": "uint160",
+        "internalType": "uint160"
+      },
+      {
+        "name": "currentSqrtPriceX96",
+        "type": "uint160",
+        "internalType": "uint160"
+      },
+      {
+        "name": "target_dXdL_X96",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "currentPriceDiscount",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
+    "name": "getInitMarketInfo",
+    "inputs": [
+      {
+        "name": "marketParams",
+        "type": "tuple",
+        "internalType": "struct MarketParams",
+        "components": [
+          {
+            "name": "baseToken",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "quoteToken",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "curator",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "lex",
+            "type": "address",
+            "internalType": "address"
+          }
+        ]
+      },
+      {
+        "name": "debtDuration",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "edgeSqrtPriceX96_A",
+        "type": "uint160",
+        "internalType": "uint160"
+      },
+      {
+        "name": "edgeSqrtPriceX96_B",
+        "type": "uint160",
+        "internalType": "uint160"
+      },
+      {
+        "name": "baseTokenNoCapLimit",
+        "type": "uint8",
+        "internalType": "uint8"
+      },
+      {
+        "name": "quoteDecimals",
+        "type": "uint8",
+        "internalType": "uint8"
+      },
+      {
+        "name": "quoteSymbol",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "info",
+        "type": "tuple",
+        "internalType": "struct LatentSwapLogic.MarketInitInfo",
+        "components": [
+          {
+            "name": "baseName",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "baseSymbol",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "quoteSymbol",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "aTokenName",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "aTokenSymbol",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "zTokenName",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "zTokenSymbol",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "synthDecimals",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "quoteDecimals",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "noCapLimit",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "levStr",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "durStr",
+            "type": "string",
+            "internalType": "string"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "readBasePriceAndCalculateLiqRatio",
+    "inputs": [
+      {
+        "name": "marketParams",
+        "type": "tuple",
+        "internalType": "struct MarketParams",
+        "components": [
+          {
+            "name": "baseToken",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "quoteToken",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "curator",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "lex",
+            "type": "address",
+            "internalType": "address"
+          }
+        ]
+      },
+      {
+        "name": "liquidityConcentrationX96",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "scaleDecimals",
+        "type": "int8",
+        "internalType": "int8"
+      },
+      {
+        "name": "isPreview",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "price",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "liqRatioX96",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_ActionNotAllowedGivenLTVlimit",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_ActionNotAllowedUnderCollateralized",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_BaseAssetNotERC20",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_InsufficientAmount",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_InsufficientTokens",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_MarketSizeLimitExceeded",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_MintCapExceeded",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_OperationNotAllowed",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_OraclePriceTooLowForMarket",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_QuoteAssetHasNoSymbol",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_RedeemCapExceeded",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_ZeroLiquidity",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "SafeCastOverflowedUintDowncast",
+    "inputs": [
+      {
+        "name": "bits",
+        "type": "uint8",
+        "internalType": "uint8"
+      },
+      {
+        "name": "value",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  }
+]

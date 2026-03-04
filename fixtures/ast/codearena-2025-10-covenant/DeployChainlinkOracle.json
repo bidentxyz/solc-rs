@@ -1,0 +1,2116 @@
+{
+  "absolutePath": "script/DeployOracleChainlink.s.sol",
+  "id": 50199,
+  "exportedSymbols": {
+    "ChainlinkConfig": [
+      50061
+    ],
+    "ChainlinkOracle": [
+      53744
+    ],
+    "DeployChainlinkOracle": [
+      50198
+    ],
+    "Script": [
+      1328
+    ],
+    "console": [
+      25521
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "39:1734:63",
+  "nodes": [
+    {
+      "id": 50042,
+      "nodeType": "PragmaDirective",
+      "src": "39:24:63",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "^",
+        "0.8",
+        ".30"
+      ]
+    },
+    {
+      "id": 50044,
+      "nodeType": "ImportDirective",
+      "src": "65:44:63",
+      "nodes": [],
+      "absolutePath": "lib/forge-std/src/Script.sol",
+      "file": "forge-std/Script.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 50199,
+      "sourceUnit": 1329,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 50043,
+            "name": "Script",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 1328,
+            "src": "73:6:63",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 50046,
+      "nodeType": "ImportDirective",
+      "src": "110:46:63",
+      "nodes": [],
+      "absolutePath": "lib/forge-std/src/console.sol",
+      "file": "forge-std/console.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 50199,
+      "sourceUnit": 25522,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 50045,
+            "name": "console",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 25521,
+            "src": "118:7:63",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 50048,
+      "nodeType": "ImportDirective",
+      "src": "157:86:63",
+      "nodes": [],
+      "absolutePath": "src/curators/oracles/chainlink/ChainlinkOracle.sol",
+      "file": "../src/curators/oracles/chainlink/ChainlinkOracle.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 50199,
+      "sourceUnit": 53745,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 50047,
+            "name": "ChainlinkOracle",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 53744,
+            "src": "165:15:63",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 50061,
+      "nodeType": "StructDefinition",
+      "src": "314:164:63",
+      "nodes": [],
+      "canonicalName": "ChainlinkConfig",
+      "members": [
+        {
+          "constant": false,
+          "id": 50050,
+          "mutability": "mutable",
+          "name": "baseToken",
+          "nameLocation": "351:9:63",
+          "nodeType": "VariableDeclaration",
+          "scope": 50061,
+          "src": "343:17:63",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_address",
+            "typeString": "address"
+          },
+          "typeName": {
+            "id": 50049,
+            "name": "address",
+            "nodeType": "ElementaryTypeName",
+            "src": "343:7:63",
+            "stateMutability": "nonpayable",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 50052,
+          "mutability": "mutable",
+          "name": "feedAddress",
+          "nameLocation": "374:11:63",
+          "nodeType": "VariableDeclaration",
+          "scope": 50061,
+          "src": "366:19:63",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_address",
+            "typeString": "address"
+          },
+          "typeName": {
+            "id": 50051,
+            "name": "address",
+            "nodeType": "ElementaryTypeName",
+            "src": "366:7:63",
+            "stateMutability": "nonpayable",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 50054,
+          "mutability": "mutable",
+          "name": "maxStaleness",
+          "nameLocation": "399:12:63",
+          "nodeType": "VariableDeclaration",
+          "scope": 50061,
+          "src": "391:20:63",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_uint256",
+            "typeString": "uint256"
+          },
+          "typeName": {
+            "id": 50053,
+            "name": "uint256",
+            "nodeType": "ElementaryTypeName",
+            "src": "391:7:63",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 50056,
+          "mutability": "mutable",
+          "name": "name",
+          "nameLocation": "424:4:63",
+          "nodeType": "VariableDeclaration",
+          "scope": 50061,
+          "src": "417:11:63",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_string_storage_ptr",
+            "typeString": "string"
+          },
+          "typeName": {
+            "id": 50055,
+            "name": "string",
+            "nodeType": "ElementaryTypeName",
+            "src": "417:6:63",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage_ptr",
+              "typeString": "string"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 50058,
+          "mutability": "mutable",
+          "name": "oracleType",
+          "nameLocation": "441:10:63",
+          "nodeType": "VariableDeclaration",
+          "scope": 50061,
+          "src": "434:17:63",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_string_storage_ptr",
+            "typeString": "string"
+          },
+          "typeName": {
+            "id": 50057,
+            "name": "string",
+            "nodeType": "ElementaryTypeName",
+            "src": "434:6:63",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage_ptr",
+              "typeString": "string"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 50060,
+          "mutability": "mutable",
+          "name": "quoteToken",
+          "nameLocation": "465:10:63",
+          "nodeType": "VariableDeclaration",
+          "scope": 50061,
+          "src": "457:18:63",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_address",
+            "typeString": "address"
+          },
+          "typeName": {
+            "id": 50059,
+            "name": "address",
+            "nodeType": "ElementaryTypeName",
+            "src": "457:7:63",
+            "stateMutability": "nonpayable",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            }
+          },
+          "visibility": "internal"
+        }
+      ],
+      "name": "ChainlinkConfig",
+      "nameLocation": "321:15:63",
+      "scope": 50199,
+      "visibility": "public"
+    },
+    {
+      "id": 50198,
+      "nodeType": "ContractDefinition",
+      "src": "480:1292:63",
+      "nodes": [
+        {
+          "id": 50197,
+          "nodeType": "FunctionDefinition",
+          "src": "527:1243:63",
+          "nodes": [],
+          "body": {
+            "id": 50196,
+            "nodeType": "Block",
+            "src": "551:1219:63",
+            "nodes": [],
+            "statements": [
+              {
+                "assignments": [
+                  50067
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 50067,
+                    "mutability": "mutable",
+                    "name": "jsonString",
+                    "nameLocation": "613:10:63",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 50196,
+                    "src": "599:24:63",
+                    "stateVariable": false,
+                    "storageLocation": "memory",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_memory_ptr",
+                      "typeString": "string"
+                    },
+                    "typeName": {
+                      "id": 50066,
+                      "name": "string",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "599:6:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage_ptr",
+                        "typeString": "string"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 50072,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "hexValue": "2e2f7363726970742f4f7261636c65436f6e6669672d436861696e6c696e6b2e6a736f6e",
+                      "id": 50070,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "638:38:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_3c6171fdb3556e9d559bd15501c7d6fcf564bbcbb37de8d6daa8a4196ee79be9",
+                        "typeString": "literal_string \"./script/OracleConfig-Chainlink.json\""
+                      },
+                      "value": "./script/OracleConfig-Chainlink.json"
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_3c6171fdb3556e9d559bd15501c7d6fcf564bbcbb37de8d6daa8a4196ee79be9",
+                        "typeString": "literal_string \"./script/OracleConfig-Chainlink.json\""
+                      }
+                    ],
+                    "expression": {
+                      "id": 50068,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1273,
+                      "src": "626:2:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$17397",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 50069,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "629:8:63",
+                    "memberName": "readFile",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 14446,
+                    "src": "626:11:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_view$_t_string_memory_ptr_$returns$_t_string_memory_ptr_$",
+                      "typeString": "function (string memory) view external returns (string memory)"
+                    }
+                  },
+                  "id": 50071,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "626:51:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string memory"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "599:78:63"
+              },
+              {
+                "assignments": [
+                  50074
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 50074,
+                    "mutability": "mutable",
+                    "name": "jsonData",
+                    "nameLocation": "718:8:63",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 50196,
+                    "src": "705:21:63",
+                    "stateVariable": false,
+                    "storageLocation": "memory",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory_ptr",
+                      "typeString": "bytes"
+                    },
+                    "typeName": {
+                      "id": 50073,
+                      "name": "bytes",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "705:5:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_storage_ptr",
+                        "typeString": "bytes"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 50079,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "id": 50077,
+                      "name": "jsonString",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 50067,
+                      "src": "742:10:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50075,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1273,
+                      "src": "729:2:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$17397",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 50076,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "732:9:63",
+                    "memberName": "parseJson",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 14744,
+                    "src": "729:12:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_pure$_t_string_memory_ptr_$returns$_t_bytes_memory_ptr_$",
+                      "typeString": "function (string memory) pure external returns (bytes memory)"
+                    }
+                  },
+                  "id": 50078,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "729:24:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes memory"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "705:48:63"
+              },
+              {
+                "assignments": [
+                  50082
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 50082,
+                    "mutability": "mutable",
+                    "name": "config",
+                    "nameLocation": "786:6:63",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 50196,
+                    "src": "763:29:63",
+                    "stateVariable": false,
+                    "storageLocation": "memory",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_ChainlinkConfig_$50061_memory_ptr",
+                      "typeString": "struct ChainlinkConfig"
+                    },
+                    "typeName": {
+                      "id": 50081,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 50080,
+                        "name": "ChainlinkConfig",
+                        "nameLocations": [
+                          "763:15:63"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 50061,
+                        "src": "763:15:63"
+                      },
+                      "referencedDeclaration": 50061,
+                      "src": "763:15:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_ChainlinkConfig_$50061_storage_ptr",
+                        "typeString": "struct ChainlinkConfig"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 50089,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "id": 50085,
+                      "name": "jsonData",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 50074,
+                      "src": "806:8:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory_ptr",
+                        "typeString": "bytes memory"
+                      }
+                    },
+                    {
+                      "components": [
+                        {
+                          "id": 50086,
+                          "name": "ChainlinkConfig",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 50061,
+                          "src": "817:15:63",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_struct$_ChainlinkConfig_$50061_storage_ptr_$",
+                            "typeString": "type(struct ChainlinkConfig storage pointer)"
+                          }
+                        }
+                      ],
+                      "id": 50087,
+                      "isConstant": false,
+                      "isInlineArray": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "TupleExpression",
+                      "src": "816:17:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_struct$_ChainlinkConfig_$50061_storage_ptr_$",
+                        "typeString": "type(struct ChainlinkConfig storage pointer)"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_bytes_memory_ptr",
+                        "typeString": "bytes memory"
+                      },
+                      {
+                        "typeIdentifier": "t_type$_t_struct$_ChainlinkConfig_$50061_storage_ptr_$",
+                        "typeString": "type(struct ChainlinkConfig storage pointer)"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50083,
+                      "name": "abi",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -1,
+                      "src": "795:3:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_abi",
+                        "typeString": "abi"
+                      }
+                    },
+                    "id": 50084,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "lValueRequested": false,
+                    "memberLocation": "799:6:63",
+                    "memberName": "decode",
+                    "nodeType": "MemberAccess",
+                    "src": "795:10:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_abidecode_pure$__$returns$__$",
+                      "typeString": "function () pure"
+                    }
+                  },
+                  "id": 50088,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "795:39:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_ChainlinkConfig_$50061_memory_ptr",
+                    "typeString": "struct ChainlinkConfig memory"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "763:71:63"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "3d3d3d20436861696e6c696e6b204f7261636c6520436f6e66696775726174696f6e203d3d3d",
+                      "id": 50093,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "900:40:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_b915eb2eae4e6de0d01bc6bf5366ff7b7b9f0ddda7900dc2a42987a93f748441",
+                        "typeString": "literal_string \"=== Chainlink Oracle Configuration ===\""
+                      },
+                      "value": "=== Chainlink Oracle Configuration ==="
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_b915eb2eae4e6de0d01bc6bf5366ff7b7b9f0ddda7900dc2a42987a93f748441",
+                        "typeString": "literal_string \"=== Chainlink Oracle Configuration ===\""
+                      }
+                    ],
+                    "expression": {
+                      "id": 50090,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "888:7:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50092,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "896:3:63",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18035,
+                    "src": "888:11:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory) pure"
+                    }
+                  },
+                  "id": 50094,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "888:53:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50095,
+                "nodeType": "ExpressionStatement",
+                "src": "888:53:63"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "4f7261636c6520547970653a",
+                      "id": 50099,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "963:14:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_f117668bcd1c16762ed756d4189f8b51ec4c8a0b12b0f45950d5daf5ff614b6a",
+                        "typeString": "literal_string \"Oracle Type:\""
+                      },
+                      "value": "Oracle Type:"
+                    },
+                    {
+                      "expression": {
+                        "id": 50100,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50082,
+                        "src": "979:6:63",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_ChainlinkConfig_$50061_memory_ptr",
+                          "typeString": "struct ChainlinkConfig memory"
+                        }
+                      },
+                      "id": 50101,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "986:10:63",
+                      "memberName": "oracleType",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50058,
+                      "src": "979:17:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_f117668bcd1c16762ed756d4189f8b51ec4c8a0b12b0f45950d5daf5ff614b6a",
+                        "typeString": "literal_string \"Oracle Type:\""
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50096,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "951:7:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50098,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "959:3:63",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18182,
+                    "src": "951:11:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory,string memory) pure"
+                    }
+                  },
+                  "id": 50102,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "951:46:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50103,
+                "nodeType": "ExpressionStatement",
+                "src": "951:46:63"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "4e616d653a",
+                      "id": 50107,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1019:7:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_a3d3b09a164f7715d36697855a8817533552dbb6de38ec4f09aaf2d1a44605cc",
+                        "typeString": "literal_string \"Name:\""
+                      },
+                      "value": "Name:"
+                    },
+                    {
+                      "expression": {
+                        "id": 50108,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50082,
+                        "src": "1028:6:63",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_ChainlinkConfig_$50061_memory_ptr",
+                          "typeString": "struct ChainlinkConfig memory"
+                        }
+                      },
+                      "id": 50109,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1035:4:63",
+                      "memberName": "name",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50056,
+                      "src": "1028:11:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_a3d3b09a164f7715d36697855a8817533552dbb6de38ec4f09aaf2d1a44605cc",
+                        "typeString": "literal_string \"Name:\""
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50104,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1007:7:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50106,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1015:3:63",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18182,
+                    "src": "1007:11:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory,string memory) pure"
+                    }
+                  },
+                  "id": 50110,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1007:33:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50111,
+                "nodeType": "ExpressionStatement",
+                "src": "1007:33:63"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "4261736520546f6b656e3a",
+                      "id": 50115,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1062:13:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_651976be05a312f0d332c66b40054c65972fc08e5186b254f87ac0915ddd301e",
+                        "typeString": "literal_string \"Base Token:\""
+                      },
+                      "value": "Base Token:"
+                    },
+                    {
+                      "expression": {
+                        "id": 50116,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50082,
+                        "src": "1077:6:63",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_ChainlinkConfig_$50061_memory_ptr",
+                          "typeString": "struct ChainlinkConfig memory"
+                        }
+                      },
+                      "id": 50117,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1084:9:63",
+                      "memberName": "baseToken",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50050,
+                      "src": "1077:16:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_651976be05a312f0d332c66b40054c65972fc08e5186b254f87ac0915ddd301e",
+                        "typeString": "literal_string \"Base Token:\""
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50112,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1050:7:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50114,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1058:3:63",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18216,
+                    "src": "1050:11:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_address_$returns$__$",
+                      "typeString": "function (string memory,address) pure"
+                    }
+                  },
+                  "id": 50118,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1050:44:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50119,
+                "nodeType": "ExpressionStatement",
+                "src": "1050:44:63"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "51756f746520546f6b656e3a",
+                      "id": 50123,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1116:14:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_6e4a32fb9cc8febff02b25db85c8142c08962bd59230e9b4ed075424438cbc37",
+                        "typeString": "literal_string \"Quote Token:\""
+                      },
+                      "value": "Quote Token:"
+                    },
+                    {
+                      "expression": {
+                        "id": 50124,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50082,
+                        "src": "1132:6:63",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_ChainlinkConfig_$50061_memory_ptr",
+                          "typeString": "struct ChainlinkConfig memory"
+                        }
+                      },
+                      "id": 50125,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1139:10:63",
+                      "memberName": "quoteToken",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50060,
+                      "src": "1132:17:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_6e4a32fb9cc8febff02b25db85c8142c08962bd59230e9b4ed075424438cbc37",
+                        "typeString": "literal_string \"Quote Token:\""
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50120,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1104:7:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50122,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1112:3:63",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18216,
+                    "src": "1104:11:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_address_$returns$__$",
+                      "typeString": "function (string memory,address) pure"
+                    }
+                  },
+                  "id": 50126,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1104:46:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50127,
+                "nodeType": "ExpressionStatement",
+                "src": "1104:46:63"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "4665656420416464726573733a",
+                      "id": 50131,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1172:15:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_8cda5eab05a83085f3f1b80e4880c32e86ff4cc596a3e378f3e0453689b62d2b",
+                        "typeString": "literal_string \"Feed Address:\""
+                      },
+                      "value": "Feed Address:"
+                    },
+                    {
+                      "expression": {
+                        "id": 50132,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50082,
+                        "src": "1189:6:63",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_ChainlinkConfig_$50061_memory_ptr",
+                          "typeString": "struct ChainlinkConfig memory"
+                        }
+                      },
+                      "id": 50133,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1196:11:63",
+                      "memberName": "feedAddress",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50052,
+                      "src": "1189:18:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_8cda5eab05a83085f3f1b80e4880c32e86ff4cc596a3e378f3e0453689b62d2b",
+                        "typeString": "literal_string \"Feed Address:\""
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50128,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1160:7:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50130,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1168:3:63",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18216,
+                    "src": "1160:11:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_address_$returns$__$",
+                      "typeString": "function (string memory,address) pure"
+                    }
+                  },
+                  "id": 50134,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1160:48:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50135,
+                "nodeType": "ExpressionStatement",
+                "src": "1160:48:63"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "4d6178205374616c656e6573733a",
+                      "id": 50139,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1230:16:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_d973a580bef1e5188e98ddaba647ddd2cb79e65b797d81ee700c1f1143beaf76",
+                        "typeString": "literal_string \"Max Staleness:\""
+                      },
+                      "value": "Max Staleness:"
+                    },
+                    {
+                      "expression": {
+                        "id": 50140,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50082,
+                        "src": "1248:6:63",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_ChainlinkConfig_$50061_memory_ptr",
+                          "typeString": "struct ChainlinkConfig memory"
+                        }
+                      },
+                      "id": 50141,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1255:12:63",
+                      "memberName": "maxStaleness",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50054,
+                      "src": "1248:19:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_d973a580bef1e5188e98ddaba647ddd2cb79e65b797d81ee700c1f1143beaf76",
+                        "typeString": "literal_string \"Max Staleness:\""
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50136,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1218:7:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50138,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1226:3:63",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18148,
+                    "src": "1218:11:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$returns$__$",
+                      "typeString": "function (string memory,uint256) pure"
+                    }
+                  },
+                  "id": 50142,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1218:50:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50143,
+                "nodeType": "ExpressionStatement",
+                "src": "1218:50:63"
+              },
+              {
+                "expression": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 50144,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1273,
+                      "src": "1279:2:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$17397",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 50146,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1282:14:63",
+                    "memberName": "startBroadcast",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 15019,
+                    "src": "1279:17:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
+                      "typeString": "function () external"
+                    }
+                  },
+                  "id": 50147,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1279:19:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50148,
+                "nodeType": "ExpressionStatement",
+                "src": "1279:19:63"
+              },
+              {
+                "assignments": [
+                  50151
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 50151,
+                    "mutability": "mutable",
+                    "name": "chainlinkOracle",
+                    "nameLocation": "1360:15:63",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 50196,
+                    "src": "1344:31:63",
+                    "stateVariable": false,
+                    "storageLocation": "default",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ChainlinkOracle_$53744",
+                      "typeString": "contract ChainlinkOracle"
+                    },
+                    "typeName": {
+                      "id": 50150,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 50149,
+                        "name": "ChainlinkOracle",
+                        "nameLocations": [
+                          "1344:15:63"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 53744,
+                        "src": "1344:15:63"
+                      },
+                      "referencedDeclaration": 53744,
+                      "src": "1344:15:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ChainlinkOracle_$53744",
+                        "typeString": "contract ChainlinkOracle"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 50164,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 50155,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50082,
+                        "src": "1411:6:63",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_ChainlinkConfig_$50061_memory_ptr",
+                          "typeString": "struct ChainlinkConfig memory"
+                        }
+                      },
+                      "id": 50156,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1418:9:63",
+                      "memberName": "baseToken",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50050,
+                      "src": "1411:16:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 50157,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50082,
+                        "src": "1441:6:63",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_ChainlinkConfig_$50061_memory_ptr",
+                          "typeString": "struct ChainlinkConfig memory"
+                        }
+                      },
+                      "id": 50158,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1448:10:63",
+                      "memberName": "quoteToken",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50060,
+                      "src": "1441:17:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 50159,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50082,
+                        "src": "1472:6:63",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_ChainlinkConfig_$50061_memory_ptr",
+                          "typeString": "struct ChainlinkConfig memory"
+                        }
+                      },
+                      "id": 50160,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1479:11:63",
+                      "memberName": "feedAddress",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50052,
+                      "src": "1472:18:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 50161,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50082,
+                        "src": "1504:6:63",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_ChainlinkConfig_$50061_memory_ptr",
+                          "typeString": "struct ChainlinkConfig memory"
+                        }
+                      },
+                      "id": 50162,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1511:12:63",
+                      "memberName": "maxStaleness",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50054,
+                      "src": "1504:19:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    ],
+                    "id": 50154,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "NewExpression",
+                    "src": "1378:19:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_creation_nonpayable$_t_address_$_t_address_$_t_address_$_t_uint256_$returns$_t_contract$_ChainlinkOracle_$53744_$",
+                      "typeString": "function (address,address,address,uint256) returns (contract ChainlinkOracle)"
+                    },
+                    "typeName": {
+                      "id": 50153,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 50152,
+                        "name": "ChainlinkOracle",
+                        "nameLocations": [
+                          "1382:15:63"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 53744,
+                        "src": "1382:15:63"
+                      },
+                      "referencedDeclaration": 53744,
+                      "src": "1382:15:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_ChainlinkOracle_$53744",
+                        "typeString": "contract ChainlinkOracle"
+                      }
+                    }
+                  },
+                  "id": 50163,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1378:155:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ChainlinkOracle_$53744",
+                    "typeString": "contract ChainlinkOracle"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "1344:189:63"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "436861696e6c696e6b4f7261636c65206465706c6f7965642061743a",
+                      "id": 50168,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1556:30:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_1ad6b0e1164aa653870bd560f88d8af2ab7bcf7a12a4b0a16ee6d28516afe7b9",
+                        "typeString": "literal_string \"ChainlinkOracle deployed at:\""
+                      },
+                      "value": "ChainlinkOracle deployed at:"
+                    },
+                    {
+                      "arguments": [
+                        {
+                          "id": 50171,
+                          "name": "chainlinkOracle",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 50151,
+                          "src": "1596:15:63",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_ChainlinkOracle_$53744",
+                            "typeString": "contract ChainlinkOracle"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_contract$_ChainlinkOracle_$53744",
+                            "typeString": "contract ChainlinkOracle"
+                          }
+                        ],
+                        "id": 50170,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "1588:7:63",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_$",
+                          "typeString": "type(address)"
+                        },
+                        "typeName": {
+                          "id": 50169,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "1588:7:63",
+                          "typeDescriptions": {}
+                        }
+                      },
+                      "id": 50172,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1588:24:63",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_1ad6b0e1164aa653870bd560f88d8af2ab7bcf7a12a4b0a16ee6d28516afe7b9",
+                        "typeString": "literal_string \"ChainlinkOracle deployed at:\""
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50165,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1544:7:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50167,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1552:3:63",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18216,
+                    "src": "1544:11:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_address_$returns$__$",
+                      "typeString": "function (string memory,address) pure"
+                    }
+                  },
+                  "id": 50173,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1544:69:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50174,
+                "nodeType": "ExpressionStatement",
+                "src": "1544:69:63"
+              },
+              {
+                "expression": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 50175,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1273,
+                      "src": "1624:2:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$17397",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 50177,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1627:13:63",
+                    "memberName": "stopBroadcast",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 15035,
+                    "src": "1624:16:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
+                      "typeString": "function () external"
+                    }
+                  },
+                  "id": 50178,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1624:18:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50179,
+                "nodeType": "ExpressionStatement",
+                "src": "1624:18:63"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "0a3d3d3d204465706c6f796d656e742053756d6d617279203d3d3d",
+                      "id": 50183,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1665:30:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_fe9a87529682c345d72b9c1e684f4ffc2fb2449679ee201a418673f8a895a86d",
+                        "typeString": "literal_string hex\"0a3d3d3d204465706c6f796d656e742053756d6d617279203d3d3d\""
+                      },
+                      "value": "\n=== Deployment Summary ==="
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_fe9a87529682c345d72b9c1e684f4ffc2fb2449679ee201a418673f8a895a86d",
+                        "typeString": "literal_string hex\"0a3d3d3d204465706c6f796d656e742053756d6d617279203d3d3d\""
+                      }
+                    ],
+                    "expression": {
+                      "id": 50180,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1653:7:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50182,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1661:3:63",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18035,
+                    "src": "1653:11:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory) pure"
+                    }
+                  },
+                  "id": 50184,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1653:43:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50185,
+                "nodeType": "ExpressionStatement",
+                "src": "1653:43:63"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "436861696e6c696e6b4f7261636c653a",
+                      "id": 50189,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1718:18:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_7a4e2e78f6431b621ece835bda539f6232870c434581823f6c66c38422c1588d",
+                        "typeString": "literal_string \"ChainlinkOracle:\""
+                      },
+                      "value": "ChainlinkOracle:"
+                    },
+                    {
+                      "arguments": [
+                        {
+                          "id": 50192,
+                          "name": "chainlinkOracle",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 50151,
+                          "src": "1746:15:63",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_ChainlinkOracle_$53744",
+                            "typeString": "contract ChainlinkOracle"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_contract$_ChainlinkOracle_$53744",
+                            "typeString": "contract ChainlinkOracle"
+                          }
+                        ],
+                        "id": 50191,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "1738:7:63",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_$",
+                          "typeString": "type(address)"
+                        },
+                        "typeName": {
+                          "id": 50190,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "1738:7:63",
+                          "typeDescriptions": {}
+                        }
+                      },
+                      "id": 50193,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1738:24:63",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_7a4e2e78f6431b621ece835bda539f6232870c434581823f6c66c38422c1588d",
+                        "typeString": "literal_string \"ChainlinkOracle:\""
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50186,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1706:7:63",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50188,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1714:3:63",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18216,
+                    "src": "1706:11:63",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_address_$returns$__$",
+                      "typeString": "function (string memory,address) pure"
+                    }
+                  },
+                  "id": 50194,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1706:57:63",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50195,
+                "nodeType": "ExpressionStatement",
+                "src": "1706:57:63"
+              }
+            ]
+          },
+          "functionSelector": "c0406226",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "run",
+          "nameLocation": "536:3:63",
+          "parameters": {
+            "id": 50064,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "539:2:63"
+          },
+          "returnParameters": {
+            "id": 50065,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "551:0:63"
+          },
+          "scope": 50198,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [
+        {
+          "baseName": {
+            "id": 50062,
+            "name": "Script",
+            "nameLocations": [
+              "514:6:63"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 1328,
+            "src": "514:6:63"
+          },
+          "id": 50063,
+          "nodeType": "InheritanceSpecifier",
+          "src": "514:6:63"
+        }
+      ],
+      "canonicalName": "DeployChainlinkOracle",
+      "contractDependencies": [
+        53744
+      ],
+      "contractKind": "contract",
+      "fullyImplemented": true,
+      "internalFunctionIDs": {
+        "17450": 1
+      },
+      "linearizedBaseContracts": [
+        50198,
+        1328,
+        13307,
+        6836,
+        4776,
+        1289,
+        1277
+      ],
+      "name": "DeployChainlinkOracle",
+      "nameLocation": "489:21:63",
+      "scope": 50199,
+      "usedErrors": [],
+      "usedEvents": []
+    }
+  ],
+  "license": "UNLICENSED"
+}

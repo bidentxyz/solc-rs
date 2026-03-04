@@ -1,0 +1,2500 @@
+{
+  "absolutePath": "script/DeployOraclePyth.s.sol",
+  "id": 50386,
+  "exportedSymbols": {
+    "DeployPythOracle": [
+      50385
+    ],
+    "PythConfig": [
+      50223
+    ],
+    "PythOracle": [
+      54121
+    ],
+    "Script": [
+      1328
+    ],
+    "console": [
+      25521
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "39:1887:64",
+  "nodes": [
+    {
+      "id": 50200,
+      "nodeType": "PragmaDirective",
+      "src": "39:24:64",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "^",
+        "0.8",
+        ".30"
+      ]
+    },
+    {
+      "id": 50202,
+      "nodeType": "ImportDirective",
+      "src": "65:44:64",
+      "nodes": [],
+      "absolutePath": "lib/forge-std/src/Script.sol",
+      "file": "forge-std/Script.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 50386,
+      "sourceUnit": 1329,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 50201,
+            "name": "Script",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 1328,
+            "src": "73:6:64",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 50204,
+      "nodeType": "ImportDirective",
+      "src": "110:46:64",
+      "nodes": [],
+      "absolutePath": "lib/forge-std/src/console.sol",
+      "file": "forge-std/console.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 50386,
+      "sourceUnit": 25522,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 50203,
+            "name": "console",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 25521,
+            "src": "118:7:64",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 50206,
+      "nodeType": "ImportDirective",
+      "src": "157:71:64",
+      "nodes": [],
+      "absolutePath": "src/curators/oracles/pyth/PythOracle.sol",
+      "file": "../src/curators/oracles/pyth/PythOracle.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 50386,
+      "sourceUnit": 54122,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 50205,
+            "name": "PythOracle",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 54121,
+            "src": "165:10:64",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 50223,
+      "nodeType": "StructDefinition",
+      "src": "299:205:64",
+      "nodes": [],
+      "canonicalName": "PythConfig",
+      "members": [
+        {
+          "constant": false,
+          "id": 50208,
+          "mutability": "mutable",
+          "name": "baseToken",
+          "nameLocation": "331:9:64",
+          "nodeType": "VariableDeclaration",
+          "scope": 50223,
+          "src": "323:17:64",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_address",
+            "typeString": "address"
+          },
+          "typeName": {
+            "id": 50207,
+            "name": "address",
+            "nodeType": "ElementaryTypeName",
+            "src": "323:7:64",
+            "stateMutability": "nonpayable",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 50210,
+          "mutability": "mutable",
+          "name": "feedId",
+          "nameLocation": "354:6:64",
+          "nodeType": "VariableDeclaration",
+          "scope": 50223,
+          "src": "346:14:64",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_bytes32",
+            "typeString": "bytes32"
+          },
+          "typeName": {
+            "id": 50209,
+            "name": "bytes32",
+            "nodeType": "ElementaryTypeName",
+            "src": "346:7:64",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 50212,
+          "mutability": "mutable",
+          "name": "maxConfWidth",
+          "nameLocation": "374:12:64",
+          "nodeType": "VariableDeclaration",
+          "scope": 50223,
+          "src": "366:20:64",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_uint256",
+            "typeString": "uint256"
+          },
+          "typeName": {
+            "id": 50211,
+            "name": "uint256",
+            "nodeType": "ElementaryTypeName",
+            "src": "366:7:64",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 50214,
+          "mutability": "mutable",
+          "name": "maxStaleness",
+          "nameLocation": "400:12:64",
+          "nodeType": "VariableDeclaration",
+          "scope": 50223,
+          "src": "392:20:64",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_uint256",
+            "typeString": "uint256"
+          },
+          "typeName": {
+            "id": 50213,
+            "name": "uint256",
+            "nodeType": "ElementaryTypeName",
+            "src": "392:7:64",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 50216,
+          "mutability": "mutable",
+          "name": "name",
+          "nameLocation": "425:4:64",
+          "nodeType": "VariableDeclaration",
+          "scope": 50223,
+          "src": "418:11:64",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_string_storage_ptr",
+            "typeString": "string"
+          },
+          "typeName": {
+            "id": 50215,
+            "name": "string",
+            "nodeType": "ElementaryTypeName",
+            "src": "418:6:64",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage_ptr",
+              "typeString": "string"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 50218,
+          "mutability": "mutable",
+          "name": "oracleType",
+          "nameLocation": "442:10:64",
+          "nodeType": "VariableDeclaration",
+          "scope": 50223,
+          "src": "435:17:64",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_string_storage_ptr",
+            "typeString": "string"
+          },
+          "typeName": {
+            "id": 50217,
+            "name": "string",
+            "nodeType": "ElementaryTypeName",
+            "src": "435:6:64",
+            "typeDescriptions": {
+              "typeIdentifier": "t_string_storage_ptr",
+              "typeString": "string"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 50220,
+          "mutability": "mutable",
+          "name": "pythAddress",
+          "nameLocation": "466:11:64",
+          "nodeType": "VariableDeclaration",
+          "scope": 50223,
+          "src": "458:19:64",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_address",
+            "typeString": "address"
+          },
+          "typeName": {
+            "id": 50219,
+            "name": "address",
+            "nodeType": "ElementaryTypeName",
+            "src": "458:7:64",
+            "stateMutability": "nonpayable",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "constant": false,
+          "id": 50222,
+          "mutability": "mutable",
+          "name": "quoteToken",
+          "nameLocation": "491:10:64",
+          "nodeType": "VariableDeclaration",
+          "scope": 50223,
+          "src": "483:18:64",
+          "stateVariable": false,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_address",
+            "typeString": "address"
+          },
+          "typeName": {
+            "id": 50221,
+            "name": "address",
+            "nodeType": "ElementaryTypeName",
+            "src": "483:7:64",
+            "stateMutability": "nonpayable",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            }
+          },
+          "visibility": "internal"
+        }
+      ],
+      "name": "PythConfig",
+      "nameLocation": "306:10:64",
+      "scope": 50386,
+      "visibility": "public"
+    },
+    {
+      "id": 50385,
+      "nodeType": "ContractDefinition",
+      "src": "506:1419:64",
+      "nodes": [
+        {
+          "id": 50384,
+          "nodeType": "FunctionDefinition",
+          "src": "548:1375:64",
+          "nodes": [],
+          "body": {
+            "id": 50383,
+            "nodeType": "Block",
+            "src": "572:1351:64",
+            "nodes": [],
+            "statements": [
+              {
+                "assignments": [
+                  50229
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 50229,
+                    "mutability": "mutable",
+                    "name": "jsonString",
+                    "nameLocation": "629:10:64",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 50383,
+                    "src": "615:24:64",
+                    "stateVariable": false,
+                    "storageLocation": "memory",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_memory_ptr",
+                      "typeString": "string"
+                    },
+                    "typeName": {
+                      "id": 50228,
+                      "name": "string",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "615:6:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage_ptr",
+                        "typeString": "string"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 50234,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "hexValue": "2e2f7363726970742f4f7261636c65436f6e6669672d507974682e6a736f6e",
+                      "id": 50232,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "654:33:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_b5971b50540b22bd37f1329295a3412eedaeb2fc706c34c41900e9e33cb840de",
+                        "typeString": "literal_string \"./script/OracleConfig-Pyth.json\""
+                      },
+                      "value": "./script/OracleConfig-Pyth.json"
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_b5971b50540b22bd37f1329295a3412eedaeb2fc706c34c41900e9e33cb840de",
+                        "typeString": "literal_string \"./script/OracleConfig-Pyth.json\""
+                      }
+                    ],
+                    "expression": {
+                      "id": 50230,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1273,
+                      "src": "642:2:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$17397",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 50231,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "645:8:64",
+                    "memberName": "readFile",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 14446,
+                    "src": "642:11:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_view$_t_string_memory_ptr_$returns$_t_string_memory_ptr_$",
+                      "typeString": "function (string memory) view external returns (string memory)"
+                    }
+                  },
+                  "id": 50233,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "642:46:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string memory"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "615:73:64"
+              },
+              {
+                "assignments": [
+                  50236
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 50236,
+                    "mutability": "mutable",
+                    "name": "jsonData",
+                    "nameLocation": "729:8:64",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 50383,
+                    "src": "716:21:64",
+                    "stateVariable": false,
+                    "storageLocation": "memory",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_memory_ptr",
+                      "typeString": "bytes"
+                    },
+                    "typeName": {
+                      "id": 50235,
+                      "name": "bytes",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "716:5:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_storage_ptr",
+                        "typeString": "bytes"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 50241,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "id": 50239,
+                      "name": "jsonString",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 50229,
+                      "src": "753:10:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50237,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1273,
+                      "src": "740:2:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$17397",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 50238,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "743:9:64",
+                    "memberName": "parseJson",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 14744,
+                    "src": "740:12:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_pure$_t_string_memory_ptr_$returns$_t_bytes_memory_ptr_$",
+                      "typeString": "function (string memory) pure external returns (bytes memory)"
+                    }
+                  },
+                  "id": 50240,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "740:24:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes memory"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "716:48:64"
+              },
+              {
+                "assignments": [
+                  50244
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 50244,
+                    "mutability": "mutable",
+                    "name": "config",
+                    "nameLocation": "792:6:64",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 50383,
+                    "src": "774:24:64",
+                    "stateVariable": false,
+                    "storageLocation": "memory",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                      "typeString": "struct PythConfig"
+                    },
+                    "typeName": {
+                      "id": 50243,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 50242,
+                        "name": "PythConfig",
+                        "nameLocations": [
+                          "774:10:64"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 50223,
+                        "src": "774:10:64"
+                      },
+                      "referencedDeclaration": 50223,
+                      "src": "774:10:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_PythConfig_$50223_storage_ptr",
+                        "typeString": "struct PythConfig"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 50251,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "id": 50247,
+                      "name": "jsonData",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 50236,
+                      "src": "812:8:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes_memory_ptr",
+                        "typeString": "bytes memory"
+                      }
+                    },
+                    {
+                      "components": [
+                        {
+                          "id": 50248,
+                          "name": "PythConfig",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 50223,
+                          "src": "823:10:64",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_struct$_PythConfig_$50223_storage_ptr_$",
+                            "typeString": "type(struct PythConfig storage pointer)"
+                          }
+                        }
+                      ],
+                      "id": 50249,
+                      "isConstant": false,
+                      "isInlineArray": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "TupleExpression",
+                      "src": "822:12:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_struct$_PythConfig_$50223_storage_ptr_$",
+                        "typeString": "type(struct PythConfig storage pointer)"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_bytes_memory_ptr",
+                        "typeString": "bytes memory"
+                      },
+                      {
+                        "typeIdentifier": "t_type$_t_struct$_PythConfig_$50223_storage_ptr_$",
+                        "typeString": "type(struct PythConfig storage pointer)"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50245,
+                      "name": "abi",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": -1,
+                      "src": "801:3:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_abi",
+                        "typeString": "abi"
+                      }
+                    },
+                    "id": 50246,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "lValueRequested": false,
+                    "memberLocation": "805:6:64",
+                    "memberName": "decode",
+                    "nodeType": "MemberAccess",
+                    "src": "801:10:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_abidecode_pure$__$returns$__$",
+                      "typeString": "function () pure"
+                    }
+                  },
+                  "id": 50250,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "801:34:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                    "typeString": "struct PythConfig memory"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "774:61:64"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "3d3d3d2050797468204f7261636c6520436f6e66696775726174696f6e203d3d3d",
+                      "id": 50255,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "901:35:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_6db7a9eb1dd4f11114538ef025ec9799d4c0d91ceaad19d920b6004132455521",
+                        "typeString": "literal_string \"=== Pyth Oracle Configuration ===\""
+                      },
+                      "value": "=== Pyth Oracle Configuration ==="
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_6db7a9eb1dd4f11114538ef025ec9799d4c0d91ceaad19d920b6004132455521",
+                        "typeString": "literal_string \"=== Pyth Oracle Configuration ===\""
+                      }
+                    ],
+                    "expression": {
+                      "id": 50252,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "889:7:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50254,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "897:3:64",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18035,
+                    "src": "889:11:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory) pure"
+                    }
+                  },
+                  "id": 50256,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "889:48:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50257,
+                "nodeType": "ExpressionStatement",
+                "src": "889:48:64"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "4f7261636c6520547970653a",
+                      "id": 50261,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "959:14:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_f117668bcd1c16762ed756d4189f8b51ec4c8a0b12b0f45950d5daf5ff614b6a",
+                        "typeString": "literal_string \"Oracle Type:\""
+                      },
+                      "value": "Oracle Type:"
+                    },
+                    {
+                      "expression": {
+                        "id": 50262,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50244,
+                        "src": "975:6:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                          "typeString": "struct PythConfig memory"
+                        }
+                      },
+                      "id": 50263,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "982:10:64",
+                      "memberName": "oracleType",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50218,
+                      "src": "975:17:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_f117668bcd1c16762ed756d4189f8b51ec4c8a0b12b0f45950d5daf5ff614b6a",
+                        "typeString": "literal_string \"Oracle Type:\""
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50258,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "947:7:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50260,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "955:3:64",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18182,
+                    "src": "947:11:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory,string memory) pure"
+                    }
+                  },
+                  "id": 50264,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "947:46:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50265,
+                "nodeType": "ExpressionStatement",
+                "src": "947:46:64"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "4e616d653a",
+                      "id": 50269,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1015:7:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_a3d3b09a164f7715d36697855a8817533552dbb6de38ec4f09aaf2d1a44605cc",
+                        "typeString": "literal_string \"Name:\""
+                      },
+                      "value": "Name:"
+                    },
+                    {
+                      "expression": {
+                        "id": 50270,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50244,
+                        "src": "1024:6:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                          "typeString": "struct PythConfig memory"
+                        }
+                      },
+                      "id": 50271,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1031:4:64",
+                      "memberName": "name",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50216,
+                      "src": "1024:11:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_a3d3b09a164f7715d36697855a8817533552dbb6de38ec4f09aaf2d1a44605cc",
+                        "typeString": "literal_string \"Name:\""
+                      },
+                      {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50266,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1003:7:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50268,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1011:3:64",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18182,
+                    "src": "1003:11:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory,string memory) pure"
+                    }
+                  },
+                  "id": 50272,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1003:33:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50273,
+                "nodeType": "ExpressionStatement",
+                "src": "1003:33:64"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "4261736520546f6b656e3a",
+                      "id": 50277,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1058:13:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_651976be05a312f0d332c66b40054c65972fc08e5186b254f87ac0915ddd301e",
+                        "typeString": "literal_string \"Base Token:\""
+                      },
+                      "value": "Base Token:"
+                    },
+                    {
+                      "expression": {
+                        "id": 50278,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50244,
+                        "src": "1073:6:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                          "typeString": "struct PythConfig memory"
+                        }
+                      },
+                      "id": 50279,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1080:9:64",
+                      "memberName": "baseToken",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50208,
+                      "src": "1073:16:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_651976be05a312f0d332c66b40054c65972fc08e5186b254f87ac0915ddd301e",
+                        "typeString": "literal_string \"Base Token:\""
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50274,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1046:7:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50276,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1054:3:64",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18216,
+                    "src": "1046:11:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_address_$returns$__$",
+                      "typeString": "function (string memory,address) pure"
+                    }
+                  },
+                  "id": 50280,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1046:44:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50281,
+                "nodeType": "ExpressionStatement",
+                "src": "1046:44:64"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "51756f746520546f6b656e3a",
+                      "id": 50285,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1112:14:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_6e4a32fb9cc8febff02b25db85c8142c08962bd59230e9b4ed075424438cbc37",
+                        "typeString": "literal_string \"Quote Token:\""
+                      },
+                      "value": "Quote Token:"
+                    },
+                    {
+                      "expression": {
+                        "id": 50286,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50244,
+                        "src": "1128:6:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                          "typeString": "struct PythConfig memory"
+                        }
+                      },
+                      "id": 50287,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1135:10:64",
+                      "memberName": "quoteToken",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50222,
+                      "src": "1128:17:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_6e4a32fb9cc8febff02b25db85c8142c08962bd59230e9b4ed075424438cbc37",
+                        "typeString": "literal_string \"Quote Token:\""
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50282,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1100:7:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50284,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1108:3:64",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18216,
+                    "src": "1100:11:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_address_$returns$__$",
+                      "typeString": "function (string memory,address) pure"
+                    }
+                  },
+                  "id": 50288,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1100:46:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50289,
+                "nodeType": "ExpressionStatement",
+                "src": "1100:46:64"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "5079746820416464726573733a",
+                      "id": 50293,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1168:15:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_fcd6858c00b44329a28c8222c18b5a2e9d82d9f453f5d6a53551a8e76527482d",
+                        "typeString": "literal_string \"Pyth Address:\""
+                      },
+                      "value": "Pyth Address:"
+                    },
+                    {
+                      "expression": {
+                        "id": 50294,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50244,
+                        "src": "1185:6:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                          "typeString": "struct PythConfig memory"
+                        }
+                      },
+                      "id": 50295,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1192:11:64",
+                      "memberName": "pythAddress",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50220,
+                      "src": "1185:18:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_fcd6858c00b44329a28c8222c18b5a2e9d82d9f453f5d6a53551a8e76527482d",
+                        "typeString": "literal_string \"Pyth Address:\""
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50290,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1156:7:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50292,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1164:3:64",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18216,
+                    "src": "1156:11:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_address_$returns$__$",
+                      "typeString": "function (string memory,address) pure"
+                    }
+                  },
+                  "id": 50296,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1156:48:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50297,
+                "nodeType": "ExpressionStatement",
+                "src": "1156:48:64"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "466565642049443a",
+                      "id": 50301,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1226:10:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_c3d2b0930f117d6c9a753de1e27bcfa1181f6eedb091a4a6caf20884c6f973d2",
+                        "typeString": "literal_string \"Feed ID:\""
+                      },
+                      "value": "Feed ID:"
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_c3d2b0930f117d6c9a753de1e27bcfa1181f6eedb091a4a6caf20884c6f973d2",
+                        "typeString": "literal_string \"Feed ID:\""
+                      }
+                    ],
+                    "expression": {
+                      "id": 50298,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1214:7:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50300,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1222:3:64",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18035,
+                    "src": "1214:11:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory) pure"
+                    }
+                  },
+                  "id": 50302,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1214:23:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50303,
+                "nodeType": "ExpressionStatement",
+                "src": "1214:23:64"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 50307,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50244,
+                        "src": "1266:6:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                          "typeString": "struct PythConfig memory"
+                        }
+                      },
+                      "id": 50308,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1273:6:64",
+                      "memberName": "feedId",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50210,
+                      "src": "1266:13:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50304,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1247:7:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50306,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1255:10:64",
+                    "memberName": "logBytes32",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 17993,
+                    "src": "1247:18:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$__$",
+                      "typeString": "function (bytes32) pure"
+                    }
+                  },
+                  "id": 50309,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1247:33:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50310,
+                "nodeType": "ExpressionStatement",
+                "src": "1247:33:64"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "4d6178205374616c656e6573733a",
+                      "id": 50314,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1302:16:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_d973a580bef1e5188e98ddaba647ddd2cb79e65b797d81ee700c1f1143beaf76",
+                        "typeString": "literal_string \"Max Staleness:\""
+                      },
+                      "value": "Max Staleness:"
+                    },
+                    {
+                      "expression": {
+                        "id": 50315,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50244,
+                        "src": "1320:6:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                          "typeString": "struct PythConfig memory"
+                        }
+                      },
+                      "id": 50316,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1327:12:64",
+                      "memberName": "maxStaleness",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50214,
+                      "src": "1320:19:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_d973a580bef1e5188e98ddaba647ddd2cb79e65b797d81ee700c1f1143beaf76",
+                        "typeString": "literal_string \"Max Staleness:\""
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50311,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1290:7:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50313,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1298:3:64",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18148,
+                    "src": "1290:11:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$returns$__$",
+                      "typeString": "function (string memory,uint256) pure"
+                    }
+                  },
+                  "id": 50317,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1290:50:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50318,
+                "nodeType": "ExpressionStatement",
+                "src": "1290:50:64"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "4d617820436f6e662057696474683a",
+                      "id": 50322,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1362:17:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_683bd2f3ea34a3d65e7e75707d7103d7c1cd1b9bba2fd5e3079ea5c1305758c1",
+                        "typeString": "literal_string \"Max Conf Width:\""
+                      },
+                      "value": "Max Conf Width:"
+                    },
+                    {
+                      "expression": {
+                        "id": 50323,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50244,
+                        "src": "1381:6:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                          "typeString": "struct PythConfig memory"
+                        }
+                      },
+                      "id": 50324,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1388:12:64",
+                      "memberName": "maxConfWidth",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50212,
+                      "src": "1381:19:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_683bd2f3ea34a3d65e7e75707d7103d7c1cd1b9bba2fd5e3079ea5c1305758c1",
+                        "typeString": "literal_string \"Max Conf Width:\""
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50319,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1350:7:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50321,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1358:3:64",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18148,
+                    "src": "1350:11:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_uint256_$returns$__$",
+                      "typeString": "function (string memory,uint256) pure"
+                    }
+                  },
+                  "id": 50325,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1350:51:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50326,
+                "nodeType": "ExpressionStatement",
+                "src": "1350:51:64"
+              },
+              {
+                "expression": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 50327,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1273,
+                      "src": "1412:2:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$17397",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 50329,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1415:14:64",
+                    "memberName": "startBroadcast",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 15019,
+                    "src": "1412:17:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
+                      "typeString": "function () external"
+                    }
+                  },
+                  "id": 50330,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1412:19:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50331,
+                "nodeType": "ExpressionStatement",
+                "src": "1412:19:64"
+              },
+              {
+                "assignments": [
+                  50334
+                ],
+                "declarations": [
+                  {
+                    "constant": false,
+                    "id": 50334,
+                    "mutability": "mutable",
+                    "name": "pythOracle",
+                    "nameLocation": "1483:10:64",
+                    "nodeType": "VariableDeclaration",
+                    "scope": 50383,
+                    "src": "1472:21:64",
+                    "stateVariable": false,
+                    "storageLocation": "default",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PythOracle_$54121",
+                      "typeString": "contract PythOracle"
+                    },
+                    "typeName": {
+                      "id": 50333,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 50332,
+                        "name": "PythOracle",
+                        "nameLocations": [
+                          "1472:10:64"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 54121,
+                        "src": "1472:10:64"
+                      },
+                      "referencedDeclaration": 54121,
+                      "src": "1472:10:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_PythOracle_$54121",
+                        "typeString": "contract PythOracle"
+                      }
+                    },
+                    "visibility": "internal"
+                  }
+                ],
+                "id": 50351,
+                "initialValue": {
+                  "arguments": [
+                    {
+                      "expression": {
+                        "id": 50338,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50244,
+                        "src": "1524:6:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                          "typeString": "struct PythConfig memory"
+                        }
+                      },
+                      "id": 50339,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1531:11:64",
+                      "memberName": "pythAddress",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50220,
+                      "src": "1524:18:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 50340,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50244,
+                        "src": "1556:6:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                          "typeString": "struct PythConfig memory"
+                        }
+                      },
+                      "id": 50341,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1563:9:64",
+                      "memberName": "baseToken",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50208,
+                      "src": "1556:16:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 50342,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50244,
+                        "src": "1586:6:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                          "typeString": "struct PythConfig memory"
+                        }
+                      },
+                      "id": 50343,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1593:10:64",
+                      "memberName": "quoteToken",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50222,
+                      "src": "1586:17:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 50344,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50244,
+                        "src": "1617:6:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                          "typeString": "struct PythConfig memory"
+                        }
+                      },
+                      "id": 50345,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1624:6:64",
+                      "memberName": "feedId",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50210,
+                      "src": "1617:13:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 50346,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50244,
+                        "src": "1644:6:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                          "typeString": "struct PythConfig memory"
+                        }
+                      },
+                      "id": 50347,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1651:12:64",
+                      "memberName": "maxStaleness",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50214,
+                      "src": "1644:19:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    {
+                      "expression": {
+                        "id": 50348,
+                        "name": "config",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 50244,
+                        "src": "1677:6:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PythConfig_$50223_memory_ptr",
+                          "typeString": "struct PythConfig memory"
+                        }
+                      },
+                      "id": 50349,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1684:12:64",
+                      "memberName": "maxConfWidth",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 50212,
+                      "src": "1677:19:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    ],
+                    "id": 50337,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "NewExpression",
+                    "src": "1496:14:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_creation_nonpayable$_t_address_$_t_address_$_t_address_$_t_bytes32_$_t_uint256_$_t_uint256_$returns$_t_contract$_PythOracle_$54121_$",
+                      "typeString": "function (address,address,address,bytes32,uint256,uint256) returns (contract PythOracle)"
+                    },
+                    "typeName": {
+                      "id": 50336,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 50335,
+                        "name": "PythOracle",
+                        "nameLocations": [
+                          "1500:10:64"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 54121,
+                        "src": "1500:10:64"
+                      },
+                      "referencedDeclaration": 54121,
+                      "src": "1500:10:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_PythOracle_$54121",
+                        "typeString": "contract PythOracle"
+                      }
+                    }
+                  },
+                  "id": 50350,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1496:210:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_PythOracle_$54121",
+                    "typeString": "contract PythOracle"
+                  }
+                },
+                "nodeType": "VariableDeclarationStatement",
+                "src": "1472:234:64"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "507974684f7261636c65206465706c6f7965642061743a",
+                      "id": 50355,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1729:25:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_ebf239845da0605e622877fa8a6c75e741cd649cdaa536783e6f7d75762e365c",
+                        "typeString": "literal_string \"PythOracle deployed at:\""
+                      },
+                      "value": "PythOracle deployed at:"
+                    },
+                    {
+                      "arguments": [
+                        {
+                          "id": 50358,
+                          "name": "pythOracle",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 50334,
+                          "src": "1764:10:64",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_PythOracle_$54121",
+                            "typeString": "contract PythOracle"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_contract$_PythOracle_$54121",
+                            "typeString": "contract PythOracle"
+                          }
+                        ],
+                        "id": 50357,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "1756:7:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_$",
+                          "typeString": "type(address)"
+                        },
+                        "typeName": {
+                          "id": 50356,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "1756:7:64",
+                          "typeDescriptions": {}
+                        }
+                      },
+                      "id": 50359,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1756:19:64",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_ebf239845da0605e622877fa8a6c75e741cd649cdaa536783e6f7d75762e365c",
+                        "typeString": "literal_string \"PythOracle deployed at:\""
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50352,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1717:7:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50354,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1725:3:64",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18216,
+                    "src": "1717:11:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_address_$returns$__$",
+                      "typeString": "function (string memory,address) pure"
+                    }
+                  },
+                  "id": 50360,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1717:59:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50361,
+                "nodeType": "ExpressionStatement",
+                "src": "1717:59:64"
+              },
+              {
+                "expression": {
+                  "arguments": [],
+                  "expression": {
+                    "argumentTypes": [],
+                    "expression": {
+                      "id": 50362,
+                      "name": "vm",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1273,
+                      "src": "1787:2:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Vm_$17397",
+                        "typeString": "contract Vm"
+                      }
+                    },
+                    "id": 50364,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1790:13:64",
+                    "memberName": "stopBroadcast",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 15035,
+                    "src": "1787:16:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
+                      "typeString": "function () external"
+                    }
+                  },
+                  "id": 50365,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1787:18:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50366,
+                "nodeType": "ExpressionStatement",
+                "src": "1787:18:64"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "0a3d3d3d204465706c6f796d656e742053756d6d617279203d3d3d",
+                      "id": 50370,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1828:30:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_fe9a87529682c345d72b9c1e684f4ffc2fb2449679ee201a418673f8a895a86d",
+                        "typeString": "literal_string hex\"0a3d3d3d204465706c6f796d656e742053756d6d617279203d3d3d\""
+                      },
+                      "value": "\n=== Deployment Summary ==="
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_fe9a87529682c345d72b9c1e684f4ffc2fb2449679ee201a418673f8a895a86d",
+                        "typeString": "literal_string hex\"0a3d3d3d204465706c6f796d656e742053756d6d617279203d3d3d\""
+                      }
+                    ],
+                    "expression": {
+                      "id": 50367,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1816:7:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50369,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1824:3:64",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18035,
+                    "src": "1816:11:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$returns$__$",
+                      "typeString": "function (string memory) pure"
+                    }
+                  },
+                  "id": 50371,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1816:43:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50372,
+                "nodeType": "ExpressionStatement",
+                "src": "1816:43:64"
+              },
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "507974684f7261636c653a",
+                      "id": 50376,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "string",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1881:13:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_stringliteral_09417ad6009c1f14693b01f20750291e3afed311fdd9a234cc1c2533066a08a1",
+                        "typeString": "literal_string \"PythOracle:\""
+                      },
+                      "value": "PythOracle:"
+                    },
+                    {
+                      "arguments": [
+                        {
+                          "id": 50379,
+                          "name": "pythOracle",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 50334,
+                          "src": "1904:10:64",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_PythOracle_$54121",
+                            "typeString": "contract PythOracle"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_contract$_PythOracle_$54121",
+                            "typeString": "contract PythOracle"
+                          }
+                        ],
+                        "id": 50378,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "1896:7:64",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_$",
+                          "typeString": "type(address)"
+                        },
+                        "typeName": {
+                          "id": 50377,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "1896:7:64",
+                          "typeDescriptions": {}
+                        }
+                      },
+                      "id": 50380,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1896:19:64",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_stringliteral_09417ad6009c1f14693b01f20750291e3afed311fdd9a234cc1c2533066a08a1",
+                        "typeString": "literal_string \"PythOracle:\""
+                      },
+                      {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    ],
+                    "expression": {
+                      "id": 50373,
+                      "name": "console",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 25521,
+                      "src": "1869:7:64",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_console_$25521_$",
+                        "typeString": "type(library console)"
+                      }
+                    },
+                    "id": 50375,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1877:3:64",
+                    "memberName": "log",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 18216,
+                    "src": "1869:11:64",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_internal_pure$_t_string_memory_ptr_$_t_address_$returns$__$",
+                      "typeString": "function (string memory,address) pure"
+                    }
+                  },
+                  "id": 50381,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "1869:47:64",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_tuple$__$",
+                    "typeString": "tuple()"
+                  }
+                },
+                "id": 50382,
+                "nodeType": "ExpressionStatement",
+                "src": "1869:47:64"
+              }
+            ]
+          },
+          "functionSelector": "c0406226",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "run",
+          "nameLocation": "557:3:64",
+          "parameters": {
+            "id": 50226,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "560:2:64"
+          },
+          "returnParameters": {
+            "id": 50227,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "572:0:64"
+          },
+          "scope": 50385,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [
+        {
+          "baseName": {
+            "id": 50224,
+            "name": "Script",
+            "nameLocations": [
+              "535:6:64"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 1328,
+            "src": "535:6:64"
+          },
+          "id": 50225,
+          "nodeType": "InheritanceSpecifier",
+          "src": "535:6:64"
+        }
+      ],
+      "canonicalName": "DeployPythOracle",
+      "contractDependencies": [
+        54121
+      ],
+      "contractKind": "contract",
+      "fullyImplemented": true,
+      "internalFunctionIDs": {
+        "17450": 1
+      },
+      "linearizedBaseContracts": [
+        50385,
+        1328,
+        13307,
+        6836,
+        4776,
+        1289,
+        1277
+      ],
+      "name": "DeployPythOracle",
+      "nameLocation": "515:16:64",
+      "scope": 50386,
+      "usedErrors": [],
+      "usedEvents": []
+    }
+  ],
+  "license": "UNLICENSED"
+}

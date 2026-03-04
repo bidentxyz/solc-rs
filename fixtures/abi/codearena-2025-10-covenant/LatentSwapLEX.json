@@ -1,0 +1,1602 @@
+[
+  {
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "initialOwner_",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "covenantCore_",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "edgeHighSqrtPriceX96_",
+        "type": "uint160",
+        "internalType": "uint160"
+      },
+      {
+        "name": "edgeLowSqrtPriceX96_",
+        "type": "uint160",
+        "internalType": "uint160"
+      },
+      {
+        "name": "limHighSqrtPriceX96_",
+        "type": "uint160",
+        "internalType": "uint160"
+      },
+      {
+        "name": "limMaxSqrtPriceX96_",
+        "type": "uint160",
+        "internalType": "uint160"
+      },
+      {
+        "name": "initLnRateBias_",
+        "type": "int64",
+        "internalType": "int64"
+      },
+      {
+        "name": "debtDuration_",
+        "type": "uint32",
+        "internalType": "uint32"
+      },
+      {
+        "name": "swapFee_",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "acceptOwnership",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "assetDecimals",
+    "inputs": [
+      {
+        "name": "asset",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "decimals_",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "assetName",
+    "inputs": [
+      {
+        "name": "asset",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "name_",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "assetSymbol",
+    "inputs": [
+      {
+        "name": "asset",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "symbol_",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getLexConfig",
+    "inputs": [
+      {
+        "name": "marketId",
+        "type": "bytes20",
+        "internalType": "MarketId"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct LexConfig",
+        "components": [
+          {
+            "name": "protocolFee",
+            "type": "uint32",
+            "internalType": "uint32"
+          },
+          {
+            "name": "aToken",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "zToken",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "noCapLimit",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "scaleDecimals",
+            "type": "int8",
+            "internalType": "int8"
+          },
+          {
+            "name": "adaptive",
+            "type": "bool",
+            "internalType": "bool"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getLexParams",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct LexParams",
+        "components": [
+          {
+            "name": "covenantCore",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "initLnRateBias",
+            "type": "int64",
+            "internalType": "int64"
+          },
+          {
+            "name": "edgeSqrtPriceX96_B",
+            "type": "uint160",
+            "internalType": "uint160"
+          },
+          {
+            "name": "edgeSqrtPriceX96_A",
+            "type": "uint160",
+            "internalType": "uint160"
+          },
+          {
+            "name": "limHighSqrtPriceX96",
+            "type": "uint160",
+            "internalType": "uint160"
+          },
+          {
+            "name": "limMaxSqrtPriceX96",
+            "type": "uint160",
+            "internalType": "uint160"
+          },
+          {
+            "name": "debtDuration",
+            "type": "uint32",
+            "internalType": "uint32"
+          },
+          {
+            "name": "swapFee",
+            "type": "uint8",
+            "internalType": "uint8"
+          },
+          {
+            "name": "targetXvsL",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getLexState",
+    "inputs": [
+      {
+        "name": "marketId",
+        "type": "bytes20",
+        "internalType": "MarketId"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct LexState",
+        "components": [
+          {
+            "name": "lastDebtNotionalPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "lastBaseTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "lastETWAPBaseSupply",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "lastSqrtPriceX96",
+            "type": "uint160",
+            "internalType": "uint160"
+          },
+          {
+            "name": "lastUpdateTimestamp",
+            "type": "uint96",
+            "internalType": "uint96"
+          },
+          {
+            "name": "lastLnRateBias",
+            "type": "int64",
+            "internalType": "int64"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getProtocolFee",
+    "inputs": [
+      {
+        "name": "marketId",
+        "type": "bytes20",
+        "internalType": "MarketId"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint32",
+        "internalType": "uint32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getSynthTokens",
+    "inputs": [
+      {
+        "name": "marketId",
+        "type": "bytes20",
+        "internalType": "MarketId"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "synthTokens",
+        "type": "tuple",
+        "internalType": "struct SynthTokens",
+        "components": [
+          {
+            "name": "aToken",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "zToken",
+            "type": "address",
+            "internalType": "address"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "initMarket",
+    "inputs": [
+      {
+        "name": "marketId",
+        "type": "bytes20",
+        "internalType": "MarketId"
+      },
+      {
+        "name": "marketParams",
+        "type": "tuple",
+        "internalType": "struct MarketParams",
+        "components": [
+          {
+            "name": "baseToken",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "quoteToken",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "curator",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "lex",
+            "type": "address",
+            "internalType": "address"
+          }
+        ]
+      },
+      {
+        "name": "protocolFee",
+        "type": "uint32",
+        "internalType": "uint32"
+      },
+      {
+        "name": "initData",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "synthTokens",
+        "type": "tuple",
+        "internalType": "struct SynthTokens",
+        "components": [
+          {
+            "name": "aToken",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "zToken",
+            "type": "address",
+            "internalType": "address"
+          }
+        ]
+      },
+      {
+        "name": "lexData",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "mint",
+    "inputs": [
+      {
+        "name": "mintParams",
+        "type": "tuple",
+        "internalType": "struct MintParams",
+        "components": [
+          {
+            "name": "marketId",
+            "type": "bytes20",
+            "internalType": "MarketId"
+          },
+          {
+            "name": "marketParams",
+            "type": "tuple",
+            "internalType": "struct MarketParams",
+            "components": [
+              {
+                "name": "baseToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "quoteToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "curator",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "lex",
+                "type": "address",
+                "internalType": "address"
+              }
+            ]
+          },
+          {
+            "name": "baseAmountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "to",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "minATokenAmountOut",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minZTokenAmountOut",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "data",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "msgValue",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      },
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "baseTokenSupply",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "aTokenAmountOut",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "zTokenAmountOut",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "protocolFees",
+        "type": "uint128",
+        "internalType": "uint128"
+      },
+      {
+        "name": "tokenPrices",
+        "type": "tuple",
+        "internalType": "struct TokenPrices",
+        "components": [
+          {
+            "name": "baseTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "aTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "zTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "payable"
+  },
+  {
+    "type": "function",
+    "name": "name",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "owner",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "pendingOwner",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "quoteMint",
+    "inputs": [
+      {
+        "name": "mintParams",
+        "type": "tuple",
+        "internalType": "struct MintParams",
+        "components": [
+          {
+            "name": "marketId",
+            "type": "bytes20",
+            "internalType": "MarketId"
+          },
+          {
+            "name": "marketParams",
+            "type": "tuple",
+            "internalType": "struct MarketParams",
+            "components": [
+              {
+                "name": "baseToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "quoteToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "curator",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "lex",
+                "type": "address",
+                "internalType": "address"
+              }
+            ]
+          },
+          {
+            "name": "baseAmountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "to",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "minATokenAmountOut",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "minZTokenAmountOut",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "data",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "msgValue",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      },
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "baseTokenSupply",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "aTokenAmountOut",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "zTokenAmountOut",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "protocolFees",
+        "type": "uint128",
+        "internalType": "uint128"
+      },
+      {
+        "name": "oracleUpdateFee",
+        "type": "uint128",
+        "internalType": "uint128"
+      },
+      {
+        "name": "tokenPrices",
+        "type": "tuple",
+        "internalType": "struct TokenPrices",
+        "components": [
+          {
+            "name": "baseTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "aTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "zTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "quoteRedeem",
+    "inputs": [
+      {
+        "name": "redeemParams",
+        "type": "tuple",
+        "internalType": "struct RedeemParams",
+        "components": [
+          {
+            "name": "marketId",
+            "type": "bytes20",
+            "internalType": "MarketId"
+          },
+          {
+            "name": "marketParams",
+            "type": "tuple",
+            "internalType": "struct MarketParams",
+            "components": [
+              {
+                "name": "baseToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "quoteToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "curator",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "lex",
+                "type": "address",
+                "internalType": "address"
+              }
+            ]
+          },
+          {
+            "name": "aTokenAmountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "zTokenAmountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "to",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "minAmountOut",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "data",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "msgValue",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      },
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "baseTokenSupply",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "amountOut",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "protocolFees",
+        "type": "uint128",
+        "internalType": "uint128"
+      },
+      {
+        "name": "oracleUpdateFee",
+        "type": "uint128",
+        "internalType": "uint128"
+      },
+      {
+        "name": "tokenPrices",
+        "type": "tuple",
+        "internalType": "struct TokenPrices",
+        "components": [
+          {
+            "name": "baseTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "aTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "zTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "quoteSwap",
+    "inputs": [
+      {
+        "name": "swapParams",
+        "type": "tuple",
+        "internalType": "struct SwapParams",
+        "components": [
+          {
+            "name": "marketId",
+            "type": "bytes20",
+            "internalType": "MarketId"
+          },
+          {
+            "name": "marketParams",
+            "type": "tuple",
+            "internalType": "struct MarketParams",
+            "components": [
+              {
+                "name": "baseToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "quoteToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "curator",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "lex",
+                "type": "address",
+                "internalType": "address"
+              }
+            ]
+          },
+          {
+            "name": "assetIn",
+            "type": "uint8",
+            "internalType": "enum AssetType"
+          },
+          {
+            "name": "assetOut",
+            "type": "uint8",
+            "internalType": "enum AssetType"
+          },
+          {
+            "name": "to",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountSpecified",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "amountLimit",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "isExactIn",
+            "type": "bool",
+            "internalType": "bool"
+          },
+          {
+            "name": "data",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "msgValue",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      },
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "baseTokenSupply",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "amountCalculated",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "protocolFees",
+        "type": "uint128",
+        "internalType": "uint128"
+      },
+      {
+        "name": "oracleUpdateFee",
+        "type": "uint128",
+        "internalType": "uint128"
+      },
+      {
+        "name": "tokenPrices",
+        "type": "tuple",
+        "internalType": "struct TokenPrices",
+        "components": [
+          {
+            "name": "baseTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "aTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "zTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "redeem",
+    "inputs": [
+      {
+        "name": "redeemParams",
+        "type": "tuple",
+        "internalType": "struct RedeemParams",
+        "components": [
+          {
+            "name": "marketId",
+            "type": "bytes20",
+            "internalType": "MarketId"
+          },
+          {
+            "name": "marketParams",
+            "type": "tuple",
+            "internalType": "struct MarketParams",
+            "components": [
+              {
+                "name": "baseToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "quoteToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "curator",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "lex",
+                "type": "address",
+                "internalType": "address"
+              }
+            ]
+          },
+          {
+            "name": "aTokenAmountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "zTokenAmountIn",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "to",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "minAmountOut",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "data",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "msgValue",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      },
+      {
+        "name": "sender",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "baseTokenSupply",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "amountOut",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "protocolFees",
+        "type": "uint128",
+        "internalType": "uint128"
+      },
+      {
+        "name": "tokenPrices",
+        "type": "tuple",
+        "internalType": "struct TokenPrices",
+        "components": [
+          {
+            "name": "baseTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "aTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "zTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "payable"
+  },
+  {
+    "type": "function",
+    "name": "renounceOwnership",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setDefaultNoCapLimit",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "newDefaultMintRedeemNoCap",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setMarketNoCapLimit",
+    "inputs": [
+      {
+        "name": "marketId",
+        "type": "bytes20",
+        "internalType": "MarketId"
+      },
+      {
+        "name": "newNoCapLimit",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setMarketProtocolFee",
+    "inputs": [
+      {
+        "name": "marketId",
+        "type": "bytes20",
+        "internalType": "MarketId"
+      },
+      {
+        "name": "newFee",
+        "type": "uint32",
+        "internalType": "uint32"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setQuoteTokenDecimalsOverrideForNewMarkets",
+    "inputs": [
+      {
+        "name": "asset",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "newDecimals",
+        "type": "uint8",
+        "internalType": "uint8"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setQuoteTokenSymbolOverrideForNewMarkets",
+    "inputs": [
+      {
+        "name": "asset",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "newSymbol",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "swap",
+    "inputs": [
+      {
+        "name": "swapParams",
+        "type": "tuple",
+        "internalType": "struct SwapParams",
+        "components": [
+          {
+            "name": "marketId",
+            "type": "bytes20",
+            "internalType": "MarketId"
+          },
+          {
+            "name": "marketParams",
+            "type": "tuple",
+            "internalType": "struct MarketParams",
+            "components": [
+              {
+                "name": "baseToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "quoteToken",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "curator",
+                "type": "address",
+                "internalType": "address"
+              },
+              {
+                "name": "lex",
+                "type": "address",
+                "internalType": "address"
+              }
+            ]
+          },
+          {
+            "name": "assetIn",
+            "type": "uint8",
+            "internalType": "enum AssetType"
+          },
+          {
+            "name": "assetOut",
+            "type": "uint8",
+            "internalType": "enum AssetType"
+          },
+          {
+            "name": "to",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "amountSpecified",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "amountLimit",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "isExactIn",
+            "type": "bool",
+            "internalType": "bool"
+          },
+          {
+            "name": "data",
+            "type": "bytes",
+            "internalType": "bytes"
+          },
+          {
+            "name": "msgValue",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      },
+      {
+        "name": "sender",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "baseTokenSupply",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "amountCalculated",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "protocolFees",
+        "type": "uint128",
+        "internalType": "uint128"
+      },
+      {
+        "name": "tokenPrices",
+        "type": "tuple",
+        "internalType": "struct TokenPrices",
+        "components": [
+          {
+            "name": "baseTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "aTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "zTokenPrice",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "payable"
+  },
+  {
+    "type": "function",
+    "name": "transferOwnership",
+    "inputs": [
+      {
+        "name": "newOwner",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "updateState",
+    "inputs": [
+      {
+        "name": "marketId",
+        "type": "bytes20",
+        "internalType": "MarketId"
+      },
+      {
+        "name": "marketParams",
+        "type": "tuple",
+        "internalType": "struct MarketParams",
+        "components": [
+          {
+            "name": "baseToken",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "quoteToken",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "curator",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "lex",
+            "type": "address",
+            "internalType": "address"
+          }
+        ]
+      },
+      {
+        "name": "baseTokenSupply",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "data",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "protocolFees",
+        "type": "uint128",
+        "internalType": "uint128"
+      }
+    ],
+    "stateMutability": "payable"
+  },
+  {
+    "type": "event",
+    "name": "OwnershipTransferStarted",
+    "inputs": [
+      {
+        "name": "previousOwner",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "newOwner",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "OwnershipTransferred",
+    "inputs": [
+      {
+        "name": "previousOwner",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "newOwner",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SetDefaultNoCapLimit",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "oldDefaultNoCapLimit",
+        "type": "uint8",
+        "indexed": false,
+        "internalType": "uint8"
+      },
+      {
+        "name": "newDefaultNoCapLimit",
+        "type": "uint8",
+        "indexed": false,
+        "internalType": "uint8"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SetMarketNoCapLimit",
+    "inputs": [
+      {
+        "name": "marketId",
+        "type": "bytes20",
+        "indexed": true,
+        "internalType": "MarketId"
+      },
+      {
+        "name": "oldNoCapLimit",
+        "type": "uint8",
+        "indexed": false,
+        "internalType": "uint8"
+      },
+      {
+        "name": "newNoCapLimit",
+        "type": "uint8",
+        "indexed": false,
+        "internalType": "uint8"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SetTokenDecimals",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "oldDecimals",
+        "type": "uint8",
+        "indexed": false,
+        "internalType": "uint8"
+      },
+      {
+        "name": "newDecimals",
+        "type": "uint8",
+        "indexed": false,
+        "internalType": "uint8"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SetTokenName",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "oldName",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
+      },
+      {
+        "name": "newName",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SetTokenSymbol",
+    "inputs": [
+      {
+        "name": "token",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "oldSymbol",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
+      },
+      {
+        "name": "newSymbol",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_AlreadyInitialized",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_IncorrectInitializationDuration",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_IncorrectInitializationLnRateBias",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_IncorrectInitializationPrice",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_MarketDoesNotExist",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_OnlyCovenantCanCall",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_Overdeposit",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "E_LEX_ZeroAddress",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "OwnableInvalidOwner",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "OwnableUnauthorizedAccount",
+    "inputs": [
+      {
+        "name": "account",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
+  },
+  {
+    "type": "error",
+    "name": "TokenData_InvalidDecimals",
+    "inputs": []
+  }
+]

@@ -1,0 +1,2387 @@
+{
+  "absolutePath": "test/poc/mocks/MockPyth.sol",
+  "id": 124668,
+  "exportedSymbols": {
+    "IPyth": [
+      239
+    ],
+    "MockPyth": [
+      124667
+    ],
+    "PythStructs": [
+      282
+    ]
+  },
+  "nodeType": "SourceUnit",
+  "src": "33:2530:132",
+  "nodes": [
+    {
+      "id": 124453,
+      "nodeType": "PragmaDirective",
+      "src": "33:24:132",
+      "nodes": [],
+      "literals": [
+        "solidity",
+        "^",
+        "0.8",
+        ".20"
+      ]
+    },
+    {
+      "id": 124455,
+      "nodeType": "ImportDirective",
+      "src": "59:38:132",
+      "nodes": [],
+      "absolutePath": "lib/euler-price-oracle/lib/pyth-sdk-solidity/IPyth.sol",
+      "file": "@pyth/IPyth.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 124668,
+      "sourceUnit": 240,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 124454,
+            "name": "IPyth",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 239,
+            "src": "67:5:132",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 124457,
+      "nodeType": "ImportDirective",
+      "src": "98:50:132",
+      "nodes": [],
+      "absolutePath": "lib/euler-price-oracle/lib/pyth-sdk-solidity/PythStructs.sol",
+      "file": "@pyth/PythStructs.sol",
+      "nameLocation": "-1:-1:-1",
+      "scope": 124668,
+      "sourceUnit": 283,
+      "symbolAliases": [
+        {
+          "foreign": {
+            "id": 124456,
+            "name": "PythStructs",
+            "nodeType": "Identifier",
+            "overloadedDeclarations": [],
+            "referencedDeclaration": 282,
+            "src": "106:11:132",
+            "typeDescriptions": {}
+          },
+          "nameLocation": "-1:-1:-1"
+        }
+      ],
+      "unitAlias": ""
+    },
+    {
+      "id": 124667,
+      "nodeType": "ContractDefinition",
+      "src": "263:2299:132",
+      "nodes": [
+        {
+          "id": 124463,
+          "nodeType": "VariableDeclaration",
+          "src": "296:33:132",
+          "nodes": [],
+          "constant": false,
+          "mutability": "mutable",
+          "name": "_price",
+          "nameLocation": "323:6:132",
+          "scope": 124667,
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_struct$_Price_$272_storage",
+            "typeString": "struct PythStructs.Price"
+          },
+          "typeName": {
+            "id": 124462,
+            "nodeType": "UserDefinedTypeName",
+            "pathNode": {
+              "id": 124461,
+              "name": "PythStructs.Price",
+              "nameLocations": [
+                "296:11:132",
+                "308:5:132"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 272,
+              "src": "296:17:132"
+            },
+            "referencedDeclaration": 272,
+            "src": "296:17:132",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_Price_$272_storage_ptr",
+              "typeString": "struct PythStructs.Price"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "id": 124466,
+          "nodeType": "VariableDeclaration",
+          "src": "335:38:132",
+          "nodes": [],
+          "constant": false,
+          "functionSelector": "758cdcf0",
+          "mutability": "mutable",
+          "name": "updateFee",
+          "nameLocation": "350:9:132",
+          "scope": 124667,
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_uint256",
+            "typeString": "uint256"
+          },
+          "typeName": {
+            "id": 124464,
+            "name": "uint256",
+            "nodeType": "ElementaryTypeName",
+            "src": "335:7:132",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            }
+          },
+          "value": {
+            "hexValue": "302e303031",
+            "id": 124465,
+            "isConstant": false,
+            "isLValue": false,
+            "isPure": true,
+            "kind": "number",
+            "lValueRequested": false,
+            "nodeType": "Literal",
+            "src": "362:11:132",
+            "subdenomination": "ether",
+            "typeDescriptions": {
+              "typeIdentifier": "t_rational_1000000000000000_by_1",
+              "typeString": "int_const 1000000000000000"
+            },
+            "value": "0.001"
+          },
+          "visibility": "public"
+        },
+        {
+          "id": 124468,
+          "nodeType": "VariableDeclaration",
+          "src": "379:27:132",
+          "nodes": [],
+          "constant": false,
+          "mutability": "mutable",
+          "name": "_shouldRevert",
+          "nameLocation": "393:13:132",
+          "scope": 124667,
+          "stateVariable": true,
+          "storageLocation": "default",
+          "typeDescriptions": {
+            "typeIdentifier": "t_bool",
+            "typeString": "bool"
+          },
+          "typeName": {
+            "id": 124467,
+            "name": "bool",
+            "nodeType": "ElementaryTypeName",
+            "src": "379:4:132",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            }
+          },
+          "visibility": "internal"
+        },
+        {
+          "id": 124478,
+          "nodeType": "ModifierDefinition",
+          "src": "413:82:132",
+          "nodes": [],
+          "body": {
+            "id": 124477,
+            "nodeType": "Block",
+            "src": "434:61:132",
+            "nodes": [],
+            "statements": [
+              {
+                "condition": {
+                  "id": 124470,
+                  "name": "_shouldRevert",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 124468,
+                  "src": "448:13:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "id": 124475,
+                "nodeType": "IfStatement",
+                "src": "444:33:132",
+                "trueBody": {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "hexValue": "4f6f7073",
+                        "id": 124472,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "470:6:132",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_f39de225e179aaaff1fa93356aa6534e980afea69fd188533b0771531bf62233",
+                          "typeString": "literal_string \"Oops\""
+                        },
+                        "value": "Oops"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_stringliteral_f39de225e179aaaff1fa93356aa6534e980afea69fd188533b0771531bf62233",
+                          "typeString": "literal_string \"Oops\""
+                        }
+                      ],
+                      "id": 124471,
+                      "name": "revert",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -19,
+                        -19
+                      ],
+                      "referencedDeclaration": -19,
+                      "src": "463:6:132",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_revert_pure$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (string memory) pure"
+                      }
+                    },
+                    "id": 124473,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "463:14:132",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 124474,
+                  "nodeType": "ExpressionStatement",
+                  "src": "463:14:132"
+                }
+              },
+              {
+                "id": 124476,
+                "nodeType": "PlaceholderStatement",
+                "src": "487:1:132"
+              }
+            ]
+          },
+          "name": "canRevert",
+          "nameLocation": "422:9:132",
+          "parameters": {
+            "id": 124469,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "431:2:132"
+          },
+          "virtual": false,
+          "visibility": "internal"
+        },
+        {
+          "id": 124489,
+          "nodeType": "FunctionDefinition",
+          "src": "501:92:132",
+          "nodes": [],
+          "body": {
+            "id": 124488,
+            "nodeType": "Block",
+            "src": "561:32:132",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 124486,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftHandSide": {
+                    "id": 124484,
+                    "name": "_price",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 124463,
+                    "src": "571:6:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Price_$272_storage",
+                      "typeString": "struct PythStructs.Price storage ref"
+                    }
+                  },
+                  "nodeType": "Assignment",
+                  "operator": "=",
+                  "rightHandSide": {
+                    "id": 124485,
+                    "name": "price_",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 124481,
+                    "src": "580:6:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Price_$272_memory_ptr",
+                      "typeString": "struct PythStructs.Price memory"
+                    }
+                  },
+                  "src": "571:15:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Price_$272_storage",
+                    "typeString": "struct PythStructs.Price storage ref"
+                  }
+                },
+                "id": 124487,
+                "nodeType": "ExpressionStatement",
+                "src": "571:15:132"
+              }
+            ]
+          },
+          "functionSelector": "d5a84476",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "setPrice",
+          "nameLocation": "510:8:132",
+          "parameters": {
+            "id": 124482,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124481,
+                "mutability": "mutable",
+                "name": "price_",
+                "nameLocation": "544:6:132",
+                "nodeType": "VariableDeclaration",
+                "scope": 124489,
+                "src": "519:31:132",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Price_$272_memory_ptr",
+                  "typeString": "struct PythStructs.Price"
+                },
+                "typeName": {
+                  "id": 124480,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 124479,
+                    "name": "PythStructs.Price",
+                    "nameLocations": [
+                      "519:11:132",
+                      "531:5:132"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 272,
+                    "src": "519:17:132"
+                  },
+                  "referencedDeclaration": 272,
+                  "src": "519:17:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Price_$272_storage_ptr",
+                    "typeString": "struct PythStructs.Price"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "518:33:132"
+          },
+          "returnParameters": {
+            "id": 124483,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "561:0:132"
+          },
+          "scope": 124667,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 124499,
+          "nodeType": "FunctionDefinition",
+          "src": "599:94:132",
+          "nodes": [],
+          "body": {
+            "id": 124498,
+            "nodeType": "Block",
+            "src": "647:46:132",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 124496,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftHandSide": {
+                    "id": 124494,
+                    "name": "_shouldRevert",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 124468,
+                    "src": "657:13:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "nodeType": "Assignment",
+                  "operator": "=",
+                  "rightHandSide": {
+                    "id": 124495,
+                    "name": "shouldRevert_",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 124491,
+                    "src": "673:13:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "src": "657:29:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "id": 124497,
+                "nodeType": "ExpressionStatement",
+                "src": "657:29:132"
+              }
+            ]
+          },
+          "functionSelector": "8fb5f171",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "setRevert",
+          "nameLocation": "608:9:132",
+          "parameters": {
+            "id": 124492,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124491,
+                "mutability": "mutable",
+                "name": "shouldRevert_",
+                "nameLocation": "623:13:132",
+                "nodeType": "VariableDeclaration",
+                "scope": 124499,
+                "src": "618:18:132",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 124490,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "618:4:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "617:20:132"
+          },
+          "returnParameters": {
+            "id": 124493,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "647:0:132"
+          },
+          "scope": 124667,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 124509,
+          "nodeType": "FunctionDefinition",
+          "src": "699:90:132",
+          "nodes": [],
+          "body": {
+            "id": 124508,
+            "nodeType": "Block",
+            "src": "750:39:132",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 124506,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": false,
+                  "lValueRequested": false,
+                  "leftHandSide": {
+                    "id": 124504,
+                    "name": "updateFee",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 124466,
+                    "src": "760:9:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "Assignment",
+                  "operator": "=",
+                  "rightHandSide": {
+                    "id": 124505,
+                    "name": "updateFee_",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 124501,
+                    "src": "772:10:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "src": "760:22:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "id": 124507,
+                "nodeType": "ExpressionStatement",
+                "src": "760:22:132"
+              }
+            ]
+          },
+          "functionSelector": "6a2e770f",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "setUpdateFee",
+          "nameLocation": "708:12:132",
+          "parameters": {
+            "id": 124502,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124501,
+                "mutability": "mutable",
+                "name": "updateFee_",
+                "nameLocation": "729:10:132",
+                "nodeType": "VariableDeclaration",
+                "scope": 124509,
+                "src": "721:18:132",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 124500,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "721:7:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "720:20:132"
+          },
+          "returnParameters": {
+            "id": 124503,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "750:0:132"
+          },
+          "scope": 124667,
+          "stateMutability": "nonpayable",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 124518,
+          "nodeType": "FunctionDefinition",
+          "src": "795:106:132",
+          "nodes": [],
+          "body": {
+            "id": 124517,
+            "nodeType": "Block",
+            "src": "863:38:132",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "hexValue": "33363030",
+                  "id": 124515,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "kind": "number",
+                  "lValueRequested": false,
+                  "nodeType": "Literal",
+                  "src": "880:4:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_rational_3600_by_1",
+                    "typeString": "int_const 3600"
+                  },
+                  "value": "3600"
+                },
+                "functionReturnParameters": 124514,
+                "id": 124516,
+                "nodeType": "Return",
+                "src": "873:11:132"
+              }
+            ]
+          },
+          "baseFunctions": [
+            133
+          ],
+          "functionSelector": "e18910a3",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "getValidTimePeriod",
+          "nameLocation": "804:18:132",
+          "overrides": {
+            "id": 124511,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [],
+            "src": "839:8:132"
+          },
+          "parameters": {
+            "id": 124510,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "822:2:132"
+          },
+          "returnParameters": {
+            "id": 124514,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124513,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124518,
+                "src": "857:4:132",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 124512,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "857:4:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "856:6:132"
+          },
+          "scope": 124667,
+          "stateMutability": "pure",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 124532,
+          "nodeType": "FunctionDefinition",
+          "src": "907:131:132",
+          "nodes": [],
+          "body": {
+            "id": 124531,
+            "nodeType": "Block",
+            "src": "1008:30:132",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 124529,
+                  "name": "_price",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 124463,
+                  "src": "1025:6:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Price_$272_storage",
+                    "typeString": "struct PythStructs.Price storage ref"
+                  }
+                },
+                "functionReturnParameters": 124528,
+                "id": 124530,
+                "nodeType": "Return",
+                "src": "1018:13:132"
+              }
+            ]
+          },
+          "baseFunctions": [
+            160
+          ],
+          "functionSelector": "96834ad3",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [
+            {
+              "id": 124524,
+              "kind": "modifierInvocation",
+              "modifierName": {
+                "id": 124523,
+                "name": "canRevert",
+                "nameLocations": [
+                  "963:9:132"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 124478,
+                "src": "963:9:132"
+              },
+              "nodeType": "ModifierInvocation",
+              "src": "963:9:132"
+            }
+          ],
+          "name": "getPriceUnsafe",
+          "nameLocation": "916:14:132",
+          "overrides": {
+            "id": 124522,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [],
+            "src": "954:8:132"
+          },
+          "parameters": {
+            "id": 124521,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124520,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124532,
+                "src": "931:7:132",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 124519,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "931:7:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "930:9:132"
+          },
+          "returnParameters": {
+            "id": 124528,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124527,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124532,
+                "src": "982:24:132",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Price_$272_memory_ptr",
+                  "typeString": "struct PythStructs.Price"
+                },
+                "typeName": {
+                  "id": 124526,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 124525,
+                    "name": "PythStructs.Price",
+                    "nameLocations": [
+                      "982:11:132",
+                      "994:5:132"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 272,
+                    "src": "982:17:132"
+                  },
+                  "referencedDeclaration": 272,
+                  "src": "982:17:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Price_$272_storage_ptr",
+                    "typeString": "struct PythStructs.Price"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "981:26:132"
+          },
+          "scope": 124667,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 124546,
+          "nodeType": "FunctionDefinition",
+          "src": "1044:125:132",
+          "nodes": [],
+          "body": {
+            "id": 124545,
+            "nodeType": "Block",
+            "src": "1139:30:132",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 124543,
+                  "name": "_price",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 124463,
+                  "src": "1156:6:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Price_$272_storage",
+                    "typeString": "struct PythStructs.Price storage ref"
+                  }
+                },
+                "functionReturnParameters": 124542,
+                "id": 124544,
+                "nodeType": "Return",
+                "src": "1149:13:132"
+              }
+            ]
+          },
+          "baseFunctions": [
+            142
+          ],
+          "functionSelector": "31d98b3f",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [
+            {
+              "id": 124538,
+              "kind": "modifierInvocation",
+              "modifierName": {
+                "id": 124537,
+                "name": "canRevert",
+                "nameLocations": [
+                  "1094:9:132"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 124478,
+                "src": "1094:9:132"
+              },
+              "nodeType": "ModifierInvocation",
+              "src": "1094:9:132"
+            }
+          ],
+          "name": "getPrice",
+          "nameLocation": "1053:8:132",
+          "overrides": {
+            "id": 124536,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [],
+            "src": "1085:8:132"
+          },
+          "parameters": {
+            "id": 124535,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124534,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124546,
+                "src": "1062:7:132",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 124533,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1062:7:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1061:9:132"
+          },
+          "returnParameters": {
+            "id": 124542,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124541,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124546,
+                "src": "1113:24:132",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Price_$272_memory_ptr",
+                  "typeString": "struct PythStructs.Price"
+                },
+                "typeName": {
+                  "id": 124540,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 124539,
+                    "name": "PythStructs.Price",
+                    "nameLocations": [
+                      "1113:11:132",
+                      "1125:5:132"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 272,
+                    "src": "1113:17:132"
+                  },
+                  "referencedDeclaration": 272,
+                  "src": "1113:17:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Price_$272_storage_ptr",
+                    "typeString": "struct PythStructs.Price"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1112:26:132"
+          },
+          "scope": 124667,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 124562,
+          "nodeType": "FunctionDefinition",
+          "src": "1175:145:132",
+          "nodes": [],
+          "body": {
+            "id": 124561,
+            "nodeType": "Block",
+            "src": "1290:30:132",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 124559,
+                  "name": "_price",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 124463,
+                  "src": "1307:6:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Price_$272_storage",
+                    "typeString": "struct PythStructs.Price storage ref"
+                  }
+                },
+                "functionReturnParameters": 124558,
+                "id": 124560,
+                "nodeType": "Return",
+                "src": "1300:13:132"
+              }
+            ]
+          },
+          "baseFunctions": [
+            171
+          ],
+          "functionSelector": "a4ae35e0",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [
+            {
+              "id": 124554,
+              "kind": "modifierInvocation",
+              "modifierName": {
+                "id": 124553,
+                "name": "canRevert",
+                "nameLocations": [
+                  "1245:9:132"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 124478,
+                "src": "1245:9:132"
+              },
+              "nodeType": "ModifierInvocation",
+              "src": "1245:9:132"
+            }
+          ],
+          "name": "getPriceNoOlderThan",
+          "nameLocation": "1184:19:132",
+          "overrides": {
+            "id": 124552,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [],
+            "src": "1236:8:132"
+          },
+          "parameters": {
+            "id": 124551,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124548,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124562,
+                "src": "1204:7:132",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 124547,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1204:7:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 124550,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124562,
+                "src": "1213:7:132",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 124549,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1213:7:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1203:18:132"
+          },
+          "returnParameters": {
+            "id": 124558,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124557,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124562,
+                "src": "1264:24:132",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Price_$272_memory_ptr",
+                  "typeString": "struct PythStructs.Price"
+                },
+                "typeName": {
+                  "id": 124556,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 124555,
+                    "name": "PythStructs.Price",
+                    "nameLocations": [
+                      "1264:11:132",
+                      "1276:5:132"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 272,
+                    "src": "1264:17:132"
+                  },
+                  "referencedDeclaration": 272,
+                  "src": "1264:17:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Price_$272_storage_ptr",
+                    "typeString": "struct PythStructs.Price"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1263:26:132"
+          },
+          "scope": 124667,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 124576,
+          "nodeType": "FunctionDefinition",
+          "src": "1326:134:132",
+          "nodes": [],
+          "body": {
+            "id": 124575,
+            "nodeType": "Block",
+            "src": "1430:30:132",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 124573,
+                  "name": "_price",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 124463,
+                  "src": "1447:6:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Price_$272_storage",
+                    "typeString": "struct PythStructs.Price storage ref"
+                  }
+                },
+                "functionReturnParameters": 124572,
+                "id": 124574,
+                "nodeType": "Return",
+                "src": "1440:13:132"
+              }
+            ]
+          },
+          "baseFunctions": [
+            180
+          ],
+          "functionSelector": "9474f45b",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [
+            {
+              "id": 124568,
+              "kind": "modifierInvocation",
+              "modifierName": {
+                "id": 124567,
+                "name": "canRevert",
+                "nameLocations": [
+                  "1385:9:132"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 124478,
+                "src": "1385:9:132"
+              },
+              "nodeType": "ModifierInvocation",
+              "src": "1385:9:132"
+            }
+          ],
+          "name": "getEmaPriceUnsafe",
+          "nameLocation": "1335:17:132",
+          "overrides": {
+            "id": 124566,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [],
+            "src": "1376:8:132"
+          },
+          "parameters": {
+            "id": 124565,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124564,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124576,
+                "src": "1353:7:132",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 124563,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1353:7:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1352:9:132"
+          },
+          "returnParameters": {
+            "id": 124572,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124571,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124576,
+                "src": "1404:24:132",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Price_$272_memory_ptr",
+                  "typeString": "struct PythStructs.Price"
+                },
+                "typeName": {
+                  "id": 124570,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 124569,
+                    "name": "PythStructs.Price",
+                    "nameLocations": [
+                      "1404:11:132",
+                      "1416:5:132"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 272,
+                    "src": "1404:17:132"
+                  },
+                  "referencedDeclaration": 272,
+                  "src": "1404:17:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Price_$272_storage_ptr",
+                    "typeString": "struct PythStructs.Price"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1403:26:132"
+          },
+          "scope": 124667,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 124590,
+          "nodeType": "FunctionDefinition",
+          "src": "1466:128:132",
+          "nodes": [],
+          "body": {
+            "id": 124589,
+            "nodeType": "Block",
+            "src": "1564:30:132",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 124587,
+                  "name": "_price",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 124463,
+                  "src": "1581:6:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Price_$272_storage",
+                    "typeString": "struct PythStructs.Price storage ref"
+                  }
+                },
+                "functionReturnParameters": 124586,
+                "id": 124588,
+                "nodeType": "Return",
+                "src": "1574:13:132"
+              }
+            ]
+          },
+          "baseFunctions": [
+            151
+          ],
+          "functionSelector": "b5dcc911",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [
+            {
+              "id": 124582,
+              "kind": "modifierInvocation",
+              "modifierName": {
+                "id": 124581,
+                "name": "canRevert",
+                "nameLocations": [
+                  "1519:9:132"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 124478,
+                "src": "1519:9:132"
+              },
+              "nodeType": "ModifierInvocation",
+              "src": "1519:9:132"
+            }
+          ],
+          "name": "getEmaPrice",
+          "nameLocation": "1475:11:132",
+          "overrides": {
+            "id": 124580,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [],
+            "src": "1510:8:132"
+          },
+          "parameters": {
+            "id": 124579,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124578,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124590,
+                "src": "1487:7:132",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 124577,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1487:7:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1486:9:132"
+          },
+          "returnParameters": {
+            "id": 124586,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124585,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124590,
+                "src": "1538:24:132",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Price_$272_memory_ptr",
+                  "typeString": "struct PythStructs.Price"
+                },
+                "typeName": {
+                  "id": 124584,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 124583,
+                    "name": "PythStructs.Price",
+                    "nameLocations": [
+                      "1538:11:132",
+                      "1550:5:132"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 272,
+                    "src": "1538:17:132"
+                  },
+                  "referencedDeclaration": 272,
+                  "src": "1538:17:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Price_$272_storage_ptr",
+                    "typeString": "struct PythStructs.Price"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1537:26:132"
+          },
+          "scope": 124667,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 124606,
+          "nodeType": "FunctionDefinition",
+          "src": "1600:170:132",
+          "nodes": [],
+          "body": {
+            "id": 124605,
+            "nodeType": "Block",
+            "src": "1740:30:132",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 124603,
+                  "name": "_price",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 124463,
+                  "src": "1757:6:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Price_$272_storage",
+                    "typeString": "struct PythStructs.Price storage ref"
+                  }
+                },
+                "functionReturnParameters": 124602,
+                "id": 124604,
+                "nodeType": "Return",
+                "src": "1750:13:132"
+              }
+            ]
+          },
+          "baseFunctions": [
+            191
+          ],
+          "functionSelector": "711a2e28",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [
+            {
+              "id": 124598,
+              "kind": "modifierInvocation",
+              "modifierName": {
+                "id": 124597,
+                "name": "canRevert",
+                "nameLocations": [
+                  "1695:9:132"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 124478,
+                "src": "1695:9:132"
+              },
+              "nodeType": "ModifierInvocation",
+              "src": "1695:9:132"
+            }
+          ],
+          "name": "getEmaPriceNoOlderThan",
+          "nameLocation": "1609:22:132",
+          "overrides": {
+            "id": 124596,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [],
+            "src": "1686:8:132"
+          },
+          "parameters": {
+            "id": 124595,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124592,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124606,
+                "src": "1641:7:132",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bytes32",
+                  "typeString": "bytes32"
+                },
+                "typeName": {
+                  "id": 124591,
+                  "name": "bytes32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1641:7:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 124594,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124606,
+                "src": "1658:7:132",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 124593,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1658:7:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1631:40:132"
+          },
+          "returnParameters": {
+            "id": 124602,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124601,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124606,
+                "src": "1714:24:132",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Price_$272_memory_ptr",
+                  "typeString": "struct PythStructs.Price"
+                },
+                "typeName": {
+                  "id": 124600,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 124599,
+                    "name": "PythStructs.Price",
+                    "nameLocations": [
+                      "1714:11:132",
+                      "1726:5:132"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 272,
+                    "src": "1714:17:132"
+                  },
+                  "referencedDeclaration": 272,
+                  "src": "1714:17:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Price_$272_storage_ptr",
+                    "typeString": "struct PythStructs.Price"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1713:26:132"
+          },
+          "scope": 124667,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 124614,
+          "nodeType": "FunctionDefinition",
+          "src": "1776:121:132",
+          "nodes": [],
+          "body": {
+            "id": 124613,
+            "nodeType": "Block",
+            "src": "1846:51:132",
+            "nodes": [],
+            "statements": []
+          },
+          "baseFunctions": [
+            198
+          ],
+          "functionSelector": "ef9e5e28",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "updatePriceFeeds",
+          "nameLocation": "1785:16:132",
+          "overrides": {
+            "id": 124611,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [],
+            "src": "1837:8:132"
+          },
+          "parameters": {
+            "id": 124610,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124609,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124614,
+                "src": "1802:16:132",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_bytes_calldata_ptr_$dyn_calldata_ptr",
+                  "typeString": "bytes[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 124607,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1802:5:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "id": 124608,
+                  "nodeType": "ArrayTypeName",
+                  "src": "1802:7:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                    "typeString": "bytes[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1801:18:132"
+          },
+          "returnParameters": {
+            "id": 124612,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "1846:0:132"
+          },
+          "scope": 124667,
+          "stateMutability": "payable",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 124628,
+          "nodeType": "FunctionDefinition",
+          "src": "1903:201:132",
+          "nodes": [],
+          "body": {
+            "id": 124627,
+            "nodeType": "Block",
+            "src": "2053:51:132",
+            "nodes": [],
+            "statements": []
+          },
+          "baseFunctions": [
+            211
+          ],
+          "functionSelector": "b9256d28",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "updatePriceFeedsIfNecessary",
+          "nameLocation": "1912:27:132",
+          "overrides": {
+            "id": 124625,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [],
+            "src": "2044:8:132"
+          },
+          "parameters": {
+            "id": 124624,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124617,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124628,
+                "src": "1949:16:132",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_bytes_calldata_ptr_$dyn_calldata_ptr",
+                  "typeString": "bytes[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 124615,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1949:5:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "id": 124616,
+                  "nodeType": "ArrayTypeName",
+                  "src": "1949:7:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                    "typeString": "bytes[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 124620,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124628,
+                "src": "1975:18:132",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_bytes32_$dyn_calldata_ptr",
+                  "typeString": "bytes32[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 124618,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1975:7:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "id": 124619,
+                  "nodeType": "ArrayTypeName",
+                  "src": "1975:9:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                    "typeString": "bytes32[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 124623,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124628,
+                "src": "2003:17:132",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint64_$dyn_calldata_ptr",
+                  "typeString": "uint64[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 124621,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2003:6:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "id": 124622,
+                  "nodeType": "ArrayTypeName",
+                  "src": "2003:8:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint64_$dyn_storage_ptr",
+                    "typeString": "uint64[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "1939:87:132"
+          },
+          "returnParameters": {
+            "id": 124626,
+            "nodeType": "ParameterList",
+            "parameters": [],
+            "src": "2053:0:132"
+          },
+          "scope": 124667,
+          "stateMutability": "payable",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 124640,
+          "nodeType": "FunctionDefinition",
+          "src": "2110:148:132",
+          "nodes": [],
+          "body": {
+            "id": 124639,
+            "nodeType": "Block",
+            "src": "2191:67:132",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "id": 124637,
+                  "name": "updateFee",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 124466,
+                  "src": "2208:9:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "functionReturnParameters": 124636,
+                "id": 124638,
+                "nodeType": "Return",
+                "src": "2201:16:132"
+              }
+            ]
+          },
+          "baseFunctions": [
+            220
+          ],
+          "functionSelector": "d47eed45",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "getUpdateFee",
+          "nameLocation": "2119:12:132",
+          "overrides": {
+            "id": 124633,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [],
+            "src": "2164:8:132"
+          },
+          "parameters": {
+            "id": 124632,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124631,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124640,
+                "src": "2132:16:132",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_bytes_calldata_ptr_$dyn_calldata_ptr",
+                  "typeString": "bytes[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 124629,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2132:5:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "id": 124630,
+                  "nodeType": "ArrayTypeName",
+                  "src": "2132:7:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                    "typeString": "bytes[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2131:18:132"
+          },
+          "returnParameters": {
+            "id": 124636,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124635,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124640,
+                "src": "2182:7:132",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 124634,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2182:7:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2181:9:132"
+          },
+          "scope": 124667,
+          "stateMutability": "view",
+          "virtual": false,
+          "visibility": "external"
+        },
+        {
+          "id": 124666,
+          "nodeType": "FunctionDefinition",
+          "src": "2264:296:132",
+          "nodes": [],
+          "body": {
+            "id": 124665,
+            "nodeType": "Block",
+            "src": "2454:106:132",
+            "nodes": [],
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "hexValue": "30",
+                      "id": 124662,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "2551:1:132",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    }
+                  ],
+                  "expression": {
+                    "argumentTypes": [
+                      {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      }
+                    ],
+                    "id": 124661,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "lValueRequested": false,
+                    "nodeType": "NewExpression",
+                    "src": "2523:27:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_function_objectcreation_pure$_t_uint256_$returns$_t_array$_t_struct$_PriceFeed_$281_memory_ptr_$dyn_memory_ptr_$",
+                      "typeString": "function (uint256) pure returns (struct PythStructs.PriceFeed memory[] memory)"
+                    },
+                    "typeName": {
+                      "baseType": {
+                        "id": 124659,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 124658,
+                          "name": "PythStructs.PriceFeed",
+                          "nameLocations": [
+                            "2527:11:132",
+                            "2539:9:132"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 281,
+                          "src": "2527:21:132"
+                        },
+                        "referencedDeclaration": 281,
+                        "src": "2527:21:132",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_PriceFeed_$281_storage_ptr",
+                          "typeString": "struct PythStructs.PriceFeed"
+                        }
+                      },
+                      "id": 124660,
+                      "nodeType": "ArrayTypeName",
+                      "src": "2527:23:132",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_struct$_PriceFeed_$281_storage_$dyn_storage_ptr",
+                        "typeString": "struct PythStructs.PriceFeed[]"
+                      }
+                    }
+                  },
+                  "id": 124663,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "kind": "functionCall",
+                  "lValueRequested": false,
+                  "nameLocations": [],
+                  "names": [],
+                  "nodeType": "FunctionCall",
+                  "src": "2523:30:132",
+                  "tryCall": false,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_PriceFeed_$281_memory_ptr_$dyn_memory_ptr",
+                    "typeString": "struct PythStructs.PriceFeed memory[] memory"
+                  }
+                },
+                "functionReturnParameters": 124657,
+                "id": 124664,
+                "nodeType": "Return",
+                "src": "2516:37:132"
+              }
+            ]
+          },
+          "baseFunctions": [
+            238
+          ],
+          "functionSelector": "4716e9c5",
+          "implemented": true,
+          "kind": "function",
+          "modifiers": [],
+          "name": "parsePriceFeedUpdates",
+          "nameLocation": "2273:21:132",
+          "overrides": {
+            "id": 124652,
+            "nodeType": "OverrideSpecifier",
+            "overrides": [],
+            "src": "2404:8:132"
+          },
+          "parameters": {
+            "id": 124651,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124643,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124666,
+                "src": "2304:16:132",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_bytes_calldata_ptr_$dyn_calldata_ptr",
+                  "typeString": "bytes[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 124641,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2304:5:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "id": 124642,
+                  "nodeType": "ArrayTypeName",
+                  "src": "2304:7:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes_storage_$dyn_storage_ptr",
+                    "typeString": "bytes[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 124646,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124666,
+                "src": "2330:18:132",
+                "stateVariable": false,
+                "storageLocation": "calldata",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_bytes32_$dyn_calldata_ptr",
+                  "typeString": "bytes32[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 124644,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2330:7:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "id": 124645,
+                  "nodeType": "ArrayTypeName",
+                  "src": "2330:9:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                    "typeString": "bytes32[]"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 124648,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124666,
+                "src": "2358:6:132",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint64",
+                  "typeString": "uint64"
+                },
+                "typeName": {
+                  "id": 124647,
+                  "name": "uint64",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2358:6:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 124650,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124666,
+                "src": "2374:6:132",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint64",
+                  "typeString": "uint64"
+                },
+                "typeName": {
+                  "id": 124649,
+                  "name": "uint64",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "2374:6:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2294:92:132"
+          },
+          "returnParameters": {
+            "id": 124657,
+            "nodeType": "ParameterList",
+            "parameters": [
+              {
+                "constant": false,
+                "id": 124656,
+                "mutability": "mutable",
+                "name": "",
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "VariableDeclaration",
+                "scope": 124666,
+                "src": "2422:30:132",
+                "stateVariable": false,
+                "storageLocation": "memory",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_struct$_PriceFeed_$281_memory_ptr_$dyn_memory_ptr",
+                  "typeString": "struct PythStructs.PriceFeed[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 124654,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 124653,
+                      "name": "PythStructs.PriceFeed",
+                      "nameLocations": [
+                        "2422:11:132",
+                        "2434:9:132"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 281,
+                      "src": "2422:21:132"
+                    },
+                    "referencedDeclaration": 281,
+                    "src": "2422:21:132",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_PriceFeed_$281_storage_ptr",
+                      "typeString": "struct PythStructs.PriceFeed"
+                    }
+                  },
+                  "id": 124655,
+                  "nodeType": "ArrayTypeName",
+                  "src": "2422:23:132",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_PriceFeed_$281_storage_$dyn_storage_ptr",
+                    "typeString": "struct PythStructs.PriceFeed[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "src": "2421:32:132"
+          },
+          "scope": 124667,
+          "stateMutability": "payable",
+          "virtual": false,
+          "visibility": "external"
+        }
+      ],
+      "abstract": false,
+      "baseContracts": [
+        {
+          "baseName": {
+            "id": 124459,
+            "name": "IPyth",
+            "nameLocations": [
+              "284:5:132"
+            ],
+            "nodeType": "IdentifierPath",
+            "referencedDeclaration": 239,
+            "src": "284:5:132"
+          },
+          "id": 124460,
+          "nodeType": "InheritanceSpecifier",
+          "src": "284:5:132"
+        }
+      ],
+      "canonicalName": "MockPyth",
+      "contractDependencies": [],
+      "contractKind": "contract",
+      "documentation": {
+        "id": 124458,
+        "nodeType": "StructuredDocumentation",
+        "src": "150:112:132",
+        "text": " @title Mock Chainlink aggregator implementation that is configurable for C4 PoC\n @author Code4rena*"
+      },
+      "fullyImplemented": true,
+      "linearizedBaseContracts": [
+        124667,
+        239,
+        261
+      ],
+      "name": "MockPyth",
+      "nameLocation": "272:8:132",
+      "scope": 124668,
+      "usedErrors": [],
+      "usedEvents": [
+        253,
+        260
+      ]
+    }
+  ],
+  "license": "MIT"
+}
