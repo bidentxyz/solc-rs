@@ -8,6 +8,27 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [0.0.10] - 2026-05-20
+
+### Added
+
+- Add ABI and AST test fixtures from 4 audit contests
+    - `codearena/2022-11-stakehouse`
+    - `codearena/2025-10-covenant`
+    - `codearena/2026-01-olas-autonolas-governance`
+    - `sherlock/2026-01-opencover-insured-vaults`
+- Add AST test fixtures from raptor fuzzer `raptor-cheatcode`
+- Add GitHub release workflow for automated crates.io publishing via trusted
+  publishing
+
+### Changed
+
+- `Literal.value` is now `Option<String>` to handle `hexString` literals where
+  the Solidity compiler omits the `value` field
+- Track fixture JSON files in the repository instead of ignoring them
+
+[0.0.10]: https://github.com/bidentxyz/solc-rs/compare/v0.0.9...v0.0.10
+
 ## [0.0.9] - 2026-03-04
 
 ### Added
