@@ -1014,7 +1014,7 @@ pub struct IdentifierPath {
 pub struct Literal {
     pub id: i64,
     pub kind: LiteralKind,
-    pub value: String,
+    pub value: Option<String>,
     pub hex_value: Option<String>,
     pub subdenomination: Option<String>,
     pub src: SourceLocation,
