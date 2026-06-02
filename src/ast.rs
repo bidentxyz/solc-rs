@@ -749,6 +749,8 @@ pub enum AssignmentOperator {
     Assign,
     #[serde(rename = ">>=")]
     RightShiftAssign,
+    #[serde(rename = "&=")]
+    BitwiseAndAssign,
     #[serde(rename = "^=")]
     BitwiseXorAssign,
     #[serde(rename = "|=")]
