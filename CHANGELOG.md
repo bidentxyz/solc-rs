@@ -8,6 +8,18 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [0.0.11] - 2026-06-02
+
+### Added
+
+- Add AST test fixtures from `cantina-morpho-midnight` audit
+
+### Fixed
+
+- Support `&=` assignment operator in AST parsing
+
+[0.0.11]: https://github.com/bidentxyz/solc-rs/compare/v0.0.10...v0.0.11
+
 ## [0.0.10] - 2026-05-20
 
 ### Added
