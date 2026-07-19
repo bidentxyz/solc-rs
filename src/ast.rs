@@ -559,7 +559,7 @@ pub struct YulVariableDeclaration {
     pub src: String,
     pub native_src: Option<String>,
     pub variables: Vec<YulTypedName>,
-    pub value: YulExpression,
+    pub value: Option<YulExpression>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
@@ -1310,6 +1310,7 @@ pub enum StorageLocation {
     Memory,
     Storage,
     Calldata,
+    Transient,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
