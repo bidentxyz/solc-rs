@@ -268,7 +268,7 @@ pub struct EventDefinition {
     pub id: i64,
     pub name: String,
     pub anonymous: bool,
-    pub event_selector: String,
+    pub event_selector: Option<String>,
     pub parameters: ParameterList,
     pub src: SourceLocation,
     pub name_location: String,
@@ -280,7 +280,7 @@ pub struct EventDefinition {
 pub struct ErrorDefinition {
     pub id: i64,
     pub name: String,
-    pub error_selector: String,
+    pub error_selector: Option<String>,
     pub parameters: ParameterList,
     pub src: SourceLocation,
     pub name_location: String,
@@ -340,6 +340,7 @@ pub struct UsingForDirective {
     pub library_name: IdentifierPath,
     pub type_name: Option<TypeName>,
     pub src: SourceLocation,
+    #[serde(default)]
     pub global: bool,
 }
 

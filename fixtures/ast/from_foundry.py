@@ -6,10 +6,10 @@ This script reads all JSON files from a Foundry artifacts directory,
 extracts the 'ast' key from each file, and writes it to the output directory.
 
 Usage:
-    python3 from_foundry.py [artifacts-dir] [output-dir]
+    python3 fixtures/ast/from_foundry.py [artifacts-dir] [output-dir]
 
 Example:
-    python3 from_foundry.py /home/pyk/codearena/2025-10-covenant/out fixtures/ast/covenant
+    python3 fixtures/ast/from_foundry.py /home/pyk/codearena/2025-10-covenant/out fixtures/ast/covenant
 """
 
 import json

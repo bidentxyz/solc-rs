@@ -8,6 +8,19 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.0.14] - 2026-08-03
+
+### Changed
+
+- `EventDefinition.event_selector` is now `Option<String>` to handle solc
+  versions that omit the `eventSelector` field
+- `ErrorDefinition.error_selector` is now `Option<String>` to handle solc
+  versions that omit the `errorSelector` field
+- `UsingForDirective.global` now defaults to `false` when the `global` field is
+  missing (solc versions before 0.8.13)
+
+[0.0.14]: https://github.com/bidentxyz/solc-rs/compare/v0.0.12...v0.0.14
+
 ## [0.0.12] - 2026-07-19
 
 ### Added
