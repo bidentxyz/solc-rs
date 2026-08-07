@@ -16,7 +16,6 @@ jobs:
             - uses: actions/checkout@v4
             - run: rustup toolchain install stable --profile minimal
             - uses: Swatinem/rust-cache@v2
-            - run: cargo fmt --check
-            - run: cargo clippy -- -D warnings
-            - run: cargo build --verbose
-            - run: cargo test --verbose
+            - uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990
+            - run: make lint
+            - run: make test

@@ -754,25 +754,33 @@ impl<'de> Deserialize<'de> for ExternalReference {
         }
 
         // Legacy format (solc < 0.6.0): { "varName": { declaration, ... } }
-        if let Some(obj) = value.as_object() {
-            if obj.len() == 1 {
-                let (name, details_value) = obj.iter().next().expect("len checked");
-                let details: Details = serde_json::from_value(details_value.clone())
-                    .map_err(serde::de::Error::custom)?;
-                return Ok(ExternalReference {
-                    name: Some(name.clone()),
-                    declaration: details.declaration,
-                    is_offset: details.is_offset,
-                    is_slot: details.is_slot,
-                    src: details.src,
-                    value_size: details.value_size,
-                });
-            }
+        let serde_json::Value::Object(obj) = value else {
+            return Err(serde::de::Error::custom(
+                "invalid external reference: expected flat object or single-key map",
+            ));
+        };
+
+        if obj.len() != 1 {
+            return Err(serde::de::Error::custom(
+                "invalid external reference: expected flat object or single-key map",
+            ));
         }
 
-        Err(serde::de::Error::custom(
-            "invalid external reference: expected flat object or single-key map",
-        ))
+        let (name, details_value) = obj.into_iter().next().ok_or_else(|| {
+            serde::de::Error::custom(
+                "invalid external reference: expected flat object or single-key map",
+            )
+        })?;
+        let details: Details =
+            serde_json::from_value(details_value).map_err(serde::de::Error::custom)?;
+        Ok(ExternalReference {
+            name: Some(name),
+            declaration: details.declaration,
+            is_offset: details.is_offset,
+            is_slot: details.is_slot,
+            src: details.src,
+            value_size: details.value_size,
+        })
     }
 }
 
@@ -1460,7 +1468,6 @@ mod tests {
 
     use super::*;
     use rayon::prelude::*;
-    use serde::de::IntoDeserializer;
     use serde_json::Value;
     use serde_path_to_error::deserialize;
     use walkdir::WalkDir;
@@ -1504,7 +1511,7 @@ mod tests {
 
         macro_rules! try_parse {
             ($type:ty) => {
-                match deserialize::<_, $type>(value.clone().into_deserializer()) {
+                match deserialize::<Value, $type>(value.clone()) {
                     Ok(_) => String::new(),
                     Err(err) => {
                         let field_path = err.path().to_string();

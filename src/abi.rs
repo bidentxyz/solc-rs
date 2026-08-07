@@ -223,7 +223,6 @@ mod tests {
 
     use super::*;
     use rayon::prelude::*;
-    use serde::de::IntoDeserializer;
     use serde_json::Value;
     use serde_path_to_error::deserialize;
     use walkdir::WalkDir;
@@ -265,7 +264,7 @@ mod tests {
 
         macro_rules! try_parse {
             ($type:ty) => {
-                match deserialize::<_, $type>(value.clone().into_deserializer()) {
+                match deserialize::<Value, $type>(value.clone()) {
                     Ok(_) => String::new(),
                     Err(err) => {
                         let field_path = err.path().to_string();
