@@ -8,6 +8,56 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-08-07
+
+### Added
+
+- Add AST test fixtures from PancakePair (solc 0.5.16)
+- Support legacy `InlineAssembly.operations` field from solc versions before
+  0.6.0
+- Support legacy name-keyed `InlineAssembly.externalReferences` entries from
+  solc versions before 0.6.0
+- Support bare string `ElementaryTypeName` values in
+  `ElementaryTypeNameExpression` from solc versions before 0.6.0
+- `UserDefinedTypeName.name` for solc versions before 0.8.0
+
+### Changed
+
+- `ContractDefinition.canonical_name` is now `Option<String>` to handle solc
+  versions that omit the `canonicalName` field
+- `ContractDefinition.name_location` is now `Option<String>` to handle solc
+  versions that omit the `nameLocation` field
+- `ContractDefinition.abstract` now defaults to `false` when the `abstract`
+  field is missing (solc versions before 0.6.0)
+- `ContractDefinition.used_errors` now defaults to an empty vec when the
+  `usedErrors` field is missing (solc versions before 0.8.4)
+- `VariableDeclaration.name_location` is now `Option<String>` to handle solc
+  versions that omit the `nameLocation` field
+- `VariableDeclaration.mutability` is now `Option<Mutability>` to handle solc
+  versions that omit the `mutability` field
+- `FunctionDefinition.name_location` is now `Option<String>` to handle solc
+  versions that omit the `nameLocation` field
+- `FunctionDefinition.virtual` now defaults to `false` when the `virtual` field
+  is missing (solc versions before 0.6.0)
+- `ModifierDefinition.name_location` is now `Option<String>` to handle solc
+  versions that omit the `nameLocation` field
+- `ModifierDefinition.virtual` now defaults to `false` when the `virtual` field
+  is missing (solc versions before 0.6.0)
+- `EventDefinition.name_location` is now `Option<String>` to handle solc
+  versions that omit the `nameLocation` field
+- `ModifierInvocation.kind` is now `Option<ModifierInvocationKind>` to handle
+  solc versions that omit the `kind` field
+- `FunctionCall.try_call` now defaults to `false` when the `tryCall` field is
+  missing (solc versions before 0.6.0)
+- `InlineAssembly.ast` is now `Option<YulBlock>` to handle solc versions that
+  omit the structured Yul `AST` field
+- `InlineAssembly.evm_version` is now `Option<String>` to handle solc versions
+  that omit the `evmVersion` field
+- `ExternalReference.name` is now available for legacy name-keyed external
+  references from solc versions before 0.6.0
+
+[0.1.0]: https://github.com/bidentxyz/solc-rs/compare/v0.0.14...v0.1.0
+
 ## [0.0.14] - 2026-08-03
 
 ### Changed

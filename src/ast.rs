@@ -76,9 +76,12 @@ pub struct SymbolAlias {
 pub struct ContractDefinition {
     pub id: i64,
     pub name: String,
+    /// Present in solc >= 0.6.0
+    #[serde(default)]
     pub r#abstract: bool,
     pub base_contracts: Vec<InheritanceSpecifier>,
-    pub canonical_name: String,
+    /// Present in solc >= 0.6.0
+    pub canonical_name: Option<String>,
     pub contract_kind: ContractKind,
     pub fully_implemented: bool,
     pub linearized_base_contracts: Vec<i64>,
@@ -87,7 +90,10 @@ pub struct ContractDefinition {
     pub src: SourceLocation,
     pub documentation: Option<Documentation>,
     pub contract_dependencies: Vec<i64>,
-    pub name_location: String,
+    /// Present in solc >= 0.6.9
+    pub name_location: Option<String>,
+    /// Present in solc >= 0.8.4
+    #[serde(default)]
     pub used_errors: Vec<i64>,
     pub used_events: Option<Vec<i64>>,
     #[serde(rename = "internalFunctionIDs")]
@@ -138,9 +144,11 @@ pub struct VariableDeclaration {
     pub name: String,
     pub type_name: TypeName,
     pub src: SourceLocation,
-    pub name_location: String,
+    /// Present in solc >= 0.6.9
+    pub name_location: Option<String>,
     pub visibility: Visibility,
-    pub mutability: Mutability,
+    /// Present in solc >= 0.6.5; older versions use `constant` instead
+    pub mutability: Option<Mutability>,
     pub state_variable: bool,
     pub storage_location: StorageLocation,
     pub constant: bool,
@@ -167,6 +175,8 @@ pub struct OverrideSpecifier {
 pub struct FunctionDefinition {
     pub id: i64,
     pub name: String,
+    /// Present in solc >= 0.6.0
+    #[serde(default)]
     pub r#virtual: bool,
     pub kind: FunctionKind,
     pub visibility: Visibility,
@@ -186,7 +196,8 @@ pub struct FunctionDefinition {
     pub base_functions: Option<Vec<i64>>,
     /// Present only on external/public functions
     pub function_selector: Option<String>,
-    pub name_location: String,
+    /// Present in solc >= 0.6.9
+    pub name_location: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
@@ -225,7 +236,8 @@ pub enum StateMutability {
 #[serde(rename_all = "camelCase")]
 pub struct ModifierInvocation {
     pub id: i64,
-    pub kind: ModifierInvocationKind,
+    /// Present in solc >= 0.8.0
+    pub kind: Option<ModifierInvocationKind>,
     pub modifier_name: IdentifierPath,
     pub arguments: Option<Vec<Box<Expression>>>,
     pub src: SourceLocation,
@@ -253,13 +265,16 @@ pub struct ParameterList {
 pub struct ModifierDefinition {
     pub id: i64,
     pub name: String,
+    /// Present in solc >= 0.6.0
+    #[serde(default)]
     pub r#virtual: bool,
     pub visibility: Visibility,
     pub parameters: ParameterList,
     pub body: Block,
     pub src: SourceLocation,
     pub documentation: Option<Documentation>,
-    pub name_location: String,
+    /// Present in solc >= 0.6.9
+    pub name_location: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
@@ -271,7 +286,8 @@ pub struct EventDefinition {
     pub event_selector: Option<String>,
     pub parameters: ParameterList,
     pub src: SourceLocation,
-    pub name_location: String,
+    /// Present in solc >= 0.6.9
+    pub name_location: Option<String>,
     pub documentation: Option<Documentation>,
 }
 
@@ -506,13 +522,17 @@ pub struct VariableDeclarationStatement {
 #[serde(rename_all = "camelCase")]
 pub struct InlineAssembly {
     pub id: i64,
+    /// Present in solc >= 0.6.0 as structured Yul AST
     #[serde(rename = "AST")]
-    pub ast: YulBlock,
+    pub ast: Option<YulBlock>,
+    /// Present in solc < 0.6.0 as raw assembly string
+    pub operations: Option<String>,
     pub external_references: Vec<ExternalReference>,
     pub src: SourceLocation,
     pub documentation: Option<Documentation>,
     pub flags: Option<Vec<String>>,
-    pub evm_version: String,
+    /// Present in solc >= 0.8.7
+    pub evm_version: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -689,14 +709,71 @@ pub struct YulIdentifier {
     pub name: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ExternalReference {
+    /// Present in solc < 0.6.0 when references are keyed by variable name
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
     pub declaration: i64,
     pub is_offset: bool,
     pub is_slot: bool,
     pub src: SourceLocation,
     pub value_size: i64,
+}
+
+impl<'de> Deserialize<'de> for ExternalReference {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        #[derive(Deserialize)]
+        #[serde(rename_all = "camelCase")]
+        struct Details {
+            declaration: i64,
+            is_offset: bool,
+            is_slot: bool,
+            src: SourceLocation,
+            value_size: i64,
+        }
+
+        let value = serde_json::Value::deserialize(deserializer)?;
+
+        // Modern format: flat object with a declaration field
+        if value.get("declaration").is_some() {
+            let details: Details =
+                serde_json::from_value(value).map_err(serde::de::Error::custom)?;
+            return Ok(ExternalReference {
+                name: None,
+                declaration: details.declaration,
+                is_offset: details.is_offset,
+                is_slot: details.is_slot,
+                src: details.src,
+                value_size: details.value_size,
+            });
+        }
+
+        // Legacy format (solc < 0.6.0): { "varName": { declaration, ... } }
+        if let Some(obj) = value.as_object() {
+            if obj.len() == 1 {
+                let (name, details_value) = obj.iter().next().expect("len checked");
+                let details: Details = serde_json::from_value(details_value.clone())
+                    .map_err(serde::de::Error::custom)?;
+                return Ok(ExternalReference {
+                    name: Some(name.clone()),
+                    declaration: details.declaration,
+                    is_offset: details.is_offset,
+                    is_slot: details.is_slot,
+                    src: details.src,
+                    value_size: details.value_size,
+                });
+            }
+        }
+
+        Err(serde::de::Error::custom(
+            "invalid external reference: expected flat object or single-key map",
+        ))
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
@@ -888,6 +965,8 @@ pub struct FunctionCall {
     pub names: Vec<String>,
     pub kind: String,
     pub src: SourceLocation,
+    /// Present in solc >= 0.6.0
+    #[serde(default)]
     pub try_call: bool,
     pub name_locations: Option<Vec<String>>,
     pub is_constant: bool,
@@ -1083,7 +1162,7 @@ impl Default for TypeName {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ElementaryTypeName {
     pub id: i64,
@@ -1093,10 +1172,54 @@ pub struct ElementaryTypeName {
     pub type_descriptions: TypeDescriptions,
 }
 
+impl<'de> Deserialize<'de> for ElementaryTypeName {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        #[derive(Deserialize)]
+        #[serde(rename_all = "camelCase")]
+        struct Full {
+            id: i64,
+            name: ElementaryType,
+            src: SourceLocation,
+            state_mutability: Option<String>,
+            type_descriptions: TypeDescriptions,
+        }
+
+        let value = serde_json::Value::deserialize(deserializer)?;
+
+        // Legacy format (solc < 0.6.0): bare type string, e.g. "bytes"
+        if value.is_string() {
+            let name: ElementaryType =
+                serde_json::from_value(value).map_err(serde::de::Error::custom)?;
+            return Ok(ElementaryTypeName {
+                id: 0,
+                name,
+                src: SourceLocation::default(),
+                state_mutability: None,
+                type_descriptions: TypeDescriptions::default(),
+            });
+        }
+
+        let full: Full = serde_json::from_value(value).map_err(serde::de::Error::custom)?;
+        Ok(ElementaryTypeName {
+            id: full.id,
+            name: full.name,
+            src: full.src,
+            state_mutability: full.state_mutability,
+            type_descriptions: full.type_descriptions,
+        })
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct UserDefinedTypeName {
     pub id: i64,
+    /// Present in solc < 0.8.0; replaced by `path_node` in later versions
+    pub name: Option<String>,
+    /// Present in solc >= 0.8.0
     pub path_node: Option<IdentifierPath>,
     pub referenced_declaration: Option<i64>,
     pub src: SourceLocation,
