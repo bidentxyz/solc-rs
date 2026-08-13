@@ -8,6 +8,35 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+### Changed
+
+## [0.1.1] - 2026-08-13
+
+### Added
+
+- Add AST test fixtures from Uniswap V3 pool
+
+### Changed
+
+- `ImportDirective.name_location` is now `Option<String>` to handle solc
+  versions that omit the `nameLocation` field
+- `SymbolAlias.name_location` is now `Option<String>` to handle solc versions
+  that omit the `nameLocation` field
+- `ErrorDefinition.name_location` is now `Option<String>` to handle solc
+  versions that omit the `nameLocation` field
+- `StructDefinition.name_location` is now `Option<String>` to handle solc
+  versions that omit the `nameLocation` field
+- `EnumDefinition.name_location` is now `Option<String>` to handle solc
+  versions that omit the `nameLocation` field
+- `EnumValue.name_location` is now `Option<String>` to handle solc versions
+  that omit the `nameLocation` field
+- `UserDefinedValueTypeDefinition.name_location` is now `Option<String>` to
+  handle solc versions that omit the `nameLocation` field
+
+[0.1.1]: https://github.com/bidentxyz/solc-rs/compare/v0.1.0...v0.1.1
+
 ## [0.1.0] - 2026-08-07
 
 ### Added

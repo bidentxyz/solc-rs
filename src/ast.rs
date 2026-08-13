@@ -60,7 +60,8 @@ pub struct ImportDirective {
     pub scope: i64,
     pub source_unit: i64,
     pub src: SourceLocation,
-    pub name_location: String,
+    /// Present in solc >= 0.6.9
+    pub name_location: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
@@ -68,7 +69,8 @@ pub struct ImportDirective {
 pub struct SymbolAlias {
     pub foreign: Identifier,
     pub local: Option<String>,
-    pub name_location: String,
+    /// Present in solc >= 0.6.9
+    pub name_location: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
@@ -299,7 +301,8 @@ pub struct ErrorDefinition {
     pub error_selector: Option<String>,
     pub parameters: ParameterList,
     pub src: SourceLocation,
-    pub name_location: String,
+    /// Present in solc >= 0.6.9
+    pub name_location: Option<String>,
     pub documentation: Option<Documentation>,
 }
 
@@ -314,7 +317,8 @@ pub struct StructDefinition {
     pub documentation: Option<Documentation>,
     pub canonical_name: String,
     pub visibility: Visibility,
-    pub name_location: String,
+    /// Present in solc >= 0.6.9
+    pub name_location: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
@@ -326,7 +330,8 @@ pub struct EnumDefinition {
     pub src: SourceLocation,
     pub documentation: Option<Documentation>,
     pub canonical_name: String,
-    pub name_location: String,
+    /// Present in solc >= 0.6.9
+    pub name_location: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
@@ -334,7 +339,8 @@ pub struct EnumDefinition {
 pub struct EnumValue {
     pub id: i64,
     pub name: String,
-    pub name_location: String,
+    /// Present in solc >= 0.6.9
+    pub name_location: Option<String>,
     pub src: SourceLocation,
 }
 
@@ -345,7 +351,8 @@ pub struct UserDefinedValueTypeDefinition {
     pub name: String,
     pub src: SourceLocation,
     pub canonical_name: String,
-    pub name_location: String,
+    /// Present in solc >= 0.6.9
+    pub name_location: Option<String>,
     pub underlying_type: TypeName,
 }
 
