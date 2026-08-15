@@ -10,6 +10,14 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ### Added
 
+### Changed
+
+### Fixed
+
+## [0.3.1] - 2026-08-15
+
+### Fixed
+
 - Make `abi` a public module and rename `AbiItem` to `abi::Item`
 
 ### Changed
@@ -110,6 +118,8 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 ### Fixed
 
 - Parse the legacy `byte` elementary type (alias for `bytes1`, solc < 0.8.0)
+
+[0.3.1]: https://github.com/bidentxyz/solc-rs/compare/v0.3.0...v0.3.1
 
 [0.3.0]: https://github.com/bidentxyz/solc-rs/compare/v0.2.0...v0.3.0
 
