@@ -17,5 +17,23 @@ jobs:
             - run: rustup toolchain install stable --profile minimal
             - uses: Swatinem/rust-cache@v2
             - uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990
+            - id: solc-versions
+              run: |
+                  python3 - <<'EOF'
+                  import hashlib, json, pathlib
+                  versions = sorted({
+                      json.loads(p.read_text()).get("version", "")
+                      for p in pathlib.Path("fixtures").glob("solc-*/*.json")
+                      if p.name != "compilers.json"
+                  })
+                  print(f"hash={hashlib.sha256('\n'.join(versions).encode()).hexdigest()}")
+                  EOF
+            - uses: actions/cache@v4
+              with:
+                  path: .solc
+                  key: solc-${{ runner.os }}-${{ steps.solc-versions.outputs.hash }}
+                  restore-keys: |
+                      solc-${{ runner.os }}-
+            - run: make fixtures
             - run: make lint
             - run: make test
