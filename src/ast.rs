@@ -199,7 +199,7 @@ pub struct FunctionDefinition {
     /// Present in solc >= 0.6.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub r#virtual: Option<bool>,
-    /// Present in solc >= 0.6.0
+    /// Present in solc >= 0.5.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub kind: Option<FunctionKind>,
     pub visibility: Visibility,

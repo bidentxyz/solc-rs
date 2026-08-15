@@ -42,7 +42,7 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ### Fixed
 
-- Fix parsing of solc ASTs before 0.6.0, where `FunctionDefinition` lacks the
+- Fix parsing of solc ASTs before 0.5.0, where `FunctionDefinition` lacks the
   `kind` field (e.g. the WETH9 fixture): `FunctionDefinition.kind` is now
   `Option<FunctionKind>` instead of a required field
 
