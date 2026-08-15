@@ -56,11 +56,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     for (source, contracts) in &output.contracts {
         for (name, contract) in contracts {
-            println!(
-                "{}: {name} ({} bytes)",
-                source.display(),
-                contract.evm.bytecode.object.len() / 2
-            );
+            let bytes = contract
+                .evm
+                .as_ref()
+                .and_then(|evm| evm.bytecode.as_ref())
+                .and_then(|bytecode| bytecode.object.as_ref())
+                .map(|object| object.len() / 2)
+                .unwrap_or(0);
+            println!("{}: {name} ({bytes} bytes)", source.display());
         }
     }
     Ok(())

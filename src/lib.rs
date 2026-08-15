@@ -52,9 +52,15 @@
 //! A runnable version of this flow lives in `examples/compile.rs`.
 
 pub use abi::Abi;
+pub use metadata::Metadata;
+pub use natspec::{DevDoc, UserDoc};
 pub use standard_json::{OutputSelector, StandardJSONInput, StandardJSONOutput};
+pub use storage_layout::StorageLayout;
 
 pub mod ast;
+pub mod metadata;
+pub mod natspec;
+pub mod standard_json;
+pub mod storage_layout;
 
 mod abi;
-mod standard_json;

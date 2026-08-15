@@ -19,6 +19,7 @@ use crate::ast::SourceUnit;
 pub struct StandardJSONInput {
     pub language: Language,
     pub sources: HashMap<PathBuf, Source>,
+    #[serde(default)]
     pub settings: Settings,
 }
 
@@ -68,11 +69,26 @@ pub enum SourceContent {
 #[serde(rename_all = "camelCase")]
 pub struct AssemblyJson {
     #[serde(rename = ".code")]
-    pub code: Vec<serde_json::Value>,
+    pub code: Vec<AssemblyInstruction>,
     #[serde(rename = ".data", skip_serializing_if = "Option::is_none")]
-    pub data: Option<serde_json::Value>,
+    pub data: Option<HashMap<String, AssemblyJson>>,
+    #[serde(rename = ".auxdata", skip_serializing_if = "Option::is_none")]
+    pub auxdata: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub source_list: Option<Vec<String>>,
+}
+
+/// One instruction in [`AssemblyJson`] `.code`.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct AssemblyInstruction {
+    pub begin: i64,
+    pub end: i64,
+    pub name: String,
+    /// Present in solc >= 0.5.0.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub source: Option<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
 }
 
 /// Compiler output selector.
@@ -271,17 +287,19 @@ pub enum StopAfter {
 }
 
 /// Optimizer configuration.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Optimizer {
-    pub enabled: bool,
-    pub runs: usize,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub enabled: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub runs: Option<usize>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub details: Option<OptimizerDetails>,
 }
 
 /// Fine-grained optimizer settings.
-#[derive(Clone, Debug, Serialize, Deserialize, Default)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OptimizerDetails {
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -307,16 +325,17 @@ pub struct OptimizerDetails {
 }
 
 /// Yul optimizer settings.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct YulDetails {
-    pub stack_allocation: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub stack_allocation: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub optimizer_steps: Option<String>,
 }
 
 /// SMT-based model checker settings.
-#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ModelCheckerSettings {
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -343,7 +362,7 @@ pub struct ModelCheckerSettings {
     pub timeout: Option<u64>,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum ModelCheckerEngine {
     All,
@@ -352,21 +371,21 @@ pub enum ModelCheckerEngine {
     None,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum ExtCalls {
     Trusted,
     Untrusted,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum Invariant {
     Contract,
     Reentrancy,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Solver {
     Cvc5,
@@ -374,7 +393,7 @@ pub enum Solver {
     Z3,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum ModelCheckerTarget {
     ConstantCondition,
@@ -388,15 +407,71 @@ pub enum ModelCheckerTarget {
 }
 
 /// Debug settings for compiler output.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DebugSettings {
-    pub revert_strings: RevertStrings,
-    pub debug_info: Vec<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub revert_strings: Option<RevertStrings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub debug_info: Option<Vec<DebugInfo>>,
+}
+
+/// Extra debug information included in EVM assembly and Yul comments.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum DebugInfo {
+    Location,
+    Snippet,
+    AstId,
+    Ethdebug,
+    All,
+    Other(String),
+}
+
+impl DebugInfo {
+    pub fn as_str(&self) -> &str {
+        match self {
+            DebugInfo::Location => "location",
+            DebugInfo::Snippet => "snippet",
+            DebugInfo::AstId => "ast-id",
+            DebugInfo::Ethdebug => "ethdebug",
+            DebugInfo::All => "*",
+            DebugInfo::Other(s) => s,
+        }
+    }
+
+    fn from_str(s: &str) -> Self {
+        match s {
+            "location" => DebugInfo::Location,
+            "snippet" => DebugInfo::Snippet,
+            "ast-id" => DebugInfo::AstId,
+            "ethdebug" => DebugInfo::Ethdebug,
+            "*" => DebugInfo::All,
+            other => DebugInfo::Other(other.to_string()),
+        }
+    }
+}
+
+impl Serialize for DebugInfo {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        serializer.serialize_str(self.as_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for DebugInfo {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let s = String::deserialize(deserializer)?;
+        Ok(Self::from_str(&s))
+    }
 }
 
 /// Revert string handling mode.
-#[derive(Clone, Debug, Serialize, Deserialize, Default)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum RevertStrings {
     #[default]
@@ -407,7 +482,7 @@ pub enum RevertStrings {
 }
 
 /// Metadata settings for compiled bytecode.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MetadataSettings {
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -419,7 +494,7 @@ pub struct MetadataSettings {
 }
 
 /// Bytecode metadata hash algorithm.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum BytecodeHash {
     Ipfs,
@@ -428,7 +503,7 @@ pub enum BytecodeHash {
 }
 
 /// Target EVM version for code generation.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum EvmVersion {
     Homestead,
@@ -603,8 +678,15 @@ mod tests {
             keccak256: None,
             content: SourceContent::AssemblyJson {
                 assembly_json: AssemblyJson {
-                    code: vec![serde_json::json!({})],
+                    code: vec![AssemblyInstruction {
+                        begin: 0,
+                        end: 1,
+                        name: String::from("PUSH"),
+                        source: Some(0),
+                        value: Some(String::from("80")),
+                    }],
                     data: None,
+                    auxdata: None,
                     source_list: None,
                 },
             },
@@ -614,6 +696,35 @@ mod tests {
         assert!(json.get("content").is_none());
         let parsed: Source = serde_json::from_value(json).unwrap();
         assert!(matches!(parsed.content, SourceContent::AssemblyJson { .. }));
+    }
+
+    #[test]
+    fn debug_info_roundtrip() {
+        let infos = vec![
+            DebugInfo::Location,
+            DebugInfo::Snippet,
+            DebugInfo::AstId,
+            DebugInfo::Ethdebug,
+            DebugInfo::All,
+            DebugInfo::Other(String::from("custom")),
+        ];
+        let json = serde_json::to_string(&infos).unwrap();
+        assert_eq!(
+            json,
+            r#"["location","snippet","ast-id","ethdebug","*","custom"]"#
+        );
+        let parsed: Vec<DebugInfo> = serde_json::from_str(&json).unwrap();
+        assert_eq!(parsed, infos);
+    }
+
+    #[test]
+    fn missing_settings_defaults() {
+        let input: StandardJSONInput = serde_json::from_str(
+            r#"{"language":"Solidity","sources":{"A.sol":{"content":"contract A {}"}}}"#,
+        )
+        .unwrap();
+        assert_eq!(input.language, Language::Solidity);
+        assert!(input.settings.optimizer.is_none());
     }
 
     #[test]

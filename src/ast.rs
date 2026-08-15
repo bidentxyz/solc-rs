@@ -612,6 +612,8 @@ pub enum YulStatement {
     YulForLoop(YulForLoop),
     YulSwitch(YulSwitch),
     YulBreak(YulBreak),
+    YulContinue(YulContinue),
+    YulLeave(YulLeave),
     YulVariableDeclaration(YulVariableDeclaration),
     YulFunctionDefinition(YulFunctionDefinition),
     YulExpressionStatement(YulExpressionStatement),
@@ -734,7 +736,10 @@ pub struct YulLiteral {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub kind: String,
-    pub value: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub hex_value: Option<String>,
     pub r#type: String,
 }
 
@@ -745,13 +750,32 @@ pub struct YulFunctionDefinition {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub name: String,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub parameters: Vec<YulTypedName>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub return_variables: Vec<YulTypedName>,
     pub body: YulBlock,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct YulBreak {
+    pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub native_src: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+pub struct YulContinue {
+    pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub native_src: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+pub struct YulLeave {
     pub src: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
@@ -788,6 +812,44 @@ pub struct YulIdentifier {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub name: String,
+}
+
+/// Yul object produced as `irAst` / `irOptimizedAst`.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+pub struct YulObject {
+    pub name: String,
+    pub code: YulCode,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub sub_objects: Vec<YulSubObject>,
+}
+
+/// Code section of a [`YulObject`].
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+pub struct YulCode {
+    pub block: YulBlock,
+}
+
+/// Nested object or data section inside a [`YulObject`].
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(tag = "nodeType")]
+pub enum YulSubObject {
+    YulObject(YulObject),
+    YulData(YulData),
+}
+
+impl Default for YulSubObject {
+    fn default() -> Self {
+        YulSubObject::YulData(YulData::default())
+    }
+}
+
+/// Named data section inside a [`YulObject`].
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+pub struct YulData {
+    pub value: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Default)]
@@ -1471,6 +1533,8 @@ impl<'de> Deserialize<'de> for ElementaryType {
             "bool" => Ok(Self::Bool),
             "string" => Ok(Self::String),
             "bytes" => Ok(Self::Bytes),
+            // Alias for bytes1, removed in Solidity 0.8.0.
+            "byte" => Ok(Self::FixedBytes(1)),
             s if s.starts_with("uint") => {
                 let bits = if s.len() == 4 {
                     256
