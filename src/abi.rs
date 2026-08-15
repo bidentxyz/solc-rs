@@ -148,10 +148,15 @@ pub struct Param {
     pub r#type: String,
 
     /// The components of a tuple type (if this parameter is a tuple).
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub components: Option<Vec<Component>>,
 
     /// The internal Solidity type (e.g., "contract IERC20", "struct User").
-    #[serde(rename = "internalType", default)]
+    #[serde(
+        rename = "internalType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
     pub internal_type: Option<String>,
 }
 
@@ -169,13 +174,18 @@ pub struct EventParam {
     pub r#type: String,
 
     /// The components of a tuple type (if this parameter is a tuple).
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub components: Option<Vec<Component>>,
 
     /// Whether this parameter is indexed (stored in the event's topics).
     pub indexed: bool,
 
     /// The internal Solidity type.
-    #[serde(rename = "internalType", default)]
+    #[serde(
+        rename = "internalType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
     pub internal_type: Option<String>,
 }
 
@@ -193,10 +203,15 @@ pub struct Component {
     pub r#type: String,
 
     /// Nested components (for nested tuples).
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub components: Option<Vec<Component>>,
 
     /// The internal Solidity type.
-    #[serde(rename = "internalType", default)]
+    #[serde(
+        rename = "internalType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
     pub internal_type: Option<String>,
 }
 

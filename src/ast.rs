@@ -17,6 +17,7 @@ pub struct SourceUnit {
     pub exported_symbols: HashMap<String, Vec<i64>>,
     pub src: SourceLocation,
     pub nodes: Vec<SourceUnitNode>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub license: Option<String>,
 }
 
@@ -61,6 +62,7 @@ pub struct ImportDirective {
     pub source_unit: i64,
     pub src: SourceLocation,
     /// Present in solc >= 0.6.9
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
 }
 
@@ -68,8 +70,10 @@ pub struct ImportDirective {
 #[serde(rename_all = "camelCase")]
 pub struct SymbolAlias {
     pub foreign: Identifier,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub local: Option<String>,
     /// Present in solc >= 0.6.9
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
 }
 
@@ -79,10 +83,11 @@ pub struct ContractDefinition {
     pub id: i64,
     pub name: String,
     /// Present in solc >= 0.6.0
-    #[serde(default)]
-    pub r#abstract: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub r#abstract: Option<bool>,
     pub base_contracts: Vec<InheritanceSpecifier>,
     /// Present in solc >= 0.6.0
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub canonical_name: Option<String>,
     pub contract_kind: ContractKind,
     pub fully_implemented: bool,
@@ -90,15 +95,21 @@ pub struct ContractDefinition {
     pub nodes: Vec<ContractDefinitionNode>,
     pub scope: i64,
     pub src: SourceLocation,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub documentation: Option<Documentation>,
     pub contract_dependencies: Vec<i64>,
     /// Present in solc >= 0.6.9
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
     /// Present in solc >= 0.8.4
-    #[serde(default)]
-    pub used_errors: Vec<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub used_errors: Option<Vec<i64>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub used_events: Option<Vec<i64>>,
-    #[serde(rename = "internalFunctionIDs")]
+    #[serde(
+        rename = "internalFunctionIDs",
+        skip_serializing_if = "Option::is_none"
+    )]
     pub internal_function_ids: Option<HashMap<String, i64>>,
 }
 
@@ -147,20 +158,28 @@ pub struct VariableDeclaration {
     pub type_name: TypeName,
     pub src: SourceLocation,
     /// Present in solc >= 0.6.9
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
     pub visibility: Visibility,
     /// Present in solc >= 0.6.5; older versions use `constant` instead
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub mutability: Option<Mutability>,
     pub state_variable: bool,
     pub storage_location: StorageLocation,
     pub constant: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub indexed: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub value: Option<Box<Expression>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub documentation: Option<Documentation>,
     pub type_descriptions: TypeDescriptions,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub overrides: Option<OverrideSpecifier>,
     pub scope: i64,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub base_functions: Option<Vec<i64>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub function_selector: Option<String>,
 }
 
@@ -178,12 +197,15 @@ pub struct FunctionDefinition {
     pub id: i64,
     pub name: String,
     /// Present in solc >= 0.6.0
-    #[serde(default)]
-    pub r#virtual: bool,
-    pub kind: FunctionKind,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub r#virtual: Option<bool>,
+    /// Present in solc >= 0.6.0
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub kind: Option<FunctionKind>,
     pub visibility: Visibility,
     pub state_mutability: StateMutability,
     /// Present only when implemented=true
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub body: Option<Block>,
     pub parameters: ParameterList,
     pub return_parameters: ParameterList,
@@ -191,14 +213,19 @@ pub struct FunctionDefinition {
     pub src: SourceLocation,
     pub scope: i64,
     pub implemented: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub documentation: Option<Documentation>,
     /// Present only when overrides base
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub overrides: Option<OverrideSpecifier>,
     /// Present only when overrides/implements base
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub base_functions: Option<Vec<i64>>,
     /// Present only on external/public functions
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub function_selector: Option<String>,
     /// Present in solc >= 0.6.9
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
 }
 
@@ -239,8 +266,10 @@ pub enum StateMutability {
 pub struct ModifierInvocation {
     pub id: i64,
     /// Present in solc >= 0.8.0
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub kind: Option<ModifierInvocationKind>,
     pub modifier_name: IdentifierPath,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub arguments: Option<Vec<Box<Expression>>>,
     pub src: SourceLocation,
 }
@@ -268,14 +297,16 @@ pub struct ModifierDefinition {
     pub id: i64,
     pub name: String,
     /// Present in solc >= 0.6.0
-    #[serde(default)]
-    pub r#virtual: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub r#virtual: Option<bool>,
     pub visibility: Visibility,
     pub parameters: ParameterList,
     pub body: Block,
     pub src: SourceLocation,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub documentation: Option<Documentation>,
     /// Present in solc >= 0.6.9
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
 }
 
@@ -285,11 +316,14 @@ pub struct EventDefinition {
     pub id: i64,
     pub name: String,
     pub anonymous: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub event_selector: Option<String>,
     pub parameters: ParameterList,
     pub src: SourceLocation,
     /// Present in solc >= 0.6.9
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub documentation: Option<Documentation>,
 }
 
@@ -298,11 +332,14 @@ pub struct EventDefinition {
 pub struct ErrorDefinition {
     pub id: i64,
     pub name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub error_selector: Option<String>,
     pub parameters: ParameterList,
     pub src: SourceLocation,
     /// Present in solc >= 0.6.9
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub documentation: Option<Documentation>,
 }
 
@@ -314,10 +351,12 @@ pub struct StructDefinition {
     pub members: Vec<VariableDeclaration>,
     pub src: SourceLocation,
     pub scope: i64,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub documentation: Option<Documentation>,
     pub canonical_name: String,
     pub visibility: Visibility,
     /// Present in solc >= 0.6.9
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
 }
 
@@ -328,9 +367,11 @@ pub struct EnumDefinition {
     pub name: String,
     pub members: Vec<EnumValue>,
     pub src: SourceLocation,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub documentation: Option<Documentation>,
     pub canonical_name: String,
     /// Present in solc >= 0.6.9
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
 }
 
@@ -340,6 +381,7 @@ pub struct EnumValue {
     pub id: i64,
     pub name: String,
     /// Present in solc >= 0.6.9
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
     pub src: SourceLocation,
 }
@@ -352,6 +394,7 @@ pub struct UserDefinedValueTypeDefinition {
     pub src: SourceLocation,
     pub canonical_name: String,
     /// Present in solc >= 0.6.9
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
     pub underlying_type: TypeName,
 }
@@ -361,10 +404,12 @@ pub struct UserDefinedValueTypeDefinition {
 pub struct UsingForDirective {
     pub id: i64,
     pub library_name: IdentifierPath,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub type_name: Option<TypeName>,
     pub src: SourceLocation,
-    #[serde(default)]
-    pub global: bool,
+    /// Present in solc >= 0.8.13
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub global: Option<bool>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -416,6 +461,7 @@ pub struct IfStatement {
     pub id: i64,
     pub condition: Box<Expression>,
     pub true_body: Box<Statement>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub false_body: Option<Box<Statement>>,
     pub src: SourceLocation,
 }
@@ -424,11 +470,14 @@ pub struct IfStatement {
 #[serde(rename_all = "camelCase")]
 pub struct ForStatement {
     pub id: i64,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub initialization_expression: Option<Box<Expression>>,
     pub condition: Box<Expression>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub loop_expression: Option<Box<Expression>>,
     pub body: Box<Statement>,
     pub src: SourceLocation,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub is_simple_counter_loop: Option<bool>,
 }
 
@@ -467,6 +516,7 @@ pub struct Break {
 pub struct Return {
     pub id: i64,
     pub function_return_parameters: i64,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub expression: Option<Box<Expression>>,
     pub src: SourceLocation,
 }
@@ -500,7 +550,9 @@ pub struct TryStatement {
 #[serde(rename_all = "camelCase")]
 pub struct TryCatchClause {
     pub id: i64,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub error_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub parameters: Option<ParameterList>,
     pub block: Block,
     pub src: SourceLocation,
@@ -520,8 +572,10 @@ pub struct VariableDeclarationStatement {
     pub id: i64,
     pub assignments: Vec<Option<i64>>,
     pub declarations: Vec<Option<VariableDeclaration>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub initial_value: Option<Box<Expression>>,
     pub src: SourceLocation,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub documentation: Option<Documentation>,
 }
 
@@ -530,15 +584,19 @@ pub struct VariableDeclarationStatement {
 pub struct InlineAssembly {
     pub id: i64,
     /// Present in solc >= 0.6.0 as structured Yul AST
-    #[serde(rename = "AST")]
+    #[serde(rename = "AST", skip_serializing_if = "Option::is_none")]
     pub ast: Option<YulBlock>,
     /// Present in solc < 0.6.0 as raw assembly string
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub operations: Option<String>,
     pub external_references: Vec<ExternalReference>,
     pub src: SourceLocation,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub documentation: Option<Documentation>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub flags: Option<Vec<String>>,
     /// Present in solc >= 0.8.7
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub evm_version: Option<String>,
 }
 
@@ -568,6 +626,7 @@ impl Default for YulStatement {
 #[serde(rename_all = "camelCase")]
 pub struct YulBlock {
     pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub statements: Vec<YulStatement>,
 }
@@ -576,6 +635,7 @@ pub struct YulBlock {
 #[serde(rename_all = "camelCase")]
 pub struct YulAssignment {
     pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub variable_names: Vec<YulIdentifier>,
     pub value: YulExpression,
@@ -585,8 +645,10 @@ pub struct YulAssignment {
 #[serde(rename_all = "camelCase")]
 pub struct YulVariableDeclaration {
     pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub variables: Vec<YulTypedName>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub value: Option<YulExpression>,
 }
 
@@ -595,6 +657,7 @@ pub struct YulVariableDeclaration {
 pub struct YulTypedName {
     pub name: String,
     pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub r#type: String,
 }
@@ -603,6 +666,7 @@ pub struct YulTypedName {
 #[serde(rename_all = "camelCase")]
 pub struct YulExpressionStatement {
     pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub expression: YulExpression,
 }
@@ -611,6 +675,7 @@ pub struct YulExpressionStatement {
 #[serde(rename_all = "camelCase")]
 pub struct YulIf {
     pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub condition: YulExpression,
     pub body: YulBlock,
@@ -620,6 +685,7 @@ pub struct YulIf {
 #[serde(rename_all = "camelCase")]
 pub struct YulForLoop {
     pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub pre: YulBlock,
     pub condition: YulExpression,
@@ -631,6 +697,7 @@ pub struct YulForLoop {
 #[serde(rename_all = "camelCase")]
 pub struct YulSwitch {
     pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub expression: YulExpression,
     pub cases: Vec<YulCase>,
@@ -640,6 +707,7 @@ pub struct YulSwitch {
 #[serde(rename_all = "camelCase")]
 pub struct YulCase {
     pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub value: YulCaseValue,
     pub body: YulBlock,
@@ -662,6 +730,7 @@ impl Default for YulCaseValue {
 #[serde(rename_all = "camelCase")]
 pub struct YulLiteral {
     pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub kind: String,
     pub value: String,
@@ -672,6 +741,7 @@ pub struct YulLiteral {
 #[serde(rename_all = "camelCase")]
 pub struct YulFunctionDefinition {
     pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub name: String,
     pub parameters: Vec<YulTypedName>,
@@ -682,6 +752,7 @@ pub struct YulFunctionDefinition {
 #[serde(rename_all = "camelCase")]
 pub struct YulBreak {
     pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
 }
 
@@ -703,6 +774,7 @@ impl Default for YulExpression {
 #[serde(rename_all = "camelCase")]
 pub struct YulFunctionCall {
     pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub function_name: Box<YulExpression>,
     pub arguments: Vec<YulExpression>,
@@ -712,6 +784,7 @@ pub struct YulFunctionCall {
 #[serde(rename_all = "camelCase")]
 pub struct YulIdentifier {
     pub src: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub native_src: Option<String>,
     pub name: String,
 }
@@ -915,6 +988,7 @@ pub struct BinaryOperation {
     pub left_expression: Box<Expression>,
     pub right_expression: Box<Expression>,
     pub operator: BinaryOperator,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub common_type: Option<CommonType>,
     pub src: SourceLocation,
     pub is_constant: bool,
@@ -981,14 +1055,16 @@ pub struct FunctionCall {
     pub kind: String,
     pub src: SourceLocation,
     /// Present in solc >= 0.6.0
-    #[serde(default)]
-    pub try_call: bool,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub try_call: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name_locations: Option<Vec<String>>,
     pub is_constant: bool,
     pub is_l_value: bool,
     pub is_pure: bool,
     pub l_value_requested: bool,
     pub type_descriptions: TypeDescriptions,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub argument_types: Option<Vec<TypeDescriptions>>,
 }
 
@@ -1001,6 +1077,7 @@ pub struct FunctionCallOptions {
     pub options: Vec<Box<Expression>>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub argument_types: Option<Vec<TypeDescriptions>>,
     pub is_constant: bool,
     pub is_l_value: bool,
@@ -1031,10 +1108,13 @@ pub struct MemberAccess {
     pub id: i64,
     pub expression: Box<Expression>,
     pub member_name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub member_location: Option<String>,
     pub src: SourceLocation,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub referenced_declaration: Option<i64>,
     pub type_descriptions: TypeDescriptions,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub argument_types: Option<Vec<TypeDescriptions>>,
     pub is_constant: bool,
     pub is_l_value: bool,
@@ -1047,6 +1127,7 @@ pub struct MemberAccess {
 pub struct IndexAccess {
     pub id: i64,
     pub base_expression: Box<Expression>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub index_expression: Option<Box<Expression>>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
@@ -1061,6 +1142,7 @@ pub struct IndexAccess {
 pub struct IndexRangeAccess {
     pub id: i64,
     pub base_expression: Box<Expression>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub start_expression: Option<Box<Expression>>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
@@ -1090,9 +1172,11 @@ pub struct Identifier {
     pub id: i64,
     pub name: String,
     pub overloaded_declarations: Vec<i64>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub referenced_declaration: Option<i64>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub argument_types: Option<Vec<TypeDescriptions>>,
 }
 
@@ -1101,7 +1185,9 @@ pub struct Identifier {
 pub struct IdentifierPath {
     pub id: i64,
     pub name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name_locations: Option<Vec<String>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub referenced_declaration: Option<i64>,
     pub src: SourceLocation,
 }
@@ -1111,8 +1197,11 @@ pub struct IdentifierPath {
 pub struct Literal {
     pub id: i64,
     pub kind: LiteralKind,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub value: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub hex_value: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub subdenomination: Option<String>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
@@ -1140,6 +1229,7 @@ pub struct NewExpression {
     pub type_name: TypeName,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub argument_types: Option<Vec<TypeDescriptions>>,
     pub is_constant: bool,
     pub is_l_value: bool,
@@ -1154,6 +1244,7 @@ pub struct ElementaryTypeNameExpression {
     pub type_name: ElementaryTypeName,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub argument_types: Option<Vec<TypeDescriptions>>,
     pub is_constant: bool,
     pub is_l_value: bool,
@@ -1183,6 +1274,7 @@ pub struct ElementaryTypeName {
     pub id: i64,
     pub name: ElementaryType,
     pub src: SourceLocation,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub state_mutability: Option<String>,
     pub type_descriptions: TypeDescriptions,
 }
@@ -1233,9 +1325,12 @@ impl<'de> Deserialize<'de> for ElementaryTypeName {
 pub struct UserDefinedTypeName {
     pub id: i64,
     /// Present in solc < 0.8.0; replaced by `path_node` in later versions
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
     /// Present in solc >= 0.8.0
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub path_node: Option<IdentifierPath>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub referenced_declaration: Option<i64>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
@@ -1246,6 +1341,7 @@ pub struct UserDefinedTypeName {
 pub struct ArrayTypeName {
     pub id: i64,
     pub base_type: Box<TypeName>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub length: Option<Box<Expression>>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
@@ -1256,15 +1352,19 @@ pub struct ArrayTypeName {
 pub struct Mapping {
     pub id: i64,
     pub key_type: Box<TypeName>,
-    #[serde(default)]
-    pub key_name: String,
-    #[serde(default)]
-    pub key_name_location: String,
+    /// Present in solc >= 0.8.18
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub key_name: Option<String>,
+    /// Present in solc >= 0.8.18
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub key_name_location: Option<String>,
     pub value_type: Box<TypeName>,
-    #[serde(default)]
-    pub value_name: String,
-    #[serde(default)]
-    pub value_name_location: String,
+    /// Present in solc >= 0.8.18
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub value_name: Option<String>,
+    /// Present in solc >= 0.8.18
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub value_name_location: Option<String>,
     pub src: SourceLocation,
     pub type_descriptions: TypeDescriptions,
 }
