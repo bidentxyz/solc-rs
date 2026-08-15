@@ -1,6 +1,17 @@
-# solc-rs
+<h3 align="center">
+    solc-rs
+</h3>
 
-Solidity compiler bindings for Rust.
+<p align="center">
+    Solidity compiler bindings for Rust
+<p>
+
+<p align="center">
+  <a href="https://crates.io/crates/solc"><img src="https://img.shields.io/crates/v/solc.svg?colorA=000&colorB=fff&style=flat&logo=rust" alt="Crates.io"></a>
+  <a href="https://crates.io/crates/solc"><img src="https://img.shields.io/crates/d/solc?colorA=000&colorB=fff&style=flat&logo=rust" alt="Downloads"></a>
+  <a href="https://docs.rs/solc/latest/solc/"><img src="https://img.shields.io/badge/latest-a?colorA=000&colorB=fff&style=flat&logo=rust&label=docs.rs"></a>
+  <a href="/LICENSE"><img src="https://img.shields.io/github/license/bidentxyz/solc?colorA=000&colorB=fff&style=flat" alt="MIT License"></a>
+</p>
 
 This crate provides types and builders for interacting with the Solidity
 compiler's [Standard JSON interface], covering both the input sent to the
