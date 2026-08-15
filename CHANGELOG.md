@@ -10,6 +10,21 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ### Added
 
+- Add typed `UserDoc` / `DevDoc` NatSpec output, including methods, events,
+  errors, state variables, custom tags, the legacy `return` field, and both
+  object and array shapes for `devdoc.errors`
+- Add typed `StorageLayout` for `storageLayout` and `transientStorageLayout`,
+  including `types: null` when a layout has no variables
+- Add typed `Metadata` for the serialized contract metadata JSON string
+- Add `ErrorType` and `ErrorComponent` enums for compiler diagnostics
+- Add `DebugInfo` for `settings.debug.debugInfo`
+- Add `AssemblyInstruction` and type `AssemblyJson` `.code`, `.data`, and
+  `.auxdata`
+- Add `YulObject`, `YulCode`, `YulData`, `YulLeave`, and `YulContinue` for IR
+  AST and inline assembly
+- Add `YulCfg` for the experimental contract-level `yulCFGJson` output
+- Expose the `standard_json`, `natspec`, `storage_layout`, and `metadata`
+  modules
 - Add `StandardJSONOutput` types for parsing the compiler's Standard JSON
   output, including diagnostics, source file outputs, and contract outputs
 - Add `OutputSelector` and the `StandardJSONInput::output_selection` builder
@@ -29,6 +44,24 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ### Changed
 
+- `userdoc` and `devdoc` are now `UserDoc` / `DevDoc` instead of raw JSON
+- `storageLayout` and `transientStorageLayout` are now `StorageLayout` instead
+  of raw JSON
+- `irAst` and `irOptimizedAst` are now `YulObject` instead of raw JSON
+- `evm.legacyAssembly` is now `AssemblyJson` instead of raw JSON
+- `generatedSources.ast` is now `YulBlock` instead of raw JSON
+- `yulCFGJson` is now a contract-level `YulCfg` field, matching solc output
+- `Error.type` is now `ErrorType` and `Error.component` is now `ErrorComponent`
+- `Severity` preserves unknown values as `Severity::Other`
+- `SourceOutput.ast`, `ContractOutput.abi`, `ContractOutput.evm`,
+  `Evm.bytecode`, and `Bytecode.object` are now optional
+- `StandardJSONOutput.sources` and `contracts` default to empty when omitted
+- `StandardJSONInput.settings` defaults when omitted
+- `Optimizer.enabled`, `Optimizer.runs`, `YulDetails.stack_allocation`,
+  `DebugSettings.revert_strings`, and `DebugSettings.debug_info` are now
+  optional
+- `YulFunctionDefinition` now includes `return_variables`
+- `YulLiteral` now includes `hex_value` and `value` is `Option<String>`
 - Move `StandardJSONInput` from `standard_json_input` into the
   `standard_json::input` module
 - `Settings.output_selection` now holds `OutputSelector` values instead of raw
@@ -37,6 +70,8 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
   `deployedBytecode` key when the output selection does not request it
 
 ### Fixed
+
+- Parse the legacy `byte` elementary type (alias for `bytes1`, solc < 0.8.0)
 
 ## [0.2.0] - 2026-08-15
 
