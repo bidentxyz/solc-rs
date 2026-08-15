@@ -20,7 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq, Default)]
 #[serde(transparent)]
 pub struct Abi {
-    pub items: Vec<AbiItem>,
+    pub items: Vec<Item>,
 }
 
 impl Abi {
@@ -30,7 +30,7 @@ impl Abi {
     }
 
     /// Create an ABI from a vector of items.
-    pub fn from_items(items: Vec<AbiItem>) -> Self {
+    pub fn from_items(items: Vec<Item>) -> Self {
         Self { items }
     }
 }
@@ -40,7 +40,7 @@ impl Abi {
 /// The `type` field in the JSON determines which variant this enum represents.
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]
 #[serde(tag = "type")]
-pub enum AbiItem {
+pub enum Item {
     /// A regular function.
     #[serde(rename = "function")]
     Function(Function),
@@ -290,7 +290,7 @@ mod tests {
         .unwrap();
 
         match &items.items[0] {
-            AbiItem::Function(function) => {
+            Item::Function(function) => {
                 assert_eq!(function.constant, Some(true));
                 assert_eq!(function.payable, Some(false));
                 assert_eq!(function.state_mutability, StateMutability::View);
@@ -298,19 +298,19 @@ mod tests {
             other => panic!("expected function, got {other:?}"),
         }
         match &items.items[1] {
-            AbiItem::Constructor(constructor) => {
+            Item::Constructor(constructor) => {
                 assert_eq!(constructor.payable, Some(true));
             }
             other => panic!("expected constructor, got {other:?}"),
         }
         match &items.items[2] {
-            AbiItem::Receive(receive) => {
+            Item::Receive(receive) => {
                 assert_eq!(receive.payable, Some(true));
             }
             other => panic!("expected receive, got {other:?}"),
         }
         match &items.items[3] {
-            AbiItem::Fallback(fallback) => {
+            Item::Fallback(fallback) => {
                 assert_eq!(fallback.payable, Some(false));
             }
             other => panic!("expected fallback, got {other:?}"),

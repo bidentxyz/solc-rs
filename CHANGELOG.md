@@ -10,6 +10,8 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ### Added
 
+- Make `abi` a public module and rename `AbiItem` to `abi::Item`
+
 ### Changed
 
 ### Fixed
