@@ -2,6 +2,8 @@
 
 Solidity compiler bindings for Rust.
 
+-------------------------------------------------------------------------------
+
 ## Non-negotiable rules
 
 List of CRITICAL rules that you must follow every time. Failing to do so will
