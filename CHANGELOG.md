@@ -10,11 +10,13 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ### Added
 
+### Changed
+
 ### Fixed
 
-- Fix parsing of solc ASTs before 0.6.0, where `FunctionDefinition` lacks the
-  `kind` field (e.g. the WETH9 fixture): `FunctionDefinition.kind` is now
-  `Option<FunctionKind>` instead of a required field
+## [0.2.0] - 2026-08-15
+
+### Added
 
 ### Changed
 
@@ -37,6 +39,14 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 - All `Option` fields in AST and ABI types are now omitted during serialization
   when `None` instead of being emitted as `null`, matching solc's canonical
   output format
+
+### Fixed
+
+- Fix parsing of solc ASTs before 0.6.0, where `FunctionDefinition` lacks the
+  `kind` field (e.g. the WETH9 fixture): `FunctionDefinition.kind` is now
+  `Option<FunctionKind>` instead of a required field
+
+[0.2.0]: https://github.com/bidentxyz/solc-rs/compare/v0.1.1...v0.2.0
 
 ## [0.1.1] - 2026-08-13
 
