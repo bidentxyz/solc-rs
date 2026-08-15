@@ -12,6 +12,7 @@ Usage:
 
 Example:
     python3 scripts/clone_etherscan.py https://arbiscan.io/address/0xC31E54c7a869B9FcBEcc14363CF510d1c41fa443
+    python3 scripts/clone_etherscan.py https://bscscan.com/token/0x8965349fb649a33a30cbfda057d8ec2c48abe2a2
 """
 
 import json
@@ -30,6 +31,7 @@ EXPLORERS: dict[str, tuple[str, str]] = {
     "arbiscan.io": ("arbitrum", "42161"),
     "etherscan.io": ("ethereum", "1"),
     "basescan.org": ("base", "8453"),
+    "bscscan.com": ("bsc", "56"),
 }
 
 API_URL = "https://api.etherscan.io/v2/api"
@@ -55,7 +57,11 @@ def load_api_key(root: Path) -> str:
 
 
 def parse_address(url: str) -> tuple[str, str, str]:
-    """Return (chain, chain_id, address) for an explorer address URL."""
+    """Return (chain, chain_id, address) for an explorer contract URL.
+
+    Accepts both /address/<addr> and /token/<addr> pages; the token page
+    points at the token's contract address.
+    """
     parsed = urllib.parse.urlparse(url)
     host = parsed.netloc.lower()
     if host.startswith("www."):
@@ -66,8 +72,11 @@ def parse_address(url: str) -> tuple[str, str, str]:
         print(f"Error: unsupported explorer host '{host}' (supported: {supported})")
         sys.exit(1)
     parts = [p for p in parsed.path.split("/") if p]
-    if len(parts) < 2 or parts[0] != "address":
-        print(f"Error: expected an address URL like https://{host}/address/0x...")
+    if len(parts) < 2 or parts[0] not in ("address", "token"):
+        print(
+            "Error: expected a URL like "
+            f"https://{host}/address/0x... or https://{host}/token/0x..."
+        )
         sys.exit(1)
     address = parts[1]
     if not re.fullmatch(r"0x[0-9a-fA-F]{40}", address):
@@ -110,7 +119,8 @@ def parse_source_wrapper(source: str) -> dict[str, Any] | None:
 
     Multi-file contracts are stored as a standard-json input, either with
     just the outer pair of braces doubled or with every brace doubled.
-    Returns None for plain Solidity sources.
+    Older explorers store a direct file name -> content map without the
+    standard-json wrapper. Returns None for plain Solidity sources.
     """
     candidates = [source]
     if source.startswith("{") and source.endswith("}"):
@@ -123,7 +133,23 @@ def parse_source_wrapper(source: str) -> dict[str, Any] | None:
             continue
         if isinstance(payload, dict) and "sources" in payload:
             return payload
+        # Legacy multi-file format: a direct map of file names to source
+        # entries, normalized into a standard-json input.
+        if isinstance(payload, dict) and payload and is_source_map(payload):
+            return {"language": "Solidity", "sources": payload, "settings": {}}
     return None
+
+
+def is_source_map(payload: dict[str, Any]) -> bool:
+    """Return whether payload maps file names to source entries."""
+    for name, entry in payload.items():
+        if name in ("language", "settings"):
+            continue
+        if isinstance(entry, str):
+            continue
+        if not isinstance(entry, dict) or "content" not in entry:
+            return False
+    return True
 
 
 def fixture_dir_for(compiler_version: str) -> Path:
@@ -140,7 +166,7 @@ def solc_binary_name(compiler_version: str) -> str:
 
 def main(argv: list[str]) -> int:
     if len(argv) != 1:
-        print("Usage: python3 scripts/clone_etherscan.py <explorer address URL>")
+        print("Usage: python3 scripts/clone_etherscan.py <explorer contract URL>")
         sys.exit(1)
 
     api_key = load_api_key(ROOT)
