@@ -10,7 +10,33 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ### Added
 
+### Fixed
+
+- Fix parsing of solc ASTs before 0.6.0, where `FunctionDefinition` lacks the
+  `kind` field (e.g. the WETH9 fixture): `FunctionDefinition.kind` is now
+  `Option<FunctionKind>` instead of a required field
+
 ### Changed
+
+- `ContractDefinition.abstract` is now `Option<bool>` instead of defaulting to
+  `false` when the `abstract` field is missing (solc versions before 0.6.0)
+- `ContractDefinition.used_errors` is now `Option<Vec<i64>>` instead of
+  defaulting to an empty vec when the `usedErrors` field is missing (solc
+  versions before 0.8.4)
+- `FunctionDefinition.virtual` is now `Option<bool>` instead of defaulting to
+  `false` when the `virtual` field is missing (solc versions before 0.6.0)
+- `ModifierDefinition.virtual` is now `Option<bool>` instead of defaulting to
+  `false` when the `virtual` field is missing (solc versions before 0.6.0)
+- `UsingForDirective.global` is now `Option<bool>` instead of defaulting to
+  `false` when the `global` field is missing (solc versions before 0.8.13)
+- `FunctionCall.try_call` is now `Option<bool>` instead of defaulting to
+  `false` when the `tryCall` field is missing (solc versions before 0.6.0)
+- `Mapping.key_name`, `Mapping.key_name_location`, `Mapping.value_name`, and
+  `Mapping.value_name_location` are now `Option<String>` instead of defaulting
+  to empty strings (named mappings, solc >= 0.8.18)
+- All `Option` fields in AST and ABI types are now omitted during serialization
+  when `None` instead of being emitted as `null`, matching solc's canonical
+  output format
 
 ## [0.1.1] - 2026-08-13
 
