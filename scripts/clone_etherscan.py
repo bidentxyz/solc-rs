@@ -25,6 +25,8 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
+from solc_bin import long_version, resolve_solc_name
+
 # Explorer host -> (chain, chain id). The Etherscan API V2 endpoint serves
 # every chain and requires the chainid parameter.
 EXPLORERS: dict[str, tuple[str, str]] = {
@@ -183,6 +185,12 @@ def main(argv: list[str]) -> int:
     if not source.strip():
         print("Error: contract has no source code (is it verified?)")
         sys.exit(1)
+    local_names = [path.name for path in (ROOT / ".solc").glob("solc-linux-amd64-v*")]
+    resolved = resolve_solc_name(compiler_version, local_names)
+    if resolved is not None:
+        compiler_version = long_version(resolved)
+    else:
+        compiler_version = compiler_version.lstrip("v")
     solc = solc_binary_name(compiler_version)
 
     fixture_dir = fixture_dir_for(compiler_version)
@@ -197,7 +205,7 @@ def main(argv: list[str]) -> int:
     # The compiler version is not part of the standard-json input format, so
     # it is stored as a custom top-level key that compile.py strips before
     # passing the input to solc.
-    wrapper["version"] = compiler_version.lstrip("v")
+    wrapper["version"] = compiler_version
     relative_file = f"{contract_name}.json"
     output = fixture_dir / relative_file
     output.parent.mkdir(parents=True, exist_ok=True)

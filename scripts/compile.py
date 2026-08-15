@@ -16,6 +16,8 @@ import sys
 import urllib.request
 from pathlib import Path
 
+from solc_bin import resolve_solc_name
+
 ROOT = Path(__file__).resolve().parent.parent
 BASE_URL = "https://binaries.soliditylang.org/linux-amd64"
 DEFAULT_CONTRACT_SELECTION = [
@@ -34,23 +36,27 @@ def _fetch(url: str) -> bytes:
 
 def ensure_solc(version: str) -> Path:
     """Return the solc binary path for a version, downloading it if needed."""
-    name = f"solc-linux-amd64-v{version.lstrip('v')}"
-    binary = ROOT / ".solc" / name
-    if binary.is_file():
-        return binary
-    binary.parent.mkdir(parents=True, exist_ok=True)
-    print(f"downloading {name}", file=sys.stderr)
+    local_dir = ROOT / ".solc"
+    local_dir.mkdir(parents=True, exist_ok=True)
+    local_names = [path.name for path in local_dir.glob("solc-linux-amd64-v*")]
+    name = resolve_solc_name(version, local_names)
+    if name is not None:
+        return local_dir / name
+
     list_json = json.loads(_fetch(f"{BASE_URL}/list.json"))
+    builds = list_json.get("builds", [])
+    remote_names = [build.get("path", "") for build in builds]
+    name = resolve_solc_name(version, remote_names)
+    if name is None:
+        raise SystemExit(f"error: solc {version} not found in solc-bin list.json")
     sha256 = next(
-        (
-            b.get("sha256", "")
-            for b in list_json.get("builds", [])
-            if b.get("path") == name
-        ),
+        (build.get("sha256", "") for build in builds if build.get("path") == name),
         "",
     )
     if not sha256:
-        raise SystemExit(f"error: {name} not found in solc-bin list.json")
+        raise SystemExit(f"error: {name} is missing a sha256 in list.json")
+    binary = local_dir / name
+    print(f"downloading {name}", file=sys.stderr)
     tmp = binary.with_suffix(".partial")
     try:
         tmp.write_bytes(_fetch(f"{BASE_URL}/{name}"))
