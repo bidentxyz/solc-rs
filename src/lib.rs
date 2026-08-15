@@ -54,13 +54,15 @@
 pub use abi::Abi;
 pub use metadata::Metadata;
 pub use natspec::{DevDoc, UserDoc};
-pub use standard_json::{OutputSelector, StandardJSONInput, StandardJSONOutput};
+pub use standard_json::{
+    DebugInfo, ErrorComponent, ErrorType, OutputSelector, StandardJSONInput, StandardJSONOutput,
+};
 pub use storage_layout::StorageLayout;
 
 pub mod ast;
-pub mod metadata;
-pub mod natspec;
-pub mod standard_json;
-pub mod storage_layout;
 
 mod abi;
+mod metadata;
+mod natspec;
+mod standard_json;
+mod storage_layout;

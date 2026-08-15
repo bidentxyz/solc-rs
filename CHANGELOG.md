@@ -10,6 +10,16 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ### Added
 
+- Add `AssemblyData` for `evm.legacyAssembly` / `assemblyJson` `.data` values,
+  which are either nested assembly objects or raw hex strings
+- Add `SymbolAliasForeign` so `import {X}` aliases accept both an `Identifier`
+  node and the legacy declaration id from solc < 0.8.0
+- Add `AssemblyInstruction.jump_type` (`[in]` / `[out]`) for
+  `evm.legacyAssembly` JUMP annotations (solc >= 0.8.14)
+- Add `YulCfgObject` and typed `YulCfgKind`, `YulCfgBlockKind`, and
+  `YulCfgExitKind` for the experimental `yulCFGJson` object tree, including
+  nested `functions`, `subObjects`, `memoryGuard`, `arguments`, `entry`,
+  `numReturns`, `returnValues`, and `Jump` exits
 - Add `OutputSelector::All` (`*`), `Evm`, `EvmBytecode`, and
   `EvmDeployedBytecode` for the documented prefix and wildcard selectors
 - Add typed `EthdebugProgram`, `EthdebugCompilation`, and `EthdebugResources`
@@ -30,8 +40,6 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 - Add `YulObject`, `YulCode`, `YulData`, `YulLeave`, and `YulContinue` for IR
   AST and inline assembly
 - Add `YulCfg` for the experimental contract-level `yulCFGJson` output
-- Expose the `standard_json`, `natspec`, `storage_layout`, and `metadata`
-  modules
 - Add `StandardJSONOutput` types for parsing the compiler's Standard JSON
   output, including diagnostics, source file outputs, and contract outputs
 - Add `OutputSelector` and the `StandardJSONInput::output_selection` builder
@@ -51,6 +59,16 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ### Changed
 
+- `AssemblyJson.data` is now `HashMap<String, AssemblyData>` so hex blobs and
+  nested assembly can share the same map
+- `SymbolAlias.foreign` is now `SymbolAliasForeign` instead of `Identifier`
+- Keep `metadata`, `natspec`, `standard_json`, and `storage_layout` private.
+  Public types stay at the crate root
+- `YulCfg` now maps named objects instead of treating them as functions
+- `YulCfgBlock.type` is now `YulCfgBlockKind` and `YulCfgExit.type` is now
+  `YulCfgExitKind` instead of raw strings
+- `GeneratedSource.language` and `EthdebugCompilationSource.language` are now
+  `Language` instead of raw strings
 - `Bytecode.ethdebug` is now `EthdebugProgram` instead of raw JSON
 - `Ethdebug.resources` is now `EthdebugResources` and `Ethdebug.compilation` is
   now `EthdebugCompilation` instead of raw JSON

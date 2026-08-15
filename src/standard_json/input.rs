@@ -71,15 +71,26 @@ pub struct AssemblyJson {
     #[serde(rename = ".code")]
     pub code: Vec<AssemblyInstruction>,
     #[serde(rename = ".data", skip_serializing_if = "Option::is_none")]
-    pub data: Option<HashMap<String, AssemblyJson>>,
+    pub data: Option<HashMap<String, AssemblyData>>,
     #[serde(rename = ".auxdata", skip_serializing_if = "Option::is_none")]
     pub auxdata: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub source_list: Option<Vec<String>>,
 }
 
+/// A value in [`AssemblyJson`] `.data`.
+///
+/// Solc stores nested assembly objects and raw hex blobs in the same map.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum AssemblyData {
+    Assembly(AssemblyJson),
+    Hex(String),
+}
+
 /// One instruction in [`AssemblyJson`] `.code`.
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct AssemblyInstruction {
     pub begin: i64,
     pub end: i64,
@@ -89,6 +100,56 @@ pub struct AssemblyInstruction {
     pub source: Option<i64>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub value: Option<String>,
+    /// Present in solc >= 0.8.14.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub jump_type: Option<JumpType>,
+}
+
+/// JUMP annotation in [`AssemblyInstruction`].
+///
+/// Present in solc >= 0.8.14 on function entry and exit jumps.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum JumpType {
+    In,
+    Out,
+    Other(String),
+}
+
+impl JumpType {
+    pub fn as_str(&self) -> &str {
+        match self {
+            JumpType::In => "[in]",
+            JumpType::Out => "[out]",
+            JumpType::Other(s) => s,
+        }
+    }
+
+    fn from_str(s: &str) -> Self {
+        match s {
+            "[in]" => JumpType::In,
+            "[out]" => JumpType::Out,
+            other => JumpType::Other(other.to_string()),
+        }
+    }
+}
+
+impl Serialize for JumpType {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        serializer.serialize_str(self.as_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for JumpType {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let s = String::deserialize(deserializer)?;
+        Ok(Self::from_str(&s))
+    }
 }
 
 /// Compiler output selector.
@@ -709,6 +770,7 @@ mod tests {
                         name: String::from("PUSH"),
                         source: Some(0),
                         value: Some(String::from("80")),
+                        jump_type: None,
                     }],
                     data: None,
                     auxdata: None,
@@ -721,6 +783,58 @@ mod tests {
         assert!(json.get("content").is_none());
         let parsed: Source = serde_json::from_value(json).unwrap();
         assert!(matches!(parsed.content, SourceContent::AssemblyJson { .. }));
+    }
+
+    #[test]
+    fn assembly_jump_type_roundtrip() {
+        let json = r#"{
+          ".code": [
+            { "begin": 70, "end": 83, "jumpType": "[in]", "name": "JUMP", "source": 0 },
+            { "begin": 90, "end": 99, "jumpType": "[out]", "name": "JUMP", "source": 0 },
+            { "begin": 0, "end": 1, "name": "PUSH", "value": "80" }
+          ]
+        }"#;
+        let assembly: AssemblyJson = serde_json::from_str(json).unwrap();
+        assert_eq!(assembly.code[0].jump_type, Some(JumpType::In));
+        assert_eq!(assembly.code[1].jump_type, Some(JumpType::Out));
+        assert_eq!(assembly.code[2].jump_type, None);
+        assert_eq!(
+            serde_json::to_value(&assembly.code[0].jump_type).unwrap(),
+            "[in]"
+        );
+    }
+
+    #[test]
+    fn assembly_data_hex_and_nested() {
+        let json = r#"{
+          ".code": [{ "begin": 0, "end": 1, "name": "PUSH", "value": "80" }],
+          ".data": {
+            "0": {
+              ".auxdata": "a264",
+              ".code": [{ "begin": 0, "end": 1, "name": "PUSH", "value": "40" }],
+              ".data": {
+                "D7EB603CCDFA372C39C0FEB69B49B32873B95C2F4CEC4E09B8638D3406425037": "68656c6c6f"
+              }
+            }
+          },
+          "sourceList": ["C.sol"]
+        }"#;
+        let assembly: AssemblyJson = serde_json::from_str(json).unwrap();
+        assert_eq!(
+            assembly.source_list.as_deref(),
+            Some(&[String::from("C.sol")][..])
+        );
+        let nested = match &assembly.data.as_ref().unwrap()["0"] {
+            AssemblyData::Assembly(nested) => nested,
+            other => panic!("expected nested assembly, got {other:?}"),
+        };
+        assert_eq!(nested.auxdata.as_deref(), Some("a264"));
+        assert_eq!(nested.code[0].name, "PUSH");
+        match &nested.data.as_ref().unwrap()["D7EB603CCDFA372C39C0FEB69B49B32873B95C2F4CEC4E09B8638D3406425037"]
+        {
+            AssemblyData::Hex(hex) => assert_eq!(hex, "68656c6c6f"),
+            other => panic!("expected hex data, got {other:?}"),
+        }
     }
 
     #[test]

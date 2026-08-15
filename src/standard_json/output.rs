@@ -13,7 +13,7 @@ use serde_json::Value;
 use crate::abi::Abi;
 use crate::ast::{SourceUnit, YulBlock, YulObject};
 use crate::natspec::{DevDoc, UserDoc};
-use crate::standard_json::input::AssemblyJson;
+use crate::standard_json::input::{AssemblyJson, Language};
 use crate::storage_layout::StorageLayout;
 
 /// Solidity compiler Standard JSON output.
@@ -354,7 +354,7 @@ pub struct GeneratedSource {
     pub ast: YulBlock,
     pub contents: String,
     pub id: i64,
-    pub language: String,
+    pub language: Language,
     pub name: String,
 }
 
@@ -500,7 +500,7 @@ pub struct EthdebugCompilationSource {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub path: Option<PathBuf>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub language: Option<String>,
+    pub language: Option<Language>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub contents: Option<String>,
 }
@@ -541,28 +541,205 @@ where
     }
 }
 
+/// Kind of a Yul CFG node.
+///
+/// Unknown kinds are preserved in [`YulCfgKind::Other`].
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum YulCfgKind {
+    Object,
+    SubObject,
+    Function,
+    Other(String),
+}
+
+impl YulCfgKind {
+    pub fn as_str(&self) -> &str {
+        match self {
+            YulCfgKind::Object => "Object",
+            YulCfgKind::SubObject => "subObject",
+            YulCfgKind::Function => "Function",
+            YulCfgKind::Other(s) => s,
+        }
+    }
+
+    fn from_str(s: &str) -> Self {
+        match s {
+            "Object" => YulCfgKind::Object,
+            "subObject" => YulCfgKind::SubObject,
+            "Function" => YulCfgKind::Function,
+            other => YulCfgKind::Other(other.to_string()),
+        }
+    }
+}
+
+impl Serialize for YulCfgKind {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        serializer.serialize_str(self.as_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for YulCfgKind {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let s = String::deserialize(deserializer)?;
+        Ok(Self::from_str(&s))
+    }
+}
+
+/// Kind of a [`YulCfgBlock`].
+///
+/// Unknown kinds are preserved in [`YulCfgBlockKind::Other`].
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum YulCfgBlockKind {
+    BuiltinCall,
+    FunctionCall,
+    Other(String),
+}
+
+impl YulCfgBlockKind {
+    pub fn as_str(&self) -> &str {
+        match self {
+            YulCfgBlockKind::BuiltinCall => "BuiltinCall",
+            YulCfgBlockKind::FunctionCall => "FunctionCall",
+            YulCfgBlockKind::Other(s) => s,
+        }
+    }
+
+    fn from_str(s: &str) -> Self {
+        match s {
+            "BuiltinCall" => YulCfgBlockKind::BuiltinCall,
+            "FunctionCall" => YulCfgBlockKind::FunctionCall,
+            other => YulCfgBlockKind::Other(other.to_string()),
+        }
+    }
+}
+
+impl Serialize for YulCfgBlockKind {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        serializer.serialize_str(self.as_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for YulCfgBlockKind {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let s = String::deserialize(deserializer)?;
+        Ok(Self::from_str(&s))
+    }
+}
+
+/// Kind of a [`YulCfgExit`].
+///
+/// Unknown kinds are preserved in [`YulCfgExitKind::Other`].
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub enum YulCfgExitKind {
+    ConditionalJump,
+    Jump,
+    #[default]
+    Terminated,
+    FunctionReturn,
+    Other(String),
+}
+
+impl YulCfgExitKind {
+    pub fn as_str(&self) -> &str {
+        match self {
+            YulCfgExitKind::ConditionalJump => "ConditionalJump",
+            YulCfgExitKind::Jump => "Jump",
+            YulCfgExitKind::Terminated => "Terminated",
+            YulCfgExitKind::FunctionReturn => "FunctionReturn",
+            YulCfgExitKind::Other(s) => s,
+        }
+    }
+
+    fn from_str(s: &str) -> Self {
+        match s {
+            "ConditionalJump" => YulCfgExitKind::ConditionalJump,
+            "Jump" => YulCfgExitKind::Jump,
+            "Terminated" => YulCfgExitKind::Terminated,
+            "FunctionReturn" => YulCfgExitKind::FunctionReturn,
+            other => YulCfgExitKind::Other(other.to_string()),
+        }
+    }
+}
+
+impl Serialize for YulCfgExitKind {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        serializer.serialize_str(self.as_str())
+    }
+}
+
+impl<'de> Deserialize<'de> for YulCfgExitKind {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let s = String::deserialize(deserializer)?;
+        Ok(Self::from_str(&s))
+    }
+}
+
 /// Yul SSA control-flow graph. Experimental.
+///
+/// The compiler emits a named object tree: the root is an `Object`, each object
+/// may contain functions and nested `subObjects`.
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 pub struct YulCfg {
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<String>,
+    pub r#type: Option<YulCfgKind>,
     #[serde(flatten)]
-    pub functions: HashMap<String, YulCfgFunction>,
+    pub objects: HashMap<String, YulCfgObject>,
 }
 
-/// One function in a [`YulCfg`].
+/// One Yul object in a [`YulCfg`].
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
-pub struct YulCfgFunction {
-    #[serde(default)]
+#[serde(rename_all = "camelCase")]
+pub struct YulCfgObject {
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub blocks: Vec<YulCfgBlock>,
+    #[serde(default, skip_serializing_if = "HashMap::is_empty")]
+    pub functions: HashMap<String, YulCfgFunction>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub memory_guard: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub sub_objects: Option<YulCfg>,
 }
 
-/// One basic block in a [`YulCfgFunction`].
+/// One function in a [`YulCfgObject`].
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct YulCfgFunction {
+    #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<YulCfgKind>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub arguments: Vec<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub blocks: Vec<YulCfgBlock>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub entry: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub num_returns: Option<u64>,
+}
+
+/// One basic block in a [`YulCfgObject`] or [`YulCfgFunction`].
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 pub struct YulCfgBlock {
     pub id: String,
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<String>,
+    pub r#type: Option<YulCfgBlockKind>,
     #[serde(default)]
     pub instructions: Vec<YulCfgInstruction>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -587,13 +764,16 @@ pub struct YulCfgInstruction {
 
 /// Exit edge of a [`YulCfgBlock`].
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct YulCfgExit {
     #[serde(rename = "type")]
-    pub r#type: String,
+    pub r#type: YulCfgExitKind,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub cond: Option<String>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub targets: Vec<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub return_values: Vec<String>,
 }
 
 /// Liveness sets for a [`YulCfgBlock`].
@@ -688,7 +868,7 @@ mod tests {
             "C.sol": {
               "C": {
                 "yulCFGJson": {
-                  "type": "cfg",
+                  "type": "Object",
                   "C_16": {
                     "blocks": [
                       {
@@ -708,7 +888,51 @@ mod tests {
                         },
                         "liveness": { "in": [], "out": [] }
                       }
-                    ]
+                    ],
+                    "functions": {
+                      "allocate_unbounded": {
+                        "type": "Function",
+                        "arguments": [],
+                        "entry": "Block0",
+                        "numReturns": 1,
+                        "blocks": [
+                          {
+                            "id": "Block0",
+                            "type": "BuiltinCall",
+                            "instructions": [
+                              {
+                                "in": ["0x40"],
+                                "op": "mload",
+                                "out": ["v2"]
+                              }
+                            ],
+                            "exit": {
+                              "type": "FunctionReturn",
+                              "returnValues": ["v2"]
+                            },
+                            "liveness": { "in": [], "out": ["v2"] }
+                          }
+                        ]
+                      }
+                    },
+                    "memoryGuard": "0xa0",
+                    "subObjects": {
+                      "type": "subObject",
+                      "C_16_deployed": {
+                        "blocks": [
+                          {
+                            "id": "Block0",
+                            "type": "FunctionCall",
+                            "instructions": [],
+                            "exit": { "type": "Jump", "targets": ["Block1"] },
+                            "liveness": { "in": [], "out": [] }
+                          }
+                        ],
+                        "functions": {},
+                        "memoryGuard": "0x80",
+                        "subObjects": {}
+                      }
+                    }
                   }
                 }
               }
@@ -720,11 +944,41 @@ mod tests {
             .yul_cfg_json
             .as_ref()
             .unwrap();
-        assert_eq!(cfg.r#type.as_deref(), Some("cfg"));
-        let block = &cfg.functions["C_16"].blocks[0];
+        assert_eq!(cfg.r#type, Some(YulCfgKind::Object));
+        let object = &cfg.objects["C_16"];
+        let block = &object.blocks[0];
         assert_eq!(block.id, "Block0");
+        assert_eq!(block.r#type, Some(YulCfgBlockKind::BuiltinCall));
         assert_eq!(block.instructions[0].op, "memoryguard");
-        assert_eq!(block.exit.as_ref().unwrap().r#type, "ConditionalJump");
+        assert_eq!(
+            block.exit.as_ref().unwrap().r#type,
+            YulCfgExitKind::ConditionalJump
+        );
+        assert_eq!(object.memory_guard.as_deref(), Some("0xa0"));
+        let function = &object.functions["allocate_unbounded"];
+        assert_eq!(function.r#type, Some(YulCfgKind::Function));
+        assert_eq!(function.entry.as_deref(), Some("Block0"));
+        assert_eq!(function.num_returns, Some(1));
+        assert_eq!(
+            function.blocks[0].exit.as_ref().unwrap().r#type,
+            YulCfgExitKind::FunctionReturn
+        );
+        assert_eq!(
+            function.blocks[0].exit.as_ref().unwrap().return_values,
+            vec![String::from("v2")]
+        );
+        let sub = object.sub_objects.as_ref().unwrap();
+        assert_eq!(sub.r#type, Some(YulCfgKind::SubObject));
+        let deployed = &sub.objects["C_16_deployed"];
+        assert_eq!(deployed.memory_guard.as_deref(), Some("0x80"));
+        assert_eq!(
+            deployed.blocks[0].exit.as_ref().unwrap().r#type,
+            YulCfgExitKind::Jump
+        );
+        assert_eq!(
+            deployed.blocks[0].exit.as_ref().unwrap().targets,
+            vec![String::from("Block1")]
+        );
     }
 
     #[test]

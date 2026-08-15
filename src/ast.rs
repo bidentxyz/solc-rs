@@ -69,12 +69,29 @@ pub struct ImportDirective {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct SymbolAlias {
-    pub foreign: Identifier,
+    pub foreign: SymbolAliasForeign,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub local: Option<String>,
     /// Present in solc >= 0.8.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
+}
+
+/// The imported symbol in a [`SymbolAlias`].
+///
+/// solc < 0.8.0 emits the referenced declaration id. Later versions emit an
+/// [`Identifier`] node.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum SymbolAliasForeign {
+    Identifier(Identifier),
+    DeclarationId(i64),
+}
+
+impl Default for SymbolAliasForeign {
+    fn default() -> Self {
+        SymbolAliasForeign::Identifier(Identifier::default())
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
@@ -1632,4 +1649,39 @@ pub struct StructuredDocumentation {
     pub id: i64,
     pub text: String,
     pub src: SourceLocation,
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn symbol_alias_foreign_shapes() {
+        let legacy: SymbolAlias =
+            serde_json::from_str(r#"{ "foreign": 93, "local": null }"#).unwrap();
+        assert_eq!(legacy.foreign, SymbolAliasForeign::DeclarationId(93));
+        assert_eq!(legacy.local, None);
+
+        let modern: SymbolAlias = serde_json::from_str(
+            r#"{
+              "foreign": {
+                "id": 12,
+                "name": "BytesLib",
+                "overloadedDeclarations": [],
+                "referencedDeclaration": 93,
+                "src": "0:8:1",
+                "typeDescriptions": {}
+              },
+              "local": null
+            }"#,
+        )
+        .unwrap();
+        match modern.foreign {
+            SymbolAliasForeign::Identifier(identifier) => {
+                assert_eq!(identifier.name, "BytesLib");
+                assert_eq!(identifier.referenced_declaration, Some(93));
+            }
+            other => panic!("expected identifier, got {other:?}"),
+        }
+    }
 }
