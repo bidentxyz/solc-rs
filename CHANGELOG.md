@@ -10,7 +10,31 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ### Added
 
+- Add `StandardJSONOutput` types for parsing the compiler's Standard JSON
+  output, including diagnostics, source file outputs, and contract outputs
+- Add `OutputSelector` and the `StandardJSONInput::output_selection` builder
+  for strongly typed compiler output selection, covering all selectors
+  documented in the Solidity compiler docs
+- Add `EvmVersion::Amsterdam` and `EvmVersion::Future` (`@future`) variants
+- Add `Settings.experimental` and `Settings.via_ssa_cfg` fields
+- Model all documented Standard JSON output fields: `metadata`, `userdoc`,
+  `devdoc`, IR and storage layout outputs, EVM assembly, function debug data,
+  generated sources, immutable references, method identifiers, gas estimates,
+  Yul CFG, and the global `ethdebug` output
+- Add `SourceContent::Ast` and `SourceContent::AssemblyJson` variants for the
+  experimental `SolidityAST` and `EVMAssembly` source modes
+- Add `OptimizerDetails.simple_counter_for_loop_unchecked_increment`
+- Add a runnable `compile` example under `examples/` that compiles a Solidity
+  source file via the Standard JSON interface
+
 ### Changed
+
+- Move `StandardJSONInput` from `standard_json_input` into the
+  `standard_json::input` module
+- `Settings.output_selection` now holds `OutputSelector` values instead of raw
+  strings
+- `Evm.deployed_bytecode` is now `Option<Bytecode>` since solc omits the
+  `deployedBytecode` key when the output selection does not request it
 
 ### Fixed
 
