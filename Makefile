@@ -27,3 +27,13 @@ doc: # Build docs and serve them
 	@IP=$$(python3 -c 'import socket; s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM); s.connect(("8.8.8.8", 80)); print(s.getsockname()[0])'); \
 	echo "Serving docs on http://$$IP:8000/solc/"; \
 	cd target/doc && python3 -m http.server 8000 --bind 0.0.0.0
+
+.PHONY: fixtures
+fixtures: # Compile all fixture inputs listed in fixtures/solc*/*.json
+	@echo "Compiling fixtures"
+	@./scripts/compile.py
+
+.PHONY: clean
+clean: # Remove all fixture build outputs
+	@echo "Cleaning fixture outputs"
+	@rm -rf fixtures/solc*/out
