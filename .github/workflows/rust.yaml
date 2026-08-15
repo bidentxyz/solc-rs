@@ -20,13 +20,16 @@ jobs:
             - id: solc-versions
               run: |
                   python3 - <<'EOF'
-                  import hashlib, json, pathlib
+                  import hashlib, json, os, pathlib
                   versions = sorted({
                       json.loads(p.read_text()).get("version", "")
                       for p in pathlib.Path("fixtures").glob("solc-*/*.json")
                       if p.name != "compilers.json"
                   })
-                  print(f"hash={hashlib.sha256('\n'.join(versions).encode()).hexdigest()}")
+                  digest = hashlib.sha256('\n'.join(versions).encode()).hexdigest()
+                  print(f"hash={digest}")
+                  with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+                      f.write(f"hash={digest}\n")
                   EOF
             - uses: actions/cache@v4
               with:
