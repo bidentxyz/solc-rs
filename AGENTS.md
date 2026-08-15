@@ -4,6 +4,12 @@ Solidity compiler bindings for Rust.
 
 -------------------------------------------------------------------------------
 
+## solc binaries
+
+Solc binaries available in `.solc` directory.
+
+-------------------------------------------------------------------------------
+
 ## Non-negotiable rules
 
 List of CRITICAL rules that you must follow every time. Failing to do so will
