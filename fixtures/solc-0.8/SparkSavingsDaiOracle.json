@@ -1,0 +1,76 @@
+{
+    "language": "Solidity",
+    "sources": {
+        "lib/aave-v3-core/contracts/dependencies/chainlink/AggregatorInterface.sol": {
+            "content": "// SPDX-License-Identifier: MIT\n// Chainlink Contracts v0.8\npragma solidity ^0.8.0;\n\ninterface AggregatorInterface {\n  function latestAnswer() external view returns (int256);\n\n  function latestTimestamp() external view returns (uint256);\n\n  function latestRound() external view returns (uint256);\n\n  function getAnswer(uint256 roundId) external view returns (int256);\n\n  function getTimestamp(uint256 roundId) external view returns (uint256);\n\n  event AnswerUpdated(int256 indexed current, uint256 indexed roundId, uint256 updatedAt);\n\n  event NewRound(uint256 indexed roundId, address indexed startedBy, uint256 startedAt);\n}\n"
+        },
+        "lib/aave-v3-core/contracts/dependencies/openzeppelin/contracts/SafeCast.sol": {
+            "content": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts v4.4.1 (utils/math/SafeCast.sol)\npragma solidity 0.8.10;\n\n/**\n * @dev Wrappers over Solidity's uintXX/intXX casting operators with added overflow\n * checks.\n *\n * Downcasting from uint256/int256 in Solidity does not revert on overflow. This can\n * easily result in undesired exploitation or bugs, since developers usually\n * assume that overflows raise errors. `SafeCast` restores this intuition by\n * reverting the transaction when such an operation overflows.\n *\n * Using this library instead of the unchecked operations eliminates an entire\n * class of bugs, so it's recommended to use it always.\n *\n * Can be combined with {SafeMath} and {SignedSafeMath} to extend it to smaller types, by performing\n * all math on `uint256` and `int256` and then downcasting.\n */\nlibrary SafeCast {\n  /**\n   * @dev Returns the downcasted uint224 from uint256, reverting on\n   * overflow (when the input is greater than largest uint224).\n   *\n   * Counterpart to Solidity's `uint224` operator.\n   *\n   * Requirements:\n   *\n   * - input must fit into 224 bits\n   */\n  function toUint224(uint256 value) internal pure returns (uint224) {\n    require(value <= type(uint224).max, \"SafeCast: value doesn't fit in 224 bits\");\n    return uint224(value);\n  }\n\n  /**\n   * @dev Returns the downcasted uint128 from uint256, reverting on\n   * overflow (when the input is greater than largest uint128).\n   *\n   * Counterpart to Solidity's `uint128` operator.\n   *\n   * Requirements:\n   *\n   * - input must fit into 128 bits\n   */\n  function toUint128(uint256 value) internal pure returns (uint128) {\n    require(value <= type(uint128).max, \"SafeCast: value doesn't fit in 128 bits\");\n    return uint128(value);\n  }\n\n  /**\n   * @dev Returns the downcasted uint96 from uint256, reverting on\n   * overflow (when the input is greater than largest uint96).\n   *\n   * Counterpart to Solidity's `uint96` operator.\n   *\n   * Requirements:\n   *\n   * - input must fit into 96 bits\n   */\n  function toUint96(uint256 value) internal pure returns (uint96) {\n    require(value <= type(uint96).max, \"SafeCast: value doesn't fit in 96 bits\");\n    return uint96(value);\n  }\n\n  /**\n   * @dev Returns the downcasted uint64 from uint256, reverting on\n   * overflow (when the input is greater than largest uint64).\n   *\n   * Counterpart to Solidity's `uint64` operator.\n   *\n   * Requirements:\n   *\n   * - input must fit into 64 bits\n   */\n  function toUint64(uint256 value) internal pure returns (uint64) {\n    require(value <= type(uint64).max, \"SafeCast: value doesn't fit in 64 bits\");\n    return uint64(value);\n  }\n\n  /**\n   * @dev Returns the downcasted uint32 from uint256, reverting on\n   * overflow (when the input is greater than largest uint32).\n   *\n   * Counterpart to Solidity's `uint32` operator.\n   *\n   * Requirements:\n   *\n   * - input must fit into 32 bits\n   */\n  function toUint32(uint256 value) internal pure returns (uint32) {\n    require(value <= type(uint32).max, \"SafeCast: value doesn't fit in 32 bits\");\n    return uint32(value);\n  }\n\n  /**\n   * @dev Returns the downcasted uint16 from uint256, reverting on\n   * overflow (when the input is greater than largest uint16).\n   *\n   * Counterpart to Solidity's `uint16` operator.\n   *\n   * Requirements:\n   *\n   * - input must fit into 16 bits\n   */\n  function toUint16(uint256 value) internal pure returns (uint16) {\n    require(value <= type(uint16).max, \"SafeCast: value doesn't fit in 16 bits\");\n    return uint16(value);\n  }\n\n  /**\n   * @dev Returns the downcasted uint8 from uint256, reverting on\n   * overflow (when the input is greater than largest uint8).\n   *\n   * Counterpart to Solidity's `uint8` operator.\n   *\n   * Requirements:\n   *\n   * - input must fit into 8 bits.\n   */\n  function toUint8(uint256 value) internal pure returns (uint8) {\n    require(value <= type(uint8).max, \"SafeCast: value doesn't fit in 8 bits\");\n    return uint8(value);\n  }\n\n  /**\n   * @dev Converts a signed int256 into an unsigned uint256.\n   *\n   * Requirements:\n   *\n   * - input must be greater than or equal to 0.\n   */\n  function toUint256(int256 value) internal pure returns (uint256) {\n    require(value >= 0, 'SafeCast: value must be positive');\n    return uint256(value);\n  }\n\n  /**\n   * @dev Returns the downcasted int128 from int256, reverting on\n   * overflow (when the input is less than smallest int128 or\n   * greater than largest int128).\n   *\n   * Counterpart to Solidity's `int128` operator.\n   *\n   * Requirements:\n   *\n   * - input must fit into 128 bits\n   *\n   * _Available since v3.1._\n   */\n  function toInt128(int256 value) internal pure returns (int128) {\n    require(\n      value >= type(int128).min && value <= type(int128).max,\n      \"SafeCast: value doesn't fit in 128 bits\"\n    );\n    return int128(value);\n  }\n\n  /**\n   * @dev Returns the downcasted int64 from int256, reverting on\n   * overflow (when the input is less than smallest int64 or\n   * greater than largest int64).\n   *\n   * Counterpart to Solidity's `int64` operator.\n   *\n   * Requirements:\n   *\n   * - input must fit into 64 bits\n   *\n   * _Available since v3.1._\n   */\n  function toInt64(int256 value) internal pure returns (int64) {\n    require(\n      value >= type(int64).min && value <= type(int64).max,\n      \"SafeCast: value doesn't fit in 64 bits\"\n    );\n    return int64(value);\n  }\n\n  /**\n   * @dev Returns the downcasted int32 from int256, reverting on\n   * overflow (when the input is less than smallest int32 or\n   * greater than largest int32).\n   *\n   * Counterpart to Solidity's `int32` operator.\n   *\n   * Requirements:\n   *\n   * - input must fit into 32 bits\n   *\n   * _Available since v3.1._\n   */\n  function toInt32(int256 value) internal pure returns (int32) {\n    require(\n      value >= type(int32).min && value <= type(int32).max,\n      \"SafeCast: value doesn't fit in 32 bits\"\n    );\n    return int32(value);\n  }\n\n  /**\n   * @dev Returns the downcasted int16 from int256, reverting on\n   * overflow (when the input is less than smallest int16 or\n   * greater than largest int16).\n   *\n   * Counterpart to Solidity's `int16` operator.\n   *\n   * Requirements:\n   *\n   * - input must fit into 16 bits\n   *\n   * _Available since v3.1._\n   */\n  function toInt16(int256 value) internal pure returns (int16) {\n    require(\n      value >= type(int16).min && value <= type(int16).max,\n      \"SafeCast: value doesn't fit in 16 bits\"\n    );\n    return int16(value);\n  }\n\n  /**\n   * @dev Returns the downcasted int8 from int256, reverting on\n   * overflow (when the input is less than smallest int8 or\n   * greater than largest int8).\n   *\n   * Counterpart to Solidity's `int8` operator.\n   *\n   * Requirements:\n   *\n   * - input must fit into 8 bits.\n   *\n   * _Available since v3.1._\n   */\n  function toInt8(int256 value) internal pure returns (int8) {\n    require(\n      value >= type(int8).min && value <= type(int8).max,\n      \"SafeCast: value doesn't fit in 8 bits\"\n    );\n    return int8(value);\n  }\n\n  /**\n   * @dev Converts an unsigned uint256 into a signed int256.\n   *\n   * Requirements:\n   *\n   * - input must be less than or equal to maxInt256.\n   */\n  function toInt256(uint256 value) internal pure returns (int256) {\n    // Note: Unsafe cast below is okay because `type(int256).max` is guaranteed to be positive\n    require(value <= uint256(type(int256).max), \"SafeCast: value doesn't fit in an int256\");\n    return int256(value);\n  }\n}\n"
+        },
+        "src/SavingsDaiOracle.sol": {
+            "content": "// SPDX-License-Identifier: AGPL-3.0-or-later\npragma solidity 0.8.10;\n\nimport {AggregatorInterface} from 'aave-v3-core/contracts/dependencies/chainlink/AggregatorInterface.sol';\nimport {SafeCast} from 'aave-v3-core/contracts/dependencies/openzeppelin/contracts/SafeCast.sol';\n\ninterface PotLike {\n    function chi() external view returns (uint256);\n}\n\n/**\n * @title Savings Dai Oracle\n * @notice Convert DAI price to Savings DAI Price via the Pot.\n */\ncontract SavingsDaiOracle is AggregatorInterface {\n    using SafeCast for uint256;\n\n    int256 private constant RAY = 10 ** 27;\n\n    AggregatorInterface internal _daiPriceFeed;\n    PotLike internal _pot;\n\n    constructor(AggregatorInterface daiPriceFeed, address pot) {\n        _daiPriceFeed = daiPriceFeed;\n        _pot = PotLike(pot);\n    }\n\n    function latestAnswer() external view returns (int256) {\n        return _daiPriceFeed.latestAnswer() * _pot.chi().toInt256() / RAY;\n    }\n\n    function latestTimestamp() external view returns (uint256) {\n        return _daiPriceFeed.latestTimestamp();\n    }\n\n    function latestRound() external view returns (uint256) {\n        return _daiPriceFeed.latestRound();\n    }\n\n    function getAnswer(uint256 roundId) external view returns (int256) {\n        return _daiPriceFeed.getAnswer(roundId) * _pot.chi().toInt256() / RAY;\n    }\n\n    function getTimestamp(uint256 roundId) external view returns (uint256) {\n        return _daiPriceFeed.getTimestamp(roundId);\n    }\n\n    function DAI_PRICE_FEED_ADDRESS() external view returns (address) {\n        return address(_daiPriceFeed);\n    }\n\n    function POT_ADDRESS() external view returns (address) {\n        return address(_pot);\n    }\n\n}\n"
+        }
+    },
+    "settings": {
+        "remappings": [
+            "@aave/core-v3/=lib/aave-v3-core/",
+            "@uniswap/v3-core/=lib/v3-core/",
+            "aave-v3-core/=lib/aave-v3-core/",
+            "aave-v3-periphery/=lib/aave-v3-periphery/contracts/",
+            "ds-test/=lib/dss-direct-deposit/lib/dss-test/lib/forge-std/lib/ds-test/src/",
+            "dss-direct-deposit/=lib/dss-direct-deposit/",
+            "dss-interfaces/=lib/dss-direct-deposit/lib/dss-test/lib/dss-interfaces/src/",
+            "dss-test/=lib/dss-direct-deposit/lib/dss-test/src/",
+            "forge-std/=lib/dss-direct-deposit/lib/dss-test/lib/forge-std/src/",
+            "v3-core/=lib/v3-core/",
+            "v3-periphery/=lib/v3-periphery/contracts/"
+        ],
+        "optimizer": {
+            "enabled": true,
+            "runs": 100000
+        },
+        "metadata": {
+            "bytecodeHash": "ipfs"
+        },
+        "outputSelection": {
+            "*": {
+                "*": [
+                    "evm.bytecode",
+                    "evm.deployedBytecode",
+                    "devdoc",
+                    "userdoc",
+                    "metadata",
+                    "abi"
+                ]
+            }
+        },
+        "evmVersion": "london",
+        "libraries": {
+            "lib/aave-v3-core/contracts/protocol/libraries/logic/BorrowLogic.sol": {
+                "BorrowLogic": "0x39fb3e784012eb3e650bf79b6909d857e0a49f0c"
+            },
+            "lib/aave-v3-core/contracts/protocol/libraries/logic/BridgeLogic.sol": {
+                "BridgeLogic": "0x7f3e0bbf4aaee28abc2cfbd571fc2b983662ad52"
+            },
+            "lib/aave-v3-core/contracts/protocol/libraries/logic/ConfiguratorLogic.sol": {
+                "ConfiguratorLogic": "0x66ac02c3120b848d65231ce977af3db1f60b97f9"
+            },
+            "lib/aave-v3-core/contracts/protocol/libraries/logic/EModeLogic.sol": {
+                "EModeLogic": "0x202f310828467bb04680a8fe879a7d1814677a24"
+            },
+            "lib/aave-v3-core/contracts/protocol/libraries/logic/FlashLoanLogic.sol": {
+                "FlashLoanLogic": "0x111b4b22ee7ea68703d8e54ea49aa1bb0d158128"
+            },
+            "lib/aave-v3-core/contracts/protocol/libraries/logic/LiquidationLogic.sol": {
+                "LiquidationLogic": "0x6d0bc1defe4379d9cb86bcd8d7c005413ab0e8fb"
+            },
+            "lib/aave-v3-core/contracts/protocol/libraries/logic/PoolLogic.sol": {
+                "PoolLogic": "0xbc6d76108729be0e85938845b74c2f8ab88b7ea6"
+            },
+            "lib/aave-v3-core/contracts/protocol/libraries/logic/SupplyLogic.sol": {
+                "SupplyLogic": "0x666835b336a3a5198b2895d94109131d1b23ad11"
+            }
+        }
+    },
+    "version": "0.8.10+commit.fc410830"
+}
