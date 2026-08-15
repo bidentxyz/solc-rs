@@ -10,6 +10,13 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ### Added
 
+- Add `OutputSelector::All` (`*`), `Evm`, `EvmBytecode`, and
+  `EvmDeployedBytecode` for the documented prefix and wildcard selectors
+- Add typed `EthdebugProgram`, `EthdebugCompilation`, and `EthdebugResources`
+  for `evm.bytecode.ethdebug`, `evm.deployedBytecode.ethdebug`, and the global
+  `ethdebug` output
+- Add legacy ABI `constant` and `payable` fields on functions, constructors,
+  receive, and fallback items
 - Add typed `UserDoc` / `DevDoc` NatSpec output, including methods, events,
   errors, state variables, custom tags, the legacy `return` field, and both
   object and array shapes for `devdoc.errors`
@@ -44,6 +51,9 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ### Changed
 
+- `Bytecode.ethdebug` is now `EthdebugProgram` instead of raw JSON
+- `Ethdebug.resources` is now `EthdebugResources` and `Ethdebug.compilation` is
+  now `EthdebugCompilation` instead of raw JSON
 - `userdoc` and `devdoc` are now `UserDoc` / `DevDoc` instead of raw JSON
 - `storageLayout` and `transientStorageLayout` are now `StorageLayout` instead
   of raw JSON

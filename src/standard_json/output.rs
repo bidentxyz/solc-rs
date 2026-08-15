@@ -312,9 +312,9 @@ pub struct Evm {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Bytecode {
-    /// Ethdebug program output. Experimental, follows the external ethdebug schema.
+    /// Ethdebug program output. Experimental.
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub ethdebug: Option<Value>,
+    pub ethdebug: Option<EthdebugProgram>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub function_debug_data: Option<HashMap<String, FunctionDebugData>>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -384,15 +384,161 @@ pub struct CreationGasEstimates {
 
 /// Global ethdebug output.
 ///
-/// Inner objects follow the external ethdebug schemas named in the compiler
-/// docs.
+/// Requested via the `ethdebug.resources` and `ethdebug.compilation` output
+/// selectors. Experimental.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Ethdebug {
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub resources: Option<Value>,
+    pub resources: Option<EthdebugResources>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub compilation: Option<Value>,
+    pub compilation: Option<EthdebugCompilation>,
+}
+
+/// Ethdebug program for creation or deployed bytecode.
+///
+/// Follows the ethdebug/format/program schema subset that solc emits.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EthdebugProgram {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub compilation: Option<EthdebugCompilationRef>,
+    pub contract: EthdebugContract,
+    pub environment: EthdebugEnvironment,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub context: Option<EthdebugContext>,
+    pub instructions: Vec<EthdebugInstruction>,
+}
+
+/// Compilation referenced by id from an [`EthdebugProgram`].
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EthdebugCompilationRef {
+    pub id: String,
+}
+
+/// Contract identity recorded in an [`EthdebugProgram`].
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EthdebugContract {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    pub definition: EthdebugSourceRange,
+}
+
+/// Bytecode execution environment.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum EthdebugEnvironment {
+    Call,
+    Create,
+}
+
+/// Source range in an ethdebug program or instruction context.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EthdebugSourceRange {
+    pub source: EthdebugSourceRef,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub range: Option<EthdebugRange>,
+}
+
+/// Source file referenced by id.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EthdebugSourceRef {
+    pub id: i64,
+}
+
+/// Byte range within a source file.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EthdebugRange {
+    pub offset: u64,
+    pub length: u64,
+}
+
+/// One instruction in an [`EthdebugProgram`].
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EthdebugInstruction {
+    pub offset: u64,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub operation: Option<EthdebugOperation>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub context: Option<EthdebugContext>,
+}
+
+/// Machine operation for an [`EthdebugInstruction`].
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EthdebugOperation {
+    pub mnemonic: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub arguments: Option<Vec<String>>,
+}
+
+/// Context attached to a program or instruction.
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+pub struct EthdebugContext {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub code: Option<EthdebugSourceRange>,
+}
+
+/// Compilation metadata from `ethdebug.compilation`.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EthdebugCompilation {
+    pub compiler: EthdebugCompiler,
+    pub id: String,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub sources: Vec<EthdebugCompilationSource>,
+}
+
+/// Compiler identity recorded in [`EthdebugCompilation`].
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EthdebugCompiler {
+    pub name: String,
+    pub version: String,
+}
+
+/// One source file recorded in [`EthdebugCompilation`].
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EthdebugCompilationSource {
+    pub id: i64,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub path: Option<PathBuf>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub language: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub contents: Option<String>,
+}
+
+/// Global ethdebug resources from `ethdebug.resources`.
+///
+/// `types` and `pointers` follow the external ethdebug type and pointer
+/// schemas. solc currently emits `types` as an object and `pointers` as
+/// either an object or an empty array.
+#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+pub struct EthdebugResources {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub compilation: Option<EthdebugCompilation>,
+    #[serde(default, skip_serializing_if = "HashMap::is_empty")]
+    pub types: HashMap<String, Value>,
+    #[serde(
+        default,
+        deserialize_with = "deserialize_ethdebug_pointers",
+        skip_serializing_if = "HashMap::is_empty"
+    )]
+    pub pointers: HashMap<String, Value>,
+}
+
+fn deserialize_ethdebug_pointers<'de, D>(
+    deserializer: D,
+) -> Result<HashMap<String, Value>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    let value = Value::deserialize(deserializer)?;
+    match value {
+        Value::Null => Ok(HashMap::new()),
+        Value::Array(items) if items.is_empty() => Ok(HashMap::new()),
+        Value::Object(map) => Ok(map.into_iter().collect()),
+        other => Err(serde::de::Error::custom(format!(
+            "expected ethdebug pointers object or empty array, got {other}"
+        ))),
+    }
 }
 
 /// Yul SSA control-flow graph. Experimental.
@@ -579,6 +725,127 @@ mod tests {
         assert_eq!(block.id, "Block0");
         assert_eq!(block.instructions[0].op, "memoryguard");
         assert_eq!(block.exit.as_ref().unwrap().r#type, "ConditionalJump");
+    }
+
+    #[test]
+    fn ethdebug_from_solc_shape() {
+        let json = r#"{
+          "contracts": {
+            "C.sol": {
+              "C": {
+                "evm": {
+                  "bytecode": {
+                    "ethdebug": {
+                      "contract": {
+                        "definition": { "source": { "id": 0 } },
+                        "name": "C"
+                      },
+                      "environment": "create",
+                      "instructions": [
+                        {
+                          "context": {
+                            "code": {
+                              "range": { "length": 68, "offset": 24 },
+                              "source": { "id": 0 }
+                            }
+                          },
+                          "offset": 0,
+                          "operation": { "arguments": ["0x80"], "mnemonic": "PUSH1" }
+                        },
+                        {
+                          "offset": 2,
+                          "operation": { "mnemonic": "ADD" }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "ethdebug": {
+            "compilation": {
+              "compiler": { "name": "solc", "version": "0.8.36+commit.8a079791" },
+              "id": "solc-abc",
+              "sources": [
+                {
+                  "contents": "pragma solidity ^0.8.0;",
+                  "id": 0,
+                  "language": "Solidity",
+                  "path": "C.sol"
+                }
+              ]
+            },
+            "resources": {
+              "compilation": {
+                "compiler": { "name": "solc", "version": "0.8.36+commit.8a079791" },
+                "id": "solc-abc",
+                "sources": []
+              },
+              "pointers": [],
+              "types": {}
+            }
+          }
+        }"#;
+        let output: StandardJSONOutput = serde_json::from_str(json).unwrap();
+        let program = output.contracts[&PathBuf::from("C.sol")]["C"]
+            .evm
+            .as_ref()
+            .unwrap()
+            .bytecode
+            .as_ref()
+            .unwrap()
+            .ethdebug
+            .as_ref()
+            .unwrap();
+        assert_eq!(program.contract.name.as_deref(), Some("C"));
+        assert_eq!(program.environment, EthdebugEnvironment::Create);
+        assert_eq!(program.instructions[0].offset, 0);
+        assert_eq!(
+            program.instructions[0].operation.as_ref().unwrap().mnemonic,
+            "PUSH1"
+        );
+        assert_eq!(
+            program.instructions[0]
+                .operation
+                .as_ref()
+                .unwrap()
+                .arguments
+                .as_deref(),
+            Some(&[String::from("0x80")][..])
+        );
+        assert_eq!(
+            program.instructions[0]
+                .context
+                .as_ref()
+                .unwrap()
+                .code
+                .as_ref()
+                .unwrap()
+                .range
+                .as_ref()
+                .unwrap()
+                .offset,
+            24
+        );
+        assert_eq!(program.instructions[1].offset, 2);
+        assert!(program.instructions[1].context.is_none());
+
+        let ethdebug = output.ethdebug.as_ref().unwrap();
+        let compilation = ethdebug.compilation.as_ref().unwrap();
+        assert_eq!(compilation.compiler.name, "solc");
+        assert_eq!(compilation.id, "solc-abc");
+        assert_eq!(
+            compilation.sources[0].path.as_ref().unwrap(),
+            &PathBuf::from("C.sol")
+        );
+        let resources = ethdebug.resources.as_ref().unwrap();
+        assert!(resources.types.is_empty());
+        assert!(resources.pointers.is_empty());
+        assert_eq!(
+            resources.compilation.as_ref().unwrap().compiler.version,
+            "0.8.36+commit.8a079791"
+        );
     }
 
     #[test]

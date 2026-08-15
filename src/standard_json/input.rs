@@ -109,9 +109,17 @@ pub enum OutputSelector {
     IrAst,
     IrOptimized,
     IrOptimizedAst,
+    /// Wildcard that selects every output except Yul IR.
+    All,
+    /// Every `evm.*` output.
+    Evm,
     EvmAssembly,
     EvmLegacyAssembly,
+    /// Every `evm.bytecode.*` output.
+    EvmBytecode,
     EvmBytecodeEthdebug,
+    /// Every `evm.deployedBytecode.*` output.
+    EvmDeployedBytecode,
     EvmDeployedBytecodeEthdebug,
     EvmBytecodeFunctionDebugData,
     EvmBytecodeObject,
@@ -148,9 +156,13 @@ impl OutputSelector {
             OutputSelector::IrAst => "irAst",
             OutputSelector::IrOptimized => "irOptimized",
             OutputSelector::IrOptimizedAst => "irOptimizedAst",
+            OutputSelector::All => "*",
+            OutputSelector::Evm => "evm",
             OutputSelector::EvmAssembly => "evm.assembly",
             OutputSelector::EvmLegacyAssembly => "evm.legacyAssembly",
+            OutputSelector::EvmBytecode => "evm.bytecode",
             OutputSelector::EvmBytecodeEthdebug => "evm.bytecode.ethdebug",
+            OutputSelector::EvmDeployedBytecode => "evm.deployedBytecode",
             OutputSelector::EvmDeployedBytecodeEthdebug => "evm.deployedBytecode.ethdebug",
             OutputSelector::EvmBytecodeFunctionDebugData => "evm.bytecode.functionDebugData",
             OutputSelector::EvmBytecodeObject => "evm.bytecode.object",
@@ -195,9 +207,13 @@ impl OutputSelector {
             "irAst" => OutputSelector::IrAst,
             "irOptimized" => OutputSelector::IrOptimized,
             "irOptimizedAst" => OutputSelector::IrOptimizedAst,
+            "*" => OutputSelector::All,
+            "evm" => OutputSelector::Evm,
             "evm.assembly" => OutputSelector::EvmAssembly,
             "evm.legacyAssembly" => OutputSelector::EvmLegacyAssembly,
+            "evm.bytecode" => OutputSelector::EvmBytecode,
             "evm.bytecode.ethdebug" => OutputSelector::EvmBytecodeEthdebug,
+            "evm.deployedBytecode" => OutputSelector::EvmDeployedBytecode,
             "evm.deployedBytecode.ethdebug" => OutputSelector::EvmDeployedBytecodeEthdebug,
             "evm.bytecode.functionDebugData" => OutputSelector::EvmBytecodeFunctionDebugData,
             "evm.bytecode.object" => OutputSelector::EvmBytecodeObject,
@@ -653,11 +669,20 @@ mod tests {
 
     #[test]
     fn output_selector_roundtrip() {
-        let selector = OutputSelector::Other(String::from("custom.selector"));
-        let json = serde_json::to_string(&selector).unwrap();
-        assert_eq!(json, "\"custom.selector\"");
-        let parsed: OutputSelector = serde_json::from_str(&json).unwrap();
-        assert_eq!(parsed, selector);
+        let selectors = [
+            OutputSelector::All,
+            OutputSelector::Evm,
+            OutputSelector::EvmBytecode,
+            OutputSelector::EvmDeployedBytecode,
+            OutputSelector::Other(String::from("custom.selector")),
+        ];
+        let json = serde_json::to_string(&selectors).unwrap();
+        assert_eq!(
+            json,
+            r#"["*","evm","evm.bytecode","evm.deployedBytecode","custom.selector"]"#
+        );
+        let parsed: Vec<OutputSelector> = serde_json::from_str(&json).unwrap();
+        assert_eq!(parsed, selectors);
     }
 
     #[test]

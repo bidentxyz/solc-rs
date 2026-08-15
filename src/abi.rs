@@ -81,6 +81,14 @@ pub struct Function {
     /// The state mutability of the function.
     #[serde(rename = "stateMutability")]
     pub state_mutability: StateMutability,
+
+    /// Present in solc < 0.6.0. Replaced by [`Function::state_mutability`].
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub constant: Option<bool>,
+
+    /// Present in solc < 0.6.0. Replaced by [`Function::state_mutability`].
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub payable: Option<bool>,
 }
 
 /// A constructor definition in the ABI.
@@ -92,6 +100,10 @@ pub struct Constructor {
     /// The state mutability of the constructor.
     #[serde(rename = "stateMutability")]
     pub state_mutability: StateMutability,
+
+    /// Present in solc < 0.6.0. Replaced by [`Constructor::state_mutability`].
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub payable: Option<bool>,
 }
 
 /// A receive function definition in the ABI.
@@ -102,6 +114,10 @@ pub struct Receive {
     /// The state mutability of the receive function (always `payable`).
     #[serde(rename = "stateMutability")]
     pub state_mutability: StateMutability,
+
+    /// Present in solc < 0.6.0. Replaced by [`Receive::state_mutability`].
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub payable: Option<bool>,
 }
 
 /// A fallback function definition in the ABI.
@@ -112,6 +128,10 @@ pub struct Fallback {
     /// The state mutability of the fallback function.
     #[serde(rename = "stateMutability")]
     pub state_mutability: StateMutability,
+
+    /// Present in solc < 0.6.0. Replaced by [`Fallback::state_mutability`].
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub payable: Option<bool>,
 }
 
 /// An event definition in the ABI.
@@ -230,4 +250,70 @@ pub enum StateMutability {
 
     /// The function can accept Ether.
     Payable,
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn legacy_constant_and_payable() {
+        let items: Abi = serde_json::from_str(
+            r#"[
+              {
+                "type": "function",
+                "name": "f",
+                "inputs": [],
+                "outputs": [],
+                "stateMutability": "view",
+                "constant": true,
+                "payable": false
+              },
+              {
+                "type": "constructor",
+                "inputs": [],
+                "stateMutability": "payable",
+                "payable": true
+              },
+              {
+                "type": "receive",
+                "stateMutability": "payable",
+                "payable": true
+              },
+              {
+                "type": "fallback",
+                "stateMutability": "nonpayable",
+                "payable": false
+              }
+            ]"#,
+        )
+        .unwrap();
+
+        match &items.items[0] {
+            AbiItem::Function(function) => {
+                assert_eq!(function.constant, Some(true));
+                assert_eq!(function.payable, Some(false));
+                assert_eq!(function.state_mutability, StateMutability::View);
+            }
+            other => panic!("expected function, got {other:?}"),
+        }
+        match &items.items[1] {
+            AbiItem::Constructor(constructor) => {
+                assert_eq!(constructor.payable, Some(true));
+            }
+            other => panic!("expected constructor, got {other:?}"),
+        }
+        match &items.items[2] {
+            AbiItem::Receive(receive) => {
+                assert_eq!(receive.payable, Some(true));
+            }
+            other => panic!("expected receive, got {other:?}"),
+        }
+        match &items.items[3] {
+            AbiItem::Fallback(fallback) => {
+                assert_eq!(fallback.payable, Some(false));
+            }
+            other => panic!("expected fallback, got {other:?}"),
+        }
+    }
 }
