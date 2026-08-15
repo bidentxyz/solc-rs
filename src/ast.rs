@@ -61,7 +61,7 @@ pub struct ImportDirective {
     pub scope: i64,
     pub source_unit: i64,
     pub src: SourceLocation,
-    /// Present in solc >= 0.6.9
+    /// Present in solc >= 0.8.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
 }
@@ -72,7 +72,7 @@ pub struct SymbolAlias {
     pub foreign: Identifier,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub local: Option<String>,
-    /// Present in solc >= 0.6.9
+    /// Present in solc >= 0.8.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
 }
@@ -98,7 +98,7 @@ pub struct ContractDefinition {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub documentation: Option<Documentation>,
     pub contract_dependencies: Vec<i64>,
-    /// Present in solc >= 0.6.9
+    /// Present in solc >= 0.8.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
     /// Present in solc >= 0.8.4
@@ -157,7 +157,7 @@ pub struct VariableDeclaration {
     pub name: String,
     pub type_name: TypeName,
     pub src: SourceLocation,
-    /// Present in solc >= 0.6.9
+    /// Present in solc >= 0.8.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
     pub visibility: Visibility,
@@ -221,10 +221,11 @@ pub struct FunctionDefinition {
     /// Present only when overrides/implements base
     #[serde(skip_serializing_if = "Option::is_none")]
     pub base_functions: Option<Vec<i64>>,
-    /// Present only on external/public functions
+    /// Present only on external/public functions; absent on constructors,
+    /// receive, and fallback
     #[serde(skip_serializing_if = "Option::is_none")]
     pub function_selector: Option<String>,
-    /// Present in solc >= 0.6.9
+    /// Present in solc >= 0.8.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
 }
@@ -305,7 +306,7 @@ pub struct ModifierDefinition {
     pub src: SourceLocation,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub documentation: Option<Documentation>,
-    /// Present in solc >= 0.6.9
+    /// Present in solc >= 0.8.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
 }
@@ -320,7 +321,7 @@ pub struct EventDefinition {
     pub event_selector: Option<String>,
     pub parameters: ParameterList,
     pub src: SourceLocation,
-    /// Present in solc >= 0.6.9
+    /// Present in solc >= 0.8.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -336,7 +337,7 @@ pub struct ErrorDefinition {
     pub error_selector: Option<String>,
     pub parameters: ParameterList,
     pub src: SourceLocation,
-    /// Present in solc >= 0.6.9
+    /// Present in solc >= 0.8.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -355,7 +356,7 @@ pub struct StructDefinition {
     pub documentation: Option<Documentation>,
     pub canonical_name: String,
     pub visibility: Visibility,
-    /// Present in solc >= 0.6.9
+    /// Present in solc >= 0.8.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
 }
@@ -370,7 +371,7 @@ pub struct EnumDefinition {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub documentation: Option<Documentation>,
     pub canonical_name: String,
-    /// Present in solc >= 0.6.9
+    /// Present in solc >= 0.8.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
 }
@@ -380,7 +381,7 @@ pub struct EnumDefinition {
 pub struct EnumValue {
     pub id: i64,
     pub name: String,
-    /// Present in solc >= 0.6.9
+    /// Present in solc >= 0.8.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
     pub src: SourceLocation,
@@ -393,7 +394,7 @@ pub struct UserDefinedValueTypeDefinition {
     pub name: String,
     pub src: SourceLocation,
     pub canonical_name: String,
-    /// Present in solc >= 0.6.9
+    /// Present in solc >= 0.8.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub name_location: Option<String>,
     pub underlying_type: TypeName,
