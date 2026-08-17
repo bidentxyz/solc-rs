@@ -14,6 +14,10 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ### Fixed
 
+## [0.3.2] - 2026-08-17
+
+### Fixed
+
 - Parse `FunctionDefinition.isConstructor` from solc < 0.5.0 artifacts so
   constructors are distinguishable from fallbacks
 - Parse `FunctionDefinition.superFunction` from solc < 0.6.0 artifacts so
@@ -21,15 +25,15 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 - Parse `InheritanceSpecifier.arguments` from solc < 0.8.0 artifacts so base
   constructor arguments survive
 
+[0.3.2]: https://github.com/bidentxyz/solc-rs/compare/v0.3.1...v0.3.2
+
 ## [0.3.1] - 2026-08-15
-
-### Fixed
-
-- Make `abi` a public module and rename `AbiItem` to `abi::Item`
 
 ### Changed
 
 ### Fixed
+
+- Make `abi` a public module and rename `AbiItem` to `abi::Item`
 
 ## [0.3.0] - 2026-08-15
 
