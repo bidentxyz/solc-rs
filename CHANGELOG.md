@@ -14,6 +14,9 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 ### Fixed
 
+- Parse `FunctionDefinition.isConstructor` from solc < 0.5.0 artifacts so
+  constructors are distinguishable from fallbacks
+
 ## [0.3.1] - 2026-08-15
 
 ### Fixed

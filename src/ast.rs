@@ -219,6 +219,9 @@ pub struct FunctionDefinition {
     /// Present in solc >= 0.5.0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub kind: Option<FunctionKind>,
+    /// Present in solc < 0.5.0; superseded by `kind` in later versions
+    #[serde(default)]
+    pub is_constructor: bool,
     pub visibility: Visibility,
     pub state_mutability: StateMutability,
     /// Present only when implemented=true
@@ -1683,5 +1686,104 @@ mod tests {
             }
             other => panic!("expected identifier, got {other:?}"),
         }
+    }
+
+    #[test]
+    fn function_definition_is_constructor_legacy() {
+        let constructor: FunctionDefinition = serde_json::from_str(
+            r#"{
+              "id": 302,
+              "name": "",
+              "isConstructor": true,
+              "visibility": "public",
+              "stateMutability": "nonpayable",
+              "implemented": true,
+              "scope": 31,
+              "src": "4139:342:0",
+              "parameters": {
+                "id": 300,
+                "nodeType": "ParameterList",
+                "parameters": [],
+                "src": "0:0:0"
+              },
+              "returnParameters": {
+                "id": 301,
+                "nodeType": "ParameterList",
+                "parameters": [],
+                "src": "0:0:0"
+              },
+              "modifiers": []
+            }"#,
+        )
+        .unwrap();
+        assert_eq!(constructor.name, "");
+        assert_eq!(constructor.kind, None);
+        assert!(constructor.is_constructor);
+
+        let fallback: FunctionDefinition = serde_json::from_str(
+            r#"{
+              "id": 55,
+              "name": "",
+              "isConstructor": false,
+              "visibility": "public",
+              "stateMutability": "payable",
+              "implemented": true,
+              "scope": 243,
+              "src": "1275:54:0",
+              "parameters": {
+                "id": 53,
+                "nodeType": "ParameterList",
+                "parameters": [],
+                "src": "0:0:0"
+              },
+              "returnParameters": {
+                "id": 54,
+                "nodeType": "ParameterList",
+                "parameters": [],
+                "src": "0:0:0"
+              },
+              "modifiers": []
+            }"#,
+        )
+        .unwrap();
+        assert_eq!(fallback.name, "");
+        assert_eq!(fallback.kind, None);
+        assert!(!fallback.is_constructor);
+
+        // solc >= 0.5.0 omits isConstructor and uses `kind` instead.
+        let modern: FunctionDefinition = serde_json::from_str(
+            r#"{
+              "id": 55,
+              "name": "",
+              "kind": "fallback",
+              "visibility": "public",
+              "stateMutability": "payable",
+              "implemented": true,
+              "scope": 243,
+              "src": "1275:54:0",
+              "parameters": {
+                "id": 53,
+                "nodeType": "ParameterList",
+                "parameters": [],
+                "src": "0:0:0"
+              },
+              "returnParameters": {
+                "id": 54,
+                "nodeType": "ParameterList",
+                "parameters": [],
+                "src": "0:0:0"
+              },
+              "modifiers": []
+            }"#,
+        )
+        .unwrap();
+        assert_eq!(modern.kind, Some(FunctionKind::Fallback));
+        assert!(!modern.is_constructor);
+
+        assert!(
+            serde_json::to_string(&constructor)
+                .unwrap()
+                .contains("\"isConstructor\":true")
+        );
     }
 }
