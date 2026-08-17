@@ -1,0 +1,10 @@
+{
+    "language": "Solidity",
+    "sources": {
+        "InheritanceChain.sol": {
+            "content": "pragma solidity ^0.6.0;\n\ncontract Base {\n    function ping() public virtual returns (uint) {\n        return 1;\n    }\n}\n\ncontract Child is Base {\n    function ping() public override returns (uint) {\n        return 2;\n    }\n}\n\ncontract WithArgs {\n    uint public value;\n\n    constructor(uint x) public {\n        value = x;\n    }\n}\n\ncontract UsesArgs is WithArgs(42) {\n    constructor() public {\n    }\n\n    fallback() external payable {\n        revert();\n    }\n}"
+        }
+    },
+    "settings": {},
+    "version": "0.6.12+commit.27d51765"
+}

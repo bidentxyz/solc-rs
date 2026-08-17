@@ -1,0 +1,10 @@
+{
+    "language": "Solidity",
+    "sources": {
+        "InheritanceChain.sol": {
+            "content": "pragma solidity ^0.4.24;\n\ncontract Base {\n    function ping() public returns (uint) {\n        return 1;\n    }\n}\n\ncontract Child is Base {\n    function ping() public returns (uint) {\n        return 2;\n    }\n}\n\ncontract WithArgs {\n    uint public value;\n\n    function WithArgs(uint x) public {\n        value = x;\n    }\n}\n\ncontract UsesArgs is WithArgs(42) {\n    function UsesArgs() public {\n    }\n\n    function () public payable {\n        revert();\n    }\n}"
+        }
+    },
+    "settings": {},
+    "version": "0.4.25+commit.59dbf8f1"
+}
