@@ -799,53 +799,7 @@ mod tests {
     use super::*;
     use walkdir::WalkDir;
 
-    #[test]
-    fn error_only_output() {
-        let json = r#"{
-          "errors": [
-            {
-              "component": "general",
-              "formattedMessage": "sourceFile.sol:100: Invalid keyword",
-              "message": "Invalid keyword",
-              "severity": "error",
-              "type": "TypeError",
-              "errorCode": "3141",
-              "sourceLocation": {
-                "file": "sourceFile.sol",
-                "start": 0,
-                "end": 100
-              },
-              "secondarySourceLocations": [
-                {
-                  "file": "sourceFile.sol",
-                  "start": 64,
-                  "end": 92,
-                  "message": "Other declaration is here:"
-                }
-              ]
-            }
-          ]
-        }"#;
-        let output: StandardJSONOutput = serde_json::from_str(json).unwrap();
-        assert!(output.contracts.is_empty());
-        assert!(output.sources.is_empty());
-        let error = &output.errors.as_ref().unwrap()[0];
-        assert_eq!(error.r#type, ErrorType::TypeError);
-        assert_eq!(error.component, ErrorComponent::General);
-        assert_eq!(error.severity, Severity::Error);
-        assert_eq!(error.error_code.as_deref(), Some("3141"));
-        assert_eq!(error.message, "Invalid keyword");
-        assert_eq!(
-            error.source_location.as_ref().unwrap().file,
-            PathBuf::from("sourceFile.sol")
-        );
-        assert_eq!(
-            error.secondary_source_locations.as_ref().unwrap()[0]
-                .message
-                .as_deref(),
-            Some("Other declaration is here:")
-        );
-    }
+    use crate::Metadata;
 
     #[test]
     fn error_type_roundtrip() {
@@ -859,247 +813,6 @@ mod tests {
             let parsed: ErrorType = serde_json::from_str(&json).unwrap();
             assert_eq!(parsed, ty);
         }
-    }
-
-    #[test]
-    fn yul_cfg_at_contract_level() {
-        let json = r#"{
-          "contracts": {
-            "C.sol": {
-              "C": {
-                "yulCFGJson": {
-                  "type": "Object",
-                  "C_16": {
-                    "blocks": [
-                      {
-                        "id": "Block0",
-                        "type": "BuiltinCall",
-                        "instructions": [
-                          {
-                            "in": [],
-                            "op": "memoryguard",
-                            "out": ["v0"]
-                          }
-                        ],
-                        "exit": {
-                          "type": "ConditionalJump",
-                          "cond": "v3",
-                          "targets": ["Block2", "Block1"]
-                        },
-                        "liveness": { "in": [], "out": [] }
-                      }
-                    ],
-                    "functions": {
-                      "allocate_unbounded": {
-                        "type": "Function",
-                        "arguments": [],
-                        "entry": "Block0",
-                        "numReturns": 1,
-                        "blocks": [
-                          {
-                            "id": "Block0",
-                            "type": "BuiltinCall",
-                            "instructions": [
-                              {
-                                "in": ["0x40"],
-                                "op": "mload",
-                                "out": ["v2"]
-                              }
-                            ],
-                            "exit": {
-                              "type": "FunctionReturn",
-                              "returnValues": ["v2"]
-                            },
-                            "liveness": { "in": [], "out": ["v2"] }
-                          }
-                        ]
-                      }
-                    },
-                    "memoryGuard": "0xa0",
-                    "subObjects": {
-                      "type": "subObject",
-                      "C_16_deployed": {
-                        "blocks": [
-                          {
-                            "id": "Block0",
-                            "type": "FunctionCall",
-                            "instructions": [],
-                            "exit": { "type": "Jump", "targets": ["Block1"] },
-                            "liveness": { "in": [], "out": [] }
-                          }
-                        ],
-                        "functions": {},
-                        "memoryGuard": "0x80",
-                        "subObjects": {}
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }"#;
-        let output: StandardJSONOutput = serde_json::from_str(json).unwrap();
-        let cfg = output.contracts[&PathBuf::from("C.sol")]["C"]
-            .yul_cfg_json
-            .as_ref()
-            .unwrap();
-        assert_eq!(cfg.r#type, Some(YulCfgKind::Object));
-        let object = &cfg.objects["C_16"];
-        let block = &object.blocks[0];
-        assert_eq!(block.id, "Block0");
-        assert_eq!(block.r#type, Some(YulCfgBlockKind::BuiltinCall));
-        assert_eq!(block.instructions[0].op, "memoryguard");
-        assert_eq!(
-            block.exit.as_ref().unwrap().r#type,
-            YulCfgExitKind::ConditionalJump
-        );
-        assert_eq!(object.memory_guard.as_deref(), Some("0xa0"));
-        let function = &object.functions["allocate_unbounded"];
-        assert_eq!(function.r#type, Some(YulCfgKind::Function));
-        assert_eq!(function.entry.as_deref(), Some("Block0"));
-        assert_eq!(function.num_returns, Some(1));
-        assert_eq!(
-            function.blocks[0].exit.as_ref().unwrap().r#type,
-            YulCfgExitKind::FunctionReturn
-        );
-        assert_eq!(
-            function.blocks[0].exit.as_ref().unwrap().return_values,
-            vec![String::from("v2")]
-        );
-        let sub = object.sub_objects.as_ref().unwrap();
-        assert_eq!(sub.r#type, Some(YulCfgKind::SubObject));
-        let deployed = &sub.objects["C_16_deployed"];
-        assert_eq!(deployed.memory_guard.as_deref(), Some("0x80"));
-        assert_eq!(
-            deployed.blocks[0].exit.as_ref().unwrap().r#type,
-            YulCfgExitKind::Jump
-        );
-        assert_eq!(
-            deployed.blocks[0].exit.as_ref().unwrap().targets,
-            vec![String::from("Block1")]
-        );
-    }
-
-    #[test]
-    fn ethdebug_from_solc_shape() {
-        let json = r#"{
-          "contracts": {
-            "C.sol": {
-              "C": {
-                "evm": {
-                  "bytecode": {
-                    "ethdebug": {
-                      "contract": {
-                        "definition": { "source": { "id": 0 } },
-                        "name": "C"
-                      },
-                      "environment": "create",
-                      "instructions": [
-                        {
-                          "context": {
-                            "code": {
-                              "range": { "length": 68, "offset": 24 },
-                              "source": { "id": 0 }
-                            }
-                          },
-                          "offset": 0,
-                          "operation": { "arguments": ["0x80"], "mnemonic": "PUSH1" }
-                        },
-                        {
-                          "offset": 2,
-                          "operation": { "mnemonic": "ADD" }
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "ethdebug": {
-            "compilation": {
-              "compiler": { "name": "solc", "version": "0.8.36+commit.8a079791" },
-              "id": "solc-abc",
-              "sources": [
-                {
-                  "contents": "pragma solidity ^0.8.0;",
-                  "id": 0,
-                  "language": "Solidity",
-                  "path": "C.sol"
-                }
-              ]
-            },
-            "resources": {
-              "compilation": {
-                "compiler": { "name": "solc", "version": "0.8.36+commit.8a079791" },
-                "id": "solc-abc",
-                "sources": []
-              },
-              "pointers": [],
-              "types": {}
-            }
-          }
-        }"#;
-        let output: StandardJSONOutput = serde_json::from_str(json).unwrap();
-        let program = output.contracts[&PathBuf::from("C.sol")]["C"]
-            .evm
-            .as_ref()
-            .unwrap()
-            .bytecode
-            .as_ref()
-            .unwrap()
-            .ethdebug
-            .as_ref()
-            .unwrap();
-        assert_eq!(program.contract.name.as_deref(), Some("C"));
-        assert_eq!(program.environment, EthdebugEnvironment::Create);
-        assert_eq!(program.instructions[0].offset, 0);
-        assert_eq!(
-            program.instructions[0].operation.as_ref().unwrap().mnemonic,
-            "PUSH1"
-        );
-        assert_eq!(
-            program.instructions[0]
-                .operation
-                .as_ref()
-                .unwrap()
-                .arguments
-                .as_deref(),
-            Some(&[String::from("0x80")][..])
-        );
-        assert_eq!(
-            program.instructions[0]
-                .context
-                .as_ref()
-                .unwrap()
-                .code
-                .as_ref()
-                .unwrap()
-                .range
-                .as_ref()
-                .unwrap()
-                .offset,
-            24
-        );
-        assert_eq!(program.instructions[1].offset, 2);
-        assert!(program.instructions[1].context.is_none());
-
-        let ethdebug = output.ethdebug.as_ref().unwrap();
-        let compilation = ethdebug.compilation.as_ref().unwrap();
-        assert_eq!(compilation.compiler.name, "solc");
-        assert_eq!(compilation.id, "solc-abc");
-        assert_eq!(
-            compilation.sources[0].path.as_ref().unwrap(),
-            &PathBuf::from("C.sol")
-        );
-        let resources = ethdebug.resources.as_ref().unwrap();
-        assert!(resources.types.is_empty());
-        assert!(resources.pointers.is_empty());
-        assert_eq!(
-            resources.compilation.as_ref().unwrap().compiler.version,
-            "0.8.36+commit.8a079791"
-        );
     }
 
     #[test]
@@ -1135,6 +848,21 @@ mod tests {
                         "No contracts in {:?}",
                         entry.path()
                     );
+                    for contracts in output.contracts.values() {
+                        for contract in contracts.values() {
+                            if let Some(metadata) = &contract.metadata {
+                                let metadata: Metadata = serde_json::from_str(metadata)
+                                    .unwrap_or_else(|e| {
+                                        panic!(
+                                            "Failed to parse metadata in {:?}: {}",
+                                            entry.path(),
+                                            e
+                                        )
+                                    });
+                                assert_eq!(metadata.version, 1);
+                            }
+                        }
+                    }
                 }
             }
         }

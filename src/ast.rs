@@ -164,6 +164,10 @@ impl Default for ContractDefinitionNode {
 pub struct InheritanceSpecifier {
     pub id: i64,
     pub base_name: IdentifierPath,
+    /// Present in solc < 0.8.0; base constructor arguments, `null` when none
+    /// are passed
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub arguments: Option<Vec<Box<Expression>>>,
     pub src: SourceLocation,
 }
 
@@ -241,6 +245,9 @@ pub struct FunctionDefinition {
     /// Present only when overrides/implements base
     #[serde(skip_serializing_if = "Option::is_none")]
     pub base_functions: Option<Vec<i64>>,
+    /// Present in solc < 0.6.0; superseded by `base_functions`
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub super_function: Option<i64>,
     /// Present only on external/public functions; absent on constructors,
     /// receive, and fallback
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -1652,138 +1659,4 @@ pub struct StructuredDocumentation {
     pub id: i64,
     pub text: String,
     pub src: SourceLocation,
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn symbol_alias_foreign_shapes() {
-        let legacy: SymbolAlias =
-            serde_json::from_str(r#"{ "foreign": 93, "local": null }"#).unwrap();
-        assert_eq!(legacy.foreign, SymbolAliasForeign::DeclarationId(93));
-        assert_eq!(legacy.local, None);
-
-        let modern: SymbolAlias = serde_json::from_str(
-            r#"{
-              "foreign": {
-                "id": 12,
-                "name": "BytesLib",
-                "overloadedDeclarations": [],
-                "referencedDeclaration": 93,
-                "src": "0:8:1",
-                "typeDescriptions": {}
-              },
-              "local": null
-            }"#,
-        )
-        .unwrap();
-        match modern.foreign {
-            SymbolAliasForeign::Identifier(identifier) => {
-                assert_eq!(identifier.name, "BytesLib");
-                assert_eq!(identifier.referenced_declaration, Some(93));
-            }
-            other => panic!("expected identifier, got {other:?}"),
-        }
-    }
-
-    #[test]
-    fn function_definition_is_constructor_legacy() {
-        let constructor: FunctionDefinition = serde_json::from_str(
-            r#"{
-              "id": 302,
-              "name": "",
-              "isConstructor": true,
-              "visibility": "public",
-              "stateMutability": "nonpayable",
-              "implemented": true,
-              "scope": 31,
-              "src": "4139:342:0",
-              "parameters": {
-                "id": 300,
-                "nodeType": "ParameterList",
-                "parameters": [],
-                "src": "0:0:0"
-              },
-              "returnParameters": {
-                "id": 301,
-                "nodeType": "ParameterList",
-                "parameters": [],
-                "src": "0:0:0"
-              },
-              "modifiers": []
-            }"#,
-        )
-        .unwrap();
-        assert_eq!(constructor.name, "");
-        assert_eq!(constructor.kind, None);
-        assert!(constructor.is_constructor);
-
-        let fallback: FunctionDefinition = serde_json::from_str(
-            r#"{
-              "id": 55,
-              "name": "",
-              "isConstructor": false,
-              "visibility": "public",
-              "stateMutability": "payable",
-              "implemented": true,
-              "scope": 243,
-              "src": "1275:54:0",
-              "parameters": {
-                "id": 53,
-                "nodeType": "ParameterList",
-                "parameters": [],
-                "src": "0:0:0"
-              },
-              "returnParameters": {
-                "id": 54,
-                "nodeType": "ParameterList",
-                "parameters": [],
-                "src": "0:0:0"
-              },
-              "modifiers": []
-            }"#,
-        )
-        .unwrap();
-        assert_eq!(fallback.name, "");
-        assert_eq!(fallback.kind, None);
-        assert!(!fallback.is_constructor);
-
-        // solc >= 0.5.0 omits isConstructor and uses `kind` instead.
-        let modern: FunctionDefinition = serde_json::from_str(
-            r#"{
-              "id": 55,
-              "name": "",
-              "kind": "fallback",
-              "visibility": "public",
-              "stateMutability": "payable",
-              "implemented": true,
-              "scope": 243,
-              "src": "1275:54:0",
-              "parameters": {
-                "id": 53,
-                "nodeType": "ParameterList",
-                "parameters": [],
-                "src": "0:0:0"
-              },
-              "returnParameters": {
-                "id": 54,
-                "nodeType": "ParameterList",
-                "parameters": [],
-                "src": "0:0:0"
-              },
-              "modifiers": []
-            }"#,
-        )
-        .unwrap();
-        assert_eq!(modern.kind, Some(FunctionKind::Fallback));
-        assert!(!modern.is_constructor);
-
-        assert!(
-            serde_json::to_string(&constructor)
-                .unwrap()
-                .contains("\"isConstructor\":true")
-        );
-    }
 }

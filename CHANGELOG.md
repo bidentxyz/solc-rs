@@ -16,6 +16,10 @@ Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 
 - Parse `FunctionDefinition.isConstructor` from solc < 0.5.0 artifacts so
   constructors are distinguishable from fallbacks
+- Parse `FunctionDefinition.superFunction` from solc < 0.6.0 artifacts so
+  override wiring is recoverable without `base_functions`
+- Parse `InheritanceSpecifier.arguments` from solc < 0.8.0 artifacts so base
+  constructor arguments survive
 
 ## [0.3.1] - 2026-08-15
 
